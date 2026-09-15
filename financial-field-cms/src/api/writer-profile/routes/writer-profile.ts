@@ -1,0 +1,7 @@
+/**
+ * writer-profile router
+ */
+
+import { factories } from '@strapi/strapi';
+
+export default factories.createCoreRouter('api::writer-profile.writer-profile');

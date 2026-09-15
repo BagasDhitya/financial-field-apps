@@ -1,0 +1,25 @@
+{
+  "kind": "singleType",
+  "collectionName": "site_navigations",
+  "info": {
+    "singularName": "site-navigation",
+    "pluralName": "site-navigations",
+    "displayName": "Site Navigation"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "menu_item": {
+      "type": "component",
+      "component": "navigation.menu-item",
+      "repeatable": true
+    },
+    "featured_articles": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::article.article"
+    }
+  }
+}
