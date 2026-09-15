@@ -1,0 +1,7 @@
+# Strapi ignored files
+financial-field-cms/node_modules/
+financial-field-cms/.tmp/
+financial-field-cms/.cache/
+financial-field-cms/dist/
+financial-field-cms/.env
+financial-field-cms/public/uploads/
