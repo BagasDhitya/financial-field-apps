@@ -8,20 +8,20 @@ The pages are unstyled on purpose. The visual design is not in this phase. What 
 
 The repository is one Git repo and two apps. They do not share a package manager or a Node version.
 
-| App | Toolchain | Node |
-| --- | --- | --- |
-| `financial-field-cms` | npm | 20 |
-| `financial-field-fe` | pnpm 11.25.0 | 24 |
+| App                   | Toolchain    | Node |
+| --------------------- | ------------ | ---- |
+| `financial-field-cms` | npm          | 20   |
+| `financial-field-fe`  | pnpm 11.25.0 | 24   |
 
 Node 24 is required for the frontend because pnpm 11 needs Node 22.13 or newer. The CMS stays on Node 20. `better-sqlite3` in the CMS was built for Node 20, so starting Strapi on Node 24 fails. Use `nvm use 20` in the CMS directory and `nvm use 24` in the frontend directory.
 
 Local URLs:
 
-| Service | URL |
-| --- | --- |
-| Strapi | http://localhost:1337 |
+| Service      | URL                         |
+| ------------ | --------------------------- |
+| Strapi       | http://localhost:1337       |
 | Strapi admin | http://localhost:1337/admin |
-| Next.js | http://localhost:3000 |
+| Next.js      | http://localhost:3000       |
 
 Start Strapi first (`npm run develop`), then the frontend (`pnpm dev`). If Strapi is not running, the homepage fetch fails with a connection error.
 
@@ -61,14 +61,14 @@ Strapi names such as `documentId`, `lead_text`, and `populate` stay inside `src/
 
 ## Routes
 
-| URL | Content |
-| --- | --- |
-| `/` | Site navigation menu, featured articles, latest articles |
-| `/articles/[slug]` | One article |
-| `/category/[slug]` | One category, its children, and two article lists |
-| `/authors/[slug]` | One writer profile, written articles, and supervised articles |
-| `/tag/[slug]` | One tag and its articles |
-| `/tickers/[symbol]` | One stock ticker and its articles |
+| URL                 | Content                                                       |
+| ------------------- | ------------------------------------------------------------- |
+| `/`                 | Site navigation menu, featured articles, latest articles      |
+| `/articles/[slug]`  | One article                                                   |
+| `/category/[slug]`  | One category, its children, and two article lists             |
+| `/authors/[slug]`   | One writer profile, written articles, and supervised articles |
+| `/tag/[slug]`       | One tag and its articles                                      |
+| `/tickers/[symbol]` | One stock ticker and its articles                             |
 
 English path segments are intentional. Changing a path later is a change to `src/lib/routes.ts` only.
 
@@ -78,22 +78,22 @@ English path segments are intentional. Changing a path later is a change to `src
 
 The CMS schema is the source of truth. The frontend renames fields at the mapper so pages do not depend on Strapi's wording. If a schema field is renamed, the mapper and `src/lib/cms/strapi-types.ts` change with it. `src/types` is the contract the rest of the frontend imports.
 
-| Strapi | Frontend |
-| --- | --- |
-| `documentId` | `id` |
-| `lead_text` | `leadText` |
-| `featured_image` | `featuredImage` |
-| `primary_category` | `primaryCategory` |
-| `stocks_mentioned` | `stocksMentioned` |
-| `full_name` | `fullName` |
-| `role_title` | `roleTitle` |
-| `ticker_symbol` | `symbol` |
-| `company_name` | `companyName` |
-| Writer Profile | `Author` |
-| Category `category` | `articlesInSection` — articles whose primary category is this one |
-| Category `articles` | `articlesMentioning` — articles that mention this category |
-| Writer Profile `articles` | `writtenArticles` |
-| Writer Profile `article` | `supervisedArticles` — articles this person reviewed |
+| Strapi                    | Frontend                                                          |
+| ------------------------- | ----------------------------------------------------------------- |
+| `documentId`              | `id`                                                              |
+| `lead_text`               | `leadText`                                                        |
+| `featured_image`          | `featuredImage`                                                   |
+| `primary_category`        | `primaryCategory`                                                 |
+| `stocks_mentioned`        | `stocksMentioned`                                                 |
+| `full_name`               | `fullName`                                                        |
+| `role_title`              | `roleTitle`                                                       |
+| `ticker_symbol`           | `symbol`                                                          |
+| `company_name`            | `companyName`                                                     |
+| Writer Profile            | `Author`                                                          |
+| Category `category`       | `articlesInSection` — articles whose primary category is this one |
+| Category `articles`       | `articlesMentioning` — articles that mention this category        |
+| Writer Profile `articles` | `writtenArticles`                                                 |
+| Writer Profile `article`  | `supervisedArticles` — articles this person reviewed              |
 
 The category page uses `articlesInSection` for the section list. Using the CMS field `articles` for that list would show mentions, not the section.
 
@@ -103,21 +103,21 @@ Header menu items use `url` when it is set. Otherwise the first entry in `catego
 
 Pages are cached and revalidated. The webhook is the main way a publish shows up. The time windows below are only a backstop if a webhook is missed.
 
-| Page | Window |
-| --- | --- |
-| Home | 60 seconds |
-| Category | 120 seconds |
-| Article | 300 seconds |
+| Page                | Window      |
+| ------------------- | ----------- |
+| Home                | 60 seconds  |
+| Category            | 120 seconds |
+| Article             | 300 seconds |
 | Author, tag, ticker | 600 seconds |
 
 Strapi webhook, configured in the Strapi admin under Settings → Webhooks:
 
-| Setting | Local value |
-| --- | --- |
-| URL | `http://localhost:3000/api/revalidate` |
-| Header | `Authorization` |
-| Header value | `Bearer <REVALIDATE_SECRET>` |
-| Events | entry create, update, delete, publish, unpublish |
+| Setting      | Local value                                      |
+| ------------ | ------------------------------------------------ |
+| URL          | `http://localhost:3000/api/revalidate`           |
+| Header       | `Authorization`                                  |
+| Header value | `Bearer <REVALIDATE_SECRET>`                     |
+| Events       | entry create, update, delete, publish, unpublish |
 
 The header value must include the word `Bearer` and a space. The route returns 401 without it.
 
@@ -129,15 +129,15 @@ Draft preview is `GET /api/preview?secret=<PREVIEW_SECRET>&slug=<article-slug>`.
 
 Copy `financial-field-fe/.env.example` to `financial-field-fe/.env.local`. `.env.local` is gitignored. `.env.example` is committed and contains empty values only.
 
-| Variable | Who reads it |
-| --- | --- |
-| `NEXT_PUBLIC_SITE_URL` | Sitemap and robots |
-| `CMS_URL` | Server-side fetch to Strapi. Not exposed to the browser |
-| `NEXT_PUBLIC_CMS_URL` | Image URLs under `/uploads` |
-| `CMS_API_TOKEN` | Optional. Server-side only. Empty means the Public role is used |
-| `REVALIDATE_SECRET` | Must match the webhook header |
-| `PREVIEW_SECRET` | Draft preview link |
-| `SKIP_CMS_FETCH` | Set to `1` only in GitHub Actions. Leave unset locally and in production |
+| Variable               | Who reads it                                                             |
+| ---------------------- | ------------------------------------------------------------------------ |
+| `NEXT_PUBLIC_SITE_URL` | Sitemap and robots                                                       |
+| `CMS_URL`              | Server-side fetch to Strapi. Not exposed to the browser                  |
+| `NEXT_PUBLIC_CMS_URL`  | Image URLs under `/uploads`                                              |
+| `CMS_API_TOKEN`        | Optional. Server-side only. Empty means the Public role is used          |
+| `REVALIDATE_SECRET`    | Must match the webhook header                                            |
+| `PREVIEW_SECRET`       | Draft preview link                                                       |
+| `SKIP_CMS_FETCH`       | Set to `1` only in GitHub Actions. Leave unset locally and in production |
 
 `next/image` accepts images from the CMS host at `/uploads/**`. `featured_image` and `avatar` currently allow files, video, and audio in the schema. The frontend drops anything whose MIME type is not `image/` before it reaches `next/image`.
 
