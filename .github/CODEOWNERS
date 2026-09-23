@@ -1,0 +1,5 @@
+# CMS schema changes are reviewed by the frontend owner.
+/financial-field-cms/src/api/**/schema.json @ULTRA-DELUXE
+
+# Frontend domain types are reviewed by the backend owner.
+/financial-field-fe/src/types/ @BagasDhitya
