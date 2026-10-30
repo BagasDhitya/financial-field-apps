@@ -1,0 +1,56 @@
+{
+  "kind": "collectionType",
+  "collectionName": "financial_products",
+  "info": {
+    "singularName": "financial-product",
+    "pluralName": "financial-products",
+    "displayName": "Financial Product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "title"
+    },
+    "product_category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::product-category.product-category",
+      "inversedBy": "financial_products"
+    },
+    "min_income": {
+      "type": "integer"
+    },
+    "annual_fee": {
+      "type": "string"
+    },
+    "features": {
+      "type": "blocks"
+    },
+    "apply_url": {
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "provider": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::provider.provider",
+      "inversedBy": "financial_products"
+    }
+  }
+}
