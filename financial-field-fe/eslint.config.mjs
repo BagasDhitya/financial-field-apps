@@ -35,7 +35,15 @@ const LAYER_BOUNDARIES = [
 ];
 
 const eslintConfig = defineConfig([
-  globalIgnores([".next/**", "out/**", "build/**", "next-env.d.ts"]),
+  globalIgnores([
+    ".next/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    "playwright-report/**",
+    "test-results/**",
+    ".lighthouseci/**",
+  ]),
 
   ...nextVitals,
   ...nextTs,
@@ -74,6 +82,10 @@ const eslintConfig = defineConfig([
           alphabetize: { order: "asc", caseInsensitive: true },
         },
       ],
+      // webReader W1: braces always.
+      curly: ["error", "all"],
+      // webReader W3: log through src/lib/log.ts only.
+      "no-console": "error",
       "no-restricted-properties": [
         "error",
         {
@@ -89,6 +101,22 @@ const eslintConfig = defineConfig([
   {
     files: ["src/lib/env.ts", "next.config.ts"],
     rules: { "no-restricted-properties": "off" },
+  },
+
+  {
+    files: ["src/lib/log.ts"],
+    rules: { "no-console": "off" },
+  },
+
+  // Tooling outside the app runtime: Node scripts, test harnesses, configs.
+  {
+    files: [
+      "scripts/**",
+      "tests/**",
+      "playwright.config.ts",
+      "vitest.config.mts",
+    ],
+    rules: { "no-console": "off", "no-restricted-properties": "off" },
   },
 
   ...LAYER_BOUNDARIES.map(({ files, forbidden, message }) => ({

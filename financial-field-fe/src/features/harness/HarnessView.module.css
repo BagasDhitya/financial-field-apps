@@ -1,0 +1,33 @@
+.root {
+  display: grid;
+  gap: var(--space-5);
+  padding-block: var(--space-4);
+}
+
+.specimen {
+  display: grid;
+  gap: var(--space-3);
+  padding-top: var(--space-3);
+  border-top: var(--stroke-frame) solid var(--color-ink);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-sans);
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  gap: var(--space-3);
+}
+
+.cards > :first-child {
+  grid-column: 1 / -1;
+}
+
+.plain {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

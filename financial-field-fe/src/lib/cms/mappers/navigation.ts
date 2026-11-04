@@ -14,7 +14,7 @@ export function mapNavigation(
       return {
         label: item.label ?? "",
         url: item.url ?? null,
-        category: category ? mapCategorySummary(category) : null,
+        category: category?.slug ? mapCategorySummary(category) : null,
       };
     }),
     featuredArticles,

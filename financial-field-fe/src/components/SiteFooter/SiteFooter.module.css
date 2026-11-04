@@ -1,0 +1,76 @@
+.root {
+  margin-top: var(--space-6);
+  border-top: var(--stroke-frame) solid var(--color-ff-blue);
+  background: var(--color-ff-navy);
+  color: var(--color-paper);
+}
+
+/* On navy, the focus ring switches to cyan (≈6:1 against navy). */
+.root :focus-visible {
+  outline-color: var(--color-ff-cyan);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  padding-block: var(--space-5);
+}
+
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .grid {
+    grid-template-columns: 1.618fr repeat(3, minmax(0, 1fr));
+  }
+}
+
+.tagline {
+  max-width: 22rem;
+  margin: var(--space-2) 0 0;
+  color: rgb(255 255 255 / 0.82);
+}
+
+.heading {
+  margin: 0 0 var(--space-2);
+  color: var(--color-ff-cyan);
+}
+
+.list {
+  display: grid;
+  gap: 0.25rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list a {
+  display: inline-flex;
+  min-height: 2rem;
+  align-items: center;
+  color: var(--color-paper);
+  text-decoration: none;
+}
+
+.list a:hover {
+  text-decoration: underline;
+}
+
+.bottom {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  padding-block: var(--space-3);
+  border-top: var(--stroke-rule) solid rgb(255 255 255 / 0.2);
+  font-size: var(--text-meta);
+}
+
+.bottom p {
+  margin: 0;
+}

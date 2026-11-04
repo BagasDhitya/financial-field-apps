@@ -5,4 +5,7 @@ export const endpoints = {
   authors: "/writer-profiles",
   tickers: "/stock-tickers",
   navigation: "/site-navigation",
+  staticPages: "/static-pages",
+  siteSettings: "/site-setting",
+  redirects: "/redirects",
 } as const;

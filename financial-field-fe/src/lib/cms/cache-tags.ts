@@ -10,4 +10,8 @@ export const cacheTags = {
   tickers: () => "tickers",
   ticker: (symbol: string) => `ticker:${symbol.toLowerCase()}`,
   navigation: () => "navigation",
+  pages: () => "pages",
+  page: (slug: string) => `page:${slug}`,
+  siteSettings: () => "site-settings",
+  redirects: () => "redirects",
 } as const;

@@ -1,0 +1,17 @@
+.box {
+  position: relative;
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: var(--ink-04);
+}
+
+.cover {
+  object-fit: cover;
+}
+
+.natural {
+  display: block;
+  width: 100%;
+  height: auto;
+}
