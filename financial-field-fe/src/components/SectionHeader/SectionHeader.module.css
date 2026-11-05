@@ -1,40 +1,40 @@
 .root {
-  margin-bottom: var(--space-3);
+	margin-bottom: var(--space-3);
 }
 
 .row {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: var(--space-2);
-  padding-bottom: var(--space-1);
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
+	gap: var(--space-2);
+	padding-bottom: var(--space-1);
 }
 
 .title {
-  margin: 0;
-  font-family: var(--font-sans);
-  color: var(--color-ink);
+	margin: 0;
+	font-family: var(--font-sans);
+	color: var(--color-ink);
 }
 
 .more {
-  font-size: var(--text-meta);
-  font-weight: 600;
-  color: var(--color-ff-blue);
-  text-decoration: none;
+	font-size: var(--text-meta);
+	font-weight: 600;
+	color: var(--color-ff-blue);
+	text-decoration: none;
 }
 
 .more:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 /* Golden divider: transparent → ink at 38.2% (Keyboard Curator signature). */
 .divider {
-  height: var(--stroke-frame);
-  background: linear-gradient(
-    to right,
-    var(--color-ff-blue) 0%,
-    var(--color-ff-blue) 38.2%,
-    var(--color-ink) 38.2%,
-    var(--color-ink) 100%
-  );
+	height: var(--stroke-frame);
+	background: linear-gradient(
+		to right,
+		var(--color-ff-blue) 0%,
+		var(--color-ff-blue) 38.2%,
+		var(--color-ink) 38.2%,
+		var(--color-ink) 100%
+	);
 }

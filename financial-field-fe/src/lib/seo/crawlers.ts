@@ -17,14 +17,14 @@
  * meta-externalfetcher) may ignore robots.txt by their vendors' own docs.
  */
 export const AI_RETRIEVAL_AGENTS = [
-  "OAI-SearchBot",
-  "ChatGPT-User",
-  "PerplexityBot",
-  "Perplexity-User",
-  "Claude-SearchBot",
-  "Claude-User",
-  "meta-webindexer",
-  "meta-externalfetcher",
+	'OAI-SearchBot',
+	'ChatGPT-User',
+	'PerplexityBot',
+	'Perplexity-User',
+	'Claude-SearchBot',
+	'Claude-User',
+	'meta-webindexer',
+	'meta-externalfetcher',
 ] as const;
 
 /**
@@ -34,12 +34,12 @@ export const AI_RETRIEVAL_AGENTS = [
  * affects Google Search inclusion or ranking.
  */
 export const AI_TRAINING_AGENTS = [
-  "GPTBot",
-  "ClaudeBot",
-  "Google-Extended",
-  "Applebot-Extended",
-  "CCBot",
-  "meta-externalagent",
+	'GPTBot',
+	'ClaudeBot',
+	'Google-Extended',
+	'Applebot-Extended',
+	'CCBot',
+	'meta-externalagent',
 ] as const;
 
 /** Flip to false to block training crawlers (one-line change, ADR-0005). */

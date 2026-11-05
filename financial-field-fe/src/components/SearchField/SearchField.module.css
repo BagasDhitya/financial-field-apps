@@ -1,59 +1,59 @@
 .root {
-  display: grid;
-  gap: var(--space-1);
+	display: grid;
+	gap: var(--space-1);
 }
 
 .label {
-  font-weight: 600;
+	font-weight: 600;
 }
 
 .row {
-  display: flex;
+	display: flex;
 }
 
 .input {
-  min-width: 0;
-  flex: 1;
-  min-height: 2.75rem;
-  padding: 0 var(--space-2);
-  border: var(--stroke-rule) solid var(--color-ink);
-  border-right: 0;
-  background: var(--color-paper);
-  font: inherit;
-  font-size: var(--text-ui);
+	min-width: 0;
+	flex: 1;
+	min-height: 2.75rem;
+	padding: 0 var(--space-2);
+	border: var(--stroke-rule) solid var(--color-ink);
+	border-right: 0;
+	background: var(--color-paper);
+	font: inherit;
+	font-size: var(--text-ui);
 }
 
 .input::placeholder {
-  color: var(--ink-66);
+	color: var(--ink-66);
 }
 
 .submit {
-  display: inline-flex;
-  width: 2.75rem;
-  min-height: 2.75rem;
-  align-items: center;
-  justify-content: center;
-  border: var(--stroke-rule) solid var(--color-ink);
-  background: var(--color-ink);
-  color: var(--color-paper);
-  cursor: pointer;
+	display: inline-flex;
+	width: 2.75rem;
+	min-height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	border: var(--stroke-rule) solid var(--color-ink);
+	background: var(--color-ink);
+	color: var(--color-paper);
+	cursor: pointer;
 }
 
 .submit:hover {
-  background: var(--color-ff-blue);
-  border-color: var(--color-ff-blue);
+	background: var(--color-ff-blue);
+	border-color: var(--color-ff-blue);
 }
 
 .compact .input {
-  width: 14rem;
+	width: 14rem;
 }
 
 .full .input {
-  min-height: 3.25rem;
-  font-size: 1.0625rem;
+	min-height: 3.25rem;
+	font-size: 1.0625rem;
 }
 
 .full .submit {
-  width: 3.25rem;
-  min-height: 3.25rem;
+	width: 3.25rem;
+	min-height: 3.25rem;
 }

@@ -1,19 +1,19 @@
 .root {
-  max-width: var(--reading-max);
-  padding: var(--space-3);
-  border: var(--stroke-card) solid var(--color-ink);
-  border-top: var(--stroke-frame) solid var(--color-ff-blue);
+	max-width: var(--reading-max);
+	padding: var(--space-3);
+	border: var(--stroke-card) solid var(--color-ink);
+	border-top: var(--stroke-frame) solid var(--color-ff-blue);
 }
 
 .label {
-  margin: 0 0 var(--space-2);
-  font-family: var(--font-sans);
+	margin: 0 0 var(--space-2);
+	font-family: var(--font-sans);
 }
 
 .list {
-  display: grid;
-  gap: var(--space-1);
-  margin: 0;
-  padding-left: var(--space-3);
-  list-style: square;
+	display: grid;
+	gap: var(--space-1);
+	margin: 0;
+	padding-left: var(--space-3);
+	list-style: square;
 }

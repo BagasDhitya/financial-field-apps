@@ -1,19 +1,19 @@
 .root {
-  padding-top: var(--space-3);
+	padding-top: var(--space-3);
 }
 
 .article {
-  display: grid;
-  gap: var(--space-3);
-  max-width: var(--reading-max);
-  margin-top: var(--space-2);
+	display: grid;
+	gap: var(--space-3);
+	max-width: var(--reading-max);
+	margin-top: var(--space-2);
 }
 
 .article > p {
-  margin: 0;
+	margin: 0;
 }
 
 .title {
-  margin: 0;
-  font-size: var(--text-h1);
+	margin: 0;
+	font-size: var(--text-h1);
 }

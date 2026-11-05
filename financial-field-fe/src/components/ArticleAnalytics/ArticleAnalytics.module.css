@@ -1,8 +1,8 @@
 .sentinel {
-  position: absolute;
-  top: 75%;
-  left: 0;
-  width: 1px;
-  height: 1px;
-  pointer-events: none;
+	position: absolute;
+	top: 75%;
+	left: 0;
+	width: 1px;
+	height: 1px;
+	pointer-events: none;
 }

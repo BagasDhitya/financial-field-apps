@@ -1,43 +1,43 @@
 .root {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-1);
-  margin: 0;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-1);
+	margin: 0;
 }
 
 .link,
 .text {
-  color: var(--color-ff-blue);
-  text-decoration: none;
+	color: var(--color-ff-blue);
+	text-decoration: none;
 }
 
 /* WCAG 2.5.8: at least 24 px tall as a target (REQ-A11Y-008). */
 .link {
-  position: relative;
-  z-index: 1;
-  display: inline-flex;
-  min-height: 1.5rem;
-  align-items: center;
+	position: relative;
+	z-index: 1;
+	display: inline-flex;
+	min-height: 1.5rem;
+	align-items: center;
 }
 
 .link:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .pr {
-  display: inline-block;
-  background: var(--color-ink);
-  color: var(--color-paper);
-  letter-spacing: 0.2em;
-  line-height: 1;
+	display: inline-block;
+	background: var(--color-ink);
+	color: var(--color-paper);
+	letter-spacing: 0.2em;
+	line-height: 1;
 }
 
 .small {
-  padding: 0.25rem 0.375rem;
+	padding: 0.25rem 0.375rem;
 }
 
 .large {
-  padding: 0.375rem 0.5rem;
-  font-size: var(--text-kicker);
+	padding: 0.375rem 0.5rem;
+	font-size: var(--text-kicker);
 }

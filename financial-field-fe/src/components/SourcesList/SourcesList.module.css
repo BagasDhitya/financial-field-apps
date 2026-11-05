@@ -1,24 +1,24 @@
 .root {
-  max-width: var(--reading-max);
+	max-width: var(--reading-max);
 }
 
 .label {
-  margin: 0 0 var(--space-1);
-  font-family: var(--font-sans);
+	margin: 0 0 var(--space-1);
+	font-family: var(--font-sans);
 }
 
 .list {
-  display: grid;
-  gap: var(--space-1);
-  margin: 0;
-  padding-left: var(--space-3);
-  font-size: var(--text-meta);
+	display: grid;
+	gap: var(--space-1);
+	margin: 0;
+	padding-left: var(--space-3);
+	font-size: var(--text-meta);
 }
 
 .list a {
-  color: var(--color-ff-blue);
+	color: var(--color-ff-blue);
 }
 
 .accessed {
-  color: var(--ink-66);
+	color: var(--ink-66);
 }

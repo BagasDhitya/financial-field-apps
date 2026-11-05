@@ -19,6 +19,18 @@ pnpm dev                     # http://localhost:3000 (start Strapi first)
 
 Component harness: http://localhost:3000/harness (local only).
 
+## Code style
+
+The owner's webReader style (pack: `context/conventions.md`, ADR-0013):
+
+- Tabs (shown 4 wide), single quotes, width 100. Prettier enforces this in
+  `pnpm verify`.
+- JSDoc on every export.
+- Every `catch` that changes behaviour logs through `src/lib/log.ts`.
+- Configuration is read once, and unknown settings are reported at server
+  start (`src/instrumentation.ts`).
+- Commits: `<Area>: <imperative summary> (<task ids>)` with a bullet body.
+
 ## Check before a PR
 
 ```bash

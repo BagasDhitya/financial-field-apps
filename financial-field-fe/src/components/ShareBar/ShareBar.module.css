@@ -1,43 +1,43 @@
 .root {
-  display: grid;
-  gap: var(--space-1);
+	display: grid;
+	gap: var(--space-1);
 }
 
 .label {
-  margin: 0;
+	margin: 0;
 }
 
 .list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-1);
-  margin: 0;
-  padding: 0;
-  list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-1);
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 .button {
-  display: inline-flex;
-  min-height: 2.75rem;
-  align-items: center;
-  padding: 0 var(--space-2);
-  border: var(--stroke-rule) solid var(--color-ink);
-  background: var(--color-paper);
-  color: var(--color-ink);
-  font: inherit;
-  font-size: var(--text-meta);
-  font-weight: 600;
-  text-decoration: none;
-  cursor: pointer;
+	display: inline-flex;
+	min-height: 2.75rem;
+	align-items: center;
+	padding: 0 var(--space-2);
+	border: var(--stroke-rule) solid var(--color-ink);
+	background: var(--color-paper);
+	color: var(--color-ink);
+	font: inherit;
+	font-size: var(--text-meta);
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
 }
 
 .button:hover {
-  background: var(--blue-06);
+	background: var(--blue-06);
 }
 
 .status {
-  min-height: 1.25rem;
-  margin: 0;
-  font-size: var(--text-meta);
-  color: var(--ink-66);
+	min-height: 1.25rem;
+	margin: 0;
+	font-size: var(--text-meta);
+	color: var(--ink-66);
 }

@@ -1,34 +1,34 @@
 .root {
-  font-size: var(--text-meta);
+	font-size: var(--text-meta);
 }
 
 .list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.25rem;
-  margin: 0;
-  padding: 0;
-  list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem;
+	margin: 0;
+	padding: 0;
+	list-style: none;
 }
 
 .item {
-  color: var(--ink-66);
+	color: var(--ink-66);
 }
 
 .item + .item::before {
-  margin-right: 0.25rem;
-  content: "›";
+	margin-right: 0.25rem;
+	content: '›';
 }
 
 .item a {
-  color: var(--color-ff-blue);
-  text-decoration: none;
+	color: var(--color-ff-blue);
+	text-decoration: none;
 }
 
 .item a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
 
 .item [aria-current] {
-  color: var(--color-ink);
+	color: var(--color-ink);
 }

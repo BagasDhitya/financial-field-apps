@@ -1,19 +1,19 @@
 .root {
-  display: grid;
-  gap: var(--space-1);
-  max-width: var(--reading-max);
-  padding: var(--space-2) var(--space-3);
-  border: var(--stroke-card) solid var(--color-ink);
-  background: var(--ink-04);
+	display: grid;
+	gap: var(--space-1);
+	max-width: var(--reading-max);
+	padding: var(--space-2) var(--space-3);
+	border: var(--stroke-card) solid var(--color-ink);
+	background: var(--ink-04);
 }
 
 .label,
 .text,
 .sponsor {
-  margin: 0;
+	margin: 0;
 }
 
 .sponsor a {
-  color: var(--color-ff-blue);
-  font-weight: 600;
+	color: var(--color-ff-blue);
+	font-weight: 600;
 }
