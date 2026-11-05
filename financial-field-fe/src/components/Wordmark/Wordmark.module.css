@@ -1,0 +1,49 @@
+.root {
+	display: inline-flex;
+	text-decoration: none;
+	line-height: 1;
+}
+
+.stacked {
+	flex-direction: column;
+	gap: 0.3rem;
+}
+
+.inline {
+	flex-direction: row;
+	align-items: baseline;
+	gap: var(--space-2);
+}
+
+.primary {
+	font-family: var(--font-display);
+	font-size: 1.125rem;
+	font-weight: 700;
+	letter-spacing: -0.01em;
+}
+
+.secondary {
+	font-size: 0.625rem;
+	font-weight: 600;
+	letter-spacing: 0.35em;
+	text-transform: uppercase;
+}
+
+.ink .primary {
+	color: var(--color-ink);
+}
+
+.ink .secondary {
+	color: var(--color-ff-blue);
+}
+
+.paper .primary,
+.paper .secondary {
+	color: var(--color-paper);
+}
+
+@media (min-width: 640px) {
+	.primary {
+		font-size: 1.375rem;
+	}
+}

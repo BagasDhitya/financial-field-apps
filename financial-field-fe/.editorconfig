@@ -1,12 +1,24 @@
 root = true
 
+# Tabs, shown 4 wide: the owner's webReader style (ADR-0013). Prettier enforces it.
 [*]
 charset = utf-8
 end_of_line = lf
-indent_style = space
-indent_size = 2
+indent_style = tab
+indent_size = 4
+tab_width = 4
 insert_final_newline = true
 trim_trailing_whitespace = true
+
+# Markdown, YAML and package.json keep 2 spaces (YAML forbids tabs; package
+# managers rewrite package.json with spaces).
+[*.{md,yml,yaml}]
+indent_style = space
+indent_size = 2
+
+[package.json]
+indent_style = space
+indent_size = 2
 
 [*.md]
 trim_trailing_whitespace = false

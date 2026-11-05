@@ -1,0 +1,20 @@
+.root {
+	max-width: var(--reading-max);
+	padding: var(--space-2) var(--space-3);
+	border: var(--stroke-card) solid var(--color-ink);
+	/* Red is a non-text signal only (palette rules). */
+	border-left: 6px solid var(--color-ff-red);
+}
+
+.label {
+	margin: 0 0 var(--space-1);
+	font-family: var(--font-sans);
+}
+
+.list {
+	display: grid;
+	gap: var(--space-1);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}

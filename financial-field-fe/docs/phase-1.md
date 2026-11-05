@@ -1,3 +1,10 @@
+> **Superseded (2026-11-03).** This describes the Phase 0 skeleton. The source
+> of truth is now the implementation pack
+> (`web-implementation-documents/financial-field-indonesia/`, PRP-0001 and
+> PRP-0002). Notable changes since: Indonesian URLs (`/artikel`, `/kategori`,
+> `/penulis`, `/saham`; ADR-0004), CMS capability gating (`CMS_CAPABILITIES`),
+> a first-party Blocks renderer, tests (Vitest, Playwright, Lighthouse CI).
+
 # Phase 1 — Frontend initialization
 
 This document describes `financial-field-fe` as initialized on branch `frontend/init`. It is the Next.js app for the Indonesian Financial Field site. The Strapi app beside it, `financial-field-cms`, is unchanged by this work.

@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# financial-field-fe
 
-## Getting Started
+Public website of **Financial Field Indonesia**: a Next.js 16 news and article
+portal that reads content from the sibling Strapi app (`../financial-field-cms`).
 
-First, run the development server:
+**Source of truth:** the implementation pack at
+`web-implementation-documents/financial-field-indonesia/` (outside this repo).
+Start with its `README.md`, `STATE.md` and `agent-rules.md`. Current work:
+`PRP-0002.p1` (Phase 1, news portal).
+
+## Run locally
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+nvm use               # Node 24 (.nvmrc). The CMS runs on Node 20.
+pnpm install
+cp .env.example .env.local   # fill REVALIDATE_SECRET and PREVIEW_SECRET
+pnpm dev                     # http://localhost:3000 (start Strapi first)
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Component harness: http://localhost:3000/harness (local only).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Code style
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The owner's webReader style (pack: `context/conventions.md`, ADR-0013):
 
-## Learn More
+- Tabs (shown 4 wide), single quotes, width 100. Prettier enforces this in
+  `pnpm verify`.
+- JSDoc on every export.
+- Every `catch` that changes behaviour logs through `src/lib/log.ts`.
+- Configuration is read once, and unknown settings are reported at server
+  start (`src/instrumentation.ts`).
+- Commits: `<Area>: <imperative summary> (<task ids>)` with a bullet body.
 
-To learn more about Next.js, take a look at the following resources:
+## Check before a PR
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+pnpm verify        # lint, format check, typecheck, unit tests, build
+pnpm test:e2e      # Playwright + axe against a mock CMS (builds first)
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+With the e2e build running (`node scripts/with-e2e-env.mjs pnpm start -p 3100`
+plus `node scripts/with-e2e-env.mjs node tests/mock-cms/server.mjs`):
 
-## Deploy on Vercel
+```bash
+pnpm seo:check     # titles, descriptions, canonicals, H1, JSON-LD, sitemap
+pnpm lhci          # Lighthouse CI budgets (mobile)
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## CMS capabilities
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Strapi runs with `strictParams`, so the site only requests CMS fields that
+exist. `CMS_CAPABILITIES` (comma list, or `all`) switches each new field group
+on as the matching CMS change lands. Names and mapping: `src/lib/cms/capabilities.ts`.
+
+## Layout
+
+```text
+src/app          routes (thin): params → content function → view
+src/features     page views
+src/components   presentational components (+ __fixtures__ for tests/harness)
+src/lib/content  data functions routes call
+src/lib/cms      the only code that knows Strapi JSON
+src/lib/seo, structured-data, analytics, …
+src/types        domain contracts (reviewed by the CMS owner, CODEOWNERS)
+tests/e2e        Playwright suites · tests/mock-cms   mock Strapi + fixtures
+```

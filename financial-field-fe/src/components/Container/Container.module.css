@@ -1,0 +1,6 @@
+.root {
+	width: 100%;
+	max-width: calc(var(--content-max) + 2 * var(--page-px));
+	margin-inline: auto;
+	padding-inline: var(--page-px);
+}

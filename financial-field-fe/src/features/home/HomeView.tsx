@@ -1,52 +1,112 @@
-import { routes } from "@/lib/routes";
-import type { ArticleSummary, MenuItem, SiteNavigation } from "@/types";
+import { ArticleCard } from '@/components/ArticleCard/ArticleCard';
+import { Container } from '@/components/Container/Container';
+import { EmptyState } from '@/components/EmptyState/EmptyState';
+import { GoldenSplit } from '@/components/GoldenSplit/GoldenSplit';
+import { RiverItem } from '@/components/RiverItem/RiverItem';
+import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
+import { routes } from '@/lib/routes';
+import type { ArticleSummary, CategoryNode } from '@/types';
 
-export type HomeViewProps = {
-  navigation: SiteNavigation;
-  latest: ArticleSummary[];
+import styles from './HomeView.module.css';
+import type { HomeStories } from './select';
+
+export type CategoryBlock = {
+	category: CategoryNode;
+	articles: ArticleSummary[];
 };
 
-function menuHref(item: MenuItem): string | null {
-  if (item.url) return item.url;
-  if (item.category?.slug) return routes.category(item.category.slug);
-  return null;
-}
+export type HomeViewProps = {
+	heading: string;
+	stories: HomeStories;
+	categoryBlocks: CategoryBlock[];
+	now: Date;
+};
 
-function ArticleList({ articles }: { articles: ArticleSummary[] }) {
-  if (articles.length === 0) return <p>None yet.</p>;
+/** Media-first home: lead story, editor picks, Terbaru river, topic blocks. */
+export function HomeView({ heading, stories, categoryBlocks, now }: HomeViewProps) {
+	const { lead, secondary, river } = stories;
 
-  return (
-    <ul>
-      {articles.map((article) => (
-        <li key={article.id}>
-          <a href={routes.article(article.slug)}>{article.title}</a>
-        </li>
-      ))}
-    </ul>
-  );
-}
+	return (
+		<Container className={styles.root}>
+			<h1 className="visually-hidden">{heading}</h1>
 
-export function HomeView({ navigation, latest }: HomeViewProps) {
-  return (
-    <main>
-      <nav>
-        <ul>
-          {navigation.menuItems.map((item) => {
-            const href = menuHref(item);
-            return (
-              <li key={`${item.label}-${href ?? "none"}`}>
-                {href ? <a href={href}>{item.label}</a> : item.label}
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
+			{lead ? (
+				<GoldenSplit
+					railLabel="Pilihan editor dan artikel terbaru"
+					main={
+						<ArticleCard article={lead} variant="lead" headingLevel={2} preloadImage />
+					}
+					rail={
+						<div className={styles.rail}>
+							{secondary.length > 0 ? (
+								<section aria-labelledby="pilihan-editor">
+									<SectionHeader id="pilihan-editor" title="Pilihan editor" />
+									<ul className={styles.stack}>
+										{secondary.map((article) => (
+											<li key={article.id}>
+												<ArticleCard
+													article={article}
+													variant="compact"
+													trackAs="home_featured"
+												/>
+											</li>
+										))}
+									</ul>
+								</section>
+							) : null}
+							{river.length > 0 ? (
+								<section aria-labelledby="terbaru">
+									<SectionHeader
+										id="terbaru"
+										title="Terbaru"
+										href={routes.latest()}
+									/>
+									<ul className={styles.river}>
+										{river.map((article) => (
+											<RiverItem
+												key={article.id}
+												article={article}
+												now={now}
+											/>
+										))}
+									</ul>
+								</section>
+							) : null}
+						</div>
+					}
+				/>
+			) : (
+				<EmptyState
+					title="Belum ada artikel yang terbit."
+					links={[
+						{
+							label: 'Tentang Financial Field Indonesia',
+							href: routes.about(),
+						},
+					]}
+				/>
+			)}
 
-      <h1>Featured</h1>
-      <ArticleList articles={navigation.featuredArticles} />
-
-      <h1>Latest</h1>
-      <ArticleList articles={latest} />
-    </main>
-  );
+			{categoryBlocks.map(({ category, articles }) => (
+				<section
+					key={category.id}
+					className={styles.block}
+					aria-labelledby={`topik-${category.slug}`}
+				>
+					<SectionHeader
+						id={`topik-${category.slug}`}
+						title={category.name}
+						href={routes.category(category)}
+					/>
+					<ul className={styles.grid}>
+						{articles.map((article) => (
+							<li key={article.id}>
+								<ArticleCard article={article} trackAs="home_category" />
+							</li>
+						))}
+					</ul>
+				</section>
+			))}
+		</Container>
+	);
 }

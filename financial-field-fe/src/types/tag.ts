@@ -1,11 +1,12 @@
-import type { ArticleSummary } from "./article";
+import type { SeoFields } from './seo';
 
 export type TagSummary = {
-  id: string;
-  slug: string;
-  name: string;
+	id: string;
+	slug: string;
+	name: string;
 };
 
 export type Tag = TagSummary & {
-  articles: ArticleSummary[];
+	description: string | null;
+	seo: SeoFields | null;
 };

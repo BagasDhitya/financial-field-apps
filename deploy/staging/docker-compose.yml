@@ -1,0 +1,116 @@
+# Financial Field Indonesia staging stack (ADR-0015, REQ-INFRA-004…007).
+# Run it only through ./deploy/staging/compose.sh, which adds
+# --env-file deploy/staging/.env.staging, the project name and the image tag.
+# Owner's steps: the pack's runbooks/staging-docker.md. Agents never run it.
+#
+#   db    Postgres 16 (named volume)
+#   cms   Strapi 5 on Node 20, built from financial-field-cms/ (unchanged)
+#   fe    Next.js standalone, basic auth on (SITE_ENV=staging)
+#   seed  one-off, on request: SEED_PROFILE=demo against http://cms:1337
+#
+# Host ports bind to 127.0.0.1 unless FE_BIND / CMS_BIND say otherwise.
+name: ffid-staging
+
+services:
+  db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-strapi}
+      POSTGRES_USER: ${POSTGRES_USER:-strapi}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?Run deploy/staging/generate-secrets.sh}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U "$${POSTGRES_USER}" -d "$${POSTGRES_DB}"']
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  cms:
+    build:
+      context: ../../financial-field-cms
+      # Relative to the build context; its ignore file is cms.Dockerfile.dockerignore.
+      dockerfile: ../deploy/staging/cms.Dockerfile
+    image: ffid-staging-cms:${FFID_IMAGE_TAG:-local}
+    init: true
+    environment:
+      NODE_ENV: production
+      HOST: 0.0.0.0
+      PORT: '1337'
+      APP_KEYS: ${APP_KEYS?Run deploy/staging/generate-secrets.sh}
+      API_TOKEN_SALT: ${API_TOKEN_SALT?Run deploy/staging/generate-secrets.sh}
+      ADMIN_JWT_SECRET: ${ADMIN_JWT_SECRET?Run deploy/staging/generate-secrets.sh}
+      TRANSFER_TOKEN_SALT: ${TRANSFER_TOKEN_SALT?Run deploy/staging/generate-secrets.sh}
+      JWT_SECRET: ${JWT_SECRET?Run deploy/staging/generate-secrets.sh}
+      ENCRYPTION_KEY: ${ENCRYPTION_KEY?Run deploy/staging/generate-secrets.sh}
+      # REQ-INFRA-003. DATABASE_URL stays unset: its parsed values would
+      # override these fields (DSC-0019).
+      DATABASE_CLIENT: postgres
+      DATABASE_HOST: db
+      DATABASE_PORT: '5432'
+      DATABASE_NAME: ${POSTGRES_DB:-strapi}
+      DATABASE_USERNAME: ${POSTGRES_USER:-strapi}
+      DATABASE_PASSWORD: ${POSTGRES_PASSWORD?Run deploy/staging/generate-secrets.sh}
+      DATABASE_SSL: 'false'
+    volumes:
+      - cms-uploads:/opt/app/public/uploads
+    ports:
+      - '${CMS_BIND:-127.0.0.1}:${CMS_PORT:-1337}:1337'
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+  fe:
+    build:
+      context: ../../financial-field-fe
+      target: runner
+      args:
+        # Inlined at build time (DSC-0014): change them, then build fe again.
+        NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+        NEXT_PUBLIC_CMS_URL: ${NEXT_PUBLIC_CMS_URL:-http://cms:1337}
+        NEXT_PUBLIC_GA_MEASUREMENT_ID: ${NEXT_PUBLIC_GA_MEASUREMENT_ID:-}
+        SITE_ENV: staging
+    image: ffid-staging-fe:${FFID_IMAGE_TAG:-local}
+    init: true
+    environment:
+      SITE_ENV: staging
+      CMS_URL: http://cms:1337
+      NEXT_PUBLIC_SITE_URL: ${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      NEXT_PUBLIC_CMS_URL: ${NEXT_PUBLIC_CMS_URL:-http://cms:1337}
+      CMS_API_TOKEN: ${CMS_API_TOKEN:-}
+      CMS_PREVIEW_TOKEN: ${CMS_PREVIEW_TOKEN:-}
+      REVALIDATE_SECRET: ${REVALIDATE_SECRET?Run deploy/staging/generate-secrets.sh}
+      PREVIEW_SECRET: ${PREVIEW_SECRET?Run deploy/staging/generate-secrets.sh}
+      CMS_CAPABILITIES: ${CMS_CAPABILITIES:-}
+      STAGING_BASIC_AUTH_USER: ${STAGING_BASIC_AUTH_USER:-}
+      STAGING_BASIC_AUTH_PASSWORD: ${STAGING_BASIC_AUTH_PASSWORD:-}
+      FEATURE_HARNESS: ${FEATURE_HARNESS:-}
+    ports:
+      - '${FE_BIND:-127.0.0.1}:${FE_PORT:-3000}:3000'
+    depends_on:
+      cms:
+        condition: service_healthy
+    restart: unless-stopped
+
+  seed:
+    build:
+      context: ../../financial-field-fe
+      target: seed
+    image: ffid-staging-seed:${FFID_IMAGE_TAG:-local}
+    profiles: [seed]
+    environment:
+      CMS_URL: http://cms:1337
+      CMS_SEED_TOKEN: ${CMS_SEED_TOKEN:-}
+      CMS_CAPABILITIES: ${CMS_CAPABILITIES:-}
+      SEED_ALLOWED_HOSTS: cms
+      SITE_ENV: staging
+      SEED_PROFILE: ${SEED_PROFILE:-demo}
+    depends_on:
+      cms:
+        condition: service_healthy
+
+volumes:
+  db-data:
+  cms-uploads:

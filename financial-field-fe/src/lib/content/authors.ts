@@ -1,49 +1,47 @@
-import { cacheTags } from "@/lib/cms/cache-tags";
-import { cmsFetch, type CmsCollection } from "@/lib/cms/client";
-import { endpoints } from "@/lib/cms/endpoints";
-import { mapArticleSummary } from "@/lib/cms/mappers/article";
-import { mapAuthor } from "@/lib/cms/mappers/author";
-import {
-  ARTICLE_SUMMARY_FIELDS,
-  ARTICLE_SUMMARY_POPULATE,
-} from "@/lib/cms/queries/articles";
-import type { StrapiArticle, StrapiAuthor } from "@/lib/cms/strapi-types";
-import { REVALIDATE } from "@/lib/revalidate";
-import type { Author } from "@/types";
+import { cacheTags } from '@/lib/cms/cache-tags';
+import { hasCapability } from '@/lib/cms/capabilities';
+import { cmsFetch, type CmsCollection } from '@/lib/cms/client';
+import { endpoints } from '@/lib/cms/endpoints';
+import { mapAuthor } from '@/lib/cms/mappers/author';
+import { seoPopulate } from '@/lib/cms/queries/articles';
+import type { StrapiAuthor } from '@/lib/cms/strapi-types';
+import { REVALIDATE } from '@/lib/revalidate';
+import type { Author } from '@/types';
 
-type StrapiAuthorEntry = StrapiAuthor & {
-  articles?: StrapiArticle[] | null;
-  article?: StrapiArticle[] | null;
-};
-
+/**
+ * Author by slug, or null. `same_as` is requested only with the `author-
+ * profile` capability.
+ */
 export async function getAuthorBySlug(slug: string): Promise<Author | null> {
-  const result = await cmsFetch<CmsCollection<StrapiAuthorEntry>>({
-    path: endpoints.authors,
-    query: {
-      filters: { slug: { $eq: slug } },
-      populate: {
-        avatar: true,
-        articles: {
-          fields: ARTICLE_SUMMARY_FIELDS,
-          populate: ARTICLE_SUMMARY_POPULATE,
-        },
-        article: {
-          fields: ARTICLE_SUMMARY_FIELDS,
-          populate: ARTICLE_SUMMARY_POPULATE,
-        },
-      },
-      pagination: { limit: 1 },
-    },
-    tags: [cacheTags.author(slug)],
-    revalidate: REVALIDATE.archive,
-  });
+	const result = await cmsFetch<CmsCollection<StrapiAuthor>>({
+		path: endpoints.authors,
+		query: {
+			filters: { slug: { $eq: slug } },
+			populate: {
+				avatar: true,
+				...(hasCapability('author-profile') ? { same_as: true } : {}),
+				...seoPopulate(),
+			},
+			pagination: { limit: 1 },
+		},
+		tags: [cacheTags.author(slug)],
+		revalidate: REVALIDATE.archive,
+	});
 
-  const entry = result.data[0];
-  if (!entry) return null;
+	const entry = result.data[0];
+	return entry ? mapAuthor(entry) : null;
+}
 
-  return mapAuthor(
-    entry,
-    (entry.articles ?? []).map(mapArticleSummary),
-    (entry.article ?? []).map(mapArticleSummary),
-  );
+/**
+ * Every author slug for the sitemap (the first 100, enough for the current
+ * team).
+ */
+export async function getAllAuthorSlugs(): Promise<string[]> {
+	const result = await cmsFetch<CmsCollection<StrapiAuthor>>({
+		path: endpoints.authors,
+		query: { fields: ['slug'], pagination: { limit: 100 } },
+		tags: [cacheTags.authors()],
+		revalidate: REVALIDATE.sitemap,
+	});
+	return result.data.flatMap((entry) => (entry.slug ? [entry.slug] : []));
 }

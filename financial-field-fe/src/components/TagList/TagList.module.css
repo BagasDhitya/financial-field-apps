@@ -1,0 +1,32 @@
+.root {
+	display: grid;
+	gap: var(--space-1);
+}
+
+.label {
+	margin: 0;
+}
+
+.list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-1);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.chip {
+	display: inline-flex;
+	min-height: 2.25rem;
+	align-items: center;
+	padding: 0 var(--space-2);
+	border: var(--stroke-rule) solid var(--color-ink);
+	font-size: var(--text-meta);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+.chip:hover {
+	background: var(--blue-06);
+}

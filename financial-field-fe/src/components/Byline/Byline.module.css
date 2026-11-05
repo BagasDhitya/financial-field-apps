@@ -1,0 +1,54 @@
+.root {
+	display: grid;
+	gap: var(--space-2);
+	padding: var(--space-2) 0;
+	border-top: var(--stroke-rule) solid var(--color-ink);
+	border-bottom: var(--stroke-rule) solid var(--ink-12);
+}
+
+.people {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-2) var(--space-4);
+}
+
+.person {
+	display: flex;
+	align-items: center;
+	gap: var(--space-1);
+}
+
+.avatar {
+	flex: 0 0 2.5rem;
+	border: var(--stroke-rule) solid var(--color-ink);
+}
+
+.line {
+	margin: 0;
+	font-size: var(--text-ui);
+}
+
+.role {
+	color: var(--ink-66);
+}
+
+.name {
+	font-weight: 600;
+	color: var(--color-ff-blue);
+	text-decoration: none;
+}
+
+.name:hover {
+	text-decoration: underline;
+}
+
+.title {
+	color: var(--ink-66);
+}
+
+.dates {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-1) var(--space-3);
+	margin: 0;
+}

@@ -1,62 +1,54 @@
-import { revalidateTag } from "next/cache";
-import { NextResponse } from "next/server";
+import { revalidateTag } from 'next/cache';
+import { NextResponse } from 'next/server';
 
-import { cacheTags } from "@/lib/cms/cache-tags";
-import { env } from "@/lib/env";
+import { env } from '@/lib/env';
+import { log } from '@/lib/log';
+import { safeEqual } from '@/lib/security';
+import { planRevalidation, type StrapiWebhookBody } from '@/lib/webhook/revalidation';
 
-type StrapiWebhookBody = {
-  event: string;
-  model: string;
-  entry?: { documentId?: string; slug?: string; ticker_symbol?: string };
-};
+const MAX_BODY_BYTES = 64 * 1024;
 
 /**
- * Maps a Strapi model to the tags that must be invalidated. Each entry
- * invalidates its own tag plus its collection tag, because a publish changes
- * both the entity page and every listing the entity appears in.
+ * Strapi webhook → on-demand revalidation. Constant-time secret check, 64 KB
+ * body limit, 401 without detail (REQ-SEC-002).
  */
-const TAGS_BY_MODEL: Record<
-  string,
-  (entry: NonNullable<StrapiWebhookBody["entry"]>) => string[]
-> = {
-  article: (entry) => [
-    cacheTags.articles(),
-    cacheTags.navigation(),
-    ...(entry.slug ? [cacheTags.article(entry.slug)] : []),
-  ],
-  category: (entry) => [
-    cacheTags.categories(),
-    cacheTags.navigation(),
-    ...(entry.slug ? [cacheTags.category(entry.slug)] : []),
-  ],
-  tag: (entry) => [
-    cacheTags.tags(),
-    ...(entry.slug ? [cacheTags.tag(entry.slug)] : []),
-  ],
-  "writer-profile": (entry) => [
-    cacheTags.authors(),
-    ...(entry.slug ? [cacheTags.author(entry.slug)] : []),
-  ],
-  "stock-ticker": (entry) => [
-    cacheTags.tickers(),
-    ...(entry.ticker_symbol ? [cacheTags.ticker(entry.ticker_symbol)] : []),
-  ],
-  "site-navigation": () => [cacheTags.navigation()],
-};
-
 export async function POST(request: Request) {
-  if (
-    request.headers.get("authorization") !== `Bearer ${env.revalidateSecret}`
-  ) {
-    return NextResponse.json({ revalidated: false }, { status: 401 });
-  }
+	const header = request.headers.get('authorization') ?? '';
+	const token = header.startsWith('Bearer ') ? header.slice('Bearer '.length) : '';
+	if (!safeEqual(token, env.revalidateSecret)) {
+		return NextResponse.json({ revalidated: false }, { status: 401 });
+	}
 
-  const body = (await request.json()) as StrapiWebhookBody;
-  const tags = TAGS_BY_MODEL[body.model]?.(body.entry ?? {}) ?? [];
+	const declared = Number(request.headers.get('content-length') ?? '0');
+	if (declared > MAX_BODY_BYTES) {
+		return NextResponse.json({ revalidated: false }, { status: 413 });
+	}
+	const raw = await request.text();
+	if (raw.length > MAX_BODY_BYTES) {
+		return NextResponse.json({ revalidated: false }, { status: 413 });
+	}
 
-  for (const tag of tags) {
-    revalidateTag(tag, { expire: 0 });
-  }
+	let body: StrapiWebhookBody;
+	try {
+		body = JSON.parse(raw) as StrapiWebhookBody;
+	} catch {
+		// Length only: the body is untrusted input (W3).
+		log.warn('api::revalidate', `invalid JSON body, length ${raw.length}`);
+		return NextResponse.json({ revalidated: false }, { status: 400 });
+	}
 
-  return NextResponse.json({ revalidated: true, model: body.model, tags });
+	const plan = planRevalidation(body);
+	if (plan.kind === 'ignore') {
+		return NextResponse.json({ revalidated: false, reason: plan.reason });
+	}
+
+	for (const tag of plan.tags) {
+		revalidateTag(tag, { expire: 0 });
+	}
+	log.info('api::revalidate', `${body.event ?? '?'} ${body.model ?? '?'}`, plan.tags);
+	return NextResponse.json({
+		revalidated: true,
+		model: body.model,
+		tags: plan.tags,
+	});
 }

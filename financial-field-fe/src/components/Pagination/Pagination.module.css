@@ -1,0 +1,45 @@
+.root {
+	margin-top: var(--space-4);
+}
+
+.list {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-1);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.page,
+.step {
+	display: inline-flex;
+	min-width: 2.75rem;
+	min-height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	padding: 0 var(--space-2);
+	border: var(--stroke-rule) solid var(--color-ink);
+	font-weight: 600;
+	text-decoration: none;
+}
+
+a.page:hover,
+a.step:hover {
+	background: var(--blue-06);
+}
+
+.current {
+	background: var(--color-ink);
+	color: var(--color-paper);
+}
+
+.disabled {
+	border-color: var(--ink-12);
+	color: var(--ink-66);
+}
+
+.gap {
+	padding: 0 0.25rem;
+}

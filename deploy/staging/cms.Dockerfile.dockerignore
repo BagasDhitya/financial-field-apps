@@ -1,0 +1,23 @@
+# Ignore file for cms.Dockerfile (BuildKit reads <Dockerfile>.dockerignore next
+# to the Dockerfile). The build context is financial-field-cms/, where no
+# .dockerignore may be added (it belongs to the CMS developer).
+.git
+node_modules
+.tmp
+.cache
+.strapi
+.strapi-updater.json
+dist
+build
+coverage
+exports
+.env
+.env.*
+!.env.example
+*.db
+*.db.*
+*.sqlite
+*.sqlite3
+public/uploads/*
+!public/uploads/.gitkeep
+.DS_Store
