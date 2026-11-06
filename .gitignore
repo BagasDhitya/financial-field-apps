@@ -19,6 +19,5 @@ financial-field-cms/.env*
 # No root package: a root lockfile is always a mistake
 /package-lock.json
 
-# Staging stack secrets (only the example is committed; ADR-0015)
-deploy/**/.env*
-!deploy/**/.env*.example
+# Leftover local secrets from the retired Docker staging (ADR-0016)
+deploy/

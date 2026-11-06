@@ -56,17 +56,14 @@ const securityHeaders = [
 
 const nextConfig: NextConfig = {
 	// Container image for self-hosting in an Indonesian data center (REQ-INFRA-002).
+	// Vercel staging builds with it set (ADR-0016).
 	output: 'standalone',
 	poweredByHeader: false,
 	images: {
 		formats: ['image/avif', 'image/webp'],
-		// Only when the CMS is on this machine (local dev, e2e mock CMS) or on the
-		// stack's private network under a single-label service name such as `cms`
-		// (Docker staging, REQ-INFRA-007). remotePatterns still pins that host and
-		// /uploads/**. A public CMS host has a dot, so the optimizer keeps refusing
-		// private addresses there.
-		dangerouslyAllowLocalIP:
-			['localhost', '127.0.0.1'].includes(cmsUrl.hostname) || !cmsUrl.hostname.includes('.'),
+		// Only when the CMS is on this machine (local dev, e2e mock CMS). Any other
+		// CMS host keeps the optimizer's private-address block.
+		dangerouslyAllowLocalIP: ['localhost', '127.0.0.1'].includes(cmsUrl.hostname),
 		remotePatterns: [
 			{
 				protocol: cmsUrl.protocol.replace(':', '') as 'http' | 'https',
