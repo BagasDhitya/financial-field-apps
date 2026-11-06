@@ -2,7 +2,7 @@ name: Frontend CI
 
 on:
   pull_request:
-    branches: [development]
+    branches: [development, staging]
     paths: ["financial-field-fe/**", ".github/workflows/frontend-ci.yml"]
   push:
     branches: [development]

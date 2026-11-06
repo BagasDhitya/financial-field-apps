@@ -26,6 +26,8 @@ export const env = {
 	revalidateSecret: requireServerEnv('REVALIDATE_SECRET', process.env.REVALIDATE_SECRET),
 	previewSecret: requireServerEnv('PREVIEW_SECRET', process.env.PREVIEW_SECRET),
 	skipCmsFetch: process.env.SKIP_CMS_FETCH === '1',
+	// Set by Next during `next build` only (REQ-INFRA-009 build fallback).
+	isBuildPhase: process.env.NEXT_PHASE === 'phase-production-build',
 	siteEnv: readSiteEnv(process.env.SITE_ENV),
 	gaMeasurementId: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID ?? '',
 	cmsCapabilities: process.env.CMS_CAPABILITIES ?? '',
