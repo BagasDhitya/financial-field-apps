@@ -11,7 +11,7 @@
 import { onPaper, solidPng } from '../lib/png.mjs';
 
 import { parseCapabilities } from './capabilities.mjs';
-import { assertSeedAllowed, createClient, SeedGuardError } from './client.mjs';
+import { assertSeedAllowed, CmsWriteError, createClient, SeedGuardError } from './client.mjs';
 import { ARTICLES, DRAFTS, FEATURED } from './data/articles.mjs';
 import { STATIC_PAGES } from './data/pages.mjs';
 import { AUTHORS } from './data/people.mjs';
@@ -67,6 +67,26 @@ function categoryImage(index) {
 	const color = PALETTE[index % PALETTE.length];
 	const alpha = [1, 0.82, 0.66][Math.floor(index / PALETTE.length) % 3];
 	return solidPng(1600, 900, onPaper(color, alpha));
+}
+
+/**
+ * The Site Navigation single type with its featured slugs, or null when it has
+ * no entry yet: a fresh CMS answers 404 until it is saved once (REQ-SEED-012,
+ * DSC-0020). The PUT that follows creates it. Any other error stops the run.
+ */
+async function readSiteNavigation(client) {
+	try {
+		return await client.request(
+			'GET',
+			'/site-navigation?status=draft&populate[featured_articles][fields][0]=slug',
+		);
+	} catch (error) {
+		if (error instanceof CmsWriteError && error.status === 404) {
+			log('  no Site Navigation entry yet: creating it');
+			return null;
+		}
+		throw error;
+	}
 }
 
 async function seed(client, caps, profile) {
@@ -168,12 +188,7 @@ async function seed(client, caps, profile) {
 	}
 
 	log('› site navigation (featured first, existing featured kept)');
-	const nav = dryRun
-		? null
-		: await client.request(
-				'GET',
-				'/site-navigation?status=draft&populate[featured_articles][fields][0]=slug',
-			);
+	const nav = dryRun ? null : await readSiteNavigation(client);
 	const existingFeatured = (nav?.data?.featured_articles ?? []).filter(
 		(article) => !FEATURED.includes(article.slug),
 	);
