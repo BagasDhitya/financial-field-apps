@@ -1,6 +1,7 @@
 import qs from 'qs';
 
 import { env } from '@/lib/env';
+import { log } from '@/lib/log';
 
 type CmsRequest = {
 	path: string;
@@ -8,7 +9,10 @@ type CmsRequest = {
 	tags: string[];
 	revalidate: number | false;
 	draft?: boolean;
-	/** Shape returned when SKIP_CMS_FETCH is on (CI builds without Strapi). */
+	/**
+	 * Shape returned when SKIP_CMS_FETCH is on (CI builds without Strapi), or
+	 * when the CMS can't be reached during `next build` (REQ-INFRA-009).
+	 */
 	kind?: 'collection' | 'single';
 };
 
@@ -47,6 +51,19 @@ const EMPTY_COLLECTION: CmsCollection<never> = {
 	meta: { pagination: { page: 1, pageSize: 0, pageCount: 0, total: 0 } },
 };
 
+function emptyResult<T>(kind: 'collection' | 'single'): T {
+	return (kind === 'single' ? { data: null } : EMPTY_COLLECTION) as T;
+}
+
+/** The error name plus the system code (`ECONNREFUSED`, `ENOTFOUND`) when fetch has one. */
+function describeFetchError(error: unknown): string {
+	if (!(error instanceof Error)) {
+		return 'unknown error';
+	}
+	const code = (error.cause as { code?: unknown } | undefined)?.code;
+	return typeof code === 'string' ? `${error.name} (${code})` : error.name;
+}
+
 function authorization(draft: boolean): Record<string, string> {
 	const token = draft ? env.cmsPreviewToken || env.cmsApiToken : env.cmsApiToken;
 	return token ? { Authorization: `Bearer ${token}` } : {};
@@ -65,7 +82,7 @@ export async function cmsFetch<T>({
 	kind = 'collection',
 }: CmsRequest): Promise<T> {
 	if (env.skipCmsFetch) {
-		return (kind === 'single' ? { data: null } : EMPTY_COLLECTION) as T;
+		return emptyResult<T>(kind);
 	}
 
 	const search = qs.stringify(
@@ -73,10 +90,25 @@ export async function cmsFetch<T>({
 		{ encodeValuesOnly: true, addQueryPrefix: true },
 	);
 
-	const response = await fetch(`${env.cmsUrl}/api${path}${search}`, {
-		headers: authorization(draft),
-		...(draft ? { cache: 'no-store' as const } : { next: { tags, revalidate } }),
-	});
+	let response: Response;
+	try {
+		response = await fetch(`${env.cmsUrl}/api${path}${search}`, {
+			headers: authorization(draft),
+			...(draft ? { cache: 'no-store' as const } : { next: { tags, revalidate } }),
+		});
+	} catch (error) {
+		// REQ-INFRA-009: no HTTP answer at all (CMS cold, down or unreachable).
+		// During `next build` the page is prebuilt empty instead of failing the
+		// deploy; ISR and the webhook refill it. At runtime the route decides.
+		if (!env.isBuildPhase) {
+			throw error;
+		}
+		log.warn(
+			'cms::cmsFetch',
+			`CMS unreachable during build, ${path} prebuilt empty: ${describeFetchError(error)}`,
+		);
+		return emptyResult<T>(kind);
+	}
 
 	if (!response.ok) {
 		throw new CmsError(response.status, path, await response.text());
