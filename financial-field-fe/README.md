@@ -11,7 +11,9 @@ same client it uses for Strapi. Setting `CMS_URL` switches to the real CMS
 **Source of truth:** the implementation pack at
 `web-implementation-documents/financial-field-indonesia/` (outside this repo).
 Start with its `README.md`, `STATE.md` and `agent-rules.md`. Current work:
-`PRP-0002.p1` (Phase 1, news portal).
+`PRP-0002.p1` (Phase 1, news portal). This README is the only document in the
+repo: plans, decisions, specs and runbooks live in the pack, never in a
+`docs/` folder here.
 
 ## Run locally
 
