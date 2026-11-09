@@ -27,7 +27,6 @@ export async function getSiteNavigation(): Promise<SiteNavigation> {
 			},
 			tags: [cacheTags.navigation()],
 			revalidate: REVALIDATE.home,
-			kind: 'single',
 		});
 
 		if (!result.data) {

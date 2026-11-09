@@ -18,7 +18,7 @@ test.describe('staging basic auth (REQ-INFRA-006)', () => {
 		// /halaman/1 would redirect: the challenge comes first, so even that is not revealed.
 		for (const path of [
 			'/',
-			'/artikel/cara-menghitung-pph-21',
+			'/artikel/cara-membaca-slip-gaji-pph-21',
 			'/robots.txt',
 			'/kategori/pajak/halaman/1',
 		]) {
@@ -52,20 +52,5 @@ test.describe('staging basic auth (REQ-INFRA-006)', () => {
 		const asset = (await home.text()).match(/\/_next\/static\/[^"'\s]+\.js/)?.[0];
 		expect(asset).toBeTruthy();
 		expect((await request.get(`${STAGING}${asset}`)).status()).toBe(200);
-	});
-
-	test('leaves the webhook and preview to their own secrets', async ({ request }) => {
-		const webhook = await request.post(`${STAGING}/api/revalidate`, {
-			headers: { Authorization: 'Bearer wrong-secret' },
-			data: { event: 'entry.publish', model: 'article' },
-		});
-		expect(webhook.status()).toBe(401);
-		expect(webhook.headers()['www-authenticate']).toBeUndefined();
-
-		const preview = await request.get(`${STAGING}/api/preview?secret=wrong&slug=a`, {
-			maxRedirects: 0,
-		});
-		expect(preview.status()).toBe(401);
-		expect(preview.headers()['www-authenticate']).toBeUndefined();
 	});
 });

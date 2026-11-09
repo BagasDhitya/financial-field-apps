@@ -1,15 +1,16 @@
 /**
- * ISR windows in seconds, by route type. These are the safety net: the primary
- * freshness mechanism is webhook-driven on-demand revalidation. Route files
- * must declare `revalidate` as a literal (Next requires static analysis), so
- * src/lib/revalidate.test.ts checks each literal against this table.
+ * ISR windows in seconds, by route type. The content ships with each deploy
+ * (src/data), so a window only refreshes time-relative output such as "2 jam
+ * lalu" and the "Baru" badge. Route files must declare `revalidate` as a
+ * literal (Next requires static analysis), so src/lib/revalidate.test.ts
+ * checks each literal against this table.
  */
 export const REVALIDATE = {
 	/** Home and top-level listings change whenever anything is published. */
 	home: 60,
 	/** Section listings: new articles arrive, but less often than on home. */
 	categoryListing: 120,
-	/** Article bodies change rarely after publish; corrections come by webhook. */
+	/** Article bodies change rarely after publish. */
 	article: 300,
 	/** Author, tag, latest and interview archives track their article lists. */
 	archive: 600,

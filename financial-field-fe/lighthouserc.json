@@ -3,7 +3,7 @@
 		"collect": {
 			"url": [
 				"http://localhost:3100/",
-				"http://localhost:3100/artikel/cara-menghitung-pph-21",
+				"http://localhost:3100/artikel/cara-membaca-slip-gaji-pph-21",
 				"http://localhost:3100/kategori/pajak"
 			],
 			"numberOfRuns": 3,

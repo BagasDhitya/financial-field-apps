@@ -3,8 +3,9 @@ import { env } from '@/lib/env';
 /**
  * CMS fields the frontend may request. Strapi runs with `strictParams`, so a
  * populate or field key the schema does not have yet returns HTTP 400. Each
- * capability maps to a CMS-nn change in SPC-content-model and is switched on
- * (CMS_CAPABILITIES env) once that change is merged and deployed.
+ * capability maps to a CMS-nn change in SPC-content-model. The local API has
+ * them all; against a real CMS (`CMS_URL` set) each is switched on in
+ * `CMS_CAPABILITIES` once its change is merged and deployed.
  */
 export const CMS_CAPABILITIES = [
 	'seo', // CMS-01
@@ -53,10 +54,12 @@ export function unknownCapabilityNames(raw: string): string[] {
 }
 
 /**
- * Capabilities for this process, parsed once from CMS_CAPABILITIES (W13).
- * Unknown names are reported at startup by src/instrumentation.ts.
+ * Capabilities for this process, decided once (W13): every one for the local
+ * API, otherwise CMS_CAPABILITIES. Unknown names are reported at startup by
+ * src/instrumentation.ts.
  */
-export const cmsCapabilities: CapabilitySet = parseCapabilities(env.cmsCapabilities);
+export const cmsCapabilities: CapabilitySet =
+	env.cmsUrl === '' ? new Set(CMS_CAPABILITIES) : parseCapabilities(env.cmsCapabilities);
 
 /**
  * True when the capability is on. Tests pass their own set; the app uses

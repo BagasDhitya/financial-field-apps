@@ -17,5 +17,4 @@ export const cacheTags = {
 	pages: () => 'pages',
 	page: (slug: string) => `page:${slug}`,
 	siteSettings: () => 'site-settings',
-	redirects: () => 'redirects',
 } as const;

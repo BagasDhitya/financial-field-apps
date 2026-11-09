@@ -5,7 +5,7 @@ import { expectNoHorizontalScroll } from './helpers';
 for (const width of [360, 390, 768]) {
 	test(`no horizontal scroll and bordered cards at ${width}px (AC4)`, async ({ page }) => {
 		await page.setViewportSize({ width, height: 800 });
-		for (const path of ['/', '/artikel/cara-menghitung-pph-21', '/kategori/pajak']) {
+		for (const path of ['/', '/artikel/cara-membaca-slip-gaji-pph-21', '/kategori/pajak']) {
 			await page.goto(path);
 			await expectNoHorizontalScroll(page);
 		}
@@ -26,7 +26,9 @@ test('mobile sheet opens as a dialog, topics expand, Escape closes (REQ-NAV-004)
 	const dialog = page.getByRole('dialog', { name: 'Menu' });
 	await expect(dialog).toBeVisible();
 	await dialog.getByText('Pajak', { exact: true }).click();
-	await expect(dialog.getByRole('link', { name: 'PPh', exact: true })).toBeVisible();
+	await expect(
+		dialog.getByRole('link', { name: 'PPh 21 & Bukti Potong', exact: true }),
+	).toBeVisible();
 	await page.keyboard.press('Escape');
 	await expect(dialog).toBeHidden();
 });

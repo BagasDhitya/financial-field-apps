@@ -6,14 +6,15 @@ import type { StrapiMedia } from '../strapi-types';
 const RENDERABLE_IMAGE = /^image\//;
 
 /**
- * The local upload provider returns paths like "/uploads/foo.jpg"; an external
- * provider returns absolute URLs. Both must resolve.
+ * Strapi's local upload provider returns paths like "/uploads/foo.jpg"; an
+ * external provider returns absolute URLs. Both must resolve. The local API's
+ * paths (`/images/…`) stay relative: they are files of this site.
  */
 export function resolveMediaUrl(url: string): string {
 	if (url.startsWith('http://') || url.startsWith('https://')) {
 		return url;
 	}
-	return `${env.cmsPublicUrl}${url}`;
+	return `${env.cmsUrl}${url}`;
 }
 
 /**

@@ -135,9 +135,3 @@ export type StrapiSiteSettings = {
 	contact_email?: string | null;
 	default_pr_disclosure?: string | null;
 };
-
-export type StrapiRedirect = {
-	from_path?: string | null;
-	to_path?: string | null;
-	status_code?: number | null;
-};

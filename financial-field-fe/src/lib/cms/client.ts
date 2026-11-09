@@ -1,19 +1,14 @@
 import qs from 'qs';
 
 import { env } from '@/lib/env';
-import { log } from '@/lib/log';
+
+import { localCmsResponse } from './local/handler';
 
 type CmsRequest = {
 	path: string;
 	query?: Record<string, unknown>;
 	tags: string[];
 	revalidate: number | false;
-	draft?: boolean;
-	/**
-	 * Shape returned when SKIP_CMS_FETCH is on (CI builds without Strapi), or
-	 * when the CMS can't be reached during `next build` (REQ-INFRA-009).
-	 */
-	kind?: 'collection' | 'single';
 };
 
 export type CmsPagination = {
@@ -46,73 +41,41 @@ export class CmsError extends Error {
 	}
 }
 
-const EMPTY_COLLECTION: CmsCollection<never> = {
-	data: [],
-	meta: { pagination: { page: 1, pageSize: 0, pageCount: 0, total: 0 } },
-};
+/**
+ * True while no `CMS_URL` is set: requests go to the local API over the
+ * hardcoded content (src/lib/cms/local) instead of a Strapi server.
+ */
+export const usesLocalCms = env.cmsUrl === '';
 
-function emptyResult<T>(kind: 'collection' | 'single'): T {
-	return (kind === 'single' ? { data: null } : EMPTY_COLLECTION) as T;
-}
-
-/** The error name plus the system code (`ECONNREFUSED`, `ENOTFOUND`) when fetch has one. */
-function describeFetchError(error: unknown): string {
-	if (!(error instanceof Error)) {
-		return 'unknown error';
-	}
-	const code = (error.cause as { code?: unknown } | undefined)?.code;
-	return typeof code === 'string' ? `${error.name} (${code})` : error.name;
-}
-
-function authorization(draft: boolean): Record<string, string> {
-	const token = draft ? env.cmsPreviewToken || env.cmsApiToken : env.cmsApiToken;
-	return token ? { Authorization: `Bearer ${token}` } : {};
+function authorization(): Record<string, string> {
+	return env.cmsApiToken ? { Authorization: `Bearer ${env.cmsApiToken}` } : {};
 }
 
 /**
- * The only place the app talks to Strapi. Owns auth, cache tags, revalidation,
- * and error shape so no caller has to think about any of them.
+ * The only place the app talks to the CMS. Owns auth, cache tags,
+ * revalidation and the error shape, so no caller has to think about any of
+ * them. Both sources get the same query string: the local API parses it
+ * exactly as its HTTP route does, so switching to Strapi changes the
+ * transport, not the answers.
  */
-export async function cmsFetch<T>({
-	path,
-	query,
-	tags,
-	revalidate,
-	draft = false,
-	kind = 'collection',
-}: CmsRequest): Promise<T> {
-	if (env.skipCmsFetch) {
-		return emptyResult<T>(kind);
-	}
+export async function cmsFetch<T>({ path, query, tags, revalidate }: CmsRequest): Promise<T> {
+	const search = qs.stringify(query ?? {}, { encodeValuesOnly: true, addQueryPrefix: true });
 
-	const search = qs.stringify(
-		{ ...query, ...(draft ? { status: 'draft' } : {}) },
-		{ encodeValuesOnly: true, addQueryPrefix: true },
-	);
-
-	let response: Response;
-	try {
-		response = await fetch(`${env.cmsUrl}/api${path}${search}`, {
-			headers: authorization(draft),
-			...(draft ? { cache: 'no-store' as const } : { next: { tags, revalidate } }),
-		});
-	} catch (error) {
-		// REQ-INFRA-009: no HTTP answer at all (CMS cold, down or unreachable).
-		// During `next build` the page is prebuilt empty instead of failing the
-		// deploy; ISR and the webhook refill it. At runtime the route decides.
-		if (!env.isBuildPhase) {
-			throw error;
+	if (usesLocalCms) {
+		const { status, body } = localCmsResponse(path, search);
+		if (status !== 200) {
+			throw new CmsError(status, path, JSON.stringify(body));
 		}
-		log.warn(
-			'cms::cmsFetch',
-			`CMS unreachable during build, ${path} prebuilt empty: ${describeFetchError(error)}`,
-		);
-		return emptyResult<T>(kind);
+		// A private copy, as a fetch would give: callers can't change the store.
+		return structuredClone(body) as T;
 	}
 
+	const response = await fetch(`${env.cmsUrl}/api${path}${search}`, {
+		headers: authorization(),
+		next: { tags, revalidate },
+	});
 	if (!response.ok) {
 		throw new CmsError(response.status, path, await response.text());
 	}
-
 	return (await response.json()) as T;
 }

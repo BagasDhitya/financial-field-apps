@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import type { StrapiArticle } from '../strapi-types';
 
-import { mapArticle, mapArticleSummary, mapEditorialStatus } from './article';
+import { mapArticle, mapArticleSummary } from './article';
 
 const image = {
 	url: '/uploads/a.jpg',
@@ -119,11 +119,10 @@ describe('mapArticleSummary / mapArticle (W2: never throw)', () => {
 		expect(node.image.url).toBe('http://cms.example.test/uploads/b.jpg');
 	});
 
-	it('hides the internal data-contoh marker tag (PRP-0002.p1 Part B T63)', () => {
+	it('drops tags without a slug', () => {
 		const article = mapArticle({
 			...full,
 			tags: [
-				{ documentId: 't1', slug: 'data-contoh', name: 'Data contoh' },
 				{ documentId: 't2', slug: 'pajak-karyawan', name: 'Pajak karyawan' },
 				{ documentId: 't3', slug: null, name: 'Tanpa slug' },
 			],
@@ -134,7 +133,5 @@ describe('mapArticleSummary / mapArticle (W2: never throw)', () => {
 	it('never carries the editorial status on the public Article (REQ-CMS-001)', () => {
 		expect(mapArticle(full)).not.toHaveProperty('editorialStatus');
 		expect(JSON.stringify(mapArticle(full))).not.toContain('approved');
-		expect(mapEditorialStatus(full)).toBe('approved');
-		expect(mapEditorialStatus({ documentId: 'x', editorial_status: 'weird' })).toBeNull();
 	});
 });

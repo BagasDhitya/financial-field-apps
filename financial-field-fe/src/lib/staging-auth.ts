@@ -3,13 +3,8 @@ import { safeEqual } from '@/lib/security';
 /** Realm shown in the browser's login prompt on staging. */
 export const STAGING_AUTH_REALM = 'Financial Field Indonesia staging';
 
-/**
- * Paths with their own protection or none needed: the CMS webhook and preview
- * entry carry their own secrets, and `/_next/*` is framework assets
- * (REQ-INFRA-006).
- */
-const EXEMPT_EXACT = ['/api/revalidate', '/api/preview'];
-const EXEMPT_PREFIXES = ['/api/revalidate/', '/api/preview/', '/_next/'];
+/** Framework assets (`/_next/*`) never ask for the password (REQ-INFRA-006). */
+const EXEMPT_PREFIXES = ['/_next/'];
 
 export type StagingAuthConfig = {
 	siteEnv: string;
@@ -24,10 +19,7 @@ export function isStagingAuthEnabled({ siteEnv, user, password }: StagingAuthCon
 
 /** True for paths that never ask for the staging password. */
 export function isStagingAuthExempt(pathname: string): boolean {
-	return (
-		EXEMPT_EXACT.includes(pathname) ||
-		EXEMPT_PREFIXES.some((prefix) => pathname.startsWith(prefix))
-	);
+	return EXEMPT_PREFIXES.some((prefix) => pathname.startsWith(prefix));
 }
 
 function decodeBase64Utf8(value: string): string | null {

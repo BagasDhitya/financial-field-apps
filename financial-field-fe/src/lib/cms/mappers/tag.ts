@@ -4,25 +4,14 @@ import type { StrapiTag } from '../strapi-types';
 
 import { mapSeo } from './seo';
 
-/**
- * Internal marker tags that are never shown, listed or given a page. The seed
- * marks demo articles with `data-contoh` (PRP-0002.p1 §S4.2, T63).
- */
-export const HIDDEN_TAG_SLUGS: ReadonlySet<string> = new Set(['data-contoh']);
-
-/** Slugs of tags a reader may see: non-empty and not internal markers. */
-export function visibleTagSlugs(
+/** Slugs of the populated tags, skipping any without a slug. */
+export function mapTagSlugs(
 	tags: readonly { slug?: string | null }[] | null | undefined,
 ): string[] {
-	return (tags ?? []).flatMap((tag) =>
-		tag.slug && !HIDDEN_TAG_SLUGS.has(tag.slug) ? [tag.slug] : [],
-	);
+	return (tags ?? []).flatMap((tag) => (tag.slug ? [tag.slug] : []));
 }
 
-/**
- * Tag name and slug for chips and lists. Does not filter marker tags; callers
- * check HIDDEN_TAG_SLUGS.
- */
+/** Tag name and slug for chips and lists. */
 export function mapTagSummary(entry: StrapiTag): TagSummary {
 	return {
 		id: entry.documentId,

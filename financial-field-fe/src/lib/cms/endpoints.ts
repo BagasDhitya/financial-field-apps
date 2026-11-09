@@ -8,5 +8,4 @@ export const endpoints = {
 	navigation: '/site-navigation',
 	staticPages: '/static-pages',
 	siteSettings: '/site-setting',
-	redirects: '/redirects',
 } as const;

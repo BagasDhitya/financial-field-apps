@@ -23,7 +23,6 @@ export const routes = {
 	ticker: (symbol: string) => `/saham/${symbol.toLowerCase()}`,
 	/** Path pagination (REQ-SEO-006): page 1 is the base URL itself. */
 	paged: (base: string, page: number) => (page <= 1 ? base : `${base}/halaman/${page}`),
-	exitPreview: () => '/api/preview/keluar',
 } as const;
 
 /** Trust pages under /tentang-kami, in footer order (REQ-PAGE-001). */

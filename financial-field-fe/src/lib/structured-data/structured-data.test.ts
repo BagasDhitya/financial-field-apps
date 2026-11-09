@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { DEFAULT_SITE_SETTINGS } from '@/lib/cms/mappers/site';
-import type { Article } from '@/types';
+import type { Article, SiteSettings } from '@/types';
 
 import { buildBreadcrumbList } from './breadcrumb';
 import { buildFaqPage } from './faq';
@@ -10,6 +9,17 @@ import { buildPageGraph } from './registry';
 import { serializeJsonLd } from './serialize';
 
 const ORIGIN = 'https://example.test';
+
+const SETTINGS: SiteSettings = {
+	siteName: 'Financial Field Indonesia',
+	tagline: 'Artikel dan panduan keuangan pribadi',
+	description: 'Artikel dan panduan keuangan pribadi untuk pembaca di Indonesia.',
+	logo: null,
+	defaultOgImage: null,
+	socialLinks: [],
+	contactEmail: null,
+	defaultPrDisclosure: 'Artikel ini adalah konten bersponsor.',
+};
 const URL = `${ORIGIN}/artikel/judul`;
 
 const article: Article = {
@@ -189,13 +199,13 @@ describe('structured data (SPC-seo §6)', () => {
 	it('links trust pages from the organisation only when they exist (REQ-GEO-009)', () => {
 		const off = buildOrganization({
 			origin: ORIGIN,
-			settings: DEFAULT_SITE_SETTINGS,
+			settings: SETTINGS,
 			trustPagesAvailable: false,
 		});
 		expect(off).not.toHaveProperty('publishingPrinciples');
 		const on = buildOrganization({
 			origin: ORIGIN,
-			settings: DEFAULT_SITE_SETTINGS,
+			settings: SETTINGS,
 			trustPagesAvailable: true,
 		});
 		expect(on).toMatchObject({

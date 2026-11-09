@@ -18,7 +18,6 @@ import { FaqList } from '@/components/FaqList/FaqList';
 import { KeyTakeaways } from '@/components/KeyTakeaways/KeyTakeaways';
 import { Kicker, PrLabel } from '@/components/Kicker/Kicker';
 import { Pagination } from '@/components/Pagination/Pagination';
-import { PreviewBanner } from '@/components/PreviewBanner/PreviewBanner';
 import { RiverItem } from '@/components/RiverItem/RiverItem';
 import { SearchField } from '@/components/SearchField/SearchField';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
@@ -129,13 +128,12 @@ export function HarnessView() {
 				/>
 				<Pagination page={4} pageCount={9} hrefFor={(page) => `/terbaru/halaman/${page}`} />
 			</Specimen>
-			<Specimen title="SearchField / EmptyState / PreviewBanner">
+			<Specimen title="SearchField / EmptyState">
 				<SearchField variant="full" id="harness-search" />
 				<EmptyState
 					title="Belum ada artikel di Pajak."
 					links={[{ label: 'Artikel terbaru', href: '/terbaru' }]}
 				/>
-				<PreviewBanner status="fact_checked" slug="contoh" />
 			</Specimen>
 		</Container>
 	);

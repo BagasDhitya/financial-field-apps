@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { draftMode } from 'next/headers';
 import { notFound } from 'next/navigation';
 
 import { JsonLd } from '@/components/JsonLd/JsonLd';
@@ -7,7 +6,6 @@ import { blocksToPlainText } from '@/lib/blocks';
 import { categoryTrail, toSchemaCrumbs } from '@/lib/breadcrumbs';
 import {
 	getArticleBySlug,
-	getArticlePreview,
 	getRecentArticleSlugs,
 	getRelatedArticles,
 } from '@/lib/content/articles';
@@ -19,7 +17,7 @@ import { routes } from '@/lib/routes';
 import { isValidSlug } from '@/lib/security';
 import { absoluteUrl, buildMetadata } from '@/lib/seo/metadata';
 import { buildPageGraph } from '@/lib/structured-data/registry';
-import type { Article, EditorialStatus } from '@/types';
+import type { Article } from '@/types';
 
 import { ArticleView } from '@/features/article/ArticleView';
 
@@ -29,27 +27,8 @@ export const dynamicParams = true;
 
 type Props = { params: Promise<{ slug: string }> };
 
-type Loaded = {
-	article: Article;
-	preview: { status: EditorialStatus | null } | null;
-};
-
-async function load(slug: string): Promise<Loaded | null> {
-	if (!isValidSlug(slug)) {
-		return null;
-	}
-	const draft = await draftMode();
-	if (draft.isEnabled) {
-		const preview = await getArticlePreview(slug);
-		return preview
-			? {
-					article: preview.article,
-					preview: { status: preview.editorialStatus },
-				}
-			: null;
-	}
-	const article = await getArticleBySlug(slug);
-	return article ? { article, preview: null } : null;
+async function load(slug: string): Promise<Article | null> {
+	return isValidSlug(slug) ? getArticleBySlug(slug) : null;
 }
 
 /** Pre-render the 100 most recent; the rest render on first request. */
@@ -60,16 +39,9 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
 	const { slug } = await params;
-	const loaded = await load(slug);
-	if (!loaded) {
+	const article = await load(slug);
+	if (!article) {
 		return {};
-	}
-	const { article, preview } = loaded;
-	if (preview) {
-		return {
-			title: `Pratinjau: ${article.title}`,
-			robots: { index: false, follow: false },
-		};
 	}
 	return buildMetadata({
 		title: article.title,
@@ -91,11 +63,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function ArticlePage({ params }: Props) {
 	const { slug } = await params;
-	const loaded = await load(slug);
-	if (!loaded) {
+	const article = await load(slug);
+	if (!article) {
 		notFound();
 	}
-	const { article, preview } = loaded;
 	const [related, settings] = await Promise.all([getRelatedArticles(article), getSiteSettings()]);
 
 	const url = absoluteUrl(routes.article(article.slug));
@@ -107,18 +78,16 @@ export default async function ArticlePage({ params }: Props) {
 
 	return (
 		<>
-			{preview ? null : (
-				<JsonLd
-					data={buildPageGraph({
-						kind: 'article',
-						origin: env.siteUrl,
-						url,
-						crumbs: toSchemaCrumbs(trail),
-						article,
-						faqSchema: features.faqSchema,
-					})}
-				/>
-			)}
+			<JsonLd
+				data={buildPageGraph({
+					kind: 'article',
+					origin: env.siteUrl,
+					url,
+					crumbs: toSchemaCrumbs(trail),
+					article,
+					faqSchema: features.faqSchema,
+				})}
+			/>
 			<ArticleView
 				article={article}
 				related={related}
@@ -127,20 +96,14 @@ export default async function ArticlePage({ params }: Props) {
 				siteOrigin={env.siteUrl}
 				readingMinutes={readingTimeMinutes(words)}
 				defaultPrDisclosure={settings.defaultPrDisclosure}
-				preview={preview}
-				analyticsParams={
-					preview
-						? null
-						: {
-								article_id: article.id,
-								primary_category: article.primaryCategory?.slug ?? 'none',
-								article_type: article.articleType,
-								author_id: article.author?.id ?? 'none',
-								has_reviewer:
-									article.reviewer !== null && article.lastReviewedAt !== null,
-								word_bucket: wordBucket(words),
-							}
-				}
+				analyticsParams={{
+					article_id: article.id,
+					primary_category: article.primaryCategory?.slug ?? 'none',
+					article_type: article.articleType,
+					author_id: article.author?.id ?? 'none',
+					has_reviewer: article.reviewer !== null && article.lastReviewedAt !== null,
+					word_bucket: wordBucket(words),
+				}}
 			/>
 		</>
 	);

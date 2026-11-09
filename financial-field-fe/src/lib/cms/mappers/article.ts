@@ -1,4 +1,4 @@
-import type { Article, ArticleSummary, ArticleType, EditorialStatus } from '@/types';
+import type { Article, ArticleSummary, ArticleType } from '@/types';
 
 import type { StrapiArticle } from '../strapi-types';
 
@@ -6,19 +6,10 @@ import { mapAuthorSummary } from './author';
 import { mapCategorySummary } from './category';
 import { mapMedia, resolveBodyMedia } from './media';
 import { mapSeo } from './seo';
-import { HIDDEN_TAG_SLUGS, mapTagSummary } from './tag';
+import { mapTagSummary } from './tag';
 import { mapStockMention } from './ticker';
 
 const ARTICLE_TYPES: readonly ArticleType[] = ['standard', 'pr_article', 'interview', 'column'];
-
-const EDITORIAL_STATUSES: readonly EditorialStatus[] = [
-	'draft',
-	'submitted',
-	'changes_requested',
-	'fact_checked',
-	'approved',
-	'rejected',
-];
 
 function nonEmpty(value: string | null | undefined): string | null {
 	const trimmed = value?.trim();
@@ -69,9 +60,7 @@ export function mapArticle(entry: StrapiArticle): Article {
 		categories: (entry.categories ?? [])
 			.filter((category) => category.slug)
 			.map(mapCategorySummary),
-		tags: (entry.tags ?? [])
-			.filter((tag) => tag.slug && !HIDDEN_TAG_SLUGS.has(tag.slug))
-			.map(mapTagSummary),
+		tags: (entry.tags ?? []).filter((tag) => tag.slug).map(mapTagSummary),
 		stocksMentioned: (entry.stocks_mentioned ?? []).map(mapStockMention),
 		contentUpdatedAt: entry.content_updated_at ?? null,
 		seo: mapSeo(entry.seo),
@@ -112,12 +101,4 @@ export function mapArticle(entry: StrapiArticle): Article {
 			})
 			.sort((a, b) => (b.date ?? '').localeCompare(a.date ?? '')),
 	};
-}
-
-/**
- * Preview-only (REQ-CMS-001). Kept out of `mapArticle` so the public Article
- * type can never carry the approval state.
- */
-export function mapEditorialStatus(entry: StrapiArticle): EditorialStatus | null {
-	return EDITORIAL_STATUSES.find((status) => status === entry.editorial_status) ?? null;
 }

@@ -21,7 +21,6 @@ export async function getSiteSettings(): Promise<SiteSettings> {
 			},
 			tags: [cacheTags.siteSettings()],
 			revalidate: REVALIDATE.staticPage,
-			kind: 'single',
 		});
 		return mapSiteSettings(result.data);
 	} catch (error) {

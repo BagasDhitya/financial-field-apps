@@ -63,7 +63,3 @@ export type Article = ArticleSummary & {
 	sources: Source[];
 	corrections: Correction[];
 };
-
-/** Approval states (ADR-0003). Only the preview banner ever shows these. */
-export type EditorialStatus =
-	'draft' | 'submitted' | 'changes_requested' | 'fact_checked' | 'approved' | 'rejected';

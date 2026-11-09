@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from 'next';
 import { Montserrat, Playfair_Display } from 'next/font/google';
-import { draftMode } from 'next/headers';
 import type { ReactNode } from 'react';
 
 import { Analytics } from '@/components/Analytics/Analytics';
@@ -60,15 +59,10 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
-	const [categories, settings, draft] = await Promise.all([
-		getCategoryTree(),
-		getSiteSettings(),
-		draftMode(),
-	]);
+	const [categories, settings] = await Promise.all([getCategoryTree(), getSiteSettings()]);
 
-	// GA4 only in production, only when configured, never in preview (REQ-ANL-001).
-	const analyticsEnabled =
-		env.siteEnv === 'production' && env.gaMeasurementId !== '' && !draft.isEnabled;
+	// GA4 only in production and only when configured (REQ-ANL-001).
+	const analyticsEnabled = env.siteEnv === 'production' && env.gaMeasurementId !== '';
 
 	const organizationGraph = buildGraph([
 		buildOrganization({

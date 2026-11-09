@@ -20,7 +20,7 @@ export type CmsImageProps = {
 };
 
 /**
- * next/image for a CMS asset. With `ratio` the image fills a cropped box;
+ * next/image for a content image (MediaAsset). With `ratio` the image fills a cropped box;
  * without it, it keeps the asset's own size. Decorative images get an empty
  * alt.
  */

@@ -1,6 +1,9 @@
 import type { NextConfig } from 'next';
 
-const cmsUrl = new URL(process.env.NEXT_PUBLIC_CMS_URL ?? 'http://localhost:1337');
+// Set only to read a real Strapi; empty = the local API over src/data, whose
+// images are files of this site (PRP-0002.p1 §S4.8).
+const cmsUrl = (process.env.CMS_URL ?? '').trim() ? new URL(process.env.CMS_URL as string) : null;
+
 const isProduction = process.env.SITE_ENV === 'production';
 // HSTS and upgrade-insecure-requests only make sense on a real HTTPS origin;
 // on http://localhost they would break production-mode test runs.
@@ -25,7 +28,7 @@ const contentSecurityPolicy = [
 	"default-src 'self'",
 	`script-src 'self' 'unsafe-inline' ${GA_SCRIPT}${isDev ? " 'unsafe-eval'" : ''}`,
 	`connect-src 'self' ${GA_CONNECT.join(' ')}`,
-	`img-src 'self' data: blob: ${cmsUrl.origin} https://www.google-analytics.com https://www.googletagmanager.com`,
+	`img-src 'self' data: blob:${cmsUrl ? ` ${cmsUrl.origin}` : ''} https://www.google-analytics.com https://www.googletagmanager.com`,
 	"style-src 'self' 'unsafe-inline'",
 	"font-src 'self'",
 	"frame-ancestors 'none'",
@@ -61,17 +64,21 @@ const nextConfig: NextConfig = {
 	poweredByHeader: false,
 	images: {
 		formats: ['image/avif', 'image/webp'],
-		// Only when the CMS is on this machine (local dev, e2e mock CMS). Any other
-		// CMS host keeps the optimizer's private-address block.
-		dangerouslyAllowLocalIP: ['localhost', '127.0.0.1'].includes(cmsUrl.hostname),
-		remotePatterns: [
-			{
-				protocol: cmsUrl.protocol.replace(':', '') as 'http' | 'https',
-				hostname: cmsUrl.hostname,
-				port: cmsUrl.port,
-				pathname: '/uploads/**',
-			},
-		],
+		...(cmsUrl
+			? {
+					// Only when the CMS is on this machine. Any other CMS host keeps the
+					// optimizer's private-address block.
+					dangerouslyAllowLocalIP: ['localhost', '127.0.0.1'].includes(cmsUrl.hostname),
+					remotePatterns: [
+						{
+							protocol: cmsUrl.protocol.replace(':', '') as 'http' | 'https',
+							hostname: cmsUrl.hostname,
+							port: cmsUrl.port,
+							pathname: '/uploads/**',
+						},
+					],
+				}
+			: {}),
 	},
 	async headers() {
 		return [{ source: '/:path*', headers: securityHeaders }];

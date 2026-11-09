@@ -2,8 +2,8 @@ import { cacheTags } from '@/lib/cms/cache-tags';
 import { hasCapability } from '@/lib/cms/capabilities';
 import { cmsFetch, type CmsCollection } from '@/lib/cms/client';
 import { endpoints } from '@/lib/cms/endpoints';
-import { mapArticle, mapArticleSummary, mapEditorialStatus } from '@/lib/cms/mappers/article';
-import { visibleTagSlugs } from '@/lib/cms/mappers/tag';
+import { mapArticle, mapArticleSummary } from '@/lib/cms/mappers/article';
+import { mapTagSlugs } from '@/lib/cms/mappers/tag';
 import {
 	articleDetailPopulate,
 	articleSort,
@@ -13,7 +13,7 @@ import type { StrapiArticle } from '@/lib/cms/strapi-types';
 import { log } from '@/lib/log';
 import { LISTING_PAGE_SIZE } from '@/lib/pagination';
 import { REVALIDATE } from '@/lib/revalidate';
-import type { Article, ArticleSummary, EditorialStatus, Paginated } from '@/types';
+import type { Article, ArticleSummary, Paginated } from '@/types';
 
 import { toPaginated } from './paginate';
 import { rankRelated } from './related';
@@ -62,29 +62,6 @@ export async function getArticleBySlug(slug: string): Promise<Article | null> {
 
 	const entry = result.data[0];
 	return entry ? mapArticle(entry) : null;
-}
-
-/** Draft read for preview (uncached, preview token). Status is preview-only. */
-export async function getArticlePreview(slug: string): Promise<{
-	article: Article;
-	editorialStatus: EditorialStatus | null;
-} | null> {
-	const result = await cmsFetch<CmsCollection<StrapiArticle>>({
-		path: endpoints.articles,
-		query: {
-			filters: { slug: { $eq: slug } },
-			populate: articleDetailPopulate(),
-			pagination: { limit: 1 },
-		},
-		tags: [],
-		revalidate: 0,
-		draft: true,
-	});
-
-	const entry = result.data[0];
-	return entry
-		? { article: mapArticle(entry), editorialStatus: mapEditorialStatus(entry) }
-		: null;
 }
 
 /** Newest articles across all categories, on the home revalidation window. */
@@ -208,7 +185,7 @@ export async function getRelatedArticles(article: Article): Promise<ArticleSumma
 			{ id: article.id, tagSlugs, primaryCategorySlug: categorySlug },
 			result.data.map((entry) => ({
 				article: mapArticleSummary(entry),
-				tagSlugs: visibleTagSlugs(entry.tags),
+				tagSlugs: mapTagSlugs(entry.tags),
 			})),
 		);
 	} catch (error) {
@@ -269,7 +246,7 @@ export async function getArticleIndex(): Promise<ArticleIndexEntry[]> {
 				publishedAt,
 				modifiedAt: entry.content_updated_at ?? publishedAt,
 				noIndex: entry.seo?.no_index === true,
-				tagSlugs: visibleTagSlugs(entry.tags),
+				tagSlugs: mapTagSlugs(entry.tags),
 				primaryCategorySlug: entry.primary_category?.slug ?? null,
 				authorSlugs: [entry.author?.slug, entry.reviewer?.slug].filter(
 					(slug): slug is string => Boolean(slug),
