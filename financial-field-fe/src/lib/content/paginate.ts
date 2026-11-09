@@ -1,22 +1,17 @@
-import type { CmsCollection } from '@/lib/cms/client';
 import type { Paginated } from '@/types';
 
-/** Converts a Strapi collection response into the domain pagination shape. */
-export function toPaginated<TEntry, TItem>(
-	result: CmsCollection<TEntry>,
-	map: (entry: TEntry) => TItem,
-): Paginated<TItem> {
-	const meta = result.meta?.pagination;
+/**
+ * One page of a list in the domain pagination shape. A page past the end has
+ * no items; `pageCount` is 0 for an empty list.
+ */
+export function paginate<T>(items: readonly T[], page: number, pageSize: number): Paginated<T> {
+	const size = Math.max(1, Math.floor(pageSize));
+	const start = (Math.max(1, page) - 1) * size;
 	return {
-		items: result.data.map(map),
-		page: meta?.page ?? 1,
-		pageSize: meta?.pageSize ?? result.data.length,
-		pageCount: meta?.pageCount ?? (result.data.length > 0 ? 1 : 0),
-		total: meta?.total ?? result.data.length,
+		items: items.slice(start, start + size),
+		page,
+		pageSize: size,
+		pageCount: Math.ceil(items.length / size),
+		total: items.length,
 	};
-}
-
-/** An empty result page in the domain shape. */
-export function emptyPage<T>(page = 1): Paginated<T> {
-	return { items: [], page, pageSize: 0, pageCount: 0, total: 0 };
 }

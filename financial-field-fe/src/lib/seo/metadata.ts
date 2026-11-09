@@ -84,7 +84,7 @@ export const DEFAULT_OG_IMAGE = {
 };
 
 /**
- * Next.js Metadata for a page. CMS seo fields win over page defaults; the title
+ * Next.js Metadata for a page. Content seo fields win over page defaults; the title
  * and description are cut to 70 and 160 characters; the canonical is absolute.
  */
 export function buildMetadata(input: MetadataInput): Metadata {

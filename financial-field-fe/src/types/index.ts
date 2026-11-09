@@ -4,7 +4,6 @@ export type {
 	ArticleSummary,
 	ArticleType,
 	Correction,
-	EditorialStatus,
 	FaqItem,
 	Source,
 	Sponsor,

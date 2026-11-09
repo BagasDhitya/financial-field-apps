@@ -42,16 +42,12 @@ jobs:
       - name: Unit and component tests
         run: pnpm test
 
+      # The content is hardcoded in src/data: the build needs no CMS and no secrets.
       - name: Build
-        env:
-          REVALIDATE_SECRET: ci-placeholder
-          PREVIEW_SECRET: ci-placeholder
-          NEXT_PUBLIC_CMS_URL: http://localhost:1337
-          SKIP_CMS_FETCH: "1"
         run: pnpm build
 
-  # E2E + axe, SEO check and Lighthouse CI against a production build on the
-  # mock CMS (ADR-0009, SPC-testing §3). Report-only for its first week:
+  # E2E + axe, SEO check and Lighthouse CI against a production build of the
+  # hardcoded content (ADR-0009, SPC-testing §3). Report-only for its first week:
   # remove `continue-on-error` once it has been stable (PRP-0002.p1.T09).
   e2e:
     needs: verify
@@ -75,15 +71,14 @@ jobs:
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
 
-      - name: E2E and accessibility (builds against the mock CMS)
+      - name: E2E and accessibility (builds the site first)
         run: pnpm test:e2e
 
       - name: SEO check and Lighthouse CI
         run: |
-          node scripts/with-e2e-env.mjs node tests/mock-cms/server.mjs &
           node scripts/with-e2e-env.mjs pnpm start -p 3100 &
           for i in $(seq 1 60); do
-            curl -sf http://localhost:3100/robots.txt >/dev/null && curl -sf http://localhost:1338/api/tags >/dev/null && break
+            curl -sf http://localhost:3100/robots.txt >/dev/null && break
             sleep 1
           done
           pnpm seo:check

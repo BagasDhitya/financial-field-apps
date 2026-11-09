@@ -1,11 +1,9 @@
-import { cmsCapabilities, unknownCapabilityNames } from '@/lib/cms/capabilities';
 import { env } from '@/lib/env';
 import { isFlagValue } from '@/lib/features';
 import { log } from '@/lib/log';
 
 /** The env values this check reads; tests pass their own. */
 export type ConfigSource = {
-	cmsCapabilities: string;
 	featureFlags: Readonly<Record<string, string | undefined>>;
 	siteEnv?: string;
 	stagingBasicAuth?: { readonly user: string; readonly password: string };
@@ -24,9 +22,7 @@ function flagEnvName(key: string): string {
  * so they may be logged; values are still cut short.
  */
 export function findConfigProblems(source: ConfigSource = env): string[] {
-	const problems = unknownCapabilityNames(source.cmsCapabilities).map(
-		(name) => `CMS_CAPABILITIES: unknown "${name}" ignored`,
-	);
+	const problems: string[] = [];
 	for (const [key, value] of Object.entries(source.featureFlags)) {
 		if (!isFlagValue(value)) {
 			const preview = String(value).slice(0, VALUE_PREVIEW_MAX);
@@ -59,18 +55,11 @@ function stagingAuthProblems({ siteEnv, stagingBasicAuth }: ConfigSource): strin
 }
 
 /**
- * Logs the active CMS capabilities once at info and each problem once at warn.
+ * Logs the site environment once at info and each problem once at warn.
  * Called by src/instrumentation.ts when a server starts.
  */
-export function reportConfig(
-	source: ConfigSource = env,
-	active: ReadonlySet<string> = cmsCapabilities,
-): void {
-	const names = [...active].sort();
-	log.info(
-		'config::reportConfig',
-		`CMS capabilities: ${names.length > 0 ? names.join(', ') : 'none'}`,
-	);
+export function reportConfig(source: ConfigSource = env): void {
+	log.info('config::reportConfig', `SITE_ENV: ${source.siteEnv ?? 'local'}`);
 	for (const problem of findConfigProblems(source)) {
 		log.warn('config::reportConfig', problem);
 	}

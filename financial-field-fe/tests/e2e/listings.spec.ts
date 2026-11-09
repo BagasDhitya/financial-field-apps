@@ -18,13 +18,13 @@ test('path pagination and page-1 redirect (REQ-SEO-006)', async ({ page, request
 });
 
 test('sub-category without its parent redirects to the canonical path', async ({ request }) => {
-	const response = await request.get('/kategori/pph', { maxRedirects: 0 });
+	const response = await request.get('/kategori/pajak-pph21', { maxRedirects: 0 });
 	expect([301, 308]).toContain(response.status());
-	expect(response.headers().location).toMatch(/\/kategori\/pajak\/pph$/);
+	expect(response.headers().location).toMatch(/\/kategori\/pajak\/pajak-pph21$/);
 });
 
 test('thin tags are noindex, rich tags are indexable (REQ-SEO-008)', async ({ page }) => {
-	await page.goto('/tag/reksa-dana');
+	await page.goto('/tag/kartu-kredit');
 	await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
 	await page.goto('/tag/pajak-karyawan');
 	await expect(page.locator('meta[name="robots"]')).toHaveCount(0);

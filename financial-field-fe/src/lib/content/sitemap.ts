@@ -1,4 +1,3 @@
-import { HIDDEN_TAG_SLUGS } from '@/lib/cms/mappers/tag';
 import { routes } from '@/lib/routes';
 import { ARTICLES_PER_SITEMAP, latestDate, type SitemapUrl } from '@/lib/sitemap';
 
@@ -29,8 +28,8 @@ function staticPagePath(slug: string): string {
 }
 
 /**
- * Pure: turns CMS index data into sitemap files (REQ-SEO-013). Only
- * canonical, indexable, non-empty URLs; lastmod from CMS dates.
+ * Pure: turns the article index into sitemap files (REQ-SEO-013). Only
+ * canonical, indexable, non-empty URLs; lastmod from the content dates.
  */
 export function buildSitemapFiles(data: SitemapData, origin: string): SitemapFile[] {
 	const base = origin.replace(/\/+$/, '');
@@ -83,9 +82,6 @@ export function buildSitemapFiles(data: SitemapData, origin: string): SitemapFil
 	const tagArticles = new Map<string, ArticleIndexEntry[]>();
 	for (const article of indexable) {
 		for (const tag of article.tagSlugs) {
-			if (HIDDEN_TAG_SLUGS.has(tag)) {
-				continue;
-			}
 			tagArticles.set(tag, [...(tagArticles.get(tag) ?? []), article]);
 		}
 	}

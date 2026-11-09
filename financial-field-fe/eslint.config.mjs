@@ -13,15 +13,21 @@ const LAYER_BOUNDARIES = [
 	{
 		name: 'components stay presentational',
 		files: ['src/components/**'],
-		forbidden: ['@/lib/cms/*', '@/lib/content/*', '@/features/*', '@/app/*'],
+		forbidden: ['@/data/*', '@/lib/content/*', '@/features/*', '@/app/*'],
 		message:
 			'Components receive data as props. Fetching belongs to src/lib/content, called from a feature or route.',
 	},
 	{
-		name: 'cms layer does not reach upward',
-		files: ['src/lib/cms/**'],
-		forbidden: ['@/lib/content/*', '@/components/*', '@/features/*', '@/app/*'],
-		message: 'The Strapi boundary may only depend on src/types and src/lib/env.',
+		name: 'data is plain content',
+		files: ['src/data/**'],
+		forbidden: ['@/lib/*', '@/components/*', '@/features/*', '@/app/*'],
+		message: 'src/data holds content only. It may import src/types and its own helpers.',
+	},
+	{
+		name: 'data is read through the content layer',
+		files: ['src/app/**', 'src/features/**', 'src/proxy.ts'],
+		forbidden: ['@/data/*'],
+		message: 'Read content through src/lib/content, which resolves and checks src/data.',
 	},
 	{
 		name: 'content layer does not know about rendering',

@@ -11,55 +11,37 @@ describe('config check (W13)', () => {
 	it('finds nothing in a valid configuration', () => {
 		expect(
 			findConfigProblems({
-				cmsCapabilities: 'seo, dates,ALL',
 				featureFlags: { comparison: 'on', ads: '0', faqSchema: undefined },
 			}),
 		).toEqual([]);
 	});
 
-	it('reports unknown capability names instead of guessing', () => {
-		expect(
-			findConfigProblems({
-				cmsCapabilities: 'seo,author_profile',
-				featureFlags: {},
-			}),
-		).toEqual(['CMS_CAPABILITIES: unknown "author_profile" ignored']);
-	});
-
 	it('reports a flag value that is not on/off, by its env name', () => {
 		expect(
 			findConfigProblems({
-				cmsCapabilities: '',
 				featureFlags: { faqSchema: 'yes please' },
 			}),
 		).toEqual(['FEATURE_FAQ_SCHEMA: "yes please" is not on/off, default used']);
 	});
 
-	it('logs the active capabilities once and each problem once', () => {
+	it('logs the site environment once and each problem once', () => {
 		const info = vi.spyOn(log, 'info').mockImplementation(() => {});
 		const warn = vi.spyOn(log, 'warn').mockImplementation(() => {});
 
-		reportConfig(
-			{ cmsCapabilities: 'seo,bogus', featureFlags: { ads: 'maybe' } },
-			new Set(['seo']),
-		);
+		reportConfig({
+			featureFlags: { ads: 'maybe', newsletter: 'later' },
+			siteEnv: 'local',
+			stagingBasicAuth: { user: '', password: '' },
+		});
 
 		expect(info).toHaveBeenCalledTimes(1);
-		expect(info).toHaveBeenCalledWith('config::reportConfig', 'CMS capabilities: seo');
+		expect(info).toHaveBeenCalledWith('config::reportConfig', 'SITE_ENV: local');
 		expect(warn).toHaveBeenCalledTimes(2);
-	});
-
-	it('says none when no capability is on', () => {
-		const info = vi.spyOn(log, 'info').mockImplementation(() => {});
-
-		reportConfig({ cmsCapabilities: '', featureFlags: {} }, new Set());
-
-		expect(info).toHaveBeenCalledWith('config::reportConfig', 'CMS capabilities: none');
 	});
 });
 
 describe('staging basic auth config (REQ-INFRA-006, W13)', () => {
-	const base = { cmsCapabilities: '', featureFlags: {} };
+	const base = { featureFlags: {} };
 
 	it('reports staging without both credentials, by name only', () => {
 		expect(

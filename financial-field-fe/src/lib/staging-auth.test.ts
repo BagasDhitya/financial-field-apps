@@ -21,14 +21,8 @@ describe('staging basic auth (REQ-INFRA-006)', () => {
 		expect(isStagingAuthEnabled({ siteEnv: 'local', user: 'u', password: 'p' })).toBe(false);
 	});
 
-	it('exempts the webhook, preview and framework assets only', () => {
-		for (const path of [
-			'/api/revalidate',
-			'/api/preview',
-			'/api/preview/keluar',
-			'/_next/static/chunks/a.js',
-			'/_next/image',
-		]) {
+	it('exempts framework assets only', () => {
+		for (const path of ['/_next/static/chunks/a.js', '/_next/image']) {
 			expect(isStagingAuthExempt(path), path).toBe(true);
 		}
 		for (const path of [
@@ -36,8 +30,9 @@ describe('staging basic auth (REQ-INFRA-006)', () => {
 			'/artikel/a',
 			'/robots.txt',
 			'/sitemap.xml',
-			'/api/previewx',
-			'/api/revalidatex',
+			'/api/preview',
+			'/api/revalidate',
+			'/_nextx',
 			'/og',
 		]) {
 			expect(isStagingAuthExempt(path), path).toBe(false);

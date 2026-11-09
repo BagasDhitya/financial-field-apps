@@ -9,7 +9,7 @@ test('topic panel: keyboard open, Escape closes, focus returns (AC3)', async ({ 
 	await expect(
 		page
 			.getByRole('navigation', { name: 'Utama' })
-			.getByRole('link', { name: 'PPh', exact: true }),
+			.getByRole('link', { name: 'PPh 21 & Bukti Potong', exact: true }),
 	).toBeVisible();
 	await page.keyboard.press('Escape');
 	await expect(trigger).toHaveAttribute('aria-expanded', 'false');

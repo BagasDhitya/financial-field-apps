@@ -4,6 +4,11 @@
 > PRP-0002). Notable changes since: Indonesian URLs (`/artikel`, `/kategori`,
 > `/penulis`, `/saham`; ADR-0004), CMS capability gating (`CMS_CAPABILITIES`),
 > a first-party Blocks renderer, tests (Vitest, Playwright, Lighthouse CI).
+>
+> **Since 2026-11-09 the frontend doesn't read the CMS.** The content is
+> hardcoded in `src/data/` (PRP-0002.p1 §S4.8). The Strapi sections below
+> (fetching, webhook, preview, env vars, permissions) describe the integration
+> that returns later, from git history at `4b8220f`.
 
 # Phase 1 — Frontend initialization
 

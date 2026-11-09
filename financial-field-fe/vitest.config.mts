@@ -11,14 +11,10 @@ export default defineConfig({
 	},
 	test: {
 		environment: 'node',
-		include: ['src/**/*.test.{ts,tsx}', 'scripts/**/*.test.mjs'],
+		include: ['src/**/*.test.{ts,tsx}'],
 		setupFiles: ['./vitest.setup.ts'],
 		env: {
-			REVALIDATE_SECRET: 'test-revalidate-secret',
-			PREVIEW_SECRET: 'test-preview-secret',
 			NEXT_PUBLIC_SITE_URL: 'https://example.test',
-			NEXT_PUBLIC_CMS_URL: 'http://cms.example.test',
-			CMS_URL: 'http://cms.example.test',
 		},
 	},
 });

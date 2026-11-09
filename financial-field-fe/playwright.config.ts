@@ -1,16 +1,11 @@
 import { defineConfig, devices } from '@playwright/test';
 
-import {
-	E2E_PORT,
-	E2E_STAGING_PORT,
-	e2eEnv,
-	e2eStagingEnv,
-	MOCK_CMS_PORT,
-} from './tests/e2e-env.mjs';
+import { E2E_PORT, E2E_STAGING_PORT, e2eEnv, e2eStagingEnv } from './tests/e2e-env.mjs';
 
 /**
- * E2E + axe against a production build on the mock CMS (ADR-0009). The build
- * runs inside webServer because Next prerenders pages against the CMS.
+ * E2E + axe against a production build of the hardcoded content (ADR-0009,
+ * PRP-0002.p1 §S4.8). The build runs inside webServer so the tests always see
+ * the current src/data.
  */
 export default defineConfig({
 	testDir: './tests/e2e',
@@ -39,15 +34,7 @@ export default defineConfig({
 	],
 	webServer: [
 		{
-			command: 'node tests/mock-cms/server.mjs',
-			url: `http://localhost:${MOCK_CMS_PORT}/api/tags`,
-			env: e2eEnv,
-			reuseExistingServer: !process.env.CI,
-		},
-		{
-			// Start from an empty data cache: Next keeps fetch results across builds,
-			// which would leak a previous run's fixtures into this one.
-			command: `node -e "require('fs').rmSync('.next/cache/fetch-cache',{recursive:true,force:true})" && pnpm build && pnpm start -p ${E2E_PORT}`,
+			command: `pnpm build && pnpm start -p ${E2E_PORT}`,
 			url: `http://localhost:${E2E_PORT}/robots.txt`,
 			env: e2eEnv,
 			timeout: 300_000,

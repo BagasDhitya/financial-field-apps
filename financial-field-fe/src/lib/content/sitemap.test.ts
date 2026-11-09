@@ -23,13 +23,13 @@ describe('buildSitemapFiles (REQ-SEO-013)', () => {
 	const files = buildSitemapFiles(
 		{
 			articles: [
-				entry('a', { tagSlugs: ['data-contoh', 'kecil', 'besar'] }),
+				entry('a', { tagSlugs: ['kecil', 'besar'] }),
 				entry('b', {
-					tagSlugs: ['data-contoh', 'besar'],
+					tagSlugs: ['besar'],
 					modifiedAt: '2026-10-05T00:00:00Z',
 				}),
 				entry('c', {
-					tagSlugs: ['data-contoh', 'besar'],
+					tagSlugs: ['besar'],
 					articleType: 'interview',
 				}),
 				entry('hidden', { noIndex: true, tagSlugs: ['besar'] }),
@@ -69,10 +69,6 @@ describe('buildSitemapFiles (REQ-SEO-013)', () => {
 		expect(byName('tags')).toEqual([`${ORIGIN}/tag/besar`]);
 	});
 
-	it('never lists the internal data-contoh marker tag, even with ≥ 3 articles (T63)', () => {
-		expect(byName('tags')).not.toContain(`${ORIGIN}/tag/data-contoh`);
-	});
-
 	it('maps static pages to their routes and adds Wawancara only when interviews exist', () => {
 		expect(byName('pages')).toEqual([
 			`${ORIGIN}/`,
@@ -84,7 +80,7 @@ describe('buildSitemapFiles (REQ-SEO-013)', () => {
 		]);
 	});
 
-	it('uses CMS dates for lastmod, never the build time', () => {
+	it('uses content dates for lastmod, never the build time', () => {
 		const home = files.find((file) => file.name === 'pages')?.urls[0];
 		expect(home?.lastmod).toBe('2026-10-05T00:00:00Z');
 	});

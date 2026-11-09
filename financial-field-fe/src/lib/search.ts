@@ -1,4 +1,4 @@
-/** Shortest query sent to the CMS (REQ-SRCH-001). */
+/** Shortest query that is searched (REQ-SRCH-001). */
 export const SEARCH_MIN = 2;
 /** Longer queries are cut to this length (REQ-SRCH-001). */
 export const SEARCH_MAX = 100;

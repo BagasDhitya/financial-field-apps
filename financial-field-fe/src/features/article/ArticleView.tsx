@@ -11,14 +11,13 @@ import { FaqList } from '@/components/FaqList/FaqList';
 import { GoldenSplit } from '@/components/GoldenSplit/GoldenSplit';
 import { KeyTakeaways } from '@/components/KeyTakeaways/KeyTakeaways';
 import { Kicker } from '@/components/Kicker/Kicker';
-import { PreviewBanner } from '@/components/PreviewBanner/PreviewBanner';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { ShareBar } from '@/components/ShareBar/ShareBar';
 import { SourcesList } from '@/components/SourcesList/SourcesList';
 import { SponsorDisclosure } from '@/components/SponsorDisclosure/SponsorDisclosure';
 import { TagList } from '@/components/TagList/TagList';
 import type { ArticleEventParams } from '@/lib/analytics/events';
-import type { Article, ArticleSummary, EditorialStatus } from '@/types';
+import type { Article, ArticleSummary } from '@/types';
 
 import styles from './ArticleView.module.css';
 
@@ -31,7 +30,6 @@ export type ArticleViewProps = {
 	readingMinutes: number;
 	defaultPrDisclosure: string;
 	analyticsParams: ArticleEventParams | null;
-	preview: { status: EditorialStatus | null } | null;
 };
 
 /** Article template (REQ-ART-001…011). Order follows SPC-functional §6. */
@@ -44,14 +42,12 @@ export function ArticleView({
 	readingMinutes,
 	defaultPrDisclosure,
 	analyticsParams,
-	preview,
 }: ArticleViewProps) {
 	const isPr = article.articleType === 'pr_article';
 	const reviewed = article.reviewer !== null && article.lastReviewedAt !== null;
 
 	return (
 		<>
-			{preview ? <PreviewBanner status={preview.status} slug={article.slug} /> : null}
 			<Container className={styles.root}>
 				<Breadcrumbs items={breadcrumbs} />
 				<article className={styles.article}>
