@@ -1,20 +1,37 @@
+import { cacheTags } from '@/lib/cms/cache-tags';
+import { cmsFetch, type CmsCollection } from '@/lib/cms/client';
+import { endpoints } from '@/lib/cms/endpoints';
+import { mapArticleSummary } from '@/lib/cms/mappers/article';
+import { mapStockTicker } from '@/lib/cms/mappers/ticker';
+import { articleSummaryQuery } from '@/lib/cms/queries/articles';
+import type { StrapiArticle, StrapiTicker } from '@/lib/cms/strapi-types';
+import { REVALIDATE } from '@/lib/revalidate';
 import type { StockTicker } from '@/types';
 
-import { articles, findTicker, toSummary } from './store';
+type StrapiTickerEntry = StrapiTicker & {
+	articles?: StrapiArticle[] | null;
+};
 
 /**
  * Ticker by symbol (case-insensitive) with the articles that mention it, or
  * null.
  */
 export async function getTickerBySymbol(symbol: string): Promise<StockTicker | null> {
-	const ticker = findTicker(symbol);
-	if (!ticker) {
+	const result = await cmsFetch<CmsCollection<StrapiTickerEntry>>({
+		path: endpoints.tickers,
+		query: {
+			filters: { ticker_symbol: { $eqi: symbol } },
+			populate: { articles: articleSummaryQuery() },
+			pagination: { limit: 1 },
+		},
+		tags: [cacheTags.ticker(symbol)],
+		revalidate: REVALIDATE.archive,
+	});
+
+	const entry = result.data[0];
+	if (!entry) {
 		return null;
 	}
-	return {
-		...ticker,
-		articles: articles
-			.filter((article) => article.stocksMentioned.some((stock) => stock.id === ticker.id))
-			.map(toSummary),
-	};
+
+	return mapStockTicker(entry, (entry.articles ?? []).map(mapArticleSummary));
 }

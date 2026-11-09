@@ -1,7 +1,9 @@
-/** One environment for e2e, Lighthouse CI and the SEO check (hardcoded content). */
+/** One environment for e2e, Lighthouse CI and the SEO check (the local API over src/data). */
 export const E2E_PORT = 3100;
 
 export const e2eEnv = {
+	// Empty on purpose: the local API, even when a developer's .env.local points at a CMS.
+	CMS_URL: '',
 	NEXT_PUBLIC_SITE_URL: `http://localhost:${E2E_PORT}`,
 	SITE_ENV: 'production',
 	NEXT_PUBLIC_GA_MEASUREMENT_ID: 'G-E2ETEST000',

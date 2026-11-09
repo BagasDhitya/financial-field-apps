@@ -1,35 +1,39 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Hari Tua and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Hari Tua and its sub-categories (PRP-0002.p1 §S4.4). */
 export const HARI_TUA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'biaya-merawat-orang-tua-lansia',
 		title: 'Merawat orang tua lanjut usia: memperkirakan biaya bulanan',
-		leadText:
+		lead_text:
 			'Biaya merawat orang tua lansia dapat diperkirakan dari kebutuhan kesehatan, tenaga pendamping, dan kebutuhan harian. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'hari-tua-perawatan',
-		tags: ['lansia'],
+		article_type: 'standard',
+		featured_image: 'kategori-hari-tua',
+		primary_category: 'hari-tua-perawatan',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-hari-tua',
-		publishedAt: '2026-09-09T02:00:00.000Z',
-		lastReviewedAt: '2026-09-10T02:00:00.000Z',
-		keyTakeaways: [
-			'Biaya merawat orang tua lansia dapat diperkirakan dari kebutuhan kesehatan, tenaga pendamping, dan kebutuhan harian.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang biaya merawat orang tua lansia.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['lansia'],
+		first_published_at: '2026-09-09T02:00:00.000Z',
+		last_reviewed_at: '2026-09-10T02:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Biaya merawat orang tua lansia dapat diperkirakan dari kebutuhan kesehatan, tenaga pendamping, dan kebutuhan harian.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang biaya merawat orang tua lansia.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang biaya merawat orang tua lansia',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/biaya-merawat-orang-tua-lansia',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Biaya merawat orang tua lansia dapat diperkirakan dari kebutuhan kesehatan, tenaga pendamping, dan kebutuhan harian. Banyak pembaca bertanya tentang biaya merawat orang tua lansia, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -112,20 +116,24 @@ export const HARI_TUA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'persiapan-lima-tahun-sebelum-berhenti-kerja',
 		title: 'Persiapan finansial lima tahun sebelum berhenti bekerja',
-		leadText:
+		lead_text:
 			'Lima tahun sebelum berhenti bekerja adalah waktu yang baik untuk melunasi utang, menghitung kebutuhan, dan merapikan aset.',
-		articleType: 'standard',
-		category: 'hari-tua-pensiun-kerja',
-		tags: ['pensiun'],
+		article_type: 'standard',
+		featured_image: 'kategori-hari-tua',
+		primary_category: 'hari-tua-pensiun-kerja',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-hari-tua',
-		publishedAt: '2026-09-07T16:00:00.000Z',
-		lastReviewedAt: '2026-09-08T16:00:00.000Z',
-		keyTakeaways: [
-			'Lima tahun sebelum berhenti bekerja adalah waktu yang baik untuk melunasi utang, menghitung kebutuhan, dan merapikan aset.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang persiapan finansial sebelum berhenti bekerja.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pensiun'],
+		first_published_at: '2026-09-07T16:00:00.000Z',
+		last_reviewed_at: '2026-09-08T16:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Lima tahun sebelum berhenti bekerja adalah waktu yang baik untuk melunasi utang, menghitung kebutuhan, dan merapikan aset.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang persiapan finansial sebelum berhenti bekerja.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -148,10 +156,10 @@ export const HARI_TUA_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang persiapan finansial sebelum berhenti bekerja',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/persiapan-lima-tahun-sebelum-berhenti-kerja',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Lima tahun sebelum berhenti bekerja adalah waktu yang baik untuk melunasi utang, menghitung kebutuhan, dan merapikan aset. Banyak pembaca bertanya tentang persiapan finansial sebelum berhenti bekerja, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -234,15 +242,15 @@ export const HARI_TUA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'kolom-pensiun-adalah-bab-baru',
 		title: 'Kolom: pensiun bukan akhir, melainkan bab baru',
-		leadText:
+		lead_text:
 			'Kolom ini membahas pensiun sebagai awal babak baru yang tetap memerlukan rencana. Simak catatan dan ajakan sederhana untuk mulai merencanakan dalam kolom berikut.',
-		articleType: 'column',
-		category: 'hari-tua-kehidupan-kedua',
-		tags: ['pensiun'],
+		article_type: 'column',
+		featured_image: 'kategori-hari-tua',
+		primary_category: 'hari-tua-kehidupan-kedua',
 		author: 'redaksi-contoh',
-		image: 'kategori-hari-tua',
-		publishedAt: '2026-09-06T06:00:00.000Z',
-		body: [
+		tags: ['pensiun'],
+		first_published_at: '2026-09-06T06:00:00.000Z',
+		content: [
 			p(
 				'Kolom ini membahas pensiun sebagai awal babak baru yang tetap memerlukan rencana. Saya menulis kolom ini sebagai catatan pribadi, untuk mengajak pembaca berhenti sejenak dan memikirkan kehidupan setelah pensiun. Topik ini jarang dibicarakan di meja makan, padahal hampir semua keluarga berhadapan dengannya. Kita lebih sering membicarakan harga barang atau rencana liburan daripada keputusan yang dampaknya terasa bertahun-tahun ke depan. Melalui tulisan singkat ini, saya ingin berbagi beberapa pengamatan sederhana yang mungkin berguna. Tidak ada rumus khusus di sini, hanya pengalaman sehari-hari yang barangkali terasa akrab bagi banyak pembaca, terutama mereka yang baru mulai mengatur keuangan keluarga sendiri.',
 			),
@@ -277,30 +285,34 @@ export const HARI_TUA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'menyederhanakan-aset-di-usia-senja',
 		title: 'Menyederhanakan aset di usia senja: rekening, polis, dan dokumen',
-		leadText:
+		lead_text:
 			'Menyederhanakan aset di usia senja memudahkan pengelolaan sehari-hari dan membantu keluarga di kemudian hari. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'hari-tua-lainnya',
-		tags: ['lansia', 'warisan-keluarga'],
+		article_type: 'standard',
+		featured_image: 'kategori-hari-tua',
+		primary_category: 'hari-tua-lainnya',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-hari-tua',
-		publishedAt: '2026-09-04T20:00:00.000Z',
-		lastReviewedAt: '2026-09-05T20:00:00.000Z',
-		keyTakeaways: [
-			'Menyederhanakan aset di usia senja memudahkan pengelolaan sehari-hari dan membantu keluarga di kemudian hari.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang penyederhanaan aset di usia senja.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['lansia', 'warisan-keluarga'],
+		first_published_at: '2026-09-04T20:00:00.000Z',
+		last_reviewed_at: '2026-09-05T20:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Menyederhanakan aset di usia senja memudahkan pengelolaan sehari-hari dan membantu keluarga di kemudian hari.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang penyederhanaan aset di usia senja.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang penyederhanaan aset di usia senja',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/menyederhanakan-aset-di-usia-senja',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Menyederhanakan aset di usia senja memudahkan pengelolaan sehari-hari dan membantu keluarga di kemudian hari. Pembahasan tentang penyederhanaan aset di usia senja biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),

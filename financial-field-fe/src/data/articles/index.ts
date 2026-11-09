@@ -15,8 +15,8 @@ import { PINJAMAN_ARTICLES } from './pinjaman';
 import { WARISAN_ARTICLES } from './warisan';
 
 /**
- * Every published demo article (PRP-0002.p1 §S4.4), grouped by top-level
- * category. Order here doesn't matter: the content layer sorts newest first.
+ * Every published article (PRP-0002.p1 §S4.4), grouped by top-level category.
+ * Order here doesn't matter: listings sort by `first_published_at`.
  */
 export const ARTICLES: ArticleEntry[] = [
 	...PENGHASILAN_ARTICLES,

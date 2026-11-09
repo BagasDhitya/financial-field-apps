@@ -15,6 +15,8 @@ export default defineConfig({
 		setupFiles: ['./vitest.setup.ts'],
 		env: {
 			NEXT_PUBLIC_SITE_URL: 'https://example.test',
+			// Mapper tests resolve media against a remote CMS host.
+			CMS_URL: 'http://cms.example.test',
 		},
 	},
 });

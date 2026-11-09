@@ -2,9 +2,11 @@
 
 Public website of **Financial Field Indonesia**: a Next.js 16 news and article
 portal. For now the content is **hardcoded in `src/data/`**: 60 demo articles,
-the topic tree, tags, authors and trust pages. The frontend doesn't call the
-CMS until the client's wireframe and roadmap are settled (pack: PRP-0002.p1
-§S4.8).
+the topic tree, tags, authors and trust pages, written with the CMS's own
+field names. A **local API** serves it at `/api/<endpoint>` in the shape of
+the Strapi CMS (`../financial-field-cms`), and the site reads it through the
+same client it uses for Strapi. Setting `CMS_URL` switches to the real CMS
+(pack: PRP-0002.p1 §S4.8).
 
 **Source of truth:** the implementation pack at
 `web-implementation-documents/financial-field-indonesia/` (outside this repo).
@@ -20,27 +22,49 @@ cp .env.example .env.local   # optional: every value has a local default
 pnpm dev                     # http://localhost:3000, no CMS needed
 ```
 
+Keep `CMS_URL` empty in `.env.local` unless you mean to read a real Strapi:
+when it is set, the build fetches from that CMS.
+
 Component harness: http://localhost:3000/harness (local only).
+
+## The local API
+
+The CMS's REST endpoints, answered from `src/data` (`src/lib/cms/local/`):
+
+| Endpoint                                               | In the CMS today     |
+| ------------------------------------------------------ | -------------------- |
+| `/api/articles`, `/api/categories`, `/api/tags`        | yes                  |
+| `/api/writer-profiles`, `/api/stock-tickers`           | yes                  |
+| `/api/site-navigation` (single type)                   | yes                  |
+| `/api/static-pages`, `/api/site-setting` (single type) | planned (CMS-13, 14) |
+
+It takes the same parameters as Strapi 5 (`filters`, `sort`, `pagination`,
+`fields`, `populate`, `status`, and `/<documentId>` reads) and refuses unknown
+keys with the same `400 ValidationError` (`strictParams`). Fields the CMS
+doesn't have yet (planned CMS-nn, `src/lib/cms/local/schema.ts`) are served
+here; against a real CMS, `CMS_CAPABILITIES` lists the ones it has. Try:
+`http://localhost:3000/api/articles?fields[0]=title&populate[author]=true`.
 
 ## Edit the content
 
 Everything a reader sees comes from `src/data/`:
 
-| File                     | Holds                                         |
-| ------------------------ | --------------------------------------------- |
-| `articles/<category>.ts` | the articles, one file per top-level category |
-| `categories.ts`          | the topic tree, in menu order                 |
-| `tags.ts`, `authors.ts`  | tags and the six fictional people             |
-| `pages.ts`, `site.ts`    | trust pages and brand settings                |
-| `navigation.ts`          | the featured articles on the home page        |
-| `media.ts`               | the images in `public/images/`                |
+| File                                 | CMS type                     |
+| ------------------------------------ | ---------------------------- |
+| `articles/<category>.ts`             | Article, one file per topic  |
+| `categories.ts`                      | Category, in menu order      |
+| `tags.ts`, `writer-profiles.ts`      | Tag, Writer Profile          |
+| `stock-tickers.ts`                   | Stock Ticker                 |
+| `site-navigation.ts`                 | Site Navigation (featured)   |
+| `static-pages.ts`, `site-setting.ts` | Static Page, Site Setting    |
+| `media.ts`                           | upload files (public/images) |
 
-Article bodies use the helpers in `src/data/blocks.ts`:
+Field names are the CMS attribute names (`lead_text`, `primary_category`,
+`full_name`). Relations are slugs, images are `media.ts` keys. Article bodies
+use the helpers in `src/data/blocks.ts`:
 `p('Teks ', link('/artikel/slug', 'judul'), '.')`, `h2('Judul bagian')`,
-`ul('satu', 'dua')`. Relations are slugs. `src/lib/content/store.ts` checks
-them, so an unknown slug or a broken internal link stops `pnpm build` and
-names the article and the slug. A new article needs only an entry in its
-category file.
+`ul('satu', 'dua')`. The local API checks every relation and internal link at
+build: an unknown slug stops `pnpm build` and names the entry.
 
 ## Code style
 
@@ -71,17 +95,18 @@ pnpm lhci          # Lighthouse CI budgets (mobile)
 ## Layout
 
 ```text
-src/app          routes (thin): params → content function → view
-src/features     page views
-src/components   presentational components (+ __fixtures__ for tests/harness)
-src/lib/content  data functions routes call; the only reader of src/data
-src/data         the hardcoded content
+src/app            routes (thin): params → content function → view; api/ = the local API
+src/features       page views
+src/components     presentational components (+ __fixtures__ for tests/harness)
+src/lib/content    data functions routes call
+src/lib/cms        the only code that knows Strapi JSON: client, queries, mappers
+src/lib/cms/local  the local API: schema, documents from src/data, Strapi query rules
+src/data           the hardcoded content, in CMS field names
 src/lib/seo, structured-data, analytics, …
-src/types        domain contracts (reviewed by the CMS owner, CODEOWNERS)
-public/images    placeholder images for the content
-tests/e2e        Playwright suites
+src/types          domain contracts (reviewed by the CMS owner, CODEOWNERS)
+public/images      placeholder images for the content
+tests/e2e          Playwright suites
 ```
 
-The CMS integration (Strapi client, mappers, preview, revalidation webhook)
-was removed for this phase. It comes back when the content model is settled,
-from git history at `4b8220f` (pack: PRP-0002.p1 §S4.9).
+Draft preview and the revalidation webhook are not in this phase; they return
+with the CMS, from git history at `4b8220f` (pack: PRP-0002.p1 §S4.9).

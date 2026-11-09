@@ -1,25 +1,29 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Penghasilan & Gaji and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Penghasilan & Gaji and its sub-categories (PRP-0002.p1 §S4.4). */
 export const PENGHASILAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'gaji-kotor-vs-gaji-bersih',
 		title: 'Gaji kotor vs gaji bersih: kenapa angkanya berbeda?',
-		leadText:
+		lead_text:
 			'Gaji bersih lebih kecil dari gaji kotor karena ada potongan pajak, iuran, dan potongan lain sebelum gaji dibayarkan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'penghasilan',
-		tags: ['gaji', 'pajak-karyawan'],
+		article_type: 'standard',
+		featured_image: 'kategori-penghasilan',
+		primary_category: 'penghasilan',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-penghasilan',
-		publishedAt: '2026-10-20T04:00:00.000Z',
-		lastReviewedAt: '2026-10-21T04:00:00.000Z',
-		keyTakeaways: [
-			'Gaji bersih lebih kecil dari gaji kotor karena ada potongan pajak, iuran, dan potongan lain sebelum gaji dibayarkan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang perbedaan gaji kotor dan gaji bersih.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['gaji', 'pajak-karyawan'],
+		first_published_at: '2026-10-20T04:00:00.000Z',
+		last_reviewed_at: '2026-10-21T04:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Gaji bersih lebih kecil dari gaji kotor karena ada potongan pajak, iuran, dan potongan lain sebelum gaji dibayarkan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang perbedaan gaji kotor dan gaji bersih.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -36,16 +40,16 @@ export const PENGHASILAN_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang perbedaan gaji kotor dan gaji bersih',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/gaji-kotor-vs-gaji-bersih',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Gaji bersih lebih kecil dari gaji kotor karena ada potongan pajak, iuran, dan potongan lain sebelum gaji dibayarkan. Pembahasan tentang perbedaan gaji kotor dan gaji bersih biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),

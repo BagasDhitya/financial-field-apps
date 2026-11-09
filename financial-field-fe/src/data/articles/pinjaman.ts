@@ -1,25 +1,23 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Pinjaman and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Pinjaman and its sub-categories (PRP-0002.p1 §S4.4). */
 export const PINJAMAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'pr-simulasi-kpr-rumah-pertama',
 		title: 'Simulasi KPR rumah pertama bersama Bank Contoh',
-		leadText:
+		lead_text:
 			'Artikel bersponsor ini berisi simulasi KPR dari Bank Contoh untuk pembeli rumah pertama. Simak cara kerja, biaya, dan hal yang perlu diperhatikan dalam artikel berikut.',
-		articleType: 'pr_article',
-		category: 'pinjaman-kpr',
-		tags: ['kpr'],
+		article_type: 'pr_article',
+		featured_image: 'kategori-pinjaman',
+		primary_category: 'pinjaman-kpr',
 		author: 'redaksi-contoh',
-		image: 'kategori-pinjaman',
-		publishedAt: '2026-09-27T12:00:00.000Z',
-		sponsor: {
-			name: 'Sponsor Contoh',
-			url: 'https://example.com',
-			disclosure: 'Artikel ini dibuat atas kerja sama dengan Sponsor Contoh.',
-		},
-		body: [
+		tags: ['kpr'],
+		first_published_at: '2026-09-27T12:00:00.000Z',
+		sponsor_name: 'Sponsor Contoh',
+		sponsor_url: 'https://example.com',
+		sponsor_disclosure: 'Artikel ini dibuat atas kerja sama dengan Sponsor Contoh.',
+		content: [
 			p(
 				'Artikel bersponsor ini berisi simulasi KPR dari Bank Contoh untuk pembeli rumah pertama. Informasi produk disusun bersama Sponsor Contoh untuk pembaca Financial Field Indonesia.',
 			),
@@ -72,30 +70,34 @@ export const PINJAMAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'kemampuan-bayar-pinjaman-pendidikan',
 		title: 'Pinjaman pendidikan: menghitung kemampuan bayar setelah lulus',
-		leadText:
+		lead_text:
 			'Kemampuan bayar pinjaman pendidikan sebaiknya dihitung dari perkiraan gaji awal, bukan dari harapan gaji di masa depan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pinjaman-pendidikan',
-		tags: ['pinjaman-pendidikan'],
+		article_type: 'standard',
+		featured_image: 'kategori-pinjaman',
+		primary_category: 'pinjaman-pendidikan',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-pinjaman',
-		publishedAt: '2026-09-26T02:00:00.000Z',
-		lastReviewedAt: '2026-09-27T02:00:00.000Z',
-		keyTakeaways: [
-			'Kemampuan bayar pinjaman pendidikan sebaiknya dihitung dari perkiraan gaji awal, bukan dari harapan gaji di masa depan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang kemampuan membayar pinjaman pendidikan.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pinjaman-pendidikan'],
+		first_published_at: '2026-09-26T02:00:00.000Z',
+		last_reviewed_at: '2026-09-27T02:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Kemampuan bayar pinjaman pendidikan sebaiknya dihitung dari perkiraan gaji awal, bukan dari harapan gaji di masa depan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang kemampuan membayar pinjaman pendidikan.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang kemampuan membayar pinjaman pendidikan',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/kemampuan-bayar-pinjaman-pendidikan',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Kemampuan bayar pinjaman pendidikan sebaiknya dihitung dari perkiraan gaji awal, bukan dari harapan gaji di masa depan. Pembahasan tentang kemampuan membayar pinjaman pendidikan biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -178,20 +180,24 @@ export const PINJAMAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'memeriksa-pinjaman-daring-legal',
 		title: 'Pinjaman daring legal atau ilegal: cara memeriksa sebelum meminjam',
-		leadText:
+		lead_text:
 			'Sebelum meminjam secara daring, periksa status izin penyelenggara dan baca seluruh biaya yang dikenakan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pinjaman-lainnya',
-		tags: ['dana-darurat'],
+		article_type: 'standard',
+		featured_image: 'kategori-pinjaman',
+		primary_category: 'pinjaman-lainnya',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pinjaman',
-		publishedAt: '2026-09-24T16:00:00.000Z',
-		lastReviewedAt: '2026-09-25T16:00:00.000Z',
-		keyTakeaways: [
-			'Sebelum meminjam secara daring, periksa status izin penyelenggara dan baca seluruh biaya yang dikenakan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pemeriksaan legalitas pinjaman daring.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['dana-darurat'],
+		first_published_at: '2026-09-24T16:00:00.000Z',
+		last_reviewed_at: '2026-09-25T16:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Sebelum meminjam secara daring, periksa status izin penyelenggara dan baca seluruh biaya yang dikenakan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pemeriksaan legalitas pinjaman daring.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -208,16 +214,16 @@ export const PINJAMAN_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang pemeriksaan legalitas pinjaman daring',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/memeriksa-pinjaman-daring-legal',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Sebelum meminjam secara daring, periksa status izin penyelenggara dan baca seluruh biaya yang dikenakan. Banyak pembaca bertanya tentang pemeriksaan legalitas pinjaman daring, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),

@@ -3,7 +3,7 @@ import { defineConfig, devices } from '@playwright/test';
 import { E2E_PORT, E2E_STAGING_PORT, e2eEnv, e2eStagingEnv } from './tests/e2e-env.mjs';
 
 /**
- * E2E + axe against a production build of the hardcoded content (ADR-0009,
+ * E2E + axe against a production build on the local API over src/data (ADR-0009,
  * PRP-0002.p1 §S4.8). The build runs inside webServer so the tests always see
  * the current src/data.
  */

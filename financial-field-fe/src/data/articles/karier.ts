@@ -1,27 +1,31 @@
 import { h2, link, p } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Karier and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Karier and its sub-categories (PRP-0002.p1 §S4.4). */
 export const KARIER_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'wawancara-negosiasi-gaji-pertama',
 		title: 'Wawancara: menegosiasikan gaji pertama setelah lulus',
-		leadText:
+		lead_text:
 			'Narasumber Contoh berbagi pengalaman tentang menyiapkan data dan sikap saat menegosiasikan gaji pertama. Simak pengalaman, kesalahan yang sering terjadi, dan sarannya dalam wawancara berikut.',
-		articleType: 'interview',
-		category: 'karier',
-		tags: ['karier-awal', 'gaji'],
+		article_type: 'interview',
+		featured_image: 'kategori-karier',
+		primary_category: 'karier',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-karier',
-		publishedAt: '2026-08-23T02:00:00.000Z',
-		lastReviewedAt: '2026-08-24T02:00:00.000Z',
-		keyTakeaways: [
-			'Narasumber Contoh berbagi pengalaman tentang menyiapkan data dan sikap saat menegosiasikan gaji pertama.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang negosiasi gaji pertama.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['karier-awal', 'gaji'],
+		first_published_at: '2026-08-23T02:00:00.000Z',
+		last_reviewed_at: '2026-08-24T02:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Narasumber Contoh berbagi pengalaman tentang menyiapkan data dan sikap saat menegosiasikan gaji pertama.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang negosiasi gaji pertama.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Narasumber Contoh berbagi pengalaman tentang menyiapkan data dan sikap saat menegosiasikan gaji pertama. Dalam percakapan berikut, Narasumber Contoh menceritakan pengalamannya tentang negosiasi gaji pertama, kesalahan yang pernah dilihatnya, dan kebiasaan yang menurutnya paling membantu bagi pembaca yang baru memulai. Jawaban telah disunting agar ringkas, tanpa mengubah maksud yang ingin disampaikan.',
 			),

@@ -1,26 +1,30 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Bisnis and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Bisnis and its sub-categories (PRP-0002.p1 §S4.4). */
 export const BISNIS_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'modal-usaha-kecil',
 		title: 'Modal usaha kecil: menabung, meminjam, atau mencari mitra?',
-		leadText:
+		lead_text:
 			'Pilihan modal usaha kecil bergantung pada besar kebutuhan, kecepatan, dan seberapa besar kendali yang ingin dipertahankan.',
-		articleType: 'standard',
-		category: 'bisnis-pembiayaan',
-		tags: ['umkm'],
+		article_type: 'standard',
+		featured_image: 'kategori-bisnis',
+		primary_category: 'bisnis-pembiayaan',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-bisnis',
-		publishedAt: '2026-08-20T06:00:00.000Z',
-		contentUpdatedAt: '2026-08-23T06:00:00.000Z',
-		lastReviewedAt: '2026-08-21T06:00:00.000Z',
-		keyTakeaways: [
-			'Pilihan modal usaha kecil bergantung pada besar kebutuhan, kecepatan, dan seberapa besar kendali yang ingin dipertahankan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pilihan modal usaha kecil.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['umkm'],
+		first_published_at: '2026-08-20T06:00:00.000Z',
+		content_updated_at: '2026-08-23T06:00:00.000Z',
+		last_reviewed_at: '2026-08-21T06:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Pilihan modal usaha kecil bergantung pada besar kebutuhan, kecepatan, dan seberapa besar kendali yang ingin dipertahankan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pilihan modal usaha kecil.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -37,16 +41,16 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang pilihan modal usaha kecil',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/modal-usaha-kecil',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Pilihan modal usaha kecil bergantung pada besar kebutuhan, kecepatan, dan seberapa besar kendali yang ingin dipertahankan. Topik pilihan modal usaha kecil sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -128,36 +132,40 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'pemasaran-usaha-rumahan-minim-anggaran',
 		title: 'Pemasaran usaha rumahan dengan anggaran minim',
-		leadText:
+		lead_text:
 			'Usaha rumahan dapat dipasarkan dengan anggaran minim melalui pelanggan pertama, ulasan, dan konsistensi konten. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'bisnis-pemasaran',
-		tags: ['umkm'],
+		article_type: 'standard',
+		featured_image: 'kategori-bisnis',
+		primary_category: 'bisnis-pemasaran',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-bisnis',
-		publishedAt: '2026-08-18T20:00:00.000Z',
-		lastReviewedAt: '2026-08-19T20:00:00.000Z',
-		keyTakeaways: [
-			'Usaha rumahan dapat dipasarkan dengan anggaran minim melalui pelanggan pertama, ulasan, dan konsistensi konten.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pemasaran usaha rumahan.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['umkm'],
+		first_published_at: '2026-08-18T20:00:00.000Z',
+		last_reviewed_at: '2026-08-19T20:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Usaha rumahan dapat dipasarkan dengan anggaran minim melalui pelanggan pertama, ulasan, dan konsistensi konten.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pemasaran usaha rumahan.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang pemasaran usaha rumahan',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/pemasaran-usaha-rumahan-minim-anggaran',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Usaha rumahan dapat dipasarkan dengan anggaran minim melalui pelanggan pertama, ulasan, dan konsistensi konten. Banyak pembaca bertanya tentang pemasaran usaha rumahan, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -239,22 +247,26 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'wawancara-memisahkan-uang-pribadi-dan-usaha',
 		title: 'Wawancara: memisahkan uang pribadi dan uang usaha',
-		leadText:
+		lead_text:
 			'Narasumber Contoh berbagi pengalaman tentang manfaat memisahkan rekening pribadi dan rekening usaha. Simak pengalaman, kesalahan yang sering terjadi, dan sarannya dalam wawancara berikut.',
-		articleType: 'interview',
-		category: 'bisnis-lainnya',
-		tags: ['umkm'],
+		article_type: 'interview',
+		featured_image: 'kategori-bisnis',
+		primary_category: 'bisnis-lainnya',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-bisnis',
-		publishedAt: '2026-08-17T10:00:00.000Z',
-		lastReviewedAt: '2026-08-18T10:00:00.000Z',
-		keyTakeaways: [
-			'Narasumber Contoh berbagi pengalaman tentang manfaat memisahkan rekening pribadi dan rekening usaha.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pemisahan uang pribadi dan uang usaha.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['umkm'],
+		first_published_at: '2026-08-17T10:00:00.000Z',
+		last_reviewed_at: '2026-08-18T10:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Narasumber Contoh berbagi pengalaman tentang manfaat memisahkan rekening pribadi dan rekening usaha.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pemisahan uang pribadi dan uang usaha.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Narasumber Contoh berbagi pengalaman tentang manfaat memisahkan rekening pribadi dan rekening usaha. Dalam percakapan berikut, Narasumber Contoh menceritakan pengalamannya tentang pemisahan uang pribadi dan uang usaha, kesalahan yang pernah dilihatnya, dan kebiasaan yang menurutnya paling membantu bagi pembaca yang baru memulai. Jawaban telah disunting agar ringkas, tanpa mengubah maksud yang ingin disampaikan.',
 			),

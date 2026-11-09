@@ -1,25 +1,29 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Pajak and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Pajak and its sub-categories (PRP-0002.p1 §S4.4). */
 export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'apa-saja-pengurang-penghasilan-kena-pajak',
 		title: 'Apa saja pengurang penghasilan kena pajak bagi karyawan?',
-		leadText:
+		lead_text:
 			'Pengurang penghasilan kena pajak adalah pos yang mengurangi dasar pengenaan pajak sebelum tarif dihitung. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-pengurang',
-		tags: ['pajak-karyawan', 'gaji'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-pengurang',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pajak',
-		publishedAt: '2026-11-09T00:00:00.000Z',
-		lastReviewedAt: '2026-11-09T01:00:00.000Z',
-		keyTakeaways: [
-			'Pengurang penghasilan kena pajak adalah pos yang mengurangi dasar pengenaan pajak sebelum tarif dihitung.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pengurang penghasilan kena pajak.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pajak-karyawan', 'gaji'],
+		first_published_at: '2026-11-09T00:00:00.000Z',
+		last_reviewed_at: '2026-11-09T01:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Pengurang penghasilan kena pajak adalah pos yang mengurangi dasar pengenaan pajak sebelum tarif dihitung.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pengurang penghasilan kena pajak.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -36,16 +40,16 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang pengurang penghasilan kena pajak',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/apa-saja-pengurang-penghasilan-kena-pajak',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Pengurang penghasilan kena pajak adalah pos yang mengurangi dasar pengenaan pajak sebelum tarif dihitung. Pembahasan tentang pengurang penghasilan kena pajak biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -127,20 +131,24 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'cara-membaca-slip-gaji-pph-21',
 		title: 'Cara membaca slip gaji: dari mana angka PPh 21 berasal?',
-		leadText:
+		lead_text:
 			'Angka PPh 21 di slip gaji berasal dari penghasilan bruto yang dikurangi pengurang tertentu, lalu dikenai tarif. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-pph21',
-		tags: ['pajak-karyawan', 'gaji'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-pph21',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pajak',
-		publishedAt: '2026-11-07T14:00:00.000Z',
-		lastReviewedAt: '2026-11-08T14:00:00.000Z',
-		keyTakeaways: [
-			'Angka PPh 21 di slip gaji berasal dari penghasilan bruto yang dikurangi pengurang tertentu, lalu dikenai tarif.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang potongan PPh 21 pada slip gaji.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pajak-karyawan', 'gaji'],
+		first_published_at: '2026-11-07T14:00:00.000Z',
+		last_reviewed_at: '2026-11-08T14:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Angka PPh 21 di slip gaji berasal dari penghasilan bruto yang dikurangi pengurang tertentu, lalu dikenai tarif.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang potongan PPh 21 pada slip gaji.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -162,10 +170,10 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang potongan PPh 21 pada slip gaji',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/cara-membaca-slip-gaji-pph-21',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Angka PPh 21 di slip gaji berasal dari penghasilan bruto yang dikurangi pengurang tertentu, lalu dikenai tarif. Banyak pembaca bertanya tentang potongan PPh 21 pada slip gaji, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -248,21 +256,25 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'langkah-mengisi-spt-tahunan-pertama',
 		title: 'Langkah mengisi SPT Tahunan pribadi untuk pertama kali',
-		leadText:
+		lead_text:
 			'Mengisi SPT Tahunan pertama kali dimulai dari menyiapkan bukti potong dan daftar harta, lalu mengisi formulir secara berurutan.',
-		articleType: 'standard',
-		category: 'pajak-spt-tahunan',
-		tags: ['spt'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-spt-tahunan',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-pajak',
-		publishedAt: '2026-11-06T04:00:00.000Z',
-		contentUpdatedAt: '2026-11-09T01:00:00.000Z',
-		lastReviewedAt: '2026-11-07T04:00:00.000Z',
-		keyTakeaways: [
-			'Mengisi SPT Tahunan pertama kali dimulai dari menyiapkan bukti potong dan daftar harta, lalu mengisi formulir secara berurutan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pengisian SPT Tahunan pertama.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['spt'],
+		first_published_at: '2026-11-06T04:00:00.000Z',
+		content_updated_at: '2026-11-09T01:00:00.000Z',
+		last_reviewed_at: '2026-11-07T04:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Mengisi SPT Tahunan pertama kali dimulai dari menyiapkan bukti potong dan daftar harta, lalu mengisi formulir secara berurutan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pengisian SPT Tahunan pertama.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -284,7 +296,7 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang pengisian SPT Tahunan pertama',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/langkah-mengisi-spt-tahunan-pertama',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
 		corrections: [
@@ -293,7 +305,7 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 				note: 'angka pada contoh perhitungan diperbaiki agar konsisten dengan teks.',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Mengisi SPT Tahunan pertama kali dimulai dari menyiapkan bukti potong dan daftar harta, lalu mengisi formulir secara berurutan. Pembahasan tentang pengisian SPT Tahunan pertama biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -376,20 +388,24 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'zakat-dan-sumbangan-pengurang-pajak',
 		title: 'Apakah zakat dan sumbangan bisa mengurangi pajak?',
-		leadText:
+		lead_text:
 			'Zakat dan sumbangan tertentu dapat diperhitungkan sebagai pengurang jika dibayarkan melalui lembaga yang memenuhi syarat.',
-		articleType: 'standard',
-		category: 'pajak-zakat-donasi',
-		tags: ['spt'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-zakat-donasi',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pajak',
-		publishedAt: '2026-11-04T18:00:00.000Z',
-		lastReviewedAt: '2026-11-05T18:00:00.000Z',
-		keyTakeaways: [
-			'Zakat dan sumbangan tertentu dapat diperhitungkan sebagai pengurang jika dibayarkan melalui lembaga yang memenuhi syarat.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang zakat dan sumbangan sebagai pengurang pajak.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['spt'],
+		first_published_at: '2026-11-04T18:00:00.000Z',
+		last_reviewed_at: '2026-11-05T18:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Zakat dan sumbangan tertentu dapat diperhitungkan sebagai pengurang jika dibayarkan melalui lembaga yang memenuhi syarat.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang zakat dan sumbangan sebagai pengurang pajak.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -412,10 +428,10 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang zakat dan sumbangan sebagai pengurang pajak',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/zakat-dan-sumbangan-pengurang-pajak',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Zakat dan sumbangan tertentu dapat diperhitungkan sebagai pengurang jika dibayarkan melalui lembaga yang memenuhi syarat. Banyak pembaca bertanya tentang zakat dan sumbangan sebagai pengurang pajak, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -498,28 +514,32 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'jatuh-tempo-pajak-kendaraan',
 		title: 'Pajak kendaraan bermotor: kapan jatuh tempo dan cara membayarnya?',
-		leadText:
+		lead_text:
 			'Tanggal jatuh tempo pajak kendaraan tercantum di dokumen kendaraan dan sebaiknya dicatat di kalender keluarga. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-lainnya',
-		tags: ['anggaran-bulanan'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-lainnya',
 		author: 'penulis-contoh-dua',
-		image: 'kategori-pajak',
-		publishedAt: '2026-11-03T08:00:00.000Z',
-		keyTakeaways: [
-			'Tanggal jatuh tempo pajak kendaraan tercantum di dokumen kendaraan dan sebaiknya dicatat di kalender keluarga.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang jatuh tempo pajak kendaraan bermotor.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['anggaran-bulanan'],
+		first_published_at: '2026-11-03T08:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Tanggal jatuh tempo pajak kendaraan tercantum di dokumen kendaraan dan sebaiknya dicatat di kalender keluarga.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang jatuh tempo pajak kendaraan bermotor.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang jatuh tempo pajak kendaraan bermotor',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/jatuh-tempo-pajak-kendaraan',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Tanggal jatuh tempo pajak kendaraan tercantum di dokumen kendaraan dan sebaiknya dicatat di kalender keluarga. Banyak pembaca bertanya tentang jatuh tempo pajak kendaraan bermotor, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -602,31 +622,35 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'gaji-naik-potongan-pajak-ikut-naik',
 		title: 'Gaji naik, apakah potongan pajak ikut naik? Simulasi sederhana',
-		leadText:
+		lead_text:
 			'Ketika gaji naik, potongan pajak biasanya ikut naik, tetapi kenaikannya tidak selalu sebanding dengan kenaikan gaji. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-pph21',
-		tags: ['pajak-karyawan', 'gaji'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-pph21',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-pajak',
-		publishedAt: '2026-11-01T22:00:00.000Z',
-		contentUpdatedAt: '2026-11-04T22:00:00.000Z',
-		lastReviewedAt: '2026-11-02T22:00:00.000Z',
-		keyTakeaways: [
-			'Ketika gaji naik, potongan pajak biasanya ikut naik, tetapi kenaikannya tidak selalu sebanding dengan kenaikan gaji.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang kenaikan gaji dan potongan pajak.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pajak-karyawan', 'gaji'],
+		first_published_at: '2026-11-01T22:00:00.000Z',
+		content_updated_at: '2026-11-04T22:00:00.000Z',
+		last_reviewed_at: '2026-11-02T22:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Ketika gaji naik, potongan pajak biasanya ikut naik, tetapi kenaikannya tidak selalu sebanding dengan kenaikan gaji.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang kenaikan gaji dan potongan pajak.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang kenaikan gaji dan potongan pajak',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/gaji-naik-potongan-pajak-ikut-naik',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Ketika gaji naik, potongan pajak biasanya ikut naik, tetapi kenaikannya tidak selalu sebanding dengan kenaikan gaji. Topik kenaikan gaji dan potongan pajak sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -709,20 +733,24 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'kesalahan-umum-lapor-spt',
 		title: 'Kesalahan umum saat lapor SPT dan cara menghindarinya',
-		leadText:
+		lead_text:
 			'Kesalahan lapor SPT yang paling sering adalah data harta yang tidak lengkap dan bukti potong yang terlewat. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-spt-tahunan',
-		tags: ['spt'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-spt-tahunan',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pajak',
-		publishedAt: '2026-10-31T12:00:00.000Z',
-		lastReviewedAt: '2026-11-01T12:00:00.000Z',
-		keyTakeaways: [
-			'Kesalahan lapor SPT yang paling sering adalah data harta yang tidak lengkap dan bukti potong yang terlewat.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang kesalahan saat melaporkan SPT.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['spt'],
+		first_published_at: '2026-10-31T12:00:00.000Z',
+		last_reviewed_at: '2026-11-01T12:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Kesalahan lapor SPT yang paling sering adalah data harta yang tidak lengkap dan bukti potong yang terlewat.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang kesalahan saat melaporkan SPT.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -744,10 +772,10 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang kesalahan saat melaporkan SPT',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/kesalahan-umum-lapor-spt',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Kesalahan lapor SPT yang paling sering adalah data harta yang tidak lengkap dan bukti potong yang terlewat. Banyak pembaca bertanya tentang kesalahan saat melaporkan SPT, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -830,30 +858,34 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'dokumen-pajak-yang-perlu-disimpan',
 		title: 'Menyimpan bukti potong: dokumen apa saja yang perlu disimpan?',
-		leadText:
+		lead_text:
 			'Bukti potong, bukti pembayaran, dan dokumen harta sebaiknya disimpan rapi selama beberapa tahun. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-pengurang',
-		tags: ['pajak-karyawan'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-pengurang',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-pajak',
-		publishedAt: '2026-10-30T02:00:00.000Z',
-		lastReviewedAt: '2026-10-31T02:00:00.000Z',
-		keyTakeaways: [
-			'Bukti potong, bukti pembayaran, dan dokumen harta sebaiknya disimpan rapi selama beberapa tahun.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang penyimpanan dokumen pajak.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pajak-karyawan'],
+		first_published_at: '2026-10-30T02:00:00.000Z',
+		last_reviewed_at: '2026-10-31T02:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Bukti potong, bukti pembayaran, dan dokumen harta sebaiknya disimpan rapi selama beberapa tahun.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang penyimpanan dokumen pajak.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang penyimpanan dokumen pajak',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/dokumen-pajak-yang-perlu-disimpan',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Bukti potong, bukti pembayaran, dan dokumen harta sebaiknya disimpan rapi selama beberapa tahun. Topik penyimpanan dokumen pajak sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -936,36 +968,40 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'pajak-hadiah-undian-dan-bonus',
 		title: 'Pajak atas hadiah undian dan bonus: yang perlu diketahui',
-		leadText:
+		lead_text:
 			'Hadiah undian dan bonus umumnya tetap dikenai pajak, sehingga jumlah yang diterima bisa lebih kecil dari yang diumumkan.',
-		articleType: 'standard',
-		category: 'pajak-lainnya',
-		tags: ['gaji'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-lainnya',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pajak',
-		publishedAt: '2026-10-28T16:00:00.000Z',
-		lastReviewedAt: '2026-10-29T16:00:00.000Z',
-		keyTakeaways: [
-			'Hadiah undian dan bonus umumnya tetap dikenai pajak, sehingga jumlah yang diterima bisa lebih kecil dari yang diumumkan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pajak atas hadiah dan bonus.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['gaji'],
+		first_published_at: '2026-10-28T16:00:00.000Z',
+		last_reviewed_at: '2026-10-29T16:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Hadiah undian dan bonus umumnya tetap dikenai pajak, sehingga jumlah yang diterima bisa lebih kecil dari yang diumumkan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pajak atas hadiah dan bonus.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang pajak atas hadiah dan bonus',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/pajak-hadiah-undian-dan-bonus',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Hadiah undian dan bonus umumnya tetap dikenai pajak, sehingga jumlah yang diterima bisa lebih kecil dari yang diumumkan. Banyak pembaca bertanya tentang pajak atas hadiah dan bonus, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -1047,22 +1083,26 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'kalender-pajak-pribadi',
 		title: 'Kalender pajak pribadi: tanggal penting sepanjang tahun',
-		leadText:
+		lead_text:
 			'Kalender pajak pribadi membantu mengingat tanggal lapor dan bayar sehingga tidak ada denda yang tidak perlu. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak',
-		tags: ['spt', 'anggaran-bulanan'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak',
 		author: 'redaksi-contoh',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pajak',
-		publishedAt: '2026-10-27T06:00:00.000Z',
-		lastReviewedAt: '2026-10-28T06:00:00.000Z',
-		keyTakeaways: [
-			'Kalender pajak pribadi membantu mengingat tanggal lapor dan bayar sehingga tidak ada denda yang tidak perlu.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang kalender pajak pribadi.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['spt', 'anggaran-bulanan'],
+		first_published_at: '2026-10-27T06:00:00.000Z',
+		last_reviewed_at: '2026-10-28T06:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Kalender pajak pribadi membantu mengingat tanggal lapor dan bayar sehingga tidak ada denda yang tidak perlu.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang kalender pajak pribadi.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Kalender pajak pribadi membantu mengingat tanggal lapor dan bayar sehingga tidak ada denda yang tidak perlu. Banyak pembaca bertanya tentang kalender pajak pribadi, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -1145,20 +1185,24 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'pajak-pekerja-lepas-vs-karyawan',
 		title: 'Pekerja lepas dan pajak: apa bedanya dengan karyawan tetap?',
-		leadText:
+		lead_text:
 			'Pekerja lepas biasanya lebih banyak mengurus pencatatan pajaknya sendiri dibandingkan karyawan tetap. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-pph21',
-		tags: ['gaji'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-pph21',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-pajak',
-		publishedAt: '2026-10-25T20:00:00.000Z',
-		lastReviewedAt: '2026-10-26T20:00:00.000Z',
-		keyTakeaways: [
-			'Pekerja lepas biasanya lebih banyak mengurus pencatatan pajaknya sendiri dibandingkan karyawan tetap.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pajak pekerja lepas.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['gaji'],
+		first_published_at: '2026-10-25T20:00:00.000Z',
+		last_reviewed_at: '2026-10-26T20:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Pekerja lepas biasanya lebih banyak mengurus pencatatan pajaknya sendiri dibandingkan karyawan tetap.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pajak pekerja lepas.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -1175,16 +1219,16 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang pajak pekerja lepas',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/pajak-pekerja-lepas-vs-karyawan',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Pekerja lepas biasanya lebih banyak mengurus pencatatan pajaknya sendiri dibandingkan karyawan tetap. Pembahasan tentang pajak pekerja lepas biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -1266,20 +1310,24 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'arti-spt-nihil-kurang-lebih-bayar',
 		title: 'SPT nihil, kurang bayar, lebih bayar: apa artinya?',
-		leadText:
+		lead_text:
 			'Status SPT menunjukkan selisih antara pajak terutang dan pajak yang sudah dipotong atau dibayar. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-spt-tahunan',
-		tags: ['spt'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-spt-tahunan',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pajak',
-		publishedAt: '2026-10-24T10:00:00.000Z',
-		lastReviewedAt: '2026-10-25T10:00:00.000Z',
-		keyTakeaways: [
-			'Status SPT menunjukkan selisih antara pajak terutang dan pajak yang sudah dipotong atau dibayar.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang status SPT nihil, kurang bayar, dan lebih bayar.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['spt'],
+		first_published_at: '2026-10-24T10:00:00.000Z',
+		last_reviewed_at: '2026-10-25T10:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Status SPT menunjukkan selisih antara pajak terutang dan pajak yang sudah dipotong atau dibayar.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang status SPT nihil, kurang bayar, dan lebih bayar.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -1297,16 +1345,16 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang status SPT nihil, kurang bayar, dan lebih bayar',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/arti-spt-nihil-kurang-lebih-bayar',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Status SPT menunjukkan selisih antara pajak terutang dan pajak yang sudah dipotong atau dibayar. Pembahasan tentang status SPT nihil, kurang bayar, dan lebih bayar biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -1388,36 +1436,38 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'bukti-setor-zakat-yang-perlu-diminta',
 		title: 'Bukti setor zakat: format apa yang perlu diminta dari lembaga?',
-		leadText:
+		lead_text:
 			'Bukti setor zakat perlu memuat identitas pembayar, jumlah, tanggal, dan nama lembaga penerima. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pajak-zakat-donasi',
-		tags: ['spt'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-zakat-donasi',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-pajak',
-		publishedAt: '2026-10-23T00:00:00.000Z',
-		lastReviewedAt: '2026-10-24T00:00:00.000Z',
-		keyTakeaways: [
-			'Bukti setor zakat perlu memuat identitas pembayar, jumlah, tanggal, dan nama lembaga penerima.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang bukti setor zakat.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['spt'],
+		first_published_at: '2026-10-23T00:00:00.000Z',
+		last_reviewed_at: '2026-10-24T00:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Bukti setor zakat perlu memuat identitas pembayar, jumlah, tanggal, dan nama lembaga penerima.',
+			},
+			{ text: 'Catat angka nyata Anda sebelum membuat keputusan tentang bukti setor zakat.' },
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang bukti setor zakat',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/bukti-setor-zakat-yang-perlu-diminta',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Bukti setor zakat perlu memuat identitas pembayar, jumlah, tanggal, dan nama lembaga penerima. Topik bukti setor zakat sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -1499,22 +1549,26 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'panduan-istilah-pajak-pribadi-untuk-pemula',
 		title: 'Panduan lengkap memahami istilah pajak pribadi yang sering membingungkan pembayar pajak pemula di Indonesia',
-		leadText:
+		lead_text:
 			'Istilah pajak menjadi lebih mudah dipahami jika dikelompokkan menurut tahap: penghasilan, pengurang, tarif, dan pelaporan.',
-		articleType: 'standard',
-		category: 'pajak',
-		tags: ['pajak-karyawan'],
+		article_type: 'standard',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak',
 		author: 'redaksi-contoh',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pajak',
-		publishedAt: '2026-10-21T14:00:00.000Z',
-		lastReviewedAt: '2026-10-22T14:00:00.000Z',
-		keyTakeaways: [
-			'Istilah pajak menjadi lebih mudah dipahami jika dikelompokkan menurut tahap: penghasilan, pengurang, tarif, dan pelaporan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang istilah pajak pribadi.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pajak-karyawan'],
+		first_published_at: '2026-10-21T14:00:00.000Z',
+		last_reviewed_at: '2026-10-22T14:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Istilah pajak menjadi lebih mudah dipahami jika dikelompokkan menurut tahap: penghasilan, pengurang, tarif, dan pelaporan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang istilah pajak pribadi.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Istilah pajak menjadi lebih mudah dipahami jika dikelompokkan menurut tahap: penghasilan, pengurang, tarif, dan pelaporan. Pembahasan tentang istilah pajak pribadi biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),

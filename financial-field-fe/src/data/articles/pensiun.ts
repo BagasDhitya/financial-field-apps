@@ -1,25 +1,29 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Pensiun and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Pensiun and its sub-categories (PRP-0002.p1 §S4.4). */
 export const PENSIUN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'manfaat-program-pensiun-pemerintah',
 		title: 'Mengenal manfaat program pensiun pemerintah bagi pekerja',
-		leadText:
+		lead_text:
 			'Program pensiun pemerintah memberi dasar perlindungan di hari tua, tetapi biasanya perlu dilengkapi tabungan pribadi. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pensiun-pemerintah',
-		tags: ['pensiun'],
+		article_type: 'standard',
+		featured_image: 'kategori-pensiun',
+		primary_category: 'pensiun-pemerintah',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pensiun',
-		publishedAt: '2026-10-11T16:00:00.000Z',
-		lastReviewedAt: '2026-10-12T16:00:00.000Z',
-		keyTakeaways: [
-			'Program pensiun pemerintah memberi dasar perlindungan di hari tua, tetapi biasanya perlu dilengkapi tabungan pribadi.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang program pensiun pemerintah.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pensiun'],
+		first_published_at: '2026-10-11T16:00:00.000Z',
+		last_reviewed_at: '2026-10-12T16:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Program pensiun pemerintah memberi dasar perlindungan di hari tua, tetapi biasanya perlu dilengkapi tabungan pribadi.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang program pensiun pemerintah.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -41,10 +45,10 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang program pensiun pemerintah',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/manfaat-program-pensiun-pemerintah',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Program pensiun pemerintah memberi dasar perlindungan di hari tua, tetapi biasanya perlu dilengkapi tabungan pribadi. Banyak pembaca bertanya tentang program pensiun pemerintah, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -127,30 +131,34 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'dana-pensiun-kantor-saat-pindah-kerja',
 		title: 'Dana pensiun dari kantor: apa yang terjadi saat pindah kerja?',
-		leadText:
+		lead_text:
 			'Saat pindah kerja, dana pensiun dari kantor lama perlu dicek statusnya agar tidak terlupakan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pensiun-pemberi-kerja',
-		tags: ['pensiun', 'karier-awal'],
+		article_type: 'standard',
+		featured_image: 'kategori-pensiun',
+		primary_category: 'pensiun-pemberi-kerja',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-pensiun',
-		publishedAt: '2026-10-10T06:00:00.000Z',
-		lastReviewedAt: '2026-10-11T06:00:00.000Z',
-		keyTakeaways: [
-			'Saat pindah kerja, dana pensiun dari kantor lama perlu dicek statusnya agar tidak terlupakan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang dana pensiun pemberi kerja saat pindah kerja.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pensiun', 'karier-awal'],
+		first_published_at: '2026-10-10T06:00:00.000Z',
+		last_reviewed_at: '2026-10-11T06:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Saat pindah kerja, dana pensiun dari kantor lama perlu dicek statusnya agar tidak terlupakan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang dana pensiun pemberi kerja saat pindah kerja.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang dana pensiun pemberi kerja saat pindah kerja',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/dana-pensiun-kantor-saat-pindah-kerja',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Saat pindah kerja, dana pensiun dari kantor lama perlu dicek statusnya agar tidak terlupakan. Pembahasan tentang dana pensiun pemberi kerja saat pindah kerja biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -233,36 +241,40 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'dplk-untuk-pekerja-mandiri',
 		title: 'DPLK untuk pekerja mandiri: cara kerja dan pertimbangannya',
-		leadText:
+		lead_text:
 			'DPLK memungkinkan pekerja mandiri menyisihkan dana pensiun secara rutin dengan aturan penarikan tertentu. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pensiun-dplk',
-		tags: ['pensiun'],
+		article_type: 'standard',
+		featured_image: 'kategori-pensiun',
+		primary_category: 'pensiun-dplk',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-pensiun',
-		publishedAt: '2026-10-08T20:00:00.000Z',
-		lastReviewedAt: '2026-10-09T20:00:00.000Z',
-		keyTakeaways: [
-			'DPLK memungkinkan pekerja mandiri menyisihkan dana pensiun secara rutin dengan aturan penarikan tertentu.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang DPLK untuk pekerja mandiri.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pensiun'],
+		first_published_at: '2026-10-08T20:00:00.000Z',
+		last_reviewed_at: '2026-10-09T20:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'DPLK memungkinkan pekerja mandiri menyisihkan dana pensiun secara rutin dengan aturan penarikan tertentu.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang DPLK untuk pekerja mandiri.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang DPLK untuk pekerja mandiri',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/dplk-untuk-pekerja-mandiri',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'DPLK memungkinkan pekerja mandiri menyisihkan dana pensiun secara rutin dengan aturan penarikan tertentu. Pembahasan tentang DPLK untuk pekerja mandiri biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -344,21 +356,25 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'menghitung-kebutuhan-dana-pensiun',
 		title: 'Berapa dana pensiun yang cukup? Cara menghitung kebutuhan kasar',
-		leadText:
+		lead_text:
 			'Kebutuhan dana pensiun dapat diperkirakan dari pengeluaran bulanan saat ini, perkiraan inflasi, dan lama masa pensiun. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'pensiun-lainnya',
-		tags: ['pensiun', 'investasi-pemula'],
+		article_type: 'standard',
+		featured_image: 'kategori-pensiun',
+		primary_category: 'pensiun-lainnya',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-pensiun',
-		publishedAt: '2026-10-07T10:00:00.000Z',
-		contentUpdatedAt: '2026-10-10T10:00:00.000Z',
-		lastReviewedAt: '2026-10-08T10:00:00.000Z',
-		keyTakeaways: [
-			'Kebutuhan dana pensiun dapat diperkirakan dari pengeluaran bulanan saat ini, perkiraan inflasi, dan lama masa pensiun.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang kebutuhan dana pensiun.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['pensiun', 'investasi-pemula'],
+		first_published_at: '2026-10-07T10:00:00.000Z',
+		content_updated_at: '2026-10-10T10:00:00.000Z',
+		last_reviewed_at: '2026-10-08T10:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Kebutuhan dana pensiun dapat diperkirakan dari pengeluaran bulanan saat ini, perkiraan inflasi, dan lama masa pensiun.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang kebutuhan dana pensiun.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -379,10 +395,10 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang kebutuhan dana pensiun',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/menghitung-kebutuhan-dana-pensiun',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Kebutuhan dana pensiun dapat diperkirakan dari pengeluaran bulanan saat ini, perkiraan inflasi, dan lama masa pensiun. Topik kebutuhan dana pensiun sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),

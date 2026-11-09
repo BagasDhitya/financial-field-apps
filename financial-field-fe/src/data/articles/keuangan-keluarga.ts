@@ -1,25 +1,29 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Keuangan Keluarga and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Keuangan Keluarga and its sub-categories (PRP-0002.p1 §S4.4). */
 export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'metode-50-30-20-untuk-gaji-umr',
 		title: 'Metode 50/30/20: apakah cocok untuk gaji UMR?',
-		leadText:
+		lead_text:
 			'Metode 50/30/20 bisa dipakai sebagai titik awal, tetapi proporsinya sering perlu disesuaikan untuk penghasilan terbatas.',
-		articleType: 'standard',
-		category: 'keluarga-anggaran',
-		tags: ['anggaran-bulanan', 'gaji'],
+		article_type: 'standard',
+		featured_image: 'kategori-keuangan-keluarga',
+		primary_category: 'keluarga-anggaran',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-keuangan-keluarga',
-		publishedAt: '2026-09-03T10:00:00.000Z',
-		lastReviewedAt: '2026-09-04T10:00:00.000Z',
-		keyTakeaways: [
-			'Metode 50/30/20 bisa dipakai sebagai titik awal, tetapi proporsinya sering perlu disesuaikan untuk penghasilan terbatas.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang metode anggaran 50/30/20.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['anggaran-bulanan', 'gaji'],
+		first_published_at: '2026-09-03T10:00:00.000Z',
+		last_reviewed_at: '2026-09-04T10:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Metode 50/30/20 bisa dipakai sebagai titik awal, tetapi proporsinya sering perlu disesuaikan untuk penghasilan terbatas.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang metode anggaran 50/30/20.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -41,10 +45,10 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang metode anggaran 50/30/20',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/metode-50-30-20-untuk-gaji-umr',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Metode 50/30/20 bisa dipakai sebagai titik awal, tetapi proporsinya sering perlu disesuaikan untuk penghasilan terbatas. Topik metode anggaran 50/30/20 sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -127,21 +131,25 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'berapa-besar-dana-darurat',
 		title: 'Dana darurat: berapa besar dan di mana menyimpannya?',
-		leadText:
+		lead_text:
 			'Dana darurat umumnya disiapkan beberapa kali pengeluaran bulanan dan disimpan di tempat yang mudah dicairkan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'keluarga-menabung',
-		tags: ['dana-darurat'],
+		article_type: 'standard',
+		featured_image: 'kategori-keuangan-keluarga',
+		primary_category: 'keluarga-menabung',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-keuangan-keluarga',
-		publishedAt: '2026-09-02T00:00:00.000Z',
-		contentUpdatedAt: '2026-09-05T00:00:00.000Z',
-		lastReviewedAt: '2026-09-03T00:00:00.000Z',
-		keyTakeaways: [
-			'Dana darurat umumnya disiapkan beberapa kali pengeluaran bulanan dan disimpan di tempat yang mudah dicairkan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang besaran dan penyimpanan dana darurat.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['dana-darurat'],
+		first_published_at: '2026-09-02T00:00:00.000Z',
+		content_updated_at: '2026-09-05T00:00:00.000Z',
+		last_reviewed_at: '2026-09-03T00:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Dana darurat umumnya disiapkan beberapa kali pengeluaran bulanan dan disimpan di tempat yang mudah dicairkan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang besaran dan penyimpanan dana darurat.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -163,7 +171,7 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang besaran dan penyimpanan dana darurat',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/berapa-besar-dana-darurat',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
 		corrections: [
@@ -172,7 +180,7 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 				note: 'angka pada contoh perhitungan diperbaiki agar konsisten dengan teks.',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Dana darurat umumnya disiapkan beberapa kali pengeluaran bulanan dan disimpan di tempat yang mudah dicairkan. Banyak pembaca bertanya tentang besaran dan penyimpanan dana darurat, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -255,15 +263,15 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'kolom-rencana-keuangan-satu-halaman',
 		title: 'Kolom: menulis rencana keuangan keluarga dalam satu halaman',
-		leadText:
+		lead_text:
 			'Kolom ini mengajak keluarga merangkum rencana keuangan dalam satu halaman yang mudah dibaca bersama. Simak catatan dan ajakan sederhana untuk mulai merencanakan dalam kolom berikut.',
-		articleType: 'column',
-		category: 'keluarga-rencana-hidup',
-		tags: ['keluarga-muda'],
+		article_type: 'column',
+		featured_image: 'kategori-keuangan-keluarga',
+		primary_category: 'keluarga-rencana-hidup',
 		author: 'redaksi-contoh',
-		image: 'kategori-keuangan-keluarga',
-		publishedAt: '2026-08-31T14:00:00.000Z',
-		body: [
+		tags: ['keluarga-muda'],
+		first_published_at: '2026-08-31T14:00:00.000Z',
+		content: [
 			p(
 				'Kolom ini mengajak keluarga merangkum rencana keuangan dalam satu halaman yang mudah dibaca bersama. Saya menulis kolom ini sebagai catatan pribadi, untuk mengajak pembaca berhenti sejenak dan memikirkan rencana keuangan keluarga satu halaman. Topik ini jarang dibicarakan di meja makan, padahal hampir semua keluarga berhadapan dengannya. Kita lebih sering membicarakan harga barang atau rencana liburan daripada keputusan yang dampaknya terasa bertahun-tahun ke depan. Melalui tulisan singkat ini, saya ingin berbagi beberapa pengamatan sederhana yang mungkin berguna. Tidak ada rumus khusus di sini, hanya pengalaman sehari-hari yang barangkali terasa akrab bagi banyak pembaca, terutama mereka yang baru mulai mengatur keuangan keluarga sendiri.',
 			),
@@ -298,36 +306,40 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'mencatat-penghasilan-kerja-sampingan',
 		title: 'Kerja sampingan: mencatat penghasilan tambahan dengan rapi',
-		leadText:
+		lead_text:
 			'Penghasilan kerja sampingan sebaiknya dicatat terpisah agar mudah dipantau dan dilaporkan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'keluarga-cara-bekerja',
-		tags: ['gaji', 'umkm'],
+		article_type: 'standard',
+		featured_image: 'kategori-keuangan-keluarga',
+		primary_category: 'keluarga-cara-bekerja',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-keuangan-keluarga',
-		publishedAt: '2026-08-30T04:00:00.000Z',
-		lastReviewedAt: '2026-08-31T04:00:00.000Z',
-		keyTakeaways: [
-			'Penghasilan kerja sampingan sebaiknya dicatat terpisah agar mudah dipantau dan dilaporkan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pencatatan penghasilan kerja sampingan.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['gaji', 'umkm'],
+		first_published_at: '2026-08-30T04:00:00.000Z',
+		last_reviewed_at: '2026-08-31T04:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Penghasilan kerja sampingan sebaiknya dicatat terpisah agar mudah dipantau dan dilaporkan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pencatatan penghasilan kerja sampingan.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang pencatatan penghasilan kerja sampingan',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/mencatat-penghasilan-kerja-sampingan',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Penghasilan kerja sampingan sebaiknya dicatat terpisah agar mudah dipantau dan dilaporkan. Pembahasan tentang pencatatan penghasilan kerja sampingan biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -409,20 +421,24 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'mengatur-pos-sosial-keluarga',
 		title: 'Arisan, iuran keluarga, dan uang kondangan: mengatur pos sosial',
-		leadText:
+		lead_text:
 			'Pengeluaran sosial seperti arisan dan kondangan lebih terkendali jika diberi pos anggaran tersendiri. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'keluarga-lainnya',
-		tags: ['anggaran-bulanan'],
+		article_type: 'standard',
+		featured_image: 'kategori-keuangan-keluarga',
+		primary_category: 'keluarga-lainnya',
 		author: 'penulis-contoh-satu',
-		image: 'kategori-keuangan-keluarga',
-		publishedAt: '2026-08-28T18:00:00.000Z',
-		keyTakeaways: [
-			'Pengeluaran sosial seperti arisan dan kondangan lebih terkendali jika diberi pos anggaran tersendiri.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pos pengeluaran sosial keluarga.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['anggaran-bulanan'],
+		first_published_at: '2026-08-28T18:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Pengeluaran sosial seperti arisan dan kondangan lebih terkendali jika diberi pos anggaran tersendiri.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pos pengeluaran sosial keluarga.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Pengeluaran sosial seperti arisan dan kondangan lebih terkendali jika diberi pos anggaran tersendiri. Banyak pembaca bertanya tentang pos pengeluaran sosial keluarga, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -507,20 +523,24 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'menekan-tagihan-ponsel-internet',
 		title: 'Menekan tagihan ponsel dan internet tanpa mengorbankan kebutuhan',
-		leadText:
+		lead_text:
 			'Tagihan ponsel dan internet dapat ditekan dengan meninjau pemakaian nyata dan memilih paket yang sesuai. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'keluarga-tagihan-ponsel',
-		tags: ['anggaran-bulanan'],
+		article_type: 'standard',
+		featured_image: 'kategori-keuangan-keluarga',
+		primary_category: 'keluarga-tagihan-ponsel',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-keuangan-keluarga',
-		publishedAt: '2026-08-27T08:00:00.000Z',
-		lastReviewedAt: '2026-08-28T08:00:00.000Z',
-		keyTakeaways: [
-			'Tagihan ponsel dan internet dapat ditekan dengan meninjau pemakaian nyata dan memilih paket yang sesuai.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang tagihan ponsel dan internet.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['anggaran-bulanan'],
+		first_published_at: '2026-08-27T08:00:00.000Z',
+		last_reviewed_at: '2026-08-28T08:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Tagihan ponsel dan internet dapat ditekan dengan meninjau pemakaian nyata dan memilih paket yang sesuai.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang tagihan ponsel dan internet.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -542,10 +562,10 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang tagihan ponsel dan internet',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/menekan-tagihan-ponsel-internet',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Tagihan ponsel dan internet dapat ditekan dengan meninjau pemakaian nyata dan memilih paket yang sesuai. Banyak pembaca bertanya tentang tagihan ponsel dan internet, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -631,31 +651,35 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'menabung-dengan-rekening-terpisah',
 		title: 'Menabung dengan rekening terpisah: cara membagi pos tabungan',
-		leadText:
+		lead_text:
 			'Rekening terpisah membantu memisahkan tujuan tabungan sehingga dana tidak mudah terpakai untuk keperluan lain. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'keluarga-menabung',
-		tags: ['dana-darurat'],
+		article_type: 'standard',
+		featured_image: 'kategori-keuangan-keluarga',
+		primary_category: 'keluarga-menabung',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-keuangan-keluarga',
-		publishedAt: '2026-08-25T22:00:00.000Z',
-		contentUpdatedAt: '2026-08-28T22:00:00.000Z',
-		lastReviewedAt: '2026-08-26T22:00:00.000Z',
-		keyTakeaways: [
-			'Rekening terpisah membantu memisahkan tujuan tabungan sehingga dana tidak mudah terpakai untuk keperluan lain.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang menabung dengan rekening terpisah.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['dana-darurat'],
+		first_published_at: '2026-08-25T22:00:00.000Z',
+		content_updated_at: '2026-08-28T22:00:00.000Z',
+		last_reviewed_at: '2026-08-26T22:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Rekening terpisah membantu memisahkan tujuan tabungan sehingga dana tidak mudah terpakai untuk keperluan lain.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang menabung dengan rekening terpisah.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang menabung dengan rekening terpisah',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/menabung-dengan-rekening-terpisah',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Rekening terpisah membantu memisahkan tujuan tabungan sehingga dana tidak mudah terpakai untuk keperluan lain. Topik menabung dengan rekening terpisah sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -738,21 +762,25 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'tantangan-menabung-52-minggu',
 		title: 'Tantangan menabung 52 minggu: hitungan dan tipsnya',
-		leadText:
+		lead_text:
 			'Tantangan menabung 52 minggu menaikkan jumlah tabungan sedikit demi sedikit setiap minggu selama setahun. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'keluarga-menabung',
-		tags: ['dana-darurat'],
+		article_type: 'standard',
+		primary_category: 'keluarga-menabung',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
-		publishedAt: '2026-08-24T12:00:00.000Z',
-		lastReviewedAt: '2026-08-25T12:00:00.000Z',
-		keyTakeaways: [
-			'Tantangan menabung 52 minggu menaikkan jumlah tabungan sedikit demi sedikit setiap minggu selama setahun.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang tantangan menabung 52 minggu.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['dana-darurat'],
+		first_published_at: '2026-08-24T12:00:00.000Z',
+		last_reviewed_at: '2026-08-25T12:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Tantangan menabung 52 minggu menaikkan jumlah tabungan sedikit demi sedikit setiap minggu selama setahun.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang tantangan menabung 52 minggu.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Tantangan menabung 52 minggu menaikkan jumlah tabungan sedikit demi sedikit setiap minggu selama setahun. Banyak pembaca bertanya tentang tantangan menabung 52 minggu, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),

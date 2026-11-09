@@ -13,9 +13,16 @@ const LAYER_BOUNDARIES = [
 	{
 		name: 'components stay presentational',
 		files: ['src/components/**'],
-		forbidden: ['@/data/*', '@/lib/content/*', '@/features/*', '@/app/*'],
+		forbidden: ['@/data/*', '@/lib/cms/*', '@/lib/content/*', '@/features/*', '@/app/*'],
 		message:
 			'Components receive data as props. Fetching belongs to src/lib/content, called from a feature or route.',
+	},
+	{
+		name: 'cms layer does not reach upward',
+		files: ['src/lib/cms/**'],
+		forbidden: ['@/lib/content/*', '@/components/*', '@/features/*', '@/app/*'],
+		message:
+			'The CMS boundary may only depend on src/types, src/lib/env, src/lib/log and src/data (local API).',
 	},
 	{
 		name: 'data is plain content',
@@ -24,15 +31,15 @@ const LAYER_BOUNDARIES = [
 		message: 'src/data holds content only. It may import src/types and its own helpers.',
 	},
 	{
-		name: 'data is read through the content layer',
+		name: 'data is read only by the local API',
 		files: ['src/app/**', 'src/features/**', 'src/proxy.ts'],
 		forbidden: ['@/data/*'],
-		message: 'Read content through src/lib/content, which resolves and checks src/data.',
+		message: 'Read content through src/lib/content; only src/lib/cms/local reads src/data.',
 	},
 	{
 		name: 'content layer does not know about rendering',
 		files: ['src/lib/content/**'],
-		forbidden: ['@/components/*', '@/features/*', '@/app/*'],
+		forbidden: ['@/data/*', '@/lib/cms/local/*', '@/components/*', '@/features/*', '@/app/*'],
 		message:
 			'The content layer returns domain data. It must not import React components or routes.',
 	},

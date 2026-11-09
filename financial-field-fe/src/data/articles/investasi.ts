@@ -1,25 +1,29 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Investasi and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Investasi and its sub-categories (PRP-0002.p1 §S4.4). */
 export const INVESTASI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'investasi-rutin-reksa-dana-pemula',
 		title: 'Investasi rutin bulanan di reksa dana untuk pemula',
-		leadText:
+		lead_text:
 			'Investasi rutin bulanan membantu pemula membangun kebiasaan dan mengurangi tekanan untuk menebak waktu terbaik membeli. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'investasi-reksa-dana',
-		tags: ['reksa-dana', 'investasi-pemula'],
+		article_type: 'standard',
+		featured_image: 'kategori-investasi',
+		primary_category: 'investasi-reksa-dana',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-investasi',
-		publishedAt: '2026-09-23T06:00:00.000Z',
-		lastReviewedAt: '2026-09-24T06:00:00.000Z',
-		keyTakeaways: [
-			'Investasi rutin bulanan membantu pemula membangun kebiasaan dan mengurangi tekanan untuk menebak waktu terbaik membeli.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang investasi rutin bulanan di reksa dana.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['reksa-dana', 'investasi-pemula'],
+		first_published_at: '2026-09-23T06:00:00.000Z',
+		last_reviewed_at: '2026-09-24T06:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Investasi rutin bulanan membantu pemula membangun kebiasaan dan mengurangi tekanan untuk menebak waktu terbaik membeli.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang investasi rutin bulanan di reksa dana.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -41,10 +45,10 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang investasi rutin bulanan di reksa dana',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/investasi-rutin-reksa-dana-pemula',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Investasi rutin bulanan membantu pemula membangun kebiasaan dan mengurangi tekanan untuk menebak waktu terbaik membeli. Pembahasan tentang investasi rutin bulanan di reksa dana biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -130,30 +134,34 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'imbal-hasil-properti-sewa',
 		title: 'Membeli properti untuk disewakan: hitungan sederhana imbal hasil',
-		leadText:
+		lead_text:
 			'Imbal hasil properti sewa dihitung dari pendapatan sewa bersih dibandingkan harga dan biaya kepemilikan properti. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'investasi-properti',
-		tags: ['investasi-pemula'],
+		article_type: 'standard',
+		featured_image: 'kategori-investasi',
+		primary_category: 'investasi-properti',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-investasi',
-		publishedAt: '2026-09-21T20:00:00.000Z',
-		lastReviewedAt: '2026-09-22T20:00:00.000Z',
-		keyTakeaways: [
-			'Imbal hasil properti sewa dihitung dari pendapatan sewa bersih dibandingkan harga dan biaya kepemilikan properti.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang imbal hasil properti sewa.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['investasi-pemula'],
+		first_published_at: '2026-09-21T20:00:00.000Z',
+		last_reviewed_at: '2026-09-22T20:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Imbal hasil properti sewa dihitung dari pendapatan sewa bersih dibandingkan harga dan biaya kepemilikan properti.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang imbal hasil properti sewa.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang imbal hasil properti sewa',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/imbal-hasil-properti-sewa',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Imbal hasil properti sewa dihitung dari pendapatan sewa bersih dibandingkan harga dan biaya kepemilikan properti. Topik imbal hasil properti sewa sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -236,22 +244,26 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'wawancara-sepuluh-tahun-investasi-saham',
 		title: 'Wawancara: pelajaran dari sepuluh tahun berinvestasi saham',
-		leadText:
+		lead_text:
 			'Narasumber Contoh berbagi pengalaman tentang disiplin dan kesabaran dalam berinvestasi saham. Simak pengalaman, kesalahan yang sering terjadi, dan sarannya dalam wawancara berikut.',
-		articleType: 'interview',
-		category: 'investasi-saham-valas',
-		tags: ['saham', 'investasi-pemula'],
+		article_type: 'interview',
+		featured_image: 'kategori-investasi',
+		primary_category: 'investasi-saham-valas',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-investasi',
-		publishedAt: '2026-09-20T10:00:00.000Z',
-		lastReviewedAt: '2026-09-21T10:00:00.000Z',
-		keyTakeaways: [
-			'Narasumber Contoh berbagi pengalaman tentang disiplin dan kesabaran dalam berinvestasi saham.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pengalaman berinvestasi saham.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['saham', 'investasi-pemula'],
+		first_published_at: '2026-09-20T10:00:00.000Z',
+		last_reviewed_at: '2026-09-21T10:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Narasumber Contoh berbagi pengalaman tentang disiplin dan kesabaran dalam berinvestasi saham.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pengalaman berinvestasi saham.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Narasumber Contoh berbagi pengalaman tentang disiplin dan kesabaran dalam berinvestasi saham. Dalam percakapan berikut, Narasumber Contoh menceritakan pengalamannya tentang pengalaman berinvestasi saham, kesalahan yang pernah dilihatnya, dan kebiasaan yang menurutnya paling membantu bagi pembaca yang baru memulai. Jawaban telah disunting agar ringkas, tanpa mengubah maksud yang ingin disampaikan.',
 			),
@@ -298,20 +310,24 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'emas-deposito-atau-obligasi-ritel',
 		title: 'Emas, deposito, atau obligasi ritel: membandingkan risiko secara umum',
-		leadText:
+		lead_text:
 			'Emas, deposito, dan obligasi ritel memiliki profil risiko dan likuiditas berbeda sehingga cocok untuk tujuan yang berbeda.',
-		articleType: 'standard',
-		category: 'investasi-lainnya',
-		tags: ['investasi-pemula', 'reksa-dana'],
+		article_type: 'standard',
+		featured_image: 'kategori-investasi',
+		primary_category: 'investasi-lainnya',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-investasi',
-		publishedAt: '2026-09-19T00:00:00.000Z',
-		lastReviewedAt: '2026-09-20T00:00:00.000Z',
-		keyTakeaways: [
-			'Emas, deposito, dan obligasi ritel memiliki profil risiko dan likuiditas berbeda sehingga cocok untuk tujuan yang berbeda.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang perbandingan emas, deposito, dan obligasi ritel.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['investasi-pemula', 'reksa-dana'],
+		first_published_at: '2026-09-19T00:00:00.000Z',
+		last_reviewed_at: '2026-09-20T00:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Emas, deposito, dan obligasi ritel memiliki profil risiko dan likuiditas berbeda sehingga cocok untuk tujuan yang berbeda.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang perbandingan emas, deposito, dan obligasi ritel.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -334,10 +350,10 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang perbandingan emas, deposito, dan obligasi ritel',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/emas-deposito-atau-obligasi-ritel',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Emas, deposito, dan obligasi ritel memiliki profil risiko dan likuiditas berbeda sehingga cocok untuk tujuan yang berbeda. Banyak pembaca bertanya tentang perbandingan emas, deposito, dan obligasi ritel, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -420,36 +436,40 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'menjual-tanah-warisan',
 		title: 'Menjual tanah warisan: langkah administratif yang perlu disiapkan',
-		leadText:
+		lead_text:
 			'Menjual tanah warisan memerlukan kesepakatan ahli waris dan kelengkapan dokumen sebelum transaksi dilakukan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'investasi-properti-lahan',
-		tags: ['warisan-keluarga'],
+		article_type: 'standard',
+		featured_image: 'kategori-investasi',
+		primary_category: 'investasi-properti-lahan',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-investasi',
-		publishedAt: '2026-09-17T14:00:00.000Z',
-		lastReviewedAt: '2026-09-18T14:00:00.000Z',
-		keyTakeaways: [
-			'Menjual tanah warisan memerlukan kesepakatan ahli waris dan kelengkapan dokumen sebelum transaksi dilakukan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang penjualan tanah warisan.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['warisan-keluarga'],
+		first_published_at: '2026-09-17T14:00:00.000Z',
+		last_reviewed_at: '2026-09-18T14:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Menjual tanah warisan memerlukan kesepakatan ahli waris dan kelengkapan dokumen sebelum transaksi dilakukan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang penjualan tanah warisan.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang penjualan tanah warisan',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/menjual-tanah-warisan',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Menjual tanah warisan memerlukan kesepakatan ahli waris dan kelengkapan dokumen sebelum transaksi dilakukan. Topik penjualan tanah warisan sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),

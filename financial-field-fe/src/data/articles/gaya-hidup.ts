@@ -1,35 +1,39 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Gaya Hidup and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Gaya Hidup and its sub-categories (PRP-0002.p1 §S4.4). */
 export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'biaya-tahun-pertama-anak',
 		title: 'Biaya membesarkan anak di tahun pertama: daftar yang sering terlupa',
-		leadText:
+		lead_text:
 			'Biaya tahun pertama anak tidak hanya kebutuhan harian, tetapi juga kesehatan, perlengkapan, dan perubahan penghasilan keluarga.',
-		articleType: 'standard',
-		category: 'gaya-hidup-anak',
-		tags: ['keluarga-muda', 'anggaran-bulanan'],
+		article_type: 'standard',
+		featured_image: 'kategori-gaya-hidup',
+		primary_category: 'gaya-hidup-anak',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-gaya-hidup',
-		publishedAt: '2026-09-16T04:00:00.000Z',
-		lastReviewedAt: '2026-09-17T04:00:00.000Z',
-		keyTakeaways: [
-			'Biaya tahun pertama anak tidak hanya kebutuhan harian, tetapi juga kesehatan, perlengkapan, dan perubahan penghasilan keluarga.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang biaya tahun pertama anak.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['keluarga-muda', 'anggaran-bulanan'],
+		first_published_at: '2026-09-16T04:00:00.000Z',
+		last_reviewed_at: '2026-09-17T04:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Biaya tahun pertama anak tidak hanya kebutuhan harian, tetapi juga kesehatan, perlengkapan, dan perubahan penghasilan keluarga.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang biaya tahun pertama anak.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang biaya tahun pertama anak',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/biaya-tahun-pertama-anak',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Biaya tahun pertama anak tidak hanya kebutuhan harian, tetapi juga kesehatan, perlengkapan, dan perubahan penghasilan keluarga. Pembahasan tentang biaya tahun pertama anak biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -112,22 +116,26 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'membeli-perabot-tanpa-utang',
 		title: 'Membeli perabot tanpa utang: strategi menabung bertahap',
-		leadText:
+		lead_text:
 			'Perabot dapat dibeli tanpa utang dengan menabung bertahap sesuai prioritas ruangan dan kebutuhan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'gaya-hidup-rumah',
-		tags: ['anggaran-bulanan'],
+		article_type: 'standard',
+		featured_image: 'kategori-gaya-hidup',
+		primary_category: 'gaya-hidup-rumah',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-gaya-hidup',
-		publishedAt: '2026-09-14T18:00:00.000Z',
-		lastReviewedAt: '2026-09-15T18:00:00.000Z',
-		keyTakeaways: [
-			'Perabot dapat dibeli tanpa utang dengan menabung bertahap sesuai prioritas ruangan dan kebutuhan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pembelian perabot tanpa utang.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['anggaran-bulanan'],
+		first_published_at: '2026-09-14T18:00:00.000Z',
+		last_reviewed_at: '2026-09-15T18:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Perabot dapat dibeli tanpa utang dengan menabung bertahap sesuai prioritas ruangan dan kebutuhan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pembelian perabot tanpa utang.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Perabot dapat dibeli tanpa utang dengan menabung bertahap sesuai prioritas ruangan dan kebutuhan. Topik pembelian perabot tanpa utang sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -210,20 +218,24 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'keamanan-dompet-digital',
 		title: 'Dompet digital dan keamanan: kebiasaan sederhana agar saldo aman',
-		leadText:
+		lead_text:
 			'Saldo dompet digital lebih aman jika kode rahasia dijaga, notifikasi diaktifkan, dan saldo besar tidak disimpan terlalu lama.',
-		articleType: 'standard',
-		category: 'gaya-hidup-nontunai',
-		tags: ['nontunai'],
+		article_type: 'standard',
+		featured_image: 'kategori-gaya-hidup',
+		primary_category: 'gaya-hidup-nontunai',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-gaya-hidup',
-		publishedAt: '2026-09-13T08:00:00.000Z',
-		lastReviewedAt: '2026-09-14T08:00:00.000Z',
-		keyTakeaways: [
-			'Saldo dompet digital lebih aman jika kode rahasia dijaga, notifikasi diaktifkan, dan saldo besar tidak disimpan terlalu lama.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang keamanan dompet digital.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['nontunai'],
+		first_published_at: '2026-09-13T08:00:00.000Z',
+		last_reviewed_at: '2026-09-14T08:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Saldo dompet digital lebih aman jika kode rahasia dijaga, notifikasi diaktifkan, dan saldo besar tidak disimpan terlalu lama.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang keamanan dompet digital.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -240,16 +252,16 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang keamanan dompet digital',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/keamanan-dompet-digital',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Saldo dompet digital lebih aman jika kode rahasia dijaga, notifikasi diaktifkan, dan saldo besar tidak disimpan terlalu lama. Topik keamanan dompet digital sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -331,22 +343,26 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'anggaran-memelihara-hewan',
 		title: 'Berapa anggaran memelihara kucing atau anjing per bulan?',
-		leadText:
+		lead_text:
 			'Anggaran hewan peliharaan mencakup makanan, perawatan rutin, kesehatan, dan dana cadangan untuk kebutuhan mendadak. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'gaya-hidup-hewan',
-		tags: ['anggaran-bulanan'],
+		article_type: 'standard',
+		featured_image: 'kategori-gaya-hidup',
+		primary_category: 'gaya-hidup-hewan',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-gaya-hidup',
-		publishedAt: '2026-09-11T22:00:00.000Z',
-		lastReviewedAt: '2026-09-12T22:00:00.000Z',
-		keyTakeaways: [
-			'Anggaran hewan peliharaan mencakup makanan, perawatan rutin, kesehatan, dan dana cadangan untuk kebutuhan mendadak.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang anggaran memelihara hewan.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['anggaran-bulanan'],
+		first_published_at: '2026-09-11T22:00:00.000Z',
+		last_reviewed_at: '2026-09-12T22:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Anggaran hewan peliharaan mencakup makanan, perawatan rutin, kesehatan, dan dana cadangan untuk kebutuhan mendadak.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang anggaran memelihara hewan.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Anggaran hewan peliharaan mencakup makanan, perawatan rutin, kesehatan, dan dana cadangan untuk kebutuhan mendadak. Banyak pembaca bertanya tentang anggaran memelihara hewan, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -428,20 +444,24 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'liburan-hemat-tanpa-paylater',
 		title: 'Liburan hemat tanpa paylater: merencanakan dari jauh hari',
-		leadText:
+		lead_text:
 			'Liburan tanpa paylater dimulai dengan menentukan anggaran total dan menabung khusus beberapa bulan sebelumnya. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'gaya-hidup-lainnya',
-		tags: ['nontunai', 'dana-darurat'],
+		article_type: 'standard',
+		featured_image: 'kategori-gaya-hidup',
+		primary_category: 'gaya-hidup-lainnya',
 		author: 'penulis-contoh-dua',
-		image: 'kategori-gaya-hidup',
-		publishedAt: '2026-09-10T12:00:00.000Z',
-		keyTakeaways: [
-			'Liburan tanpa paylater dimulai dengan menentukan anggaran total dan menabung khusus beberapa bulan sebelumnya.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang liburan tanpa paylater.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['nontunai', 'dana-darurat'],
+		first_published_at: '2026-09-10T12:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Liburan tanpa paylater dimulai dengan menentukan anggaran total dan menabung khusus beberapa bulan sebelumnya.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang liburan tanpa paylater.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Liburan tanpa paylater dimulai dengan menentukan anggaran total dan menabung khusus beberapa bulan sebelumnya. Topik liburan tanpa paylater sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),

@@ -1,25 +1,23 @@
 import { h2, link, p, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Kartu Kredit and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Kartu Kredit and its sub-categories (PRP-0002.p1 §S4.4). */
 export const KARTU_KREDIT_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'pr-kartu-kredit-cashback-contoh',
 		title: 'Kartu kredit dengan cashback dari Penerbit Contoh: cara kerja dan biayanya',
-		leadText:
+		lead_text:
 			'Artikel bersponsor ini menjelaskan kartu kredit dengan cashback dari Penerbit Contoh. Simak cara kerja, biaya, dan hal yang perlu diperhatikan dalam artikel berikut.',
-		articleType: 'pr_article',
-		category: 'kartu-kredit',
-		tags: ['kartu-kredit'],
+		article_type: 'pr_article',
+		featured_image: 'kategori-kartu-kredit',
+		primary_category: 'kartu-kredit',
 		author: 'redaksi-contoh',
-		image: 'kategori-kartu-kredit',
-		publishedAt: '2026-08-21T16:00:00.000Z',
-		sponsor: {
-			name: 'Sponsor Contoh',
-			url: 'https://example.com',
-			disclosure: 'Artikel ini dibuat atas kerja sama dengan Sponsor Contoh.',
-		},
-		body: [
+		tags: ['kartu-kredit'],
+		first_published_at: '2026-08-21T16:00:00.000Z',
+		sponsor_name: 'Sponsor Contoh',
+		sponsor_url: 'https://example.com',
+		sponsor_disclosure: 'Artikel ini dibuat atas kerja sama dengan Sponsor Contoh.',
+		content: [
 			p(
 				'Artikel bersponsor ini menjelaskan kartu kredit dengan cashback dari Penerbit Contoh. Informasi produk disusun bersama Sponsor Contoh untuk pembaca Financial Field Indonesia.',
 			),

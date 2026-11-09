@@ -1,25 +1,29 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Asuransi and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Asuransi and its sub-categories (PRP-0002.p1 §S4.4). */
 export const ASURANSI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'asuransi-jiwa-berjangka-atau-seumur-hidup',
 		title: 'Asuransi jiwa berjangka atau seumur hidup: mana yang sesuai?',
-		leadText:
+		lead_text:
 			'Asuransi jiwa berjangka cocok untuk perlindungan murni dalam periode tertentu, sedangkan seumur hidup memberi perlindungan lebih panjang dengan premi lebih tinggi.',
-		articleType: 'standard',
-		category: 'asuransi-jiwa',
-		tags: ['asuransi-jiwa'],
+		article_type: 'standard',
+		featured_image: 'kategori-asuransi',
+		primary_category: 'asuransi-jiwa',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-asuransi',
-		publishedAt: '2026-10-06T00:00:00.000Z',
-		lastReviewedAt: '2026-10-07T00:00:00.000Z',
-		keyTakeaways: [
-			'Asuransi jiwa berjangka cocok untuk perlindungan murni dalam periode tertentu, sedangkan seumur hidup memberi perlindungan lebih panjang dengan premi lebih tinggi.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pilihan asuransi jiwa berjangka dan seumur hidup.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['asuransi-jiwa'],
+		first_published_at: '2026-10-06T00:00:00.000Z',
+		last_reviewed_at: '2026-10-07T00:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Asuransi jiwa berjangka cocok untuk perlindungan murni dalam periode tertentu, sedangkan seumur hidup memberi perlindungan lebih panjang dengan premi lebih tinggi.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pilihan asuransi jiwa berjangka dan seumur hidup.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -37,16 +41,16 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang pilihan asuransi jiwa berjangka dan seumur hidup',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/asuransi-jiwa-berjangka-atau-seumur-hidup',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Asuransi jiwa berjangka cocok untuk perlindungan murni dalam periode tertentu, sedangkan seumur hidup memberi perlindungan lebih panjang dengan premi lebih tinggi. Pembahasan tentang pilihan asuransi jiwa berjangka dan seumur hidup biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -128,30 +132,34 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'asuransi-rumah-dari-kebakaran',
 		title: 'Asuransi rumah dari kebakaran: apa yang biasanya ditanggung?',
-		leadText:
+		lead_text:
 			'Asuransi kebakaran rumah umumnya menanggung kerusakan bangunan, sementara isi rumah sering memerlukan perluasan jaminan.',
-		articleType: 'standard',
-		category: 'asuransi-umum',
-		tags: ['keluarga-muda'],
+		article_type: 'standard',
+		featured_image: 'kategori-asuransi',
+		primary_category: 'asuransi-umum',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-asuransi',
-		publishedAt: '2026-10-04T14:00:00.000Z',
-		lastReviewedAt: '2026-10-05T14:00:00.000Z',
-		keyTakeaways: [
-			'Asuransi kebakaran rumah umumnya menanggung kerusakan bangunan, sementara isi rumah sering memerlukan perluasan jaminan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang asuransi rumah dari kebakaran.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['keluarga-muda'],
+		first_published_at: '2026-10-04T14:00:00.000Z',
+		last_reviewed_at: '2026-10-05T14:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Asuransi kebakaran rumah umumnya menanggung kerusakan bangunan, sementara isi rumah sering memerlukan perluasan jaminan.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang asuransi rumah dari kebakaran.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang asuransi rumah dari kebakaran',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/asuransi-rumah-dari-kebakaran',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Asuransi kebakaran rumah umumnya menanggung kerusakan bangunan, sementara isi rumah sering memerlukan perluasan jaminan. Banyak pembaca bertanya tentang asuransi rumah dari kebakaran, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -234,20 +242,24 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'all-risk-atau-tlo',
 		title: 'All risk atau TLO: memilih jenis asuransi mobil',
-		leadText:
+		lead_text:
 			'All risk menanggung kerusakan kecil hingga besar, sedangkan TLO hanya menanggung kerugian total dengan premi yang lebih rendah.',
-		articleType: 'standard',
-		category: 'asuransi-kendaraan',
-		tags: ['anggaran-bulanan'],
+		article_type: 'standard',
+		featured_image: 'kategori-asuransi',
+		primary_category: 'asuransi-kendaraan',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-asuransi',
-		publishedAt: '2026-10-03T04:00:00.000Z',
-		lastReviewedAt: '2026-10-04T04:00:00.000Z',
-		keyTakeaways: [
-			'All risk menanggung kerusakan kecil hingga besar, sedangkan TLO hanya menanggung kerugian total dengan premi yang lebih rendah.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang pilihan asuransi mobil all risk dan TLO.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['anggaran-bulanan'],
+		first_published_at: '2026-10-03T04:00:00.000Z',
+		last_reviewed_at: '2026-10-04T04:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'All risk menanggung kerusakan kecil hingga besar, sedangkan TLO hanya menanggung kerugian total dengan premi yang lebih rendah.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pilihan asuransi mobil all risk dan TLO.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -264,16 +276,16 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang pilihan asuransi mobil all risk dan TLO',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/all-risk-atau-tlo',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'All risk menanggung kerusakan kecil hingga besar, sedangkan TLO hanya menanggung kerugian total dengan premi yang lebih rendah. Topik pilihan asuransi mobil all risk dan TLO sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -355,30 +367,34 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'asuransi-pendidikan-anak',
 		title: 'Asuransi pendidikan anak: kelebihan dan hal yang perlu dicek',
-		leadText:
+		lead_text:
 			'Asuransi pendidikan perlu dicek dari sisi manfaat, jangka waktu, dan biaya, lalu dibandingkan dengan menabung biasa. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'asuransi-pendidikan',
-		tags: ['keluarga-muda', 'pinjaman-pendidikan'],
+		article_type: 'standard',
+		featured_image: 'kategori-asuransi',
+		primary_category: 'asuransi-pendidikan',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-asuransi',
-		publishedAt: '2026-10-01T18:00:00.000Z',
-		lastReviewedAt: '2026-10-02T18:00:00.000Z',
-		keyTakeaways: [
-			'Asuransi pendidikan perlu dicek dari sisi manfaat, jangka waktu, dan biaya, lalu dibandingkan dengan menabung biasa.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang asuransi pendidikan anak.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['keluarga-muda', 'pinjaman-pendidikan'],
+		first_published_at: '2026-10-01T18:00:00.000Z',
+		last_reviewed_at: '2026-10-02T18:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Asuransi pendidikan perlu dicek dari sisi manfaat, jangka waktu, dan biaya, lalu dibandingkan dengan menabung biasa.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang asuransi pendidikan anak.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang asuransi pendidikan anak',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/asuransi-pendidikan-anak',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Asuransi pendidikan perlu dicek dari sisi manfaat, jangka waktu, dan biaya, lalu dibandingkan dengan menabung biasa. Topik asuransi pendidikan anak sering terdengar rumit karena istilahnya banyak dan informasinya tersebar. Padahal, jika dipecah menjadi beberapa langkah kecil, sebagian besar orang dapat memahaminya dalam satu kali baca.',
 			),
@@ -461,20 +477,18 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'pr-asuransi-kesehatan-keluarga-contoh',
 		title: 'Asuransi kesehatan keluarga: ilustrasi manfaat dari Sponsor Contoh',
-		leadText:
+		lead_text:
 			'Artikel bersponsor ini menggambarkan produk asuransi kesehatan dari Sponsor Contoh. Simak cara kerja, biaya, dan hal yang perlu diperhatikan dalam artikel berikut.',
-		articleType: 'pr_article',
-		category: 'asuransi-kesehatan',
-		tags: ['asuransi-kesehatan'],
+		article_type: 'pr_article',
+		featured_image: 'kategori-asuransi',
+		primary_category: 'asuransi-kesehatan',
 		author: 'redaksi-contoh',
-		image: 'kategori-asuransi',
-		publishedAt: '2026-09-30T08:00:00.000Z',
-		sponsor: {
-			name: 'Sponsor Contoh',
-			url: 'https://example.com',
-			disclosure: 'Artikel ini dibuat atas kerja sama dengan Sponsor Contoh.',
-		},
-		body: [
+		tags: ['asuransi-kesehatan'],
+		first_published_at: '2026-09-30T08:00:00.000Z',
+		sponsor_name: 'Sponsor Contoh',
+		sponsor_url: 'https://example.com',
+		sponsor_disclosure: 'Artikel ini dibuat atas kerja sama dengan Sponsor Contoh.',
+		content: [
 			p(
 				'Artikel bersponsor ini menggambarkan produk asuransi kesehatan dari Sponsor Contoh. Informasi produk disusun bersama Sponsor Contoh untuk pembaca Financial Field Indonesia.',
 			),
@@ -527,20 +541,24 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'bagian-polis-yang-wajib-dipahami',
 		title: 'Membaca polis asuransi: bagian yang wajib dipahami sebelum tanda tangan',
-		leadText:
+		lead_text:
 			'Bagian polis yang paling penting dibaca adalah manfaat, pengecualian, masa tunggu, dan cara pengajuan klaim. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'asuransi-lainnya',
-		tags: ['asuransi-jiwa', 'asuransi-kesehatan'],
+		article_type: 'standard',
+		featured_image: 'kategori-asuransi',
+		primary_category: 'asuransi-lainnya',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-asuransi',
-		publishedAt: '2026-09-28T22:00:00.000Z',
-		lastReviewedAt: '2026-09-29T22:00:00.000Z',
-		keyTakeaways: [
-			'Bagian polis yang paling penting dibaca adalah manfaat, pengecualian, masa tunggu, dan cara pengajuan klaim.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang isi polis asuransi.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['asuransi-jiwa', 'asuransi-kesehatan'],
+		first_published_at: '2026-09-28T22:00:00.000Z',
+		last_reviewed_at: '2026-09-29T22:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Bagian polis yang paling penting dibaca adalah manfaat, pengecualian, masa tunggu, dan cara pengajuan klaim.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang isi polis asuransi.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -561,10 +579,10 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang isi polis asuransi',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/bagian-polis-yang-wajib-dipahami',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Bagian polis yang paling penting dibaca adalah manfaat, pengecualian, masa tunggu, dan cara pengajuan klaim. Banyak pembaca bertanya tentang isi polis asuransi, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),

@@ -5,10 +5,12 @@
 > `/penulis`, `/saham`; ADR-0004), CMS capability gating (`CMS_CAPABILITIES`),
 > a first-party Blocks renderer, tests (Vitest, Playwright, Lighthouse CI).
 >
-> **Since 2026-11-09 the frontend doesn't read the CMS.** The content is
-> hardcoded in `src/data/` (PRP-0002.p1 §S4.8). The Strapi sections below
-> (fetching, webhook, preview, env vars, permissions) describe the integration
-> that returns later, from git history at `4b8220f`.
+> **Since 2026-11-09 the content is hardcoded in `src/data/`**, in the CMS's
+> field names, and served by a local API with the CMS's REST shape
+> (PRP-0002.p1 §S4.8). The frontend reads it through the same client as
+> Strapi; `CMS_URL` switches to a real CMS. The webhook, preview and
+> `SKIP_CMS_FETCH` sections below describe code that was removed and is in git
+> history at `4b8220f`.
 
 # Phase 1 — Frontend initialization
 

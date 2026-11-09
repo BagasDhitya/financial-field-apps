@@ -1,25 +1,27 @@
 import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
-/** Demo articles in Warisan and its sub-categories (PRP-0002.p1 §S4.4). */
+/** Articles in Warisan and its sub-categories (PRP-0002.p1 §S4.4). */
 export const WARISAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'pentingnya-surat-wasiat',
 		title: 'Mengapa surat wasiat penting meski harta tidak banyak?',
-		leadText:
+		lead_text:
 			'Surat wasiat membantu keluarga memahami keinginan pemilik harta dan mengurangi potensi perselisihan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'warisan-wasiat',
-		tags: ['warisan-keluarga'],
+		article_type: 'standard',
+		featured_image: 'kategori-warisan',
+		primary_category: 'warisan-wasiat',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-warisan',
-		publishedAt: '2026-10-18T18:00:00.000Z',
-		lastReviewedAt: '2026-10-19T18:00:00.000Z',
-		keyTakeaways: [
-			'Surat wasiat membantu keluarga memahami keinginan pemilik harta dan mengurangi potensi perselisihan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang surat wasiat.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['warisan-keluarga'],
+		first_published_at: '2026-10-18T18:00:00.000Z',
+		last_reviewed_at: '2026-10-19T18:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Surat wasiat membantu keluarga memahami keinginan pemilik harta dan mengurangi potensi perselisihan.',
+			},
+			{ text: 'Catat angka nyata Anda sebelum membuat keputusan tentang surat wasiat.' },
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		faq: [
 			{
@@ -36,16 +38,16 @@ export const WARISAN_ARTICLES: ArticleEntry[] = [
 				title: 'Panduan tentang surat wasiat',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/pentingnya-surat-wasiat',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Surat wasiat membantu keluarga memahami keinginan pemilik harta dan mengurangi potensi perselisihan. Pembahasan tentang surat wasiat biasanya muncul pada momen tertentu, misalnya saat penghasilan berubah atau saat keluarga bertambah. Artikel ini menyusun dasar-dasarnya secara berurutan.',
 			),
@@ -127,36 +129,40 @@ export const WARISAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'biaya-mengurus-warisan-properti',
 		title: 'Biaya apa saja yang muncul saat mengurus warisan properti?',
-		leadText:
+		lead_text:
 			'Mengurus warisan properti memunculkan biaya administrasi, biaya jasa, dan kemungkinan pajak yang perlu diperkirakan sejak awal.',
-		articleType: 'standard',
-		category: 'warisan-pajak-biaya',
-		tags: ['warisan-keluarga'],
+		article_type: 'standard',
+		featured_image: 'kategori-warisan',
+		primary_category: 'warisan-pajak-biaya',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-warisan',
-		publishedAt: '2026-10-17T08:00:00.000Z',
-		lastReviewedAt: '2026-10-18T08:00:00.000Z',
-		keyTakeaways: [
-			'Mengurus warisan properti memunculkan biaya administrasi, biaya jasa, dan kemungkinan pajak yang perlu diperkirakan sejak awal.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang biaya pengurusan warisan properti.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['warisan-keluarga'],
+		first_published_at: '2026-10-17T08:00:00.000Z',
+		last_reviewed_at: '2026-10-18T08:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Mengurus warisan properti memunculkan biaya administrasi, biaya jasa, dan kemungkinan pajak yang perlu diperkirakan sejak awal.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang biaya pengurusan warisan properti.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang biaya pengurusan warisan properti',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/biaya-mengurus-warisan-properti',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Mengurus warisan properti memunculkan biaya administrasi, biaya jasa, dan kemungkinan pajak yang perlu diperkirakan sejak awal. Banyak pembaca bertanya tentang biaya pengurusan warisan properti, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -238,36 +244,38 @@ export const WARISAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'hibah-kepada-anak-semasa-hidup',
 		title: 'Hibah kepada anak semasa hidup: hal yang perlu dipertimbangkan',
-		leadText:
+		lead_text:
 			'Hibah semasa hidup perlu mempertimbangkan keadilan antar anak, dokumen, dan kebutuhan pemberi hibah di masa depan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'warisan-hibah',
-		tags: ['warisan-keluarga', 'keluarga-muda'],
+		article_type: 'standard',
+		featured_image: 'kategori-warisan',
+		primary_category: 'warisan-hibah',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-dua',
-		image: 'kategori-warisan',
-		publishedAt: '2026-10-15T22:00:00.000Z',
-		lastReviewedAt: '2026-10-16T22:00:00.000Z',
-		keyTakeaways: [
-			'Hibah semasa hidup perlu mempertimbangkan keadilan antar anak, dokumen, dan kebutuhan pemberi hibah di masa depan.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang hibah kepada anak.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['warisan-keluarga', 'keluarga-muda'],
+		first_published_at: '2026-10-15T22:00:00.000Z',
+		last_reviewed_at: '2026-10-16T22:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Hibah semasa hidup perlu mempertimbangkan keadilan antar anak, dokumen, dan kebutuhan pemberi hibah di masa depan.',
+			},
+			{ text: 'Catat angka nyata Anda sebelum membuat keputusan tentang hibah kepada anak.' },
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		sources: [
 			{
 				title: 'Panduan tentang hibah kepada anak',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/hibah-kepada-anak-semasa-hidup',
-				accessedOn: '2026-10-01',
+				accessed_on: '2026-10-01',
 			},
 			{
 				title: 'Panduan umum keuangan keluarga',
 				publisher: 'Lembaga Contoh',
 				url: 'https://example.org/sumber/panduan-umum',
-				accessedOn: '2026-10-15',
+				accessed_on: '2026-10-15',
 			},
 		],
-		body: [
+		content: [
 			p(
 				'Hibah semasa hidup perlu mempertimbangkan keadilan antar anak, dokumen, dan kebutuhan pemberi hibah di masa depan. Banyak pembaca bertanya tentang hibah kepada anak, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -349,22 +357,26 @@ export const WARISAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'merencanakan-biaya-pemakaman',
 		title: 'Merencanakan biaya pemakaman tanpa membebani keluarga',
-		leadText:
+		lead_text:
 			'Merencanakan biaya pemakaman lebih awal membuat keluarga tidak harus mengambil keputusan besar dalam waktu singkat. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'warisan-pemakaman',
-		tags: ['warisan-keluarga'],
+		article_type: 'standard',
+		featured_image: 'kategori-warisan',
+		primary_category: 'warisan-pemakaman',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
-		image: 'kategori-warisan',
-		publishedAt: '2026-10-14T12:00:00.000Z',
-		lastReviewedAt: '2026-10-15T12:00:00.000Z',
-		keyTakeaways: [
-			'Merencanakan biaya pemakaman lebih awal membuat keluarga tidak harus mengambil keputusan besar dalam waktu singkat.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang perencanaan biaya pemakaman.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['warisan-keluarga'],
+		first_published_at: '2026-10-14T12:00:00.000Z',
+		last_reviewed_at: '2026-10-15T12:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Merencanakan biaya pemakaman lebih awal membuat keluarga tidak harus mengambil keputusan besar dalam waktu singkat.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang perencanaan biaya pemakaman.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Merencanakan biaya pemakaman lebih awal membuat keluarga tidak harus mengambil keputusan besar dalam waktu singkat. Banyak pembaca bertanya tentang perencanaan biaya pemakaman, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
@@ -446,19 +458,23 @@ export const WARISAN_ARTICLES: ArticleEntry[] = [
 	{
 		slug: 'membuka-percakapan-soal-warisan',
 		title: 'Cara membuka percakapan soal warisan dengan keluarga',
-		leadText:
+		lead_text:
 			'Percakapan soal warisan lebih mudah dimulai dari tujuan bersama keluarga, bukan dari pembagian angka. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
-		articleType: 'standard',
-		category: 'warisan-lainnya',
-		tags: ['warisan-keluarga'],
+		article_type: 'standard',
+		primary_category: 'warisan-lainnya',
 		author: 'penulis-contoh-tiga',
-		publishedAt: '2026-10-13T02:00:00.000Z',
-		keyTakeaways: [
-			'Percakapan soal warisan lebih mudah dimulai dari tujuan bersama keluarga, bukan dari pembagian angka.',
-			'Catat angka nyata Anda sebelum membuat keputusan tentang percakapan keluarga soal warisan.',
-			'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.',
+		tags: ['warisan-keluarga'],
+		first_published_at: '2026-10-13T02:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Percakapan soal warisan lebih mudah dimulai dari tujuan bersama keluarga, bukan dari pembagian angka.',
+			},
+			{
+				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang percakapan keluarga soal warisan.',
+			},
+			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
-		body: [
+		content: [
 			p(
 				'Percakapan soal warisan lebih mudah dimulai dari tujuan bersama keluarga, bukan dari pembagian angka. Banyak pembaca bertanya tentang percakapan keluarga soal warisan, terutama ketika pertama kali harus mengambil keputusan sendiri. Pertanyaannya sering sederhana, tetapi jawabannya bergantung pada kebiasaan dan kondisi keuangan masing-masing.',
 			),
