@@ -1,0 +1,59 @@
+name: Deploy CMS to Dokploy
+
+on:
+  push:
+    branches:
+      - "backend"
+      - "backend/**"
+    paths:
+      - "financial-field-cms/**"
+      - ".github/workflows/cms-dokploy.yml"
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-cms-dokploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Point Dokploy to the pushed branch and deploy
+        env:
+          DOKPLOY_URL: ${{ secrets.DOKPLOY_URL }}
+          DOKPLOY_API_KEY: ${{ secrets.DOKPLOY_API_KEY }}
+          APPLICATION_ID: ${{ secrets.DOKPLOY_APPLICATION_ID }}
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+
+          # 1. Update the Git provider branch in Dokploy to the pushed branch
+          #    (saveGitProvider overwrites the whole Git config, so send every field)
+          BODY=$(jq -n \
+            --arg id "$APPLICATION_ID" \
+            --arg branch "$BRANCH" \
+            '{
+              applicationId: $id,
+              customGitUrl: "https://github.com/BagasDhitya/financial-field-apps",
+              customGitBranch: $branch,
+              customGitBuildPath: "/financial-field-cms",
+              watchPaths: [],
+              enableSubmodules: false
+            }')
+
+          echo "Switching Dokploy branch to: $BRANCH"
+          curl -sS -f -X POST "$DOKPLOY_URL/api/application.saveGitProvider" \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: $DOKPLOY_API_KEY" \
+            -d "$BODY"
+          echo ""
+
+          # 2. Trigger the deployment
+          echo "Triggering deployment..."
+          curl -sS -f -X POST "$DOKPLOY_URL/api/application.deploy" \
+            -H "Content-Type: application/json" \
+            -H "x-api-key: $DOKPLOY_API_KEY" \
+            -d "$(jq -n --arg id "$APPLICATION_ID" '{applicationId: $id}')"
+          echo ""
+          echo "Deployment triggered!"
