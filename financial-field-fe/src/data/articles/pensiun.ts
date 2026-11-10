@@ -10,6 +10,15 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 			'Program pensiun pemerintah memberi dasar perlindungan di hari tua, tetapi biasanya perlu dilengkapi tabungan pribadi. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pensiun',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=MuYDRq4tw5I',
+			title: 'Jaminan Pensiun Cair di Usia 59 Tahun, Pekerja Rugi atau Untung? | Liputan 6',
+			channel_name: 'Liputan6',
+			uploaded_at: '2025-01-09T06:54:41.000Z',
+			duration_seconds: 170,
+			caption:
+				'Liputan 6 SCTV: sejak Januari 2025 usia pensiun pekerja menjadi 59 tahun, yang memengaruhi kapan peserta BPJS Ketenagakerjaan dapat mencairkan Jaminan Pensiun.',
+		},
 		primary_category: 'pensiun-pemerintah',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
@@ -245,6 +254,15 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 			'DPLK memungkinkan pekerja mandiri menyisihkan dana pensiun secara rutin dengan aturan penarikan tertentu. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pensiun',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=IMOkRUu_Iag',
+			title: 'Jurus DPLK Tambah Perserta Dana Pensiunan & Tingkatkan Aset',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2023-10-17T07:22:21.000Z',
+			duration_seconds: 383,
+			caption:
+				'Ketua Umum Perkumpulan DPLK menjelaskan di CNBC Indonesia bahwa peserta DPLK memilih sendiri instrumen investasinya dari pilihan yang disediakan, serta upaya industri menambah jumlah peserta.',
+		},
 		primary_category: 'pensiun-dplk',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',
@@ -360,6 +378,15 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 			'Kebutuhan dana pensiun dapat diperkirakan dari pengeluaran bulanan saat ini, perkiraan inflasi, dan lama masa pensiun. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pensiun',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=fXuVH71b0-4',
+			title: 'Cara Mempersiapkan Dana Pensiun, Simak Perhitungannya!',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2024-09-16T09:00:40.000Z',
+			duration_seconds: 878,
+			caption:
+				'Financial Expert CNBC Indonesia membahas cara mempersiapkan dana pensiun dan menghitung kebutuhannya dalam program Investime.',
+		},
 		primary_category: 'pensiun-lainnya',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-dua',

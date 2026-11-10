@@ -12,6 +12,7 @@ function article(id: string, category: string | null, publishedAt: string): Arti
 		leadText: null,
 		articleType: 'standard',
 		featuredImage: null,
+		video: null,
 		primaryCategory: category
 			? {
 					id: category,

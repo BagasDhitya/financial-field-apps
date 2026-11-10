@@ -10,6 +10,15 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 			'Pilihan modal usaha kecil bergantung pada besar kebutuhan, kecepatan, dan seberapa besar kendali yang ingin dipertahankan.',
 		article_type: 'standard',
 		featured_image: 'kategori-bisnis',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=PHAuC9Jq6AA',
+			title: 'Isu UMKM Sulit Dapat KUR, Menkeu Purbaya Bakal Investigasi',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2025-11-05T08:30:12.000Z',
+			duration_seconds: 168,
+			caption:
+				'Berita CNBC Indonesia: Menteri Keuangan akan menyelidiki keluhan UMKM yang sulit mengakses Kredit Usaha Rakyat (KUR), salah satunya karena persyaratan agunan.',
+		},
 		primary_category: 'bisnis-pembiayaan',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',

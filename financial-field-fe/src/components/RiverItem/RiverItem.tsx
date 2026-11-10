@@ -4,7 +4,7 @@ import { routes } from '@/lib/routes';
 import type { ArticleSummary } from '@/types';
 
 import { DateTime } from '../DateTime/DateTime';
-import { PrLabel } from '../Kicker/Kicker';
+import { PrLabel, VideoLabel } from '../Kicker/Kicker';
 
 import styles from './RiverItem.module.css';
 
@@ -15,7 +15,7 @@ export type RiverItemProps = {
 
 const NEW_WINDOW_MS = 24 * 60 * 60 * 1000;
 
-/** One row of the "Terbaru" river: time, kicker, headline (B4, B7). */
+/** One row of the "Terbaru" river: time, kicker (PR and Video labels), headline (B4, B7). */
 export function RiverItem({ article, now = new Date() }: RiverItemProps) {
 	if (!article.slug || !article.title) {
 		return null;
@@ -36,6 +36,7 @@ export function RiverItem({ article, now = new Date() }: RiverItemProps) {
 			</p>
 			<p className={styles.line}>
 				{article.articleType === 'pr_article' ? <PrLabel /> : null}
+				{article.video ? <VideoLabel /> : null}
 				{article.primaryCategory ? (
 					<span className={`type-kicker ${styles.kicker}`}>
 						{article.primaryCategory.name}
@@ -50,6 +51,7 @@ export function RiverItem({ article, now = new Date() }: RiverItemProps) {
 					data-item-id={article.id}
 				>
 					{article.title}
+					{article.video ? <span className="visually-hidden"> (video)</span> : null}
 				</Link>
 			</h3>
 		</li>

@@ -26,6 +26,10 @@ test('sitemap index and files list only indexable URLs (AC9)', async ({ request 
 test('security headers are present (AC19, REQ-SEC-001)', async ({ request }) => {
 	const headers = (await request.get('/')).headers();
 	expect(headers['content-security-policy']).toContain("frame-ancestors 'none'");
+	// The one frame the site shows: the YouTube player (REQ-SEC-010).
+	expect(headers['content-security-policy']).toContain(
+		'frame-src https://www.youtube-nocookie.com;',
+	);
 	expect(headers['x-content-type-options']).toBe('nosniff');
 	expect(headers['referrer-policy']).toBe('strict-origin-when-cross-origin');
 	expect(headers['x-powered-by']).toBeUndefined();

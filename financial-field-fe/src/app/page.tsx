@@ -1,6 +1,10 @@
 import type { Metadata } from 'next';
 
-import { getArticlesInCategories, getLatestArticles } from '@/lib/content/articles';
+import {
+	getArticlesInCategories,
+	getLatestArticles,
+	getVideoArticles,
+} from '@/lib/content/articles';
 import { getCategoryTree } from '@/lib/content/categories';
 import { getSiteNavigation } from '@/lib/content/navigation';
 import { getSiteSettings } from '@/lib/content/site';
@@ -8,12 +12,15 @@ import { routes } from '@/lib/routes';
 import { BRAND, buildMetadata, composeDescription } from '@/lib/seo/metadata';
 
 import { HomeView } from '@/features/home/HomeView';
-import { selectHomeStories } from '@/features/home/select';
+import { selectHomeStories, selectHomeVideos } from '@/features/home/select';
 
 /** Safety-net window. Keep in sync with REVALIDATE.home (revalidate.test.ts). */
 export const revalidate = 60;
 
 const BLOCK_SIZE = 3;
+
+/** Enough for the 6 videos after the up to 12 stories above them are taken out. */
+const VIDEO_CANDIDATES = 18;
 
 export async function generateMetadata(): Promise<Metadata> {
 	const settings = await getSiteSettings();
@@ -28,9 +35,10 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-	const [navigation, latest, categories, settings] = await Promise.all([
+	const [navigation, latest, videos, categories, settings] = await Promise.all([
 		getSiteNavigation(),
 		getLatestArticles(1, 20),
+		getVideoArticles(1, VIDEO_CANDIDATES),
 		getCategoryTree(),
 		getSiteSettings(),
 	]);
@@ -46,10 +54,13 @@ export default async function Home() {
 		}),
 	);
 
+	const stories = selectHomeStories(navigation.featuredArticles, latest.items);
+
 	return (
 		<HomeView
 			heading={`${BRAND}: ${settings.tagline}`}
-			stories={selectHomeStories(navigation.featuredArticles, latest.items)}
+			stories={stories}
+			videos={selectHomeVideos(videos.items, stories)}
 			categoryBlocks={blocks.filter((block) => block.articles.length > 0)}
 			now={new Date()}
 		/>

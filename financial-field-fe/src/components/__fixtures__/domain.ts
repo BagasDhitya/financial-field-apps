@@ -1,4 +1,4 @@
-import type { Article, ArticleSummary, AuthorSummary, CategoryNode } from '@/types';
+import type { Article, ArticleSummary, ArticleVideo, AuthorSummary, CategoryNode } from '@/types';
 
 /** Synthetic data only: no real people, no personal data (REQ-TEST-003). */
 const HOUR = 60 * 60 * 1000;
@@ -31,6 +31,18 @@ const category = {
 	parentName: null,
 };
 
+/** A public institutional video, so the harness shows a real still (no people's data). */
+export const videoFixture: ArticleVideo = {
+	provider: 'youtube',
+	id: 'vfXixW3BNqM',
+	title: 'Tutorial Coretax Resmi : Panduan SPT Tahunan Wajib Pajak Orang Pribadi - Karyawan',
+	channelName: 'Direktorat Jenderal Pajak',
+	uploadedAt: '2025-09-29T07:52:49.000Z',
+	durationSeconds: 1006,
+	caption:
+		'Keterangan video dari redaksi: apa yang ditampilkan video dan mengapa ada di artikel ini.',
+};
+
 export function summary(overrides: Partial<ArticleSummary> = {}): ArticleSummary {
 	return {
 		id: overrides.id ?? 'article-1',
@@ -40,6 +52,7 @@ export function summary(overrides: Partial<ArticleSummary> = {}): ArticleSummary
 			'Pajak penghasilan karyawan dihitung dari penghasilan neto setahun dikurangi PTKP. Berikut langkahnya.',
 		articleType: 'standard',
 		featuredImage: null,
+		video: null,
 		primaryCategory: category,
 		author: writer,
 		publishedAt: new Date(harnessNow.getTime() - 3 * HOUR).toISOString(),
@@ -49,6 +62,7 @@ export function summary(overrides: Partial<ArticleSummary> = {}): ArticleSummary
 
 export const articleFixture: Article = {
 	...summary(),
+	video: null,
 	body: [
 		{
 			type: 'paragraph',

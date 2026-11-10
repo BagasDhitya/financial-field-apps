@@ -32,6 +32,25 @@ export type SeoEntry = {
 	no_index?: boolean;
 };
 
+/**
+ * `article.video` component (planned CMS-30): a YouTube video shown at the top
+ * of the article. Everything but `url` is copied from the video's YouTube page,
+ * so the credit and the structured data match what readers see there.
+ */
+export type VideoEntry = {
+	/** The watch link, `https://www.youtube.com/watch?v=<id>`. */
+	url: string;
+	/** The title as published on YouTube. */
+	title: string;
+	/** The channel that published it: the credit line. */
+	channel_name: string;
+	/** ISO 8601, YouTube's publish time. */
+	uploaded_at: string;
+	duration_seconds: number;
+	/** One or two sentences from the editor: what the video shows and why it is here. */
+	caption: string;
+};
+
 /** An Article (api::article.article). */
 export type ArticleEntry = {
 	slug: string;
@@ -40,6 +59,8 @@ export type ArticleEntry = {
 	lead_text: string;
 	article_type: 'standard' | 'pr_article' | 'interview' | 'column';
 	featured_image?: MediaKey;
+	/** Planned CMS-30. Shown in place of the featured image at the top of the article. */
+	featured_video?: VideoEntry;
 	/** Category slug, top-level or sub-category. */
 	primary_category: string;
 	/** Category slugs; left out means `[primary_category]`. */

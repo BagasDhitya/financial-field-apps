@@ -10,6 +10,15 @@ export const WARISAN_ARTICLES: ArticleEntry[] = [
 			'Surat wasiat membantu keluarga memahami keinginan pemilik harta dan mengurangi potensi perselisihan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-warisan',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=1I4CFABDcsA',
+			title: 'Hindari Ribut-ribut Harta Warisan, Surat Wasiat Jadi Kunci?',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2023-06-29T09:00:01.000Z',
+			duration_seconds: 677,
+			caption:
+				'Dialog CNBC Indonesia dengan seorang praktisi hukum tentang hal yang perlu diperhatikan pewaris dan ahli waris agar pembagian harta warisan tidak berujung sengketa, termasuk peran surat wasiat.',
+		},
 		primary_category: 'warisan-wasiat',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
@@ -133,6 +142,15 @@ export const WARISAN_ARTICLES: ArticleEntry[] = [
 			'Mengurus warisan properti memunculkan biaya administrasi, biaya jasa, dan kemungkinan pajak yang perlu diperkirakan sejak awal.',
 		article_type: 'standard',
 		featured_image: 'kategori-warisan',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=nMyh-W5Q6Gs',
+			title: 'Cara dan Biaya Balik Nama Sertifikat Tanah Warisan Terbaru, Selesai dalam 10 Hari',
+			channel_name: 'Kompas.com',
+			uploaded_at: '2026-08-13T07:40:24.000Z',
+			duration_seconds: 296,
+			caption:
+				'Kompas.com menjelaskan cara dan biaya balik nama sertifikat tanah warisan menurut aturan terbaru Kementerian ATR/BPN, dengan target penyelesaian paling lama 10 hari.',
+		},
 		primary_category: 'warisan-pajak-biaya',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',

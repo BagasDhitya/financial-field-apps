@@ -1,10 +1,12 @@
 import Link from 'next/link';
 
 import { routes } from '@/lib/routes';
-import type { ArticleSummary } from '@/types';
+import { YOUTUBE_THUMBNAILS, youTubeThumbnailUrl } from '@/lib/video';
+import type { ArticleSummary, MediaAsset } from '@/types';
 
 import { CmsImage } from '../CmsImage/CmsImage';
 import { DateTime } from '../DateTime/DateTime';
+import { Icon } from '../Icon/Icon';
 import { Kicker } from '../Kicker/Kicker';
 
 import styles from './ArticleCard.module.css';
@@ -19,6 +21,12 @@ export type ArticleCardProps = {
 	preloadImage?: boolean;
 	/** Analytics: which surface the card sits on (select_content). */
 	trackAs?: string;
+	/**
+	 * `video`: a video article shows the video's still instead of its featured
+	 * image (the Video section and /video). Elsewhere it keeps the featured
+	 * image and gets the play mark.
+	 */
+	media?: 'image' | 'video';
 };
 
 const IMAGE_SIZES: Record<ArticleCardVariant, string> = {
@@ -29,8 +37,23 @@ const IMAGE_SIZES: Record<ArticleCardVariant, string> = {
 };
 
 /**
+ * The video's still as a card image: `hq`, which every video has, cropped to the
+ * card (the crop removes its letterbox bars). Served through the optimizer.
+ */
+function videoStill(id: string): MediaAsset {
+	return {
+		url: youTubeThumbnailUrl(id, 'hq'),
+		alternativeText: null,
+		width: YOUTUBE_THUMBNAILS.hq.width,
+		height: YOUTUBE_THUMBNAILS.hq.height,
+		mime: 'image/jpeg',
+	};
+}
+
+/**
  * One bordered, sharp card (I1, I3). The whole card is a single link: the
- * title link stretches over it, so screen readers hear the title once.
+ * title link stretches over it, so screen readers hear the title once (with
+ * "video" when the article has one).
  */
 export function ArticleCard({
 	article,
@@ -38,29 +61,46 @@ export function ArticleCard({
 	headingLevel = 3,
 	preloadImage = false,
 	trackAs,
+	media = 'image',
 }: ArticleCardProps) {
 	if (!article.slug || !article.title) {
 		return null;
 	}
 	const Heading = headingLevel === 2 ? 'h2' : 'h3';
 	const isPr = article.articleType === 'pr_article';
-	const showImage = variant !== 'text' && article.featuredImage;
+	const image =
+		media === 'video' && article.video ? videoStill(article.video.id) : article.featuredImage;
+	const showImage = variant !== 'text' && image;
 
 	return (
 		<article className={`${styles.card} ${styles[variant]}`}>
-			{showImage && article.featuredImage ? (
+			{showImage && image ? (
 				<div className={styles.media}>
-					<CmsImage
-						image={article.featuredImage}
-						sizes={IMAGE_SIZES[variant]}
-						ratio={variant === 'compact' ? '1/1' : '16/9'}
-						preload={preloadImage}
-						decorative
-					/>
+					<div className={styles.frame}>
+						<CmsImage
+							image={image}
+							sizes={IMAGE_SIZES[variant]}
+							ratio={variant === 'compact' ? '1/1' : '16/9'}
+							preload={preloadImage}
+							decorative
+						/>
+						{article.video ? (
+							<span className={styles.video} aria-hidden="true">
+								<Icon name="play" size={16} />
+								{variant === 'compact' ? null : (
+									<span className="type-label">Video</span>
+								)}
+							</span>
+						) : null}
+					</div>
 				</div>
 			) : null}
 			<div className={styles.body}>
-				<Kicker category={article.primaryCategory} isPr={isPr} />
+				<Kicker
+					category={article.primaryCategory}
+					isPr={isPr}
+					isVideo={article.video !== null && !showImage}
+				/>
 				<Heading className={styles.title}>
 					<Link
 						href={routes.article(article.slug)}
@@ -74,6 +114,7 @@ export function ArticleCard({
 							: {})}
 					>
 						{article.title}
+						{article.video ? <span className="visually-hidden"> (video)</span> : null}
 					</Link>
 				</Heading>
 				{variant === 'lead' || variant === 'standard' ? (

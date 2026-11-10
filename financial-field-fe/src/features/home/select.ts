@@ -57,3 +57,21 @@ export function selectHomeStories(
 
 	return { lead, secondary, river };
 }
+
+const VIDEO_COUNT = 6;
+
+/**
+ * REQ-HOME-005: the Video section, newest first, without the articles already
+ * shown above it in the lead, the editor's picks or the river.
+ */
+export function selectHomeVideos(videos: ArticleSummary[], stories: HomeStories): ArticleSummary[] {
+	const shown = new Set(
+		[stories.lead, ...stories.secondary, ...stories.river].flatMap((article) =>
+			article ? [article.id] : [],
+		),
+	);
+	return videos
+		.filter((article) => article.video && article.slug && article.title)
+		.filter((article) => !shown.has(article.id))
+		.slice(0, VIDEO_COUNT);
+}

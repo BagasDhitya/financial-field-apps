@@ -3,10 +3,12 @@ export type {
 	ArticleBody,
 	ArticleSummary,
 	ArticleType,
+	ArticleVideo,
 	Correction,
 	FaqItem,
 	Source,
 	Sponsor,
+	VideoRef,
 } from './article';
 export type { Author, AuthorSummary } from './author';
 export type { Category, CategoryNode, CategorySummary } from './category';

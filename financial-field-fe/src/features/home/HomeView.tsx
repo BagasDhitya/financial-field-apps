@@ -18,12 +18,14 @@ export type CategoryBlock = {
 export type HomeViewProps = {
 	heading: string;
 	stories: HomeStories;
+	/** Articles with a video, not already above (REQ-HOME-005); empty hides the section. */
+	videos: ArticleSummary[];
 	categoryBlocks: CategoryBlock[];
 	now: Date;
 };
 
-/** Media-first home: lead story, editor picks, Terbaru river, topic blocks. */
-export function HomeView({ heading, stories, categoryBlocks, now }: HomeViewProps) {
+/** Media-first home: lead story, editor picks, Terbaru river, Video, topic blocks. */
+export function HomeView({ heading, stories, videos, categoryBlocks, now }: HomeViewProps) {
 	const { lead, secondary, river } = stories;
 
 	return (
@@ -86,6 +88,24 @@ export function HomeView({ heading, stories, categoryBlocks, now }: HomeViewProp
 					]}
 				/>
 			)}
+
+			{videos.length > 0 ? (
+				<section className={styles.block} aria-labelledby="video">
+					<SectionHeader
+						id="video"
+						title="Video"
+						href={routes.videos()}
+						linkLabel="Semua video"
+					/>
+					<ul className={styles.grid}>
+						{videos.map((article) => (
+							<li key={article.id}>
+								<ArticleCard article={article} media="video" trackAs="home_video" />
+							</li>
+						))}
+					</ul>
+				</section>
+			) : null}
 
 			{categoryBlocks.map(({ category, articles }) => (
 				<section

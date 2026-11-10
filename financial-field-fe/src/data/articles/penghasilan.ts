@@ -10,6 +10,15 @@ export const PENGHASILAN_ARTICLES: ArticleEntry[] = [
 			'Gaji bersih lebih kecil dari gaji kotor karena ada potongan pajak, iuran, dan potongan lain sebelum gaji dibayarkan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-penghasilan',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=6O5BU_hrQbw',
+			title: 'Gaji Kotor vs. Gaji Bersih, Apa Bedanya? | OBSESIF S5 X SSAJ Associates',
+			channel_name: 'Medio by KG Media',
+			uploaded_at: '2022-05-09T10:00:06.000Z',
+			duration_seconds: 454,
+			caption:
+				'Siniar OBSESIF dari KG Media bersama firma hukum SSAJ & Associates menjelaskan perbedaan gaji kotor dan gaji bersih, serta komponen apa saja yang termasuk di dalamnya.',
+		},
 		primary_category: 'penghasilan',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',

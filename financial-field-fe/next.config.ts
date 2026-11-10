@@ -11,6 +11,11 @@ const isHttpsProduction =
 	isProduction && (process.env.NEXT_PUBLIC_SITE_URL ?? '').startsWith('https://');
 const isDev = process.env.NODE_ENV === 'development';
 
+// Article videos (ADR-0019): the player loads from YouTube's privacy-enhanced
+// domain after a click; stills go through the image optimizer, so browsers
+// never request i.ytimg.com themselves.
+const YOUTUBE_PLAYER = 'https://www.youtube-nocookie.com';
+
 const GA_SCRIPT = 'https://www.googletagmanager.com';
 const GA_CONNECT = [
 	'https://www.google-analytics.com',
@@ -22,7 +27,8 @@ const GA_CONNECT = [
 /**
  * REQ-SEC-001. Scripts need 'unsafe-inline': a nonce-based CSP would force
  * every route into dynamic rendering and defeat ISR (DSC-0010). Everything
- * else stays strict: no framing, no plugins, same-origin forms and base.
+ * else stays strict: nobody may frame this site, the only frame it shows is
+ * the YouTube player (REQ-SEC-010), no plugins, same-origin forms and base.
  */
 const contentSecurityPolicy = [
 	"default-src 'self'",
@@ -31,6 +37,7 @@ const contentSecurityPolicy = [
 	`img-src 'self' data: blob:${cmsUrl ? ` ${cmsUrl.origin}` : ''} https://www.google-analytics.com https://www.googletagmanager.com`,
 	"style-src 'self' 'unsafe-inline'",
 	"font-src 'self'",
+	`frame-src ${YOUTUBE_PLAYER}`,
 	"frame-ancestors 'none'",
 	"object-src 'none'",
 	"base-uri 'self'",
@@ -64,21 +71,25 @@ const nextConfig: NextConfig = {
 	poweredByHeader: false,
 	images: {
 		formats: ['image/avif', 'image/webp'],
-		...(cmsUrl
-			? {
-					// Only when the CMS is on this machine. Any other CMS host keeps the
-					// optimizer's private-address block.
-					dangerouslyAllowLocalIP: ['localhost', '127.0.0.1'].includes(cmsUrl.hostname),
-					remotePatterns: [
+		// Only when the CMS is on this machine. Any other CMS host keeps the
+		// optimizer's private-address block.
+		dangerouslyAllowLocalIP: cmsUrl
+			? ['localhost', '127.0.0.1'].includes(cmsUrl.hostname)
+			: false,
+		remotePatterns: [
+			// Video stills by id only (src/lib/video.ts).
+			{ protocol: 'https', hostname: 'i.ytimg.com', pathname: '/vi/**' },
+			...(cmsUrl
+				? [
 						{
 							protocol: cmsUrl.protocol.replace(':', '') as 'http' | 'https',
 							hostname: cmsUrl.hostname,
 							port: cmsUrl.port,
 							pathname: '/uploads/**',
 						},
-					],
-				}
-			: {}),
+					]
+				: []),
+		],
 	},
 	async headers() {
 		return [{ source: '/:path*', headers: securityHeaders }];

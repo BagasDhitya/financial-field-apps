@@ -184,6 +184,15 @@ export const PINJAMAN_ARTICLES: ArticleEntry[] = [
 			'Sebelum meminjam secara daring, periksa status izin penyelenggara dan baca seluruh biaya yang dikenakan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pinjaman',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=7e4uNm69yZI',
+			title: 'Jangan Asal Pinjam! Banyak Pinjol Ilegal, Ini Daftar yang Resmi dari OJK',
+			channel_name: 'Kompas.com',
+			uploaded_at: '2026-02-26T13:52:18.000Z',
+			duration_seconds: 278,
+			caption:
+				'Kompas.com merangkum daftar penyelenggara pinjaman daring yang berizin OJK per Februari 2026 dan cara memeriksa legalitas pinjol secara mandiri sebelum meminjam.',
+		},
 		primary_category: 'pinjaman-lainnya',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',

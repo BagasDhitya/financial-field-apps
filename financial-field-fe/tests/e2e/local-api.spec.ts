@@ -43,6 +43,20 @@ test.describe('local API (Strapi REST shape)', () => {
 		expect(one.data).toEqual({ id: 1, documentId: id, name: 'Pajak karyawan' });
 	});
 
+	test('filters and populates a component (the article video, CMS-30)', async ({ request }) => {
+		const response = await request.get(
+			'/api/articles?filters[featured_video][url][$notNull]=true&fields[0]=slug&populate[featured_video][fields][0]=url&pagination[pageSize]=1',
+		);
+		const body = await response.json();
+		expect(body.meta.pagination.total).toBe(25);
+		expect(Object.keys(body.data[0].featured_video)).toEqual(['id', 'url']);
+		expect(body.data[0].featured_video.url).toMatch(
+			/^https:\/\/www\.youtube\.com\/watch\?v=[\w-]{11}$/,
+		);
+		const invalid = await request.get('/api/articles?filters[featured_video][bogus]=1');
+		expect(invalid.status()).toBe(400);
+	});
+
 	test('refuses unknown keys like strictParams, and unknown paths', async ({ request }) => {
 		const invalid = await request.get('/api/articles?fields[0]=bogus');
 		expect(invalid.status()).toBe(400);

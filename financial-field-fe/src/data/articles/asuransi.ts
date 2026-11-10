@@ -10,6 +10,15 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 			'Asuransi jiwa berjangka cocok untuk perlindungan murni dalam periode tertentu, sedangkan seumur hidup memberi perlindungan lebih panjang dengan premi lebih tinggi.',
 		article_type: 'standard',
 		featured_image: 'kategori-asuransi',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=4ZI5DnJY4P0',
+			title: 'Kenali Manfaat dan Jenis Asuransi Jiwa',
+			channel_name: 'Otoritas Jasa Keuangan',
+			uploaded_at: '2022-03-23T01:00:01.000Z',
+			duration_seconds: 2115,
+			caption:
+				'Edukasi Finansial OJK bersama Asosiasi Asuransi Jiwa Indonesia (AAJI) tentang manfaat dan jenis-jenis asuransi jiwa, serta hal penting yang perlu dipahami sebelum memilihnya.',
+		},
 		primary_category: 'asuransi-jiwa',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-satu',
@@ -545,6 +554,15 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 			'Bagian polis yang paling penting dibaca adalah manfaat, pengecualian, masa tunggu, dan cara pengajuan klaim. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-asuransi',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=mJBZO1qpWkk',
+			title: 'Biar Gak Merasa "Tertipu”, Ini Cara Tepat Pilih Asuransi',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2023-01-10T04:20:18.000Z',
+			duration_seconds: 334,
+			caption:
+				'Financial Expert CNBC Indonesia membahas cara memilih asuransi agar manfaatnya sesuai kebutuhan dan pemegang polis tidak kecewa saat mengajukan klaim.',
+		},
 		primary_category: 'asuransi-lainnya',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',

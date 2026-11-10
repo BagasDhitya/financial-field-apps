@@ -7,8 +7,8 @@ const CATEGORY_WITH_PARENT = {
 	populate: { parent_category: { fields: ['slug', 'name'] } },
 } as const;
 
-/** Relations and media a card needs. Kept minimal: listings fetch many. */
-export const ARTICLE_SUMMARY_POPULATE = {
+/** Relations and media a card needs, on every CMS. Kept minimal: listings fetch many. */
+const ARTICLE_SUMMARY_POPULATE = {
 	featured_image: true,
 	primary_category: CATEGORY_WITH_PARENT,
 	author: { populate: { avatar: true } },
@@ -30,13 +30,30 @@ export function articleSort(caps: CapabilitySet = cmsCapabilities): string[] {
 		: ['publishedAt:desc'];
 }
 
+/**
+ * Card relations and media, plus the video's link once the CMS has videos
+ * (CMS-30): a card needs to know only that there is one, and which.
+ */
+export function articleSummaryPopulate(caps: CapabilitySet = cmsCapabilities) {
+	return {
+		...ARTICLE_SUMMARY_POPULATE,
+		...(caps.has('video') ? { featured_video: { fields: ['url'] } } : {}),
+	};
+}
+
 /** Query fragment for card-sized articles. */
 export function articleSummaryQuery(caps: CapabilitySet = cmsCapabilities) {
 	return {
 		fields: articleSummaryFields(caps),
-		populate: ARTICLE_SUMMARY_POPULATE,
+		populate: articleSummaryPopulate(caps),
 	};
 }
+
+/**
+ * Only articles with a video (CMS-30). The component is filtered on its
+ * required `url`, as Strapi filters a component's fields.
+ */
+export const WITH_VIDEO_FILTER = { featured_video: { url: { $notNull: true } } } as const;
 
 /**
  * Everything the article detail route renders. No `fields` list, so scalar
@@ -55,6 +72,7 @@ export function articleDetailPopulate(caps: CapabilitySet = cmsCapabilities) {
 		...(caps.has('sources') ? { sources: true } : {}),
 		...(caps.has('takeaways') ? { key_takeaways: true } : {}),
 		...(caps.has('corrections') ? { corrections: true } : {}),
+		...(caps.has('video') ? { featured_video: true } : {}),
 	};
 }
 

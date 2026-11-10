@@ -10,6 +10,15 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 			'Metode 50/30/20 bisa dipakai sebagai titik awal, tetapi proporsinya sering perlu disesuaikan untuk penghasilan terbatas.',
 		article_type: 'standard',
 		featured_image: 'kategori-keuangan-keluarga',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=484cz-fWPWc',
+			title: 'Cara Cerdas Atur Keuangan Dengan Gaji UMR',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2022-12-27T02:46:14.000Z',
+			duration_seconds: 354,
+			caption:
+				'Financial Expert CNBC Indonesia berbagi cara mengatur anggaran dengan gaji UMR agar kebutuhan terpenuhi dan masih ada yang disisihkan untuk tabungan dan investasi.',
+		},
 		primary_category: 'keluarga-anggaran',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',
@@ -135,6 +144,15 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 			'Dana darurat umumnya disiapkan beberapa kali pengeluaran bulanan dan disimpan di tempat yang mudah dicairkan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-keuangan-keluarga',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=Ybx3FNSIlBY',
+			title: 'Berapa Idealnya Dana Darurat? Cek Jawabannya Disini',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2022-11-28T12:52:33.000Z',
+			duration_seconds: 277,
+			caption:
+				'Program Investime CNBC Indonesia membahas berapa idealnya dana darurat sebagai bagian dari perencanaan keuangan, bersama asuransi, investasi, dan rencana pensiun.',
+		},
 		primary_category: 'keluarga-menabung',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',

@@ -22,6 +22,7 @@ export const CMS_CAPABILITIES = [
 	'site-settings', // CMS-14
 	'redirects', // CMS-15
 	'tag-description', // CMS-19
+	'video', // CMS-30
 ] as const;
 
 export type CmsCapability = (typeof CMS_CAPABILITIES)[number];

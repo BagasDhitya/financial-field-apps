@@ -10,6 +10,15 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 			'Investasi rutin bulanan membantu pemula membangun kebiasaan dan mengurangi tekanan untuk menebak waktu terbaik membeli. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-investasi',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=FIAXLR8eiEo',
+			title: 'Tips Memulai Investasi Reksa Dana Bagi Pemula',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2023-10-28T04:00:09.000Z',
+			duration_seconds: 626,
+			caption:
+				'Liputan CNBC Indonesia tentang cara kerja reksa dana, yang dikelola oleh manajer investasi, dan tips memulai investasi reksa dana bagi pemula.',
+		},
 		primary_category: 'investasi-reksa-dana',
 		author: 'penulis-contoh-dua',
 		reviewer: 'peninjau-contoh-satu',
@@ -314,6 +323,15 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 			'Emas, deposito, dan obligasi ritel memiliki profil risiko dan likuiditas berbeda sehingga cocok untuk tujuan yang berbeda.',
 		article_type: 'standard',
 		featured_image: 'kategori-investasi',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=4gIY5d5nE8E',
+			title: 'Mana lebih Profit, Investasi di Obligasi, Deposito Vs Emas?',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2025-04-15T11:45:01.000Z',
+			duration_seconds: 646,
+			caption:
+				'Equity Analyst CNBC Indonesia membandingkan investasi emas dengan obligasi dan deposito, di tengah kenaikan harga emas yang tajam pada awal 2025.',
+		},
 		primary_category: 'investasi-lainnya',
 		author: 'penulis-contoh-satu',
 		reviewer: 'peninjau-contoh-dua',

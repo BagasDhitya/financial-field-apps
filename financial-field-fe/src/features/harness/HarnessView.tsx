@@ -5,6 +5,7 @@ import {
 	checker,
 	harnessNow,
 	summary,
+	videoFixture,
 	writer,
 } from '@/components/__fixtures__/domain';
 import { ArticleBody } from '@/components/ArticleBody/ArticleBody';
@@ -24,6 +25,7 @@ import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { SourcesList } from '@/components/SourcesList/SourcesList';
 import { SponsorDisclosure } from '@/components/SponsorDisclosure/SponsorDisclosure';
 import { TagList } from '@/components/TagList/TagList';
+import { VideoEmbed } from '@/components/VideoEmbed/VideoEmbed';
 
 import styles from './HarnessView.module.css';
 
@@ -49,6 +51,19 @@ export function HarnessView() {
 		primaryCategory: null,
 		title: 'Kartu tanpa gambar, penulis, dan kategori',
 	});
+	const withVideo = (id: string, title: string) =>
+		summary({
+			id,
+			title,
+			video: { provider: videoFixture.provider, id: videoFixture.id },
+			featuredImage: {
+				url: '/images/kategori/pajak.png',
+				alternativeText: null,
+				width: 1600,
+				height: 900,
+				mime: 'image/png',
+			},
+		});
 
 	return (
 		<Container className={styles.root}>
@@ -63,9 +78,27 @@ export function HarnessView() {
 					<ArticleCard article={summary({ id: 't' })} variant="text" />
 				</div>
 			</Specimen>
-			<Specimen title="Kicker / PR label">
+			<Specimen title="ArticleCard — video: featured image + mark / still / compact / text">
+				<div className={styles.cards}>
+					<ArticleCard article={withVideo('v1', 'Artikel dengan video di daftar')} />
+					<ArticleCard
+						article={withVideo('v2', 'Artikel dengan video di bagian Video')}
+						media="video"
+					/>
+					<ArticleCard
+						article={withVideo('v3', 'Video, kartu ringkas')}
+						variant="compact"
+					/>
+					<ArticleCard article={withVideo('v4', 'Video, kartu teks')} variant="text" />
+				</div>
+			</Specimen>
+			<Specimen title="VideoEmbed — still and play button; the player loads on click">
+				<VideoEmbed video={videoFixture} articleId="harness" />
+			</Specimen>
+			<Specimen title="Kicker / PR label / Video label">
 				<Kicker category={summary().primaryCategory} />
 				<Kicker category={summary().primaryCategory} isPr />
+				<Kicker category={summary().primaryCategory} isVideo />
 				<PrLabel size="large" />
 			</Specimen>
 			<Specimen title="RiverItem">
@@ -79,6 +112,7 @@ export function HarnessView() {
 						now={harnessNow}
 					/>
 					<RiverItem article={pr} now={harnessNow} />
+					<RiverItem article={withVideo('rv', 'Baris dengan video')} now={harnessNow} />
 				</ul>
 			</Specimen>
 			<Specimen title="SectionHeader">

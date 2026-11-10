@@ -39,6 +39,9 @@ export function SiteFooter({ categories, settings, showConsentSettings, year }: 
 						<li>
 							<Link href={routes.interviews()}>Wawancara</Link>
 						</li>
+						<li>
+							<Link href={routes.videos()}>Video</Link>
+						</li>
 					</ul>
 				</nav>
 				<nav aria-label="Footer" className={styles.column}>

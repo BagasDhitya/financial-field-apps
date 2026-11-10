@@ -15,6 +15,7 @@ const ROUTES: [string, RegExp][] = [
 	['/penulis/penulis-contoh-tiga', /Penulis Contoh Tiga/],
 	['/terbaru', /Artikel Terbaru/],
 	['/wawancara', /Wawancara/],
+	['/video', /^Video$/],
 	['/tentang-kami', /Tentang Financial Field Indonesia/],
 	['/tentang-kami/redaksi', /Redaksi/],
 	['/hubungi-kami', /Hubungi Kami/],

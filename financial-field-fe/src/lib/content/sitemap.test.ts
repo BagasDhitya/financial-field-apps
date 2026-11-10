@@ -10,6 +10,7 @@ function entry(slug: string, overrides: Partial<ArticleIndexEntry> = {}): Articl
 		publishedAt: '2026-10-01T00:00:00Z',
 		modifiedAt: '2026-10-02T00:00:00Z',
 		noIndex: false,
+		hasVideo: false,
 		tagSlugs: [],
 		primaryCategorySlug: 'pph',
 		authorSlugs: ['penulis'],

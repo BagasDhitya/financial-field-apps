@@ -99,6 +99,11 @@ export function MobileNav({ label, categories }: MobileNavProps) {
 									Wawancara
 								</Link>
 							</li>
+							<li>
+								<Link href={routes.videos()} className={styles.summary}>
+									Video
+								</Link>
+							</li>
 						</ul>
 					</nav>
 					<nav aria-label="Tentang kami">

@@ -1,0 +1,42 @@
+.root {
+	margin: 0;
+	border: var(--stroke-card) solid var(--color-ink);
+}
+
+.caption {
+	display: grid;
+	gap: var(--space-1);
+	padding: var(--space-2) var(--space-3);
+	border-top: var(--stroke-card) solid var(--color-ink);
+}
+
+.text {
+	max-width: var(--reading-max);
+	margin: 0;
+	font-size: var(--text-ui);
+	line-height: 1.55;
+}
+
+/* Inline, so the credit wraps like a sentence on a phone. */
+.credit {
+	margin: 0;
+}
+
+/* Each part keeps its words together; lines break only at the spaces between parts. */
+.credit > * {
+	white-space: nowrap;
+}
+
+.credit > :first-child {
+	white-space: normal;
+}
+
+/* A middle dot after every part but the last: a wrapped line never starts with one. */
+.credit > :not(:last-child)::after {
+	content: '\00a0·';
+}
+
+.link {
+	color: var(--color-ff-blue);
+	font-weight: 600;
+}

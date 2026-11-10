@@ -14,6 +14,21 @@ export type ArticleType = 'standard' | 'pr_article' | 'interview' | 'column';
  */
 export type ArticleBody = readonly Record<string, unknown>[];
 
+/** A video an article carries (CMS-30). Only YouTube, by its 11-character id. */
+export type VideoRef = {
+	provider: 'youtube';
+	id: string;
+};
+
+/** The video at the top of an article, with the credit taken from YouTube. */
+export type ArticleVideo = VideoRef & {
+	title: string;
+	channelName: string | null;
+	uploadedAt: string | null;
+	durationSeconds: number | null;
+	caption: string | null;
+};
+
 /** Card-sized article. What listings, rails, and related blocks consume. */
 export type ArticleSummary = {
 	id: string;
@@ -22,6 +37,8 @@ export type ArticleSummary = {
 	leadText: string | null;
 	articleType: ArticleType;
 	featuredImage: MediaAsset | null;
+	/** Set when the article has a video (CMS-30): cards show a play mark. */
+	video: VideoRef | null;
 	primaryCategory: CategorySummary | null;
 	author: AuthorSummary | null;
 	/** First publication (CMS-09 `first_published_at`, else Strapi `publishedAt`). */
@@ -46,7 +63,9 @@ export type Source = {
 export type Correction = { date: string | null; note: string };
 
 /** Full article. Only the detail route needs this. */
-export type Article = ArticleSummary & {
+export type Article = Omit<ArticleSummary, 'video'> & {
+	/** Shown in place of the featured image (CMS-30); null = none or not a YouTube link. */
+	video: ArticleVideo | null;
 	body: ArticleBody;
 	reviewer: AuthorSummary | null;
 	categories: CategorySummary[];

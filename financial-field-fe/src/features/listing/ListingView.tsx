@@ -23,9 +23,11 @@ export type ListingViewProps = {
 	hrefFor: (page: number) => string;
 	emptyLabel: string;
 	aside?: ReactNode;
+	/** `video` on /video: cards show the video's still (REQ-LIST-006). */
+	cardMedia?: 'image' | 'video';
 };
 
-/** Category hubs, tags, Terbaru and Wawancara (REQ-LIST-001/002/004). */
+/** Category hubs, tags, Terbaru, Wawancara and Video (REQ-LIST-001/002/004/006). */
 export function ListingView({
 	title,
 	kicker,
@@ -37,6 +39,7 @@ export function ListingView({
 	hrefFor,
 	emptyLabel,
 	aside,
+	cardMedia = 'image',
 }: ListingViewProps) {
 	return (
 		<Container className={styles.root}>
@@ -70,6 +73,7 @@ export function ListingView({
 								<ArticleCard
 									article={article}
 									preloadImage={result.page === 1 && index === 0}
+									media={cardMedia}
 								/>
 							</li>
 						))}

@@ -35,6 +35,7 @@ const article: Article = {
 		height: 900,
 		mime: 'image/jpeg',
 	},
+	video: null,
 	primaryCategory: {
 		id: 'c',
 		slug: 'pajak',

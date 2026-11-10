@@ -13,6 +13,7 @@ export const routes = {
 	author: (slug: string) => `/penulis/${slug}`,
 	latest: () => '/terbaru',
 	interviews: () => '/wawancara',
+	videos: () => '/video',
 	about: (slug?: string) => (slug ? `/tentang-kami/${slug}` : '/tentang-kami'),
 	contact: () => '/hubungi-kami',
 	search: (query?: string) => (query ? `/cari?q=${encodeURIComponent(query)}` : '/cari'),

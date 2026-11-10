@@ -1,0 +1,107 @@
+/* 16:9 box, reserved before anything loads: no layout shift (REQ-PERF-006). */
+.frame {
+	position: relative;
+	aspect-ratio: 16 / 9;
+	overflow: hidden;
+	background: var(--color-ink);
+}
+
+.still {
+	object-fit: cover;
+}
+
+.player {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	border: 0;
+}
+
+/* The whole still is the button; the mark and label only show it. */
+.play {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	padding: 0;
+	border: 0;
+	background: transparent;
+	color: var(--color-paper);
+	cursor: pointer;
+}
+
+.play:focus-visible {
+	outline: 3px solid var(--color-ff-blue);
+	outline-offset: -3px;
+}
+
+/* I1: a sharp ink square with a paper rule, not YouTube's rounded red button. */
+.mark {
+	display: grid;
+	place-items: center;
+	width: 3.5rem;
+	height: 3.5rem;
+	border: var(--stroke-card) solid var(--color-paper);
+	background: var(--color-ink);
+	transition:
+		background-color var(--dur-base) var(--ease-standard),
+		box-shadow var(--dur-base) var(--ease-standard);
+}
+
+.mark svg {
+	fill: currentColor;
+}
+
+.label {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	display: inline-flex;
+	gap: var(--space-1);
+	align-items: center;
+	padding: 0.375rem 0.5rem;
+	background: var(--color-ink);
+	color: var(--color-paper);
+	line-height: 1;
+}
+
+.duration {
+	font-variant-numeric: tabular-nums;
+	letter-spacing: 0.04em;
+}
+
+.duration::before {
+	margin-right: var(--space-1);
+	content: '·';
+}
+
+@media (min-width: 640px) {
+	.mark {
+		width: 4.5rem;
+		height: 4.5rem;
+	}
+
+	.label {
+		padding: 0.5rem 0.75rem;
+	}
+}
+
+/* I3: the hard offset shadow and the FF blue mark where hover exists (REQ-UI-005).
+   Paper, not ink: the shadow falls on a still, often a dark one. */
+@media (hover: hover) {
+	.play:hover .mark {
+		background: var(--color-ff-blue);
+		box-shadow: 6px 6px 0 0 var(--color-paper);
+	}
+}
+
+.play:focus-visible .mark {
+	background: var(--color-ff-blue);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.mark {
+		transition: none;
+	}
+}

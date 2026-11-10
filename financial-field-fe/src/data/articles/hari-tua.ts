@@ -10,6 +10,15 @@ export const HARI_TUA_ARTICLES: ArticleEntry[] = [
 			'Biaya merawat orang tua lansia dapat diperkirakan dari kebutuhan kesehatan, tenaga pendamping, dan kebutuhan harian. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-hari-tua',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=XqXgSTzCKHU',
+			title: '‘Generasi Sandwich’, Biayai Kebutuhan Orang Tua, Anak & Diri Sendiri',
+			channel_name: 'CNN Indonesia',
+			uploaded_at: '2021-11-27T04:30:04.000Z',
+			duration_seconds: 165,
+			caption:
+				'CNN Indonesia tentang generasi sandwich, yang menanggung kebutuhan orang tua, anak, dan diri sendiri, serta saran perencana keuangan untuk mencatat pemasukan dan pengeluaran setiap bulan.',
+		},
 		primary_category: 'hari-tua-perawatan',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-satu',

@@ -116,6 +116,9 @@ export function TopicPanel({ label, categories }: TopicPanelProps) {
 						<li>
 							<Link href={routes.interviews()}>Wawancara</Link>
 						</li>
+						<li>
+							<Link href={routes.videos()}>Video</Link>
+						</li>
 					</ul>
 				</div>
 			</div>

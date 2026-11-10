@@ -104,10 +104,12 @@ export function buildSitemapFiles(data: SitemapData, origin: string): SitemapFil
 	}));
 
 	const hasInterviews = indexable.some((article) => article.articleType === 'interview');
+	const hasVideos = indexable.some((article) => article.hasVideo);
 	const pageUrls: SitemapUrl[] = [
 		{ loc: abs(routes.home()), lastmod: newest },
 		{ loc: abs(routes.latest()), lastmod: newest },
 		...(hasInterviews ? [{ loc: abs(routes.interviews()), lastmod: newest }] : []),
+		...(hasVideos ? [{ loc: abs(routes.videos()), lastmod: newest }] : []),
 		...data.pages.map((page) => ({
 			loc: abs(staticPagePath(page.slug)),
 			lastmod: page.updatedAt,

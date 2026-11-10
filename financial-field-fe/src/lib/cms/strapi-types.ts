@@ -74,6 +74,15 @@ export type StrapiTakeaway = { text?: string | null };
 
 export type StrapiCorrection = { date?: string | null; note?: string | null };
 
+export type StrapiVideo = {
+	url?: string | null;
+	title?: string | null;
+	channel_name?: string | null;
+	uploaded_at?: string | null;
+	duration_seconds?: number | null;
+	caption?: string | null;
+};
+
 export type StrapiArticle = {
 	documentId: string;
 	title?: string | null;
@@ -102,6 +111,7 @@ export type StrapiArticle = {
 	sources?: StrapiSource[] | null;
 	key_takeaways?: StrapiTakeaway[] | null;
 	corrections?: StrapiCorrection[] | null;
+	featured_video?: StrapiVideo | null;
 };
 
 export type StrapiMenuItem = {

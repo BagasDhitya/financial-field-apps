@@ -222,6 +222,15 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 			'Saldo dompet digital lebih aman jika kode rahasia dijaga, notifikasi diaktifkan, dan saldo besar tidak disimpan terlalu lama.',
 		article_type: 'standard',
 		featured_image: 'kategori-gaya-hidup',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=hMhYKTqkODM',
+			title: 'Penipuan Kuras Rekening Lewat Social Engineering',
+			channel_name: 'CNN Indonesia',
+			uploaded_at: '2023-01-31T06:00:12.000Z',
+			duration_seconds: 461,
+			caption:
+				'CNN Indonesia menjelaskan modus rekayasa sosial (social engineering): penipuan yang memanipulasi korban lewat pesan dan media sosial sampai rekening atau saldonya terkuras.',
+		},
 		primary_category: 'gaya-hidup-nontunai',
 		author: 'penulis-contoh-tiga',
 		reviewer: 'peninjau-contoh-dua',
@@ -448,6 +457,15 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 			'Liburan tanpa paylater dimulai dengan menentukan anggaran total dan menabung khusus beberapa bulan sebelumnya. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-gaya-hidup',
+		featured_video: {
+			url: 'https://www.youtube.com/watch?v=OwPOEbwaaBI',
+			title: 'Liburan Asik, Anti Dompet Tercekik',
+			channel_name: 'CNBC Indonesia',
+			uploaded_at: '2024-08-24T00:01:20.000Z',
+			duration_seconds: 1016,
+			caption:
+				'Program Investime CNBC Indonesia bersama CEO Antavaya membahas mengapa harga tiket pesawat naik saat permintaan tinggi dan cara berlibur tanpa membebani keuangan.',
+		},
 		primary_category: 'gaya-hidup-lainnya',
 		author: 'penulis-contoh-dua',
 		tags: ['nontunai', 'dana-darurat'],

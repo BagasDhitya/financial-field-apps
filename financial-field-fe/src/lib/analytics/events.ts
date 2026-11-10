@@ -79,4 +79,6 @@ export const analytics = {
 	share: (method: string, itemId: string) =>
 		track('share', { method, content_type: 'article', item_id: itemId }),
 	navOpen: (surface: 'desktop_panel' | 'mobile_sheet') => track('nav_open', { surface }),
+	videoStart: (videoUrl: string, itemId: string) =>
+		track('video_start', { video_provider: 'youtube', video_url: videoUrl, item_id: itemId }),
 };

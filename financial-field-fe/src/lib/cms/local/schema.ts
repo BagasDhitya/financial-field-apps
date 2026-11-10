@@ -14,6 +14,7 @@ export type ComponentName =
 	| 'article.source'
 	| 'article.takeaway'
 	| 'article.correction'
+	| 'article.video'
 	| 'shared.link'
 	| 'navigation.menu-item'
 	| 'site.social-link';
@@ -83,6 +84,14 @@ export const COMPONENTS: Record<ComponentName, Record<string, Attribute>> = {
 	},
 	'article.takeaway': { text: scalar() },
 	'article.correction': { date: scalar(), note: scalar() },
+	'article.video': {
+		url: scalar(),
+		title: scalar(),
+		channel_name: scalar(),
+		uploaded_at: scalar(),
+		duration_seconds: scalar(),
+		caption: scalar(),
+	},
 	'shared.link': { url: scalar(), label: scalar() },
 	'navigation.menu-item': { label: scalar(), url: scalar(), category_ref: many('categories') },
 	'site.social-link': { platform: scalar(), url: scalar() },
@@ -116,6 +125,7 @@ export const CONTENT_TYPES: Record<ContentTypeName, ContentType> = {
 			sources: component('article.source', true, 'sources'),
 			key_takeaways: component('article.takeaway', true, 'takeaways'),
 			corrections: component('article.correction', true, 'corrections'),
+			featured_video: component('article.video', false, 'video'),
 		},
 	},
 	categories: {

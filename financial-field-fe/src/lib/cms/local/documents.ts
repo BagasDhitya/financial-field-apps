@@ -6,8 +6,9 @@ import { SITE_SETTING } from '@/data/site-setting';
 import { STATIC_PAGES } from '@/data/static-pages';
 import { STOCK_TICKERS } from '@/data/stock-tickers';
 import { TAGS } from '@/data/tags';
-import type { BlocksEntry, SeoEntry } from '@/data/types';
+import type { ArticleEntry, BlocksEntry, SeoEntry } from '@/data/types';
 import { WRITER_PROFILES } from '@/data/writer-profiles';
+import { parseYouTubeId } from '@/lib/video';
 
 import type { ContentTypeName } from './schema';
 
@@ -16,8 +17,8 @@ import type { ContentTypeName } from './schema';
  * §S4.8). Relations become references in both directions, as the CMS stores
  * them: an article's `primary_category` also appears in that category's
  * `category` list. A duplicate slug, an unknown relation, a missing featured
- * article or an internal body link to a page that doesn't exist throws, so
- * `next build` stops and names the entry.
+ * article, an internal body link to a page that doesn't exist or a broken
+ * featured video throws, so `next build` stops and names the entry.
  */
 
 /** A stored document: its system fields plus attribute values. */
@@ -133,6 +134,46 @@ function items<T>(list: readonly T[] | undefined): (T & { id: number })[] {
 	return (list ?? []).map((item, index) => ({ id: index + 1, ...item }));
 }
 
+/** Which article each video is on: the same video twice is a copy-paste slip. */
+const videoOwners = new Map<string, string>();
+
+/**
+ * The `article.video` component, checked: a YouTube link, the credit and
+ * caption filled in, a whole number of seconds, and not uploaded after the
+ * article's last date (a video can't be in an article before it exists).
+ */
+function videoOf(entry: ArticleEntry): Record<string, unknown> | null {
+	const video = entry.featured_video;
+	if (!video) {
+		return null;
+	}
+	const owner = `article "${entry.slug}"`;
+	const id =
+		parseYouTubeId(video.url) ??
+		fail(`${owner} has a featured_video that isn't a YouTube link`);
+	const other = videoOwners.get(id);
+	if (other) {
+		fail(`${owner} has the same featured_video as article "${other}"`);
+	}
+	videoOwners.set(id, entry.slug);
+	for (const field of ['title', 'channel_name', 'caption'] as const) {
+		if (!video[field].trim()) {
+			fail(`${owner} has an empty featured_video ${field}`);
+		}
+	}
+	const uploaded = Date.parse(video.uploaded_at);
+	if (Number.isNaN(uploaded)) {
+		fail(`${owner} has an invalid featured_video uploaded_at`);
+	}
+	if (uploaded > Date.parse(entry.content_updated_at ?? entry.first_published_at)) {
+		fail(`${owner} has a featured_video uploaded after the article's last date`);
+	}
+	if (!Number.isInteger(video.duration_seconds) || video.duration_seconds <= 0) {
+		fail(`${owner} has an invalid featured_video duration_seconds`);
+	}
+	return { id: 1, ...video };
+}
+
 // ---- Collections -------------------------------------------------------------
 
 const categories = collection('categories', CATEGORIES, (entry) => ({
@@ -223,6 +264,7 @@ const articles = collection('articles', ARTICLES, (entry) => {
 		sources: items(entry.sources),
 		key_takeaways: items(entry.key_takeaways),
 		corrections: items(entry.corrections),
+		featured_video: videoOf(entry),
 	};
 });
 for (const entry of ARTICLES) {

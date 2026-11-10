@@ -4,10 +4,12 @@ import { cmsFetch, type CmsCollection } from '@/lib/cms/client';
 import { endpoints } from '@/lib/cms/endpoints';
 import { mapArticle, mapArticleSummary } from '@/lib/cms/mappers/article';
 import { mapTagSlugs } from '@/lib/cms/mappers/tag';
+import { mapVideoRef } from '@/lib/cms/mappers/video';
 import {
 	articleDetailPopulate,
 	articleSort,
 	articleSummaryQuery,
+	WITH_VIDEO_FILTER,
 } from '@/lib/cms/queries/articles';
 import type { StrapiArticle } from '@/lib/cms/strapi-types';
 import { log } from '@/lib/log';
@@ -15,7 +17,7 @@ import { LISTING_PAGE_SIZE } from '@/lib/pagination';
 import { REVALIDATE } from '@/lib/revalidate';
 import type { Article, ArticleSummary, Paginated } from '@/types';
 
-import { toPaginated } from './paginate';
+import { emptyPage, toPaginated } from './paginate';
 import { rankRelated } from './related';
 
 type ListingRequest = {
@@ -134,6 +136,26 @@ export async function getInterviewArticles(page = 1): Promise<Paginated<ArticleS
 	});
 }
 
+/**
+ * Articles with a video, newest first: the home Video section and /video
+ * (CMS-30). Empty until the CMS has the `video` capability, so both hide.
+ */
+export async function getVideoArticles(
+	page = 1,
+	pageSize = LISTING_PAGE_SIZE,
+): Promise<Paginated<ArticleSummary>> {
+	if (!hasCapability('video')) {
+		return emptyPage(page);
+	}
+	return fetchArticleListing({
+		filters: WITH_VIDEO_FILTER,
+		page,
+		pageSize,
+		tags: [],
+		revalidate: REVALIDATE.archive,
+	});
+}
+
 /** REQ-SRCH-001: title or lead, case-insensitive. Uncached. */
 export async function searchArticles(query: string, page = 1): Promise<Paginated<ArticleSummary>> {
 	const result = await cmsFetch<CmsCollection<StrapiArticle>>({
@@ -203,6 +225,7 @@ export type ArticleIndexEntry = {
 	publishedAt: string | null;
 	modifiedAt: string | null;
 	noIndex: boolean;
+	hasVideo: boolean;
 	tagSlugs: string[];
 	primaryCategorySlug: string | null;
 	authorSlugs: string[];
@@ -227,6 +250,7 @@ export async function getArticleIndex(): Promise<ArticleIndexEntry[]> {
 					author: { fields: ['slug'] },
 					reviewer: { fields: ['slug'] },
 					...(hasCapability('seo') ? { seo: { fields: ['no_index'] } } : {}),
+					...(hasCapability('video') ? { featured_video: { fields: ['url'] } } : {}),
 				},
 				sort: articleSort(),
 				pagination: { page, pageSize: 100 },
@@ -246,6 +270,7 @@ export async function getArticleIndex(): Promise<ArticleIndexEntry[]> {
 				publishedAt,
 				modifiedAt: entry.content_updated_at ?? publishedAt,
 				noIndex: entry.seo?.no_index === true,
+				hasVideo: mapVideoRef(entry.featured_video) !== null,
 				tagSlugs: mapTagSlugs(entry.tags),
 				primaryCategorySlug: entry.primary_category?.slug ?? null,
 				authorSlugs: [entry.author?.slug, entry.reviewer?.slug].filter(

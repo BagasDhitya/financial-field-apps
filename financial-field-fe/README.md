@@ -68,6 +68,13 @@ use the helpers in `src/data/blocks.ts`:
 `ul('satu', 'dua')`. The local API checks every relation and internal link at
 build: an unknown slug stops `pnpm build` and names the entry.
 
+An article can carry a YouTube video at the top: add `featured_video` with the
+watch link, and the title, channel, publish time and length as YouTube shows
+them, plus a one- or two-sentence `caption`. Pick a video that can be embedded
+and was uploaded before the article's date; the build checks the link, the date
+and that no other article uses the same video. The player loads only when the
+reader presses play.
+
 ## Code style
 
 The owner's webReader style (pack: `context/conventions.md`, ADR-0013):

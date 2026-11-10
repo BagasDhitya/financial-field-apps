@@ -5,7 +5,12 @@ import { expectNoHorizontalScroll } from './helpers';
 for (const width of [360, 390, 768]) {
 	test(`no horizontal scroll and bordered cards at ${width}px (AC4)`, async ({ page }) => {
 		await page.setViewportSize({ width, height: 800 });
-		for (const path of ['/', '/artikel/cara-membaca-slip-gaji-pph-21', '/kategori/pajak']) {
+		for (const path of [
+			'/',
+			'/artikel/cara-membaca-slip-gaji-pph-21',
+			'/kategori/pajak',
+			'/video',
+		]) {
 			await page.goto(path);
 			await expectNoHorizontalScroll(page);
 		}

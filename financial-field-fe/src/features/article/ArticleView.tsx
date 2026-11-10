@@ -16,6 +16,7 @@ import { ShareBar } from '@/components/ShareBar/ShareBar';
 import { SourcesList } from '@/components/SourcesList/SourcesList';
 import { SponsorDisclosure } from '@/components/SponsorDisclosure/SponsorDisclosure';
 import { TagList } from '@/components/TagList/TagList';
+import { VideoEmbed } from '@/components/VideoEmbed/VideoEmbed';
 import type { ArticleEventParams } from '@/lib/analytics/events';
 import type { Article, ArticleSummary } from '@/types';
 
@@ -32,7 +33,10 @@ export type ArticleViewProps = {
 	analyticsParams: ArticleEventParams | null;
 };
 
-/** Article template (REQ-ART-001…011). Order follows SPC-functional §6. */
+/**
+ * Article template (REQ-ART-001…012). Order follows SPC-functional §6; a video
+ * takes the featured image's place at the top.
+ */
 export function ArticleView({
 	article,
 	related,
@@ -65,7 +69,9 @@ export function ArticleView({
 						/>
 					</header>
 
-					{article.featuredImage ? (
+					{article.video ? (
+						<VideoEmbed video={article.video} articleId={article.id} sponsored={isPr} />
+					) : article.featuredImage ? (
 						<figure className={styles.hero}>
 							<CmsImage
 								image={article.featuredImage}

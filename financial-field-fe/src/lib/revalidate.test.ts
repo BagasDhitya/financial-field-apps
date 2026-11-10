@@ -15,6 +15,7 @@ const ROUTES: [string, number][] = [
 	['tag/[slug]/[[...paging]]/page.tsx', REVALIDATE.archive],
 	['terbaru/[[...paging]]/page.tsx', REVALIDATE.archive],
 	['wawancara/[[...paging]]/page.tsx', REVALIDATE.archive],
+	['video/[[...paging]]/page.tsx', REVALIDATE.archive],
 	['penulis/[slug]/page.tsx', REVALIDATE.archive],
 	['saham/[symbol]/page.tsx', REVALIDATE.archive],
 	['tentang-kami/[[...slug]]/page.tsx', REVALIDATE.staticPage],

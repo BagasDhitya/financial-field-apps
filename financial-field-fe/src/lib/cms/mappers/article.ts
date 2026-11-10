@@ -8,6 +8,7 @@ import { mapMedia, resolveBodyMedia } from './media';
 import { mapSeo } from './seo';
 import { mapTagSummary } from './tag';
 import { mapStockMention } from './ticker';
+import { mapVideo, mapVideoRef } from './video';
 
 const ARTICLE_TYPES: readonly ArticleType[] = ['standard', 'pr_article', 'interview', 'column'];
 
@@ -32,6 +33,7 @@ export function mapArticleSummary(entry: StrapiArticle): ArticleSummary {
 		leadText: nonEmpty(entry.lead_text),
 		articleType: toArticleType(entry.article_type),
 		featuredImage: mapMedia(entry.featured_image),
+		video: mapVideoRef(entry.featured_video),
 		primaryCategory: entry.primary_category?.slug
 			? mapCategorySummary(entry.primary_category)
 			: null,
@@ -52,6 +54,7 @@ export function mapArticle(entry: StrapiArticle): Article {
 
 	return {
 		...summary,
+		video: mapVideo(entry.featured_video),
 		body: resolveBodyMedia(entry.content ?? []),
 		reviewer,
 		// A reviewer without a recorded fact-check date is not shown publicly
