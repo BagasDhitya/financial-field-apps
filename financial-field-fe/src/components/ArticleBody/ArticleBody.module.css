@@ -96,3 +96,138 @@
 	font-size: var(--text-meta);
 	color: var(--ink-66);
 }
+
+/*
+ * Interview dialogue (ADR-0020, REQ-ART-013): the interviewer on the left in
+ * soft pink, the guest on the right in soft orange. Square bubbles with a
+ * square-cut pointer toward the avatar (I1); 1px border in the stronger tint
+ * (I2). The tints are backgrounds only; text stays ink.
+ */
+.dialogue {
+	--avatar: 2.5rem;
+	--pointer: 0.625rem;
+}
+
+.dialogue > .turn + .turn {
+	margin-top: var(--space-2);
+}
+
+.turn {
+	display: flex;
+	gap: var(--space-2);
+	align-items: flex-start;
+}
+
+.guest {
+	flex-direction: row-reverse;
+}
+
+.avatar {
+	flex: none;
+	display: block;
+	width: var(--avatar);
+	height: var(--avatar);
+	overflow: hidden;
+	border: var(--stroke-rule) solid var(--line);
+	background: var(--line);
+}
+
+.initials {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-ink);
+	font-size: 0.875rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+}
+
+.interviewer {
+	--fill: var(--color-dialogue-host);
+	--line: var(--color-dialogue-host-line);
+}
+
+.guest {
+	--fill: var(--color-dialogue-guest);
+	--line: var(--color-dialogue-guest-line);
+}
+
+.bubble {
+	position: relative;
+	min-width: 0;
+	max-width: min(100%, 34rem);
+	padding: var(--space-2) var(--space-3);
+	border: var(--stroke-rule) solid var(--line);
+	background: var(--fill);
+}
+
+.bubble > p {
+	margin: 0;
+}
+
+.bubble > p + p {
+	margin-top: var(--space-1);
+}
+
+/* The pointer: two stacked triangles, the border colour under the fill. */
+.bubble::before,
+.bubble::after {
+	position: absolute;
+	top: calc(var(--avatar) / 2 - var(--pointer));
+	content: '';
+	border-block: var(--pointer) solid transparent;
+}
+
+.interviewer .bubble::before {
+	left: calc(var(--pointer) * -1);
+	border-right: var(--pointer) solid var(--line);
+}
+
+.interviewer .bubble::after {
+	left: calc(var(--pointer) * -1 + 1px);
+	border-right: var(--pointer) solid var(--fill);
+}
+
+.guest .bubble::before {
+	right: calc(var(--pointer) * -1);
+	border-left: var(--pointer) solid var(--line);
+}
+
+.guest .bubble::after {
+	right: calc(var(--pointer) * -1 + 1px);
+	border-left: var(--pointer) solid var(--fill);
+}
+
+.speaker {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 var(--space-1);
+	align-items: baseline;
+	margin-bottom: 0.25rem;
+	line-height: 1.4;
+}
+
+.speaker strong {
+	font-weight: 700;
+}
+
+.role {
+	color: var(--ink-66);
+}
+
+@media (max-width: 639px) {
+	.dialogue {
+		--avatar: 2rem;
+		--pointer: 0.5rem;
+	}
+
+	.turn {
+		gap: var(--space-1);
+	}
+
+	.bubble {
+		padding: var(--space-1) var(--space-2);
+	}
+}

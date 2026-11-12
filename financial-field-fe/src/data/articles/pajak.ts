@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, ul } from '../blocks';
+import { h2, link, ol, p, quote, say, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Pajak and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -1716,6 +1716,104 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 					'Apa saja pengurang penghasilan kena pajak bagi karyawan?',
 				),
 				'.',
+			),
+		],
+	},
+	{
+		slug: 'wawancara-menyiapkan-spt-tahunan-pertama',
+		title: 'Wawancara: menyiapkan SPT Tahunan pertama tanpa panik',
+		lead_text:
+			'Narasumber Contoh Empat, konsultan pajak, menjelaskan dokumen yang perlu disiapkan karyawan sebelum melaporkan SPT Tahunan pertama dan kesalahan yang paling sering ia temui.',
+		article_type: 'interview',
+		featured_image: 'kategori-pajak',
+		primary_category: 'pajak-spt-tahunan',
+		author: 'penulis-contoh-satu',
+		reviewer: 'peninjau-contoh-dua',
+		tags: ['spt', 'pajak-karyawan'],
+		first_published_at: '2026-10-22T09:00:00.000Z',
+		last_reviewed_at: '2026-10-23T09:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Minta bukti potong tahunan dari setiap pemberi kerja sebelum mulai mengisi SPT.',
+			},
+			{
+				text: 'Siapkan daftar harta dan utang per akhir tahun, karena bagian ini sering terlewat.',
+			},
+			{
+				text: 'Laporkan jauh sebelum batas waktu akhir Maret agar ada waktu memperbaiki kesalahan.',
+			},
+		],
+		content: [
+			p(
+				'Setiap awal tahun, banyak karyawan baru pertama kali harus melaporkan SPT Tahunan pribadi. Kami bertanya kepada Narasumber Contoh Empat, konsultan pajak yang setiap musim lapor menerima pertanyaan dari karyawan muda, tentang cara menyiapkannya dengan tenang. Nama narasumber dan angka dalam wawancara ini fiktif. Untuk aturan yang berlaku bagi Anda, rujuk situs resmi Direktorat Jenderal Pajak.',
+			),
+			say(
+				'Penulis Contoh Satu',
+				'Apa yang paling membuat karyawan bingung saat lapor SPT pertama kali?',
+			),
+			say(
+				'Narasumber Contoh Empat',
+				'Mereka mengira harus menghitung pajak sendiri dari nol. Padahal bagi karyawan, pajak penghasilan biasanya sudah dipotong oleh kantor setiap bulan. Tugas di SPT adalah melaporkan ulang: berapa penghasilan setahun, berapa pajak yang sudah dipotong, dan apa saja harta serta utang yang dimiliki.',
+			),
+			p('Begitu pemahaman itu ada, prosesnya terasa jauh lebih ringan.'),
+			say('Penulis Contoh Satu', 'Dokumen apa saja yang perlu disiapkan?'),
+			say(
+				'Narasumber Contoh Empat',
+				'Pertama, bukti potong tahunan dari pemberi kerja. Kalau dalam setahun Anda pindah kantor, mintalah bukti potong dari setiap kantor. Kedua, data keluarga untuk status tanggungan. Ketiga, daftar harta dan utang per akhir tahun: tabungan, kendaraan, cicilan, dan sebagainya.',
+			),
+			p(
+				'Simpan semuanya dalam satu folder, kertas maupun berkas digital. Folder itu akan Anda pakai lagi tahun depan.',
+			),
+			say('Penulis Contoh Satu', 'Kesalahan apa yang paling sering Anda temui?'),
+			say(
+				'Narasumber Contoh Empat',
+				'Yang paling sering adalah lupa menggabungkan penghasilan dari dua kantor dalam tahun yang sama. Masing-masing kantor memotong pajak seolah-olah itu satu-satunya penghasilan Anda, sehingga saat digabung bisa muncul kurang bayar.',
+			),
+			p(
+				'Kesalahan kedua adalah mengosongkan daftar harta. Banyak yang menganggap tabungan kecil tidak perlu dilaporkan, padahal SPT meminta gambaran harta secara lengkap.',
+			),
+			say('Penulis Contoh Satu', 'Bagaimana jika hasil akhirnya kurang bayar?'),
+			say(
+				'Narasumber Contoh Empat',
+				'Jangan panik. Kurang bayar berarti masih ada pajak yang perlu disetor sebelum SPT dikirim. Hitung ulang dengan teliti, cocokkan dengan bukti potong, dan kalau ragu, tanyakan ke kantor pajak atau saluran resmi DJP. Lebih baik bertanya sekarang daripada membetulkan SPT belakangan.',
+			),
+			say('Penulis Contoh Satu', 'Kapan waktu terbaik untuk melapor?'),
+			say(
+				'Narasumber Contoh Empat',
+				'Secepatnya setelah bukti potong diterima, biasanya pada awal tahun. Batas waktu untuk wajib pajak orang pribadi adalah akhir Maret, dan mendekati tanggal itu layanan bantuan biasanya ramai. Melapor lebih awal memberi Anda waktu bila ada data yang perlu diperbaiki.',
+			),
+			say(
+				'Penulis Contoh Satu',
+				'Apakah karyawan yang hanya punya satu kantor juga perlu memeriksa datanya?',
+			),
+			say(
+				'Narasumber Contoh Empat',
+				'Tetap perlu. Cocokkan nama, nomor identitas pajak, dan angka di bukti potong dengan slip gaji Anda. Kesalahan ketik jarang terjadi, tetapi lebih mudah diperbaiki bila ditemukan sebelum melapor.',
+			),
+			p(
+				'Periksa juga status tanggungan. Kalau Anda menikah atau punya anak pada tahun itu, pastikan datanya sudah diperbarui di kantor.',
+			),
+			say('Penulis Contoh Satu', 'Bagaimana dengan penghasilan dari kerja sampingan?'),
+			say(
+				'Narasumber Contoh Empat',
+				'Penghasilan itu juga perlu dilaporkan, walaupun tidak selalu ada bukti potongnya. Catat setiap pembayaran yang Anda terima sepanjang tahun, lengkap dengan tanggal dan pemberi kerjanya. Tanpa catatan, angka di SPT hanya tebakan.',
+			),
+			say('Penulis Contoh Satu', 'Saran terakhir untuk pembaca?'),
+			say(
+				'Narasumber Contoh Empat',
+				'Simpan bukti penerimaan laporan Anda dan catat apa yang Anda pelajari tahun ini. Tahun depan, prosesnya biasanya hanya butuh separuh waktu.',
+			),
+			h2('Baca juga'),
+			ul(
+				link(
+					'/artikel/langkah-mengisi-spt-tahunan-pertama',
+					'Langkah mengisi SPT Tahunan pribadi untuk pertama kali',
+				),
+				link(
+					'/artikel/arti-spt-nihil-kurang-lebih-bayar',
+					'SPT nihil, kurang bayar, lebih bayar: apa artinya?',
+				),
+				link('/kategori/pajak', 'Semua artikel di topik Pajak'),
 			),
 		],
 	},

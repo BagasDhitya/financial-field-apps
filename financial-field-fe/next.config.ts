@@ -69,6 +69,9 @@ const nextConfig: NextConfig = {
 	// Vercel staging builds with it set (ADR-0016).
 	output: 'standalone',
 	poweredByHeader: false,
+	// `next dev` would otherwise write an AGENTS.md when it detects a coding
+	// agent; the repo keeps no agent instruction files (only README.md).
+	agentRules: false,
 	images: {
 		formats: ['image/avif', 'image/webp'],
 		// Only when the CMS is on this machine. Any other CMS host keeps the

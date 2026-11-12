@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, ul } from '../blocks';
+import { h2, link, ol, p, quote, say, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Investasi and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -254,7 +254,7 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 		slug: 'wawancara-sepuluh-tahun-investasi-saham',
 		title: 'Wawancara: pelajaran dari sepuluh tahun berinvestasi saham',
 		lead_text:
-			'Narasumber Contoh berbagi pengalaman tentang disiplin dan kesabaran dalam berinvestasi saham. Simak pengalaman, kesalahan yang sering terjadi, dan sarannya dalam wawancara berikut.',
+			'Narasumber Contoh Dua, investor ritel selama sepuluh tahun, berbagi pelajaran tentang disiplin, diversifikasi, dan menahan diri saat pasar saham sedang bergejolak.',
 		article_type: 'interview',
 		featured_image: 'kategori-investasi',
 		primary_category: 'investasi-saham-valas',
@@ -265,54 +265,83 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 		last_reviewed_at: '2026-09-21T10:00:00.000Z',
 		key_takeaways: [
 			{
-				text: 'Narasumber Contoh berbagi pengalaman tentang disiplin dan kesabaran dalam berinvestasi saham.',
+				text: 'Mulailah dengan dana yang tidak dibutuhkan dalam lima tahun ke depan, setelah dana darurat terkumpul.',
 			},
 			{
-				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pengalaman berinvestasi saham.',
+				text: 'Pahami bisnis perusahaan sebelum membeli sahamnya, bukan hanya pergerakan harganya.',
 			},
-			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
+			{
+				text: 'Sebar dana ke beberapa saham dan sektor agar satu kesalahan tidak menghapus seluruh hasil.',
+			},
 		],
 		content: [
 			p(
-				'Narasumber Contoh berbagi pengalaman tentang disiplin dan kesabaran dalam berinvestasi saham. Dalam percakapan berikut, Narasumber Contoh menceritakan pengalamannya tentang pengalaman berinvestasi saham, kesalahan yang pernah dilihatnya, dan kebiasaan yang menurutnya paling membantu bagi pembaca yang baru memulai. Jawaban telah disunting agar ringkas, tanpa mengubah maksud yang ingin disampaikan.',
+				'Sepuluh tahun lalu, Narasumber Contoh Dua membeli saham pertamanya dengan sisa bonus tahunan. Sejak itu ia mengalami pasar yang naik tajam, turun dalam, dan bergerak datar berbulan-bulan. Kami bertanya apa yang ia pelajari dari semua itu. Nama narasumber dan angka dalam wawancara ini fiktif; jawaban telah disunting agar ringkas.',
 			),
-			h2('Bagaimana awalnya Anda tertarik pada pengalaman berinvestasi saham?'),
-			p(
-				'Awalnya karena kebutuhan sendiri. Beberapa tahun lalu saya membuat beberapa keputusan keuangan tanpa rencana, dan hasilnya kurang memuaskan. Sejak itu saya merasa perlu memahami pengalaman berinvestasi saham dengan lebih serius. Saya mulai dari hal sederhana: membaca, mencatat, dan bertanya kepada orang yang lebih berpengalaman, sedikit demi sedikit, tanpa target yang berlebihan.',
-			),
-			p(
-				'Yang paling saya pelajari dari masa itu adalah bahwa memulai dengan pertanyaan sederhana jauh lebih mudah daripada menunggu sampai merasa benar-benar siap. Perasaan siap itu sering tidak pernah datang. Jadi, saya memilih untuk mulai dengan pengetahuan yang ada, lalu memperbaikinya sambil berjalan.',
-			),
-			h2('Kesalahan apa yang paling sering Anda lihat?'),
-			p(
-				'Terburu-buru. Banyak orang ingin hasil yang cepat, lalu mengambil keputusan berdasarkan cerita teman atau unggahan di media sosial tanpa melihat kondisi sendiri. Padahal, apa yang cocok untuk orang lain belum tentu cocok untuk kita, karena penghasilan, tanggungan, dan tujuan setiap orang berbeda.',
+			say('Penulis Contoh Dua', 'Apa yang Anda siapkan sebelum membeli saham pertama?'),
+			say(
+				'Narasumber Contoh Dua',
+				'Jujur, hampir tidak ada. Saya membuka rekening efek di perusahaan sekuritas yang berizin OJK, lalu membeli saham yang sedang ramai dibicarakan. Dalam tiga bulan nilainya turun sekitar 30 persen. Angkanya fiktif, tetapi rasanya nyata.',
 			),
 			p(
-				'Kesalahan berikutnya adalah tidak mencatat. Tanpa catatan, sulit mengetahui apakah sebuah rencana berjalan atau tidak. Banyak orang merasa sudah berhemat, tetapi ketika angkanya dilihat, ternyata pengeluaran justru naik. Catatan yang sederhana sudah cukup, asalkan dibuat secara rutin dan jujur.',
+				'Dari situ saya belajar urutannya: dana darurat dulu, lalu investasi dengan uang yang tidak akan saya butuhkan dalam lima tahun. Dengan begitu, saya tidak terpaksa menjual saat harga sedang jatuh.',
 			),
-			h2('Kebiasaan apa yang paling membantu Anda?'),
-			p(
-				'Meninjau rencana secara rutin. Saya menyisihkan sekitar tiga puluh menit setiap akhir bulan untuk melihat angka, membandingkannya dengan rencana, dan menyesuaikan langkah untuk bulan berikutnya. Waktunya tidak lama, tetapi manfaatnya terasa karena masalah kecil bisa terlihat sebelum menjadi besar.',
-			),
-			p(
-				'Kebiasaan kecil ini memang terasa membosankan pada awalnya. Namun setelah beberapa bulan, saya mulai melihat pola: pengeluaran mana yang selalu muncul, kapan kebutuhan besar biasanya datang, dan berapa sebenarnya yang bisa disisihkan. Pola inilah yang kemudian membuat rencana saya lebih realistis.',
-			),
-			h2('Apa saran Anda untuk pembaca yang baru mulai?'),
-			p(
-				'Mulailah dari langkah yang bisa dilakukan minggu ini. Tidak perlu sempurna; yang penting konsisten. Misalnya, catat semua pengeluaran selama satu minggu, lalu lihat hasilnya bersama keluarga. Dari situ biasanya muncul satu atau dua hal yang bisa langsung diperbaiki tanpa harus mengubah gaya hidup secara drastis. Setelah itu, tambahkan satu kebiasaan baru setiap bulan.',
+			say('Penulis Contoh Dua', 'Bagaimana cara Anda memilih saham sekarang?'),
+			say(
+				'Narasumber Contoh Dua',
+				'Saya mulai dari bisnisnya. Apa yang dijual perusahaan, siapa pembelinya, apakah labanya stabil, dan apakah utangnya masuk akal. Laporan keuangan tahunan perusahaan tercatat bisa dibaca siapa saja di situs bursa.',
 			),
 			p(
-				'Dan jangan ragu bertanya kepada orang yang lebih memahami topiknya sebelum mengambil keputusan besar. Bertanya bukan tanda tidak tahu, melainkan cara untuk mengurangi risiko. Terakhir, sesuaikan setiap saran dengan kondisi Anda sendiri.',
+				'Kalau saya tidak bisa menjelaskan cara perusahaan itu mendapat uang dalam dua kalimat, saya tidak membelinya.',
+			),
+			say('Penulis Contoh Dua', 'Pernahkah Anda panik saat pasar turun?'),
+			say(
+				'Narasumber Contoh Dua',
+				'Pernah, terutama di tahun-tahun awal. Sekarang saya punya aturan tertulis: tidak mengambil keputusan jual-beli pada hari yang sama dengan berita besar. Saya menunggu, membaca ulang alasan saya membeli, lalu bertanya apakah alasan itu masih berlaku.',
 			),
 			p(
-				'Ingin membaca topik serupa? Lihat kumpulan artikel di ',
-				link('/kategori/investasi/investasi-saham-valas', 'topik Saham & Valas'),
-				' atau lanjutkan ke ',
+				'Sering kali alasannya masih sama, dan yang berubah hanya harga. Kalau alasannya sudah hilang, barulah saya menjual, meski rugi.',
+			),
+			say(
+				'Penulis Contoh Dua',
+				'Berapa banyak saham yang sebaiknya dimiliki investor pemula?',
+			),
+			say(
+				'Narasumber Contoh Dua',
+				'Tidak ada angka ajaib. Saya sendiri memegang delapan sampai dua belas saham dari beberapa sektor, ditambah reksa dana indeks. Intinya, jangan sampai satu saham yang salah pilih menghapus hasil bertahun-tahun.',
+			),
+			say(
+				'Penulis Contoh Dua',
+				'Bagaimana Anda membagi uang antara saham dan instrumen lain?',
+			),
+			say(
+				'Narasumber Contoh Dua',
+				'Saya menyesuaikannya dengan tujuan. Dana untuk kebutuhan dua sampai tiga tahun lagi, seperti biaya sekolah anak, saya taruh di instrumen yang lebih stabil, misalnya deposito atau obligasi ritel. Saham hanya untuk tujuan yang jauh, seperti pensiun.',
+			),
+			p(
+				'Setiap tahun saya meninjau porsinya. Kalau saham sudah naik terlalu banyak sehingga porsinya melewati batas yang saya tetapkan, sebagian saya pindahkan. Kalau turun, saya tambah dari setoran rutin.',
+			),
+			say('Penulis Contoh Dua', 'Bagaimana dengan rekomendasi saham dari media sosial?'),
+			say(
+				'Narasumber Contoh Dua',
+				'Saya anggap sebagai bahan bacaan, bukan perintah beli. Banyak yang membagikan rekomendasi tanpa menyebut risiko atau kepentingannya sendiri. Kalau sebuah ajakan menjanjikan untung pasti dalam waktu singkat, itu justru tanda untuk menjauh.',
+			),
+			say('Penulis Contoh Dua', 'Apa pesan Anda untuk yang baru mau mulai?'),
+			say(
+				'Narasumber Contoh Dua',
+				'Mulailah kecil dan rutin, misalnya menyisihkan jumlah tetap setiap bulan, lalu catat setiap transaksi beserta alasannya. Setelah satu tahun, baca kembali catatan itu. Anda akan belajar lebih banyak dari catatan sendiri daripada dari grup percakapan mana pun.',
+			),
+			h2('Baca juga'),
+			ul(
 				link(
 					'/artikel/investasi-rutin-reksa-dana-pemula',
 					'Investasi rutin bulanan di reksa dana untuk pemula',
 				),
-				'.',
+				link(
+					'/artikel/emas-deposito-atau-obligasi-ritel',
+					'Emas, deposito, atau obligasi ritel: membandingkan risiko secara umum',
+				),
+				link('/kategori/investasi', 'Semua artikel di topik Investasi'),
 			),
 		],
 	},

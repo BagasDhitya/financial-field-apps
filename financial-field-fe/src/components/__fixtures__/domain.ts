@@ -43,6 +43,36 @@ export const videoFixture: ArticleVideo = {
 		'Keterangan video dari redaksi: apa yang ditampilkan video dan mengapa ada di artikel ini.',
 };
 
+/**
+ * An interview body written as a dialogue (ADR-0020): bold "Name:" paragraphs,
+ * a plain paragraph continuing a turn, and a heading that ends the dialogue.
+ */
+export const dialogueFixture: Article['body'] = [
+	{
+		type: 'paragraph',
+		children: [{ type: 'text', text: 'Pengantar redaksi sebelum percakapan.' }],
+	},
+	{
+		type: 'paragraph',
+		children: [
+			{ type: 'text', text: 'Contoh Penulis:', bold: true },
+			{ type: 'text', text: ' Pertanyaan pertama dari pewawancara?' },
+		],
+	},
+	{
+		type: 'paragraph',
+		children: [
+			{ type: 'text', text: 'Narasumber Contoh:', bold: true },
+			{ type: 'text', text: ' Jawaban narasumber, paragraf pertama.' },
+		],
+	},
+	{
+		type: 'paragraph',
+		children: [{ type: 'text', text: 'Paragraf kedua dari jawaban yang sama.' }],
+	},
+	{ type: 'heading', level: 1, children: [{ type: 'text', text: 'Baca juga' }] },
+];
+
 export function summary(overrides: Partial<ArticleSummary> = {}): ArticleSummary {
 	return {
 		id: overrides.id ?? 'article-1',

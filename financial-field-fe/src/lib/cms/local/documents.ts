@@ -8,6 +8,7 @@ import { STOCK_TICKERS } from '@/data/stock-tickers';
 import { TAGS } from '@/data/tags';
 import type { ArticleEntry, BlocksEntry, SeoEntry } from '@/data/types';
 import { WRITER_PROFILES } from '@/data/writer-profiles';
+import { toDialogue } from '@/lib/blocks';
 import { parseYouTubeId } from '@/lib/video';
 
 import type { ContentTypeName } from './schema';
@@ -17,8 +18,9 @@ import type { ContentTypeName } from './schema';
  * §S4.8). Relations become references in both directions, as the CMS stores
  * them: an article's `primary_category` also appears in that category's
  * `category` list. A duplicate slug, an unknown relation, a missing featured
- * article, an internal body link to a page that doesn't exist or a broken
- * featured video throws, so `next build` stops and names the entry.
+ * article, an internal body link to a page that doesn't exist, a broken
+ * featured video or an interview that isn't written as a dialogue throws, so
+ * `next build` stops and names the entry.
  */
 
 /** A stored document: its system fields plus attribute values. */
@@ -394,6 +396,29 @@ for (const entry of ARTICLES) {
 }
 for (const entry of STATIC_PAGES) {
 	checkLinks(`static page "${entry.slug}"`, entry.body);
+}
+
+/**
+ * An interview must read as a dialogue led by its author (ADR-0020): at least
+ * one turn named like the author and one guest turn. The renderer would fall
+ * back to plain text; for the hardcoded content that is a mistake, so it stops.
+ */
+function checkDialogue(entry: ArticleEntry): void {
+	const owner = `interview "${entry.slug}"`;
+	const author = WRITER_PROFILES.find((profile) => profile.slug === entry.author);
+	const dialogue = toDialogue(entry.content, author?.full_name ?? null);
+	if (!dialogue) {
+		fail(`${owner} has no interviewer and guest turns ("**Name:** text" paragraphs)`);
+	}
+	if (!dialogue.interviewerIsAuthor) {
+		fail(`${owner} has no turn named after its author "${author?.full_name ?? entry.author}"`);
+	}
+}
+
+for (const entry of ARTICLES) {
+	if (entry.article_type === 'interview') {
+		checkDialogue(entry);
+	}
 }
 
 // ---- Exports -------------------------------------------------------------------------

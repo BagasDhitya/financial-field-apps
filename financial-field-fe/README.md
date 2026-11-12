@@ -75,6 +75,15 @@ and was uploaded before the article's date; the build checks the link, the date
 and that no other article uses the same video. The player loads only when the
 reader presses play.
 
+An `interview` article shows as a dialogue of speech bubbles. Write each turn
+with `say('Nama', 'teks')`, which stores the name in bold followed by a colon,
+the same as typing **Nama:** in the CMS editor. The turns named like the
+article's author are the interviewer's (pink, left), every other name is a
+guest's (orange, right), and a plain `p()` right after a turn continues it. A
+heading ends the dialogue, so put "Baca juga" links under `h2('Baca juga')`.
+The build stops when an interview has no turn by its author or no guest turn.
+No new field is involved, so the CMS needs no change for this.
+
 ## Code style
 
 The owner's webReader style (pack: `context/conventions.md`, ADR-0013):

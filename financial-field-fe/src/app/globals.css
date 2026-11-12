@@ -5,7 +5,8 @@
  *
  * Palette lock (I7): paper, ink, FF blue, FF navy, FF cyan, FF red — values
  * from the Financial Field JP stylesheet (DSC-0006). Opacity is the only extra
- * lever. Cyan is never text on paper; red is never text.
+ * lever, except the interview dialogue tints below (ADR-0020). Cyan is never
+ * text on paper; red is never text.
  *
  * Sharp edges (I1): the radius scale is removed, so `rounded-*` utilities do
  * not exist in this project, and every element renders square corners.
@@ -19,6 +20,15 @@
 	--color-ff-navy: #18186d;
 	--color-ff-cyan: #09aeee;
 	--color-ff-red: #fe1f20;
+
+	/*
+	 * The one exception to the palette lock (ADR-0020): interview dialogue
+	 * bubbles. Backgrounds and borders only, never text.
+	 */
+	--color-dialogue-host: #fde8ef;
+	--color-dialogue-host-line: #f2a7c0;
+	--color-dialogue-guest: #ffeedd;
+	--color-dialogue-guest-line: #f6b47a;
 
 	--font-display: var(--font-playfair), 'Playfair Display', Georgia, serif;
 	--font-sans: var(--font-montserrat), 'Montserrat', ui-sans-serif, system-ui, sans-serif;

@@ -4,10 +4,10 @@
  * link('/artikel/a', 'judul'), '.')` reads like the text it makes. Only the
  * node types the renderer supports are made here. Heading helpers are named
  * after the tag they render: the renderer shifts Blocks levels down by one
- * (REQ-ART-011), so `h2()` stores level 1.
+ * (REQ-ART-011), so `h2()` stores level 1. `say()` writes an interview turn.
  */
 
-type TextNode = { type: 'text'; text: string };
+type TextNode = { type: 'text'; text: string; bold?: true };
 
 type LinkNode = { type: 'link'; url: string; children: TextNode[] };
 
@@ -41,6 +41,21 @@ function list(format: 'ordered' | 'unordered', items: (Inline | Inline[])[]): Bl
 /** A paragraph of text and links. */
 export function p(...children: Inline[]): Block {
 	return { type: 'paragraph', children: inlines(children) };
+}
+
+/**
+ * One turn of an interview (ADR-0020): the paragraph starts with the speaker's
+ * name in bold and a colon, exactly as an editor writes it in Strapi
+ * (`**Nama:** teks`). Plain `p()` paragraphs right after it continue the turn.
+ */
+export function say(speaker: string, ...children: Inline[]): Block {
+	return {
+		type: 'paragraph',
+		children: [
+			{ type: 'text', text: `${speaker}:`, bold: true },
+			...inlines([' ', ...children]),
+		],
+	};
 }
 
 /** A section heading, rendered as h2. The article title is the page's only h1 (REQ-A11Y-011). */

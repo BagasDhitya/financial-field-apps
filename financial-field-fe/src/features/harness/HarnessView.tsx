@@ -3,6 +3,7 @@ import type { ReactNode } from 'react';
 import {
 	articleFixture,
 	checker,
+	dialogueFixture,
 	harnessNow,
 	summary,
 	videoFixture,
@@ -51,6 +52,21 @@ export function HarnessView() {
 		primaryCategory: null,
 		title: 'Kartu tanpa gambar, penulis, dan kategori',
 	});
+	const interview = (id: string, title: string, withImage = true) =>
+		summary({
+			id,
+			title,
+			articleType: 'interview',
+			featuredImage: withImage
+				? {
+						url: '/images/kategori/karier.png',
+						alternativeText: null,
+						width: 1600,
+						height: 900,
+						mime: 'image/png',
+					}
+				: null,
+		});
 	const withVideo = (id: string, title: string) =>
 		summary({
 			id,
@@ -92,13 +108,41 @@ export function HarnessView() {
 					<ArticleCard article={withVideo('v4', 'Video, kartu teks')} variant="text" />
 				</div>
 			</Specimen>
+			<Specimen title="ArticleCard — interview: mark on the image / compact / text">
+				<div className={styles.cards}>
+					<ArticleCard article={interview('i1', 'Wawancara: kartu dengan gambar')} />
+					<ArticleCard
+						article={interview('i2', 'Wawancara: kartu ringkas')}
+						variant="compact"
+					/>
+					<ArticleCard
+						article={interview('i3', 'Kartu teks tanpa awalan Wawancara', false)}
+						variant="text"
+					/>
+				</div>
+			</Specimen>
+			<Specimen title="ArticleBody — interview dialogue (interviewer left, guest right)">
+				<ArticleBody
+					body={dialogueFixture}
+					siteOrigin="http://localhost:3000"
+					dialogue={{ authorName: writer.fullName, authorAvatar: null }}
+				/>
+			</Specimen>
+			<Specimen title="ArticleBody — interview without named turns (falls back to text)">
+				<ArticleBody
+					body={articleFixture.body}
+					siteOrigin="http://localhost:3000"
+					dialogue={{ authorName: writer.fullName, authorAvatar: null }}
+				/>
+			</Specimen>
 			<Specimen title="VideoEmbed — still and play button; the player loads on click">
 				<VideoEmbed video={videoFixture} articleId="harness" />
 			</Specimen>
-			<Specimen title="Kicker / PR label / Video label">
+			<Specimen title="Kicker / PR label / Video label / Wawancara label">
 				<Kicker category={summary().primaryCategory} />
 				<Kicker category={summary().primaryCategory} isPr />
 				<Kicker category={summary().primaryCategory} isVideo />
+				<Kicker category={summary().primaryCategory} isInterview />
 				<PrLabel size="large" />
 			</Specimen>
 			<Specimen title="RiverItem">
@@ -113,6 +157,10 @@ export function HarnessView() {
 					/>
 					<RiverItem article={pr} now={harnessNow} />
 					<RiverItem article={withVideo('rv', 'Baris dengan video')} now={harnessNow} />
+					<RiverItem
+						article={interview('ri', 'Wawancara: baris di Terbaru', false)}
+						now={harnessNow}
+					/>
 				</ul>
 			</Specimen>
 			<Specimen title="SectionHeader">

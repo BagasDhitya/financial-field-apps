@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, ul } from '../blocks';
+import { h2, link, ol, p, quote, say, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Keuangan Keluarga and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -875,6 +875,98 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 					'Metode 50/30/20: apakah cocok untuk gaji UMR?',
 				),
 				'.',
+			),
+		],
+	},
+	{
+		slug: 'wawancara-keuangan-bersama-tahun-pertama-menikah',
+		title: 'Wawancara: mengatur keuangan bersama di tahun pertama menikah',
+		lead_text:
+			'Narasumber Contoh Delapan, yang menikah dua tahun lalu, berbagi cara ia dan pasangannya membuka angka gaji, membagi rekening, dan menyepakati anggaran bulanan bersama.',
+		article_type: 'interview',
+		featured_image: 'kategori-keuangan-keluarga',
+		primary_category: 'keluarga-anggaran',
+		author: 'penulis-contoh-dua',
+		reviewer: 'peninjau-contoh-dua',
+		tags: ['keluarga-muda', 'anggaran-bulanan'],
+		first_published_at: '2026-09-12T17:00:00.000Z',
+		last_reviewed_at: '2026-09-13T17:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Mulailah dengan saling membuka angka: gaji, utang, dan kiriman rutin untuk keluarga besar.',
+			},
+			{
+				text: 'Gunakan rekening bersama untuk kebutuhan rumah tangga dan rekening pribadi untuk keperluan masing-masing.',
+			},
+			{
+				text: 'Jadwalkan rapat keuangan singkat setiap bulan agar masalah kecil tidak menumpuk.',
+			},
+		],
+		content: [
+			p(
+				'Uang termasuk topik yang paling sering memicu salah paham pada pasangan baru. Narasumber Contoh Delapan dan pasangannya menikah dua tahun lalu dengan dua gaji, dua kebiasaan belanja, dan satu cicilan pinjaman. Kami bertanya bagaimana mereka menyatukan semuanya. Nama narasumber dan angka dalam wawancara ini fiktif.',
+			),
+			say('Penulis Contoh Dua', 'Apa percakapan keuangan pertama Anda berdua?'),
+			say(
+				'Narasumber Contoh Delapan',
+				'Saling membuka angka, beberapa minggu sebelum menikah. Berapa gaji masing-masing, berapa utang, dan berapa yang rutin kami kirim untuk orang tua. Rasanya canggung, tetapi justru itu yang membuat kami tidak kaget belakangan.',
+			),
+			p(
+				'Ternyata pasangan saya masih punya sisa cicilan pinjaman pendidikan. Karena sudah tahu sejak awal, kami bisa memasukkannya ke rencana bersama, bukan menjadi rahasia.',
+			),
+			say('Penulis Contoh Dua', 'Bagaimana Anda membagi rekening?'),
+			say(
+				'Narasumber Contoh Delapan',
+				'Kami memakai pola tiga rekening. Satu rekening bersama untuk sewa rumah, belanja dapur, listrik, internet, dan tabungan keluarga. Masing-masing juga tetap punya rekening pribadi.',
+			),
+			p(
+				'Setiap tanggal gajian, kami memindahkan bagian yang disepakati ke rekening bersama, sebanding dengan gaji masing-masing. Dengan angka fiktif, bila gaji kami Rp8 juta dan Rp6 juta, kontribusinya sekitar 57 dan 43 persen dari kebutuhan bersama.',
+			),
+			say('Penulis Contoh Dua', 'Apakah tidak lebih mudah menyatukan semua uang?'),
+			say(
+				'Narasumber Contoh Delapan',
+				'Bisa saja, dan ada pasangan yang nyaman dengan cara itu. Bagi kami, rekening pribadi memberi ruang untuk hobi dan hadiah tanpa harus minta izin setiap kali. Yang penting kebutuhan bersama selalu terpenuhi lebih dulu.',
+			),
+			say(
+				'Penulis Contoh Dua',
+				'Bagaimana kalian menyelesaikan perbedaan pendapat soal uang?',
+			),
+			say(
+				'Narasumber Contoh Delapan',
+				'Kami mengadakan rapat keuangan singkat setiap awal bulan, kurang dari tiga puluh menit. Kami melihat pengeluaran bulan lalu, rencana bulan ini, dan satu tujuan jangka panjang, misalnya dana darurat atau uang muka rumah.',
+			),
+			p(
+				'Untuk belanja besar di atas batas tertentu, misalnya Rp1 juta, kami sepakat membicarakannya dulu. Aturan sederhana ini mencegah banyak pertengkaran.',
+			),
+			say('Penulis Contoh Dua', 'Bagaimana dengan kiriman untuk orang tua?'),
+			say(
+				'Narasumber Contoh Delapan',
+				'Kami memasukkannya ke anggaran bersama sebagai pos tetap, dengan jumlah yang disepakati untuk kedua keluarga. Dengan begitu tidak ada yang merasa keluarganya dinomorduakan.',
+			),
+			p(
+				'Kalau ada kebutuhan mendadak, misalnya biaya berobat, kami ambil dari dana darurat lalu mengisinya kembali bertahap. Itu juga alasan kami mendahulukan dana darurat sebelum tujuan lain.',
+			),
+			say('Penulis Contoh Dua', 'Apakah kalian memakai aplikasi untuk mencatat?'),
+			say(
+				'Narasumber Contoh Delapan',
+				'Kami mencoba beberapa aplikasi, lalu kembali ke lembar kerja bersama yang bisa dibuka berdua di ponsel. Yang penting bukan alatnya, tetapi siapa yang mencatat. Kami bergantian setiap bulan, supaya keduanya tetap tahu kondisi keuangan rumah tangga.',
+			),
+			say('Penulis Contoh Dua', 'Apa saran Anda untuk pasangan yang baru menikah?'),
+			say(
+				'Narasumber Contoh Delapan',
+				'Mulailah dari kejujuran, bukan dari aplikasi atau metode tertentu. Metode bisa diganti kapan saja, tetapi kebiasaan saling terbuka itulah yang membuat rencana keuangan bertahan.',
+			),
+			h2('Baca juga'),
+			ul(
+				link(
+					'/artikel/metode-50-30-20-untuk-gaji-umr',
+					'Metode 50/30/20: apakah cocok untuk gaji UMR?',
+				),
+				link(
+					'/artikel/menabung-dengan-rekening-terpisah',
+					'Menabung dengan rekening terpisah: cara membagi pos tabungan',
+				),
+				link('/kategori/keuangan-keluarga', 'Semua artikel di topik Keuangan Keluarga'),
 			),
 		],
 	},

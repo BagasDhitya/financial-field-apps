@@ -34,8 +34,9 @@ export type ArticleViewProps = {
 };
 
 /**
- * Article template (REQ-ART-001…012). Order follows SPC-functional §6; a video
- * takes the featured image's place at the top.
+ * Article template (REQ-ART-001…013). Order follows SPC-functional §6; a video
+ * takes the featured image's place at the top, and an interview's body shows
+ * as a dialogue.
  */
 export function ArticleView({
 	article,
@@ -48,6 +49,7 @@ export function ArticleView({
 	analyticsParams,
 }: ArticleViewProps) {
 	const isPr = article.articleType === 'pr_article';
+	const isInterview = article.articleType === 'interview';
 	const reviewed = article.reviewer !== null && article.lastReviewedAt !== null;
 
 	return (
@@ -56,7 +58,11 @@ export function ArticleView({
 				<Breadcrumbs items={breadcrumbs} />
 				<article className={styles.article}>
 					<header className={styles.header}>
-						<Kicker category={article.primaryCategory} isPr={isPr} />
+						<Kicker
+							category={article.primaryCategory}
+							isPr={isPr}
+							isInterview={isInterview}
+						/>
 						<h1 className={styles.title}>{article.title}</h1>
 						{article.leadText ? <p className={styles.dek}>{article.leadText}</p> : null}
 						<Byline
@@ -98,6 +104,16 @@ export function ArticleView({
 										body={article.body}
 										siteOrigin={siteOrigin}
 										sponsored={isPr}
+										dialogue={
+											isInterview
+												? {
+														authorName:
+															article.author?.fullName ?? null,
+														authorAvatar:
+															article.author?.avatar ?? null,
+													}
+												: undefined
+										}
 									/>
 									{analyticsParams ? (
 										<ArticleAnalytics params={analyticsParams} />

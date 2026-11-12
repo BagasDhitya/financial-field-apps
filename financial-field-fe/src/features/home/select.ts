@@ -59,19 +59,41 @@ export function selectHomeStories(
 }
 
 const VIDEO_COUNT = 6;
+const INTERVIEW_COUNT = 6;
+
+function shownIds(stories: HomeStories, also: ArticleSummary[] = []): Set<string> {
+	return new Set(
+		[stories.lead, ...stories.secondary, ...stories.river, ...also].flatMap((article) =>
+			article ? [article.id] : [],
+		),
+	);
+}
 
 /**
  * REQ-HOME-005: the Video section, newest first, without the articles already
  * shown above it in the lead, the editor's picks or the river.
  */
 export function selectHomeVideos(videos: ArticleSummary[], stories: HomeStories): ArticleSummary[] {
-	const shown = new Set(
-		[stories.lead, ...stories.secondary, ...stories.river].flatMap((article) =>
-			article ? [article.id] : [],
-		),
-	);
+	const shown = shownIds(stories);
 	return videos
 		.filter((article) => article.video && article.slug && article.title)
 		.filter((article) => !shown.has(article.id))
 		.slice(0, VIDEO_COUNT);
+}
+
+/**
+ * REQ-HOME-006: the Wawancara section, newest first, without the articles
+ * already shown above it (the lead, the editor's picks, the river and the
+ * Video section).
+ */
+export function selectHomeInterviews(
+	interviews: ArticleSummary[],
+	stories: HomeStories,
+	videos: ArticleSummary[],
+): ArticleSummary[] {
+	const shown = shownIds(stories, videos);
+	return interviews
+		.filter((article) => article.articleType === 'interview' && article.slug && article.title)
+		.filter((article) => !shown.has(article.id))
+		.slice(0, INTERVIEW_COUNT);
 }

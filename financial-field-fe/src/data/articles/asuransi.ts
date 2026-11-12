@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, ul } from '../blocks';
+import { h2, link, ol, p, quote, say, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Asuransi and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -677,6 +677,99 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 					'Asuransi jiwa berjangka atau seumur hidup: mana yang sesuai?',
 				),
 				'.',
+			),
+		],
+	},
+	{
+		slug: 'wawancara-asuransi-kesehatan-tambahan',
+		title: 'Wawancara: perlukah asuransi kesehatan tambahan di luar BPJS?',
+		lead_text:
+			'Narasumber Contoh Lima, perencana keuangan, menjelaskan kapan asuransi kesehatan swasta layak menjadi pelengkap BPJS Kesehatan dan bagian polis yang perlu dicek sebelum membeli.',
+		article_type: 'interview',
+		featured_image: 'kategori-asuransi',
+		primary_category: 'asuransi-kesehatan',
+		author: 'penulis-contoh-tiga',
+		reviewer: 'peninjau-contoh-satu',
+		tags: ['asuransi-kesehatan', 'keluarga-muda'],
+		first_published_at: '2026-10-12T11:00:00.000Z',
+		last_reviewed_at: '2026-10-13T11:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Pastikan kepesertaan BPJS Kesehatan aktif dulu, karena itu fondasi perlindungan kesehatan keluarga.',
+			},
+			{
+				text: 'Asuransi tambahan berguna untuk risiko yang tidak ingin Anda tanggung sendiri, selama preminya tidak menggeser dana darurat.',
+			},
+			{ text: 'Baca masa tunggu, pengecualian, dan batas manfaat sebelum tanda tangan.' },
+		],
+		content: [
+			p(
+				'Pertanyaan ini sering datang dari pembaca yang baru menikah atau baru punya anak: apakah BPJS Kesehatan sudah cukup? Kami berbincang dengan Narasumber Contoh Lima, perencana keuangan, tentang cara menimbangnya. Nama narasumber dan angka dalam wawancara ini fiktif, dan isi wawancara bukan rekomendasi produk tertentu.',
+			),
+			say('Penulis Contoh Tiga', 'Apakah BPJS Kesehatan saja sudah cukup?'),
+			say(
+				'Narasumber Contoh Lima',
+				'Untuk banyak keluarga, BPJS Kesehatan adalah fondasi yang perlu dijaga lebih dulu. Pastikan iurannya lancar dan data keluarga benar. Tanpa fondasi ini, membeli asuransi swasta sering kali hanya memindahkan masalah.',
+			),
+			p(
+				'Pertanyaan berikutnya adalah kebutuhan apa yang belum terpenuhi. Ada yang ingin bebas memilih rumah sakit atau kamar perawatan, ada yang khawatir soal penghasilan saat dirawat. Jawabannya menentukan jenis perlindungan tambahan yang dicari.',
+			),
+			say('Penulis Contoh Tiga', 'Jadi kapan asuransi tambahan masuk akal?'),
+			say(
+				'Narasumber Contoh Lima',
+				'Ketika ada risiko yang tidak ingin atau tidak mampu Anda tanggung sendiri, dan premi tidak mengganggu pos penting lain. Patokan sederhana yang sering saya pakai: total premi semua asuransi jangan sampai menggeser dana darurat dan tabungan rutin.',
+			),
+			p(
+				'Misalnya, dengan angka fiktif, keluarga berpenghasilan Rp10 juta sebulan yang membayar premi Rp2,5 juta perlu bertanya apakah perlindungannya memang sebanding.',
+			),
+			say('Penulis Contoh Tiga', 'Bagian polis apa yang paling sering terlewat?'),
+			say(
+				'Narasumber Contoh Lima',
+				'Masa tunggu, pengecualian, dan batas manfaat. Masa tunggu adalah periode awal ketika klaim untuk penyakit tertentu belum bisa diajukan. Pengecualian adalah daftar kondisi yang tidak ditanggung. Batas manfaat menentukan berapa maksimal yang dibayar dalam setahun atau per perawatan.',
+			),
+			p(
+				'Tanyakan juga apakah produk itu bisa dikoordinasikan dengan BPJS Kesehatan. Dengan koordinasi manfaat, sebagian biaya ditanggung BPJS dan selisihnya oleh asuransi swasta, sesuai ketentuan polis.',
+			),
+			say(
+				'Penulis Contoh Tiga',
+				'Bagaimana dengan produk yang menggabungkan asuransi dan investasi?',
+			),
+			say(
+				'Narasumber Contoh Lima',
+				'Pahami dulu porsi biaya dan porsi investasinya. Bagi banyak orang, memisahkan perlindungan dan investasi membuat keduanya lebih mudah dipantau. Apa pun pilihannya, pastikan perusahaan asuransinya berizin dan diawasi OJK.',
+			),
+			say(
+				'Penulis Contoh Tiga',
+				'Apa yang sebaiknya ditanyakan kepada agen sebelum membeli?',
+			),
+			say(
+				'Narasumber Contoh Lima',
+				'Minta ringkasan informasi produk dan baca bersama di rumah, jangan langsung tanda tangan pada pertemuan pertama. Tanyakan contoh kasus: kalau saya dirawat tiga hari karena demam berdarah, berapa yang dibayar dan dokumen apa yang dibutuhkan untuk klaim?',
+			),
+			p(
+				'Agen yang baik akan menjawab dengan rinci, termasuk hal yang tidak ditanggung. Kalau jawabannya selalu semua ditanggung, itu tanda untuk bertanya lebih jauh.',
+			),
+			say('Penulis Contoh Tiga', 'Bagaimana jika premi terasa berat di tengah jalan?'),
+			say(
+				'Narasumber Contoh Lima',
+				'Hubungi perusahaan asuransi sebelum premi tertunggak, karena polis bisa berhenti berlaku bila premi tidak dibayar sampai masa tenggang habis. Tanyakan pilihan yang ada, misalnya menurunkan manfaat atau mengganti plan. Keputusan yang dibuat dengan tenang biasanya lebih baik daripada membiarkan polis berhenti begitu saja.',
+			),
+			say('Penulis Contoh Tiga', 'Apa saran Anda untuk keluarga muda yang baru mulai?'),
+			say(
+				'Narasumber Contoh Lima',
+				'Urutkan langkahnya: BPJS Kesehatan aktif, dana darurat terkumpul, baru kemudian asuransi tambahan bila memang perlu. Simpan polis dan kartu peserta di tempat yang diketahui pasangan Anda, karena saat sakit, yang mengurus klaim sering kali bukan pemegang polisnya.',
+			),
+			h2('Baca juga'),
+			ul(
+				link(
+					'/artikel/bagian-polis-yang-wajib-dipahami',
+					'Membaca polis asuransi: bagian yang wajib dipahami sebelum tanda tangan',
+				),
+				link(
+					'/artikel/berapa-besar-dana-darurat',
+					'Dana darurat: berapa besar dan di mana menyimpannya?',
+				),
+				link('/kategori/asuransi', 'Semua artikel di topik Asuransi'),
 			),
 		],
 	},

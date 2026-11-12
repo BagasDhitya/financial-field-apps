@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 
 import {
 	getArticlesInCategories,
+	getInterviewArticles,
 	getLatestArticles,
 	getVideoArticles,
 } from '@/lib/content/articles';
@@ -12,7 +13,7 @@ import { routes } from '@/lib/routes';
 import { BRAND, buildMetadata, composeDescription } from '@/lib/seo/metadata';
 
 import { HomeView } from '@/features/home/HomeView';
-import { selectHomeStories, selectHomeVideos } from '@/features/home/select';
+import { selectHomeInterviews, selectHomeStories, selectHomeVideos } from '@/features/home/select';
 
 /** Safety-net window. Keep in sync with REVALIDATE.home (revalidate.test.ts). */
 export const revalidate = 60;
@@ -21,6 +22,9 @@ const BLOCK_SIZE = 3;
 
 /** Enough for the 6 videos after the up to 12 stories above them are taken out. */
 const VIDEO_CANDIDATES = 18;
+
+/** Enough for the 6 interviews after the stories and the videos above them are taken out. */
+const INTERVIEW_CANDIDATES = 24;
 
 export async function generateMetadata(): Promise<Metadata> {
 	const settings = await getSiteSettings();
@@ -35,10 +39,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-	const [navigation, latest, videos, categories, settings] = await Promise.all([
+	const [navigation, latest, videos, interviews, categories, settings] = await Promise.all([
 		getSiteNavigation(),
 		getLatestArticles(1, 20),
 		getVideoArticles(1, VIDEO_CANDIDATES),
+		getInterviewArticles(1, INTERVIEW_CANDIDATES),
 		getCategoryTree(),
 		getSiteSettings(),
 	]);
@@ -55,12 +60,14 @@ export default async function Home() {
 	);
 
 	const stories = selectHomeStories(navigation.featuredArticles, latest.items);
+	const homeVideos = selectHomeVideos(videos.items, stories);
 
 	return (
 		<HomeView
 			heading={`${BRAND}: ${settings.tagline}`}
 			stories={stories}
-			videos={selectHomeVideos(videos.items, stories)}
+			videos={homeVideos}
+			interviews={selectHomeInterviews(interviews.items, stories, homeVideos)}
 			categoryBlocks={blocks.filter((block) => block.articles.length > 0)}
 			now={new Date()}
 		/>

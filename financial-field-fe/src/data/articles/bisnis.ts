@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, ul } from '../blocks';
+import { h2, link, ol, p, quote, say, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Bisnis and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -257,7 +257,7 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 		slug: 'wawancara-memisahkan-uang-pribadi-dan-usaha',
 		title: 'Wawancara: memisahkan uang pribadi dan uang usaha',
 		lead_text:
-			'Narasumber Contoh berbagi pengalaman tentang manfaat memisahkan rekening pribadi dan rekening usaha. Simak pengalaman, kesalahan yang sering terjadi, dan sarannya dalam wawancara berikut.',
+			'Narasumber Contoh Tiga, pemilik usaha katering rumahan, menceritakan mengapa ia memisahkan rekening pribadi dan usaha, serta cara menggaji diri sendiri setiap bulan.',
 		article_type: 'interview',
 		featured_image: 'kategori-bisnis',
 		primary_category: 'bisnis-lainnya',
@@ -267,55 +267,85 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 		first_published_at: '2026-08-17T10:00:00.000Z',
 		last_reviewed_at: '2026-08-18T10:00:00.000Z',
 		key_takeaways: [
+			{ text: 'Buka rekening khusus usaha dan arahkan semua pembayaran pelanggan ke sana.' },
 			{
-				text: 'Narasumber Contoh berbagi pengalaman tentang manfaat memisahkan rekening pribadi dan rekening usaha.',
+				text: 'Tetapkan gaji bulanan untuk diri sendiri, bukan mengambil uang usaha setiap kali perlu.',
 			},
 			{
-				text: 'Catat angka nyata Anda sebelum membuat keputusan tentang pemisahan uang pribadi dan uang usaha.',
+				text: 'Catat penerimaan dan pengeluaran usaha setiap hari agar laba sebenarnya terlihat.',
 			},
-			{ text: 'Tinjau kembali rencana secara berkala dan sesuaikan bila kondisi berubah.' },
 		],
 		content: [
 			p(
-				'Narasumber Contoh berbagi pengalaman tentang manfaat memisahkan rekening pribadi dan rekening usaha. Dalam percakapan berikut, Narasumber Contoh menceritakan pengalamannya tentang pemisahan uang pribadi dan uang usaha, kesalahan yang pernah dilihatnya, dan kebiasaan yang menurutnya paling membantu bagi pembaca yang baru memulai. Jawaban telah disunting agar ringkas, tanpa mengubah maksud yang ingin disampaikan.',
+				'Narasumber Contoh Tiga memulai usaha katering dari dapur rumahnya lima tahun lalu. Pada tahun kedua pesanan ramai, tetapi uangnya selalu terasa habis. Kami berbincang tentang langkah yang akhirnya membuat keuangan usahanya lebih jelas. Nama narasumber dan angka dalam wawancara ini fiktif; jawaban telah disunting agar ringkas.',
 			),
-			h2('Bagaimana awalnya Anda tertarik pada pemisahan uang pribadi dan uang usaha?'),
-			p(
-				'Awalnya karena kebutuhan sendiri. Beberapa tahun lalu saya membuat beberapa keputusan keuangan tanpa rencana, dan hasilnya kurang memuaskan. Sejak itu saya merasa perlu memahami pemisahan uang pribadi dan uang usaha dengan lebih serius. Saya mulai dari hal sederhana: membaca, mencatat, dan bertanya kepada orang yang lebih berpengalaman, sedikit demi sedikit, tanpa target yang berlebihan.',
+			say(
+				'Penulis Contoh Dua',
+				'Apa tanda bahwa uang pribadi dan uang usaha Anda tercampur?',
 			),
-			p(
-				'Yang paling saya pelajari dari masa itu adalah bahwa memulai dengan pertanyaan sederhana jauh lebih mudah daripada menunggu sampai merasa benar-benar siap. Perasaan siap itu sering tidak pernah datang. Jadi, saya memilih untuk mulai dengan pengetahuan yang ada, lalu memperbaikinya sambil berjalan.',
-			),
-			h2('Kesalahan apa yang paling sering Anda lihat?'),
-			p(
-				'Terburu-buru. Banyak orang ingin hasil yang cepat, lalu mengambil keputusan berdasarkan cerita teman atau unggahan di media sosial tanpa melihat kondisi sendiri. Padahal, apa yang cocok untuk orang lain belum tentu cocok untuk kita, karena penghasilan, tanggungan, dan tujuan setiap orang berbeda.',
+			say(
+				'Narasumber Contoh Tiga',
+				'Saya tidak bisa menjawab pertanyaan sederhana: bulan ini usaha saya untung atau rugi? Uang belanja bahan, uang sekolah anak, dan uang dari pelanggan masuk dan keluar dari rekening yang sama.',
 			),
 			p(
-				'Kesalahan berikutnya adalah tidak mencatat. Tanpa catatan, sulit mengetahui apakah sebuah rencana berjalan atau tidak. Banyak orang merasa sudah berhemat, tetapi ketika angkanya dilihat, ternyata pengeluaran justru naik. Catatan yang sederhana sudah cukup, asalkan dibuat secara rutin dan jujur.',
+				'Saya merasa usahanya ramai, tetapi tabungan keluarga tidak bertambah. Ternyata sebagian keuntungan habis untuk kebutuhan rumah tanpa pernah tercatat.',
 			),
-			h2('Kebiasaan apa yang paling membantu Anda?'),
-			p(
-				'Meninjau rencana secara rutin. Saya menyisihkan sekitar tiga puluh menit setiap akhir bulan untuk melihat angka, membandingkannya dengan rencana, dan menyesuaikan langkah untuk bulan berikutnya. Waktunya tidak lama, tetapi manfaatnya terasa karena masalah kecil bisa terlihat sebelum menjadi besar.',
-			),
-			p(
-				'Kebiasaan kecil ini memang terasa membosankan pada awalnya. Namun setelah beberapa bulan, saya mulai melihat pola: pengeluaran mana yang selalu muncul, kapan kebutuhan besar biasanya datang, dan berapa sebenarnya yang bisa disisihkan. Pola inilah yang kemudian membuat rencana saya lebih realistis.',
-			),
-			h2('Apa saran Anda untuk pembaca yang baru mulai?'),
-			p(
-				'Mulailah dari langkah yang bisa dilakukan minggu ini. Tidak perlu sempurna; yang penting konsisten. Misalnya, catat semua pengeluaran selama satu minggu, lalu lihat hasilnya bersama keluarga. Dari situ biasanya muncul satu atau dua hal yang bisa langsung diperbaiki tanpa harus mengubah gaya hidup secara drastis. Setelah itu, tambahkan satu kebiasaan baru setiap bulan.',
+			say('Penulis Contoh Dua', 'Langkah pertama apa yang Anda ambil?'),
+			say(
+				'Narasumber Contoh Tiga',
+				'Membuka rekening kedua, khusus untuk usaha. Semua pembayaran pelanggan, termasuk lewat QRIS, saya arahkan ke rekening itu. Belanja bahan, gas, dan kemasan juga dibayar dari sana.',
 			),
 			p(
-				'Dan jangan ragu bertanya kepada orang yang lebih memahami topiknya sebelum mengambil keputusan besar. Bertanya bukan tanda tidak tahu, melainkan cara untuk mengurangi risiko. Terakhir, sesuaikan setiap saran dengan kondisi Anda sendiri.',
+				'Butuh disiplin di bulan-bulan awal, karena kebiasaan lama selalu menggoda. Setelah tiga bulan, saya bisa melihat dengan jelas berapa uang yang masuk dan ke mana perginya.',
+			),
+			say('Penulis Contoh Dua', 'Lalu bagaimana Anda mengambil uang untuk kebutuhan rumah?'),
+			say(
+				'Narasumber Contoh Tiga',
+				'Saya menggaji diri sendiri. Setiap tanggal satu, sejumlah tetap dipindahkan dari rekening usaha ke rekening pribadi, misalnya Rp4 juta, angka fiktif. Kalau laba bulan itu lebih besar, kelebihannya tetap di rekening usaha sebagai cadangan atau untuk membeli peralatan.',
 			),
 			p(
-				'Ingin membaca topik serupa? Lihat kumpulan artikel di ',
-				link('/kategori/bisnis/bisnis-lainnya', 'topik Bisnis Lainnya'),
-				' atau lanjutkan ke ',
+				'Dengan cara ini, keluarga punya penghasilan yang bisa diperkirakan, dan usaha tidak kekurangan modal kerja saat pesanan sepi.',
+			),
+			say('Penulis Contoh Dua', 'Bagaimana Anda mencatat keuangan usaha?'),
+			say(
+				'Narasumber Contoh Tiga',
+				'Awalnya di buku tulis, sekarang di lembar kerja sederhana di ponsel. Setiap malam saya catat penerimaan dan pengeluaran hari itu, lengkap dengan foto nota bila ada. Waktunya kurang dari sepuluh menit.',
+			),
+			p(
+				'Catatan ini juga berguna ketika saya mengajukan pembiayaan usaha. Pemberi pinjaman ingin melihat arus kas, bukan sekadar cerita bahwa usaha sedang ramai.',
+			),
+			say('Penulis Contoh Dua', 'Bagaimana dengan pajak usaha Anda?'),
+			say(
+				'Narasumber Contoh Tiga',
+				'Sejak omzet mulai stabil, saya mendaftarkan usaha dan mencari tahu kewajiban pajak untuk usaha kecil. Karena uang usaha sudah terpisah, menghitung omzet bulanan menjadi mudah: cukup lihat mutasi rekening usaha dan catatan harian.',
+			),
+			p(
+				'Saran saya, tanyakan langsung ke kantor pajak terdekat atau saluran resmi DJP tentang aturan yang berlaku untuk usaha Anda, karena ketentuannya bisa berubah.',
+			),
+			say(
+				'Penulis Contoh Dua',
+				'Apa kesalahan yang pernah Anda buat setelah memisahkan rekening?',
+			),
+			say(
+				'Narasumber Contoh Tiga',
+				'Meminjam dari rekening usaha untuk keperluan rumah, lalu lupa mengembalikannya. Sekarang setiap pinjaman seperti itu saya catat sebagai utang pribadi kepada usaha, lengkap dengan tanggal pengembaliannya.',
+			),
+			say('Penulis Contoh Dua', 'Apa saran Anda untuk pemilik usaha kecil lain?'),
+			say(
+				'Narasumber Contoh Tiga',
+				'Jangan menunggu usaha besar untuk mulai rapi. Justru saat masih kecil, memisahkan uang paling mudah dilakukan. Mulailah dengan satu rekening, satu catatan harian, dan satu tanggal gajian untuk diri sendiri.',
+			),
+			h2('Baca juga'),
+			ul(
 				link(
 					'/artikel/modal-usaha-kecil',
 					'Modal usaha kecil: menabung, meminjam, atau mencari mitra?',
 				),
-				'.',
+				link(
+					'/artikel/mencatat-penghasilan-kerja-sampingan',
+					'Kerja sampingan: mencatat penghasilan tambahan dengan rapi',
+				),
+				link('/kategori/bisnis', 'Semua artikel di topik Bisnis'),
 			),
 		],
 	},

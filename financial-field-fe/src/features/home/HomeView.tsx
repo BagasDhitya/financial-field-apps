@@ -20,12 +20,21 @@ export type HomeViewProps = {
 	stories: HomeStories;
 	/** Articles with a video, not already above (REQ-HOME-005); empty hides the section. */
 	videos: ArticleSummary[];
+	/** Interviews, not already above (REQ-HOME-006); empty hides the section. */
+	interviews: ArticleSummary[];
 	categoryBlocks: CategoryBlock[];
 	now: Date;
 };
 
-/** Media-first home: lead story, editor picks, Terbaru river, Video, topic blocks. */
-export function HomeView({ heading, stories, videos, categoryBlocks, now }: HomeViewProps) {
+/** Media-first home: lead story, editor picks, Terbaru river, Video, Wawancara, topic blocks. */
+export function HomeView({
+	heading,
+	stories,
+	videos,
+	interviews,
+	categoryBlocks,
+	now,
+}: HomeViewProps) {
 	const { lead, secondary, river } = stories;
 
 	return (
@@ -101,6 +110,24 @@ export function HomeView({ heading, stories, videos, categoryBlocks, now }: Home
 						{videos.map((article) => (
 							<li key={article.id}>
 								<ArticleCard article={article} media="video" trackAs="home_video" />
+							</li>
+						))}
+					</ul>
+				</section>
+			) : null}
+
+			{interviews.length > 0 ? (
+				<section className={styles.block} aria-labelledby="wawancara">
+					<SectionHeader
+						id="wawancara"
+						title="Wawancara"
+						href={routes.interviews()}
+						linkLabel="Semua wawancara"
+					/>
+					<ul className={styles.grid}>
+						{interviews.map((article) => (
+							<li key={article.id}>
+								<ArticleCard article={article} trackAs="home_interview" />
 							</li>
 						))}
 					</ul>

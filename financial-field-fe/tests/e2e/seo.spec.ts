@@ -20,7 +20,7 @@ test('sitemap index and files list only indexable URLs (AC9)', async ({ request 
 	expect(categories.match(/<loc>/g)).toHaveLength(59);
 	const articles = await (await request.get('/sitemaps/articles-1.xml')).text();
 	expect(articles).toContain('<lastmod>');
-	expect(articles.match(/<loc>/g)).toHaveLength(60);
+	expect(articles.match(/<loc>/g)).toHaveLength(65);
 });
 
 test('security headers are present (AC19, REQ-SEC-001)', async ({ request }) => {

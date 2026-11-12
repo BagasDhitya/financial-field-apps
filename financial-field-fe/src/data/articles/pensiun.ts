@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, ul } from '../blocks';
+import { h2, link, ol, p, quote, say, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Pensiun and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -502,6 +502,93 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 					'Mengenal manfaat program pensiun pemerintah bagi pekerja',
 				),
 				'.',
+			),
+		],
+	},
+	{
+		slug: 'wawancara-lima-tahun-menjelang-pensiun',
+		title: 'Wawancara: lima tahun menjelang pensiun, apa yang perlu dibereskan?',
+		lead_text:
+			'Narasumber Contoh Enam, pegawai swasta yang lima tahun lagi pensiun, berbagi cara ia memetakan sumber dana, melunasi utang, dan menyesuaikan gaya hidup sebelum berhenti bekerja.',
+		article_type: 'interview',
+		featured_image: 'kategori-pensiun',
+		primary_category: 'pensiun-lainnya',
+		author: 'penulis-contoh-satu',
+		reviewer: 'peninjau-contoh-satu',
+		tags: ['pensiun', 'lansia'],
+		first_published_at: '2026-10-02T13:00:00.000Z',
+		last_reviewed_at: '2026-10-03T13:00:00.000Z',
+		key_takeaways: [
+			{
+				text: 'Petakan semua sumber dana pensiun, dari program pemerintah, kantor, hingga tabungan pribadi, beserta kapan masing-masing cair.',
+			},
+			{ text: 'Usahakan utang konsumtif lunas sebelum gaji bulanan berhenti.' },
+			{
+				text: 'Coba hidup dengan anggaran masa pensiun selama beberapa bulan sebelum benar-benar pensiun.',
+			},
+		],
+		content: [
+			p(
+				'Lima tahun terasa lama, tetapi bagi Narasumber Contoh Enam, waktu itu justru terasa sempit setelah ia mulai menghitung. Kami berbincang tentang daftar yang ia susun untuk masa menjelang pensiun. Nama narasumber dan angka dalam wawancara ini fiktif; jawaban telah disunting agar ringkas.',
+			),
+			say('Penulis Contoh Satu', 'Kapan Anda mulai serius memikirkan pensiun?'),
+			say(
+				'Narasumber Contoh Enam',
+				'Saat ulang tahun kelima puluh. Bagian SDM di kantor mengirimkan perkiraan saldo program pensiun saya, dan saya sadar belum pernah benar-benar membacanya. Hari itu juga saya membuat daftar semua sumber dana yang akan saya andalkan.',
+			),
+			say('Penulis Contoh Satu', 'Apa saja isi daftar itu?'),
+			say(
+				'Narasumber Contoh Enam',
+				'Ada program dari pemerintah melalui BPJS Ketenagakerjaan, yaitu Jaminan Hari Tua dan Jaminan Pensiun. Ada dana pensiun dari kantor. Lalu tabungan dan investasi pribadi. Untuk setiap sumber, saya catat perkiraan nilainya, kapan bisa dicairkan, dan apakah dibayar sekaligus atau bulanan.',
+			),
+			p(
+				'Ternyata waktunya tidak sama. Ada yang cair sekaligus, ada yang dibayar bulanan, dan ada yang baru bisa diterima pada usia tertentu. Mengetahui urutannya membantu saya menyusun arus kas setelah gaji berhenti.',
+			),
+			say('Penulis Contoh Satu', 'Bagaimana dengan utang?'),
+			say(
+				'Narasumber Contoh Enam',
+				'Itu prioritas saya. Masih ada sisa cicilan kendaraan dan kartu kredit. Saya menyusun jadwal agar keduanya lunas paling lambat dua tahun sebelum pensiun. Membayar cicilan dari dana pensiun terasa seperti mengurangi umur tabungan.',
+			),
+			p(
+				'Untuk rumah, saya dan istri memutuskan tidak mengambil pinjaman baru apa pun, termasuk untuk renovasi besar.',
+			),
+			say('Penulis Contoh Satu', 'Apakah gaya hidup Anda ikut berubah?'),
+			say(
+				'Narasumber Contoh Enam',
+				'Pelan-pelan, ya. Tahun lalu kami mencoba hidup dengan anggaran masa pensiun selama enam bulan, misalnya Rp7 juta sebulan, angka fiktif. Selisih dari gaji kami tabung. Uji coba itu menunjukkan pos mana yang realistis dan mana yang terlalu optimistis, terutama biaya kesehatan dan bantuan untuk keluarga.',
+			),
+			say('Penulis Contoh Satu', 'Apakah Anda berencana tetap bekerja setelah pensiun?'),
+			say(
+				'Narasumber Contoh Enam',
+				'Sedikit, mungkin dua atau tiga hari seminggu sebagai pengajar di kursus dekat rumah. Bukan semata soal uang, tetapi juga supaya tetap punya rutinitas dan teman bicara.',
+			),
+			p(
+				'Namun saya tidak memasukkan penghasilan itu ke perhitungan utama. Kalau ternyata tidak berjalan, rencana pensiun saya tetap harus cukup tanpanya.',
+			),
+			say('Penulis Contoh Satu', 'Bagaimana dengan biaya kesehatan?'),
+			say(
+				'Narasumber Contoh Enam',
+				'Saya memastikan kepesertaan BPJS Kesehatan tetap aktif setelah tidak lagi bekerja di kantor, karena status kepesertaannya ikut berubah. Selain itu, saya menyisihkan pos khusus kesehatan di tabungan, terpisah dari dana harian. Biaya kesehatan biasanya justru naik ketika penghasilan turun.',
+			),
+			say(
+				'Penulis Contoh Satu',
+				'Apa yang ingin Anda sampaikan kepada pembaca yang masih jauh dari pensiun?',
+			),
+			say(
+				'Narasumber Contoh Enam',
+				'Bacalah laporan saldo pensiun Anda sejak sekarang, meski angkanya masih kecil. Dan bicarakan rencana pensiun dengan pasangan dan anak sejak awal. Pensiun bukan hanya urusan angka, tetapi juga soal siapa yang bergantung pada siapa.',
+			),
+			h2('Baca juga'),
+			ul(
+				link(
+					'/artikel/menghitung-kebutuhan-dana-pensiun',
+					'Berapa dana pensiun yang cukup? Cara menghitung kebutuhan kasar',
+				),
+				link(
+					'/artikel/manfaat-program-pensiun-pemerintah',
+					'Mengenal manfaat program pensiun pemerintah bagi pekerja',
+				),
+				link('/kategori/pensiun', 'Semua artikel di topik Pensiun'),
 			),
 		],
 	},

@@ -126,11 +126,15 @@ export async function getArticlesByAuthor(
 	});
 }
 
-/** Articles of type `interview`, for /wawancara. */
-export async function getInterviewArticles(page = 1): Promise<Paginated<ArticleSummary>> {
+/** Articles of type `interview`, newest first: /wawancara and the home Wawancara section. */
+export async function getInterviewArticles(
+	page = 1,
+	pageSize = LISTING_PAGE_SIZE,
+): Promise<Paginated<ArticleSummary>> {
 	return fetchArticleListing({
 		filters: { article_type: { $eq: 'interview' } },
 		page,
+		pageSize,
 		tags: [],
 		revalidate: REVALIDATE.archive,
 	});

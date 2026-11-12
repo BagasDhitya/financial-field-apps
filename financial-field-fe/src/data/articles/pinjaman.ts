@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, ul } from '../blocks';
+import { h2, link, ol, p, quote, say, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Pinjaman and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -308,6 +308,94 @@ export const PINJAMAN_ARTICLES: ArticleEntry[] = [
 					'Simulasi KPR rumah pertama bersama Bank Contoh',
 				),
 				'.',
+			),
+		],
+	},
+	{
+		slug: 'wawancara-keluar-dari-tumpukan-cicilan-daring',
+		title: 'Wawancara: keluar dari tumpukan cicilan paylater dan pinjaman daring',
+		lead_text:
+			'Narasumber Contoh Tujuh, pendamping keuangan, menjelaskan cara menghentikan cicilan baru, mengurutkan pelunasan, dan memeriksa legalitas pemberi pinjaman daring.',
+		article_type: 'interview',
+		featured_image: 'kategori-pinjaman',
+		primary_category: 'pinjaman-lainnya',
+		author: 'penulis-contoh-tiga',
+		reviewer: 'peninjau-contoh-dua',
+		tags: ['nontunai', 'anggaran-bulanan'],
+		first_published_at: '2026-09-22T15:00:00.000Z',
+		last_reviewed_at: '2026-09-23T15:00:00.000Z',
+		key_takeaways: [
+			{ text: 'Hentikan pinjaman baru dan tulis semua cicilan dalam satu daftar.' },
+			{
+				text: 'Bayar minimum semua cicilan, lalu arahkan sisa uang ke cicilan dengan bunga dan denda tertinggi.',
+			},
+			{ text: 'Pinjam hanya dari penyelenggara yang terdaftar dan berizin OJK.' },
+		],
+		content: [
+			p(
+				'Paylater dan pinjaman daring membuat berutang semudah beberapa ketukan di layar. Narasumber Contoh Tujuh mendampingi warga yang cicilannya menumpuk dari beberapa aplikasi sekaligus. Kami bertanya bagaimana langkah keluarnya. Nama narasumber dan angka dalam wawancara ini fiktif; jawaban telah disunting agar ringkas.',
+			),
+			say('Penulis Contoh Tiga', 'Bagaimana biasanya cicilan bisa menumpuk?'),
+			say(
+				'Narasumber Contoh Tujuh',
+				'Hampir selalu dimulai dari jumlah kecil. Belanja kebutuhan dengan paylater, lalu bulan berikutnya ada tagihan yang belum tertutup, lalu meminjam di aplikasi lain untuk membayarnya. Dalam beberapa bulan, satu orang bisa punya empat atau lima cicilan dengan tanggal jatuh tempo berbeda.',
+			),
+			p(
+				'Yang membuat berat bukan hanya pokok utangnya, tetapi juga bunga dan denda keterlambatan yang terus bertambah.',
+			),
+			say('Penulis Contoh Tiga', 'Apa langkah pertama yang Anda sarankan?'),
+			say(
+				'Narasumber Contoh Tujuh',
+				'Berhenti menambah pinjaman baru, apa pun alasannya. Setelah itu tulis semua cicilan dalam satu daftar: nama aplikasi, sisa pokok, bunga atau biaya, denda, dan tanggal jatuh tempo.',
+			),
+			p(
+				'Banyak orang baru menyadari total utangnya ketika semua angka itu ada di satu halaman. Itu menyakitkan, tetapi tanpa daftar ini tidak ada rencana yang bisa disusun.',
+			),
+			say('Penulis Contoh Tiga', 'Lalu cicilan mana yang dilunasi lebih dulu?'),
+			say(
+				'Narasumber Contoh Tujuh',
+				'Bayar minimum untuk semua cicilan agar denda tidak bertambah, lalu arahkan sisa uang ke cicilan dengan bunga dan denda tertinggi. Setelah lunas, pindahkan jumlah yang sama ke cicilan berikutnya.',
+			),
+			p(
+				'Sebagai ilustrasi fiktif, bila Anda bisa menyisihkan Rp1,5 juta sebulan untuk utang dan pembayaran minimum seluruhnya Rp1 juta, sisa Rp500 ribu itulah yang mempercepat pelunasan satu per satu.',
+			),
+			say('Penulis Contoh Tiga', 'Bagaimana jika pemberi pinjamannya ternyata ilegal?'),
+			say(
+				'Narasumber Contoh Tujuh',
+				'Periksa dulu namanya di daftar penyelenggara berizin di situs OJK. Bila tidak terdaftar, jangan memberikan akses data tambahan apa pun, simpan bukti percakapan, dan laporkan ke OJK. Penagihan dengan ancaman atau penyebaran data pribadi bukan hal yang harus Anda terima.',
+			),
+			say(
+				'Penulis Contoh Tiga',
+				'Bagaimana jika penghasilan tidak cukup untuk membayar minimum semua cicilan?',
+			),
+			say(
+				'Narasumber Contoh Tujuh',
+				'Hubungi pemberi pinjaman sebelum jatuh tempo, bukan setelah tertunggak. Penyelenggara yang berizin umumnya punya jalur untuk mengajukan keringanan atau penjadwalan ulang, walaupun tidak selalu dikabulkan. Siapkan penjelasan singkat dan bukti penghasilan Anda.',
+			),
+			p(
+				'Sambil menunggu, pangkas pengeluaran yang bisa ditunda dan cari penghasilan tambahan sementara. Hindari menutup satu cicilan dengan pinjaman baru, karena itu hanya memindahkan masalah ke bulan depan.',
+			),
+			say('Penulis Contoh Tiga', 'Perlukah keluarga diberi tahu?'),
+			say(
+				'Narasumber Contoh Tujuh',
+				'Menurut saya perlu, setidaknya satu orang yang Anda percaya. Banyak yang menyimpannya sendirian karena malu, padahal tekanan itu sering membuat keputusan semakin buruk. Dukungan keluarga juga membantu menjaga komitmen untuk tidak meminjam lagi.',
+			),
+			say('Penulis Contoh Tiga', 'Bagaimana mencegah hal ini terulang?'),
+			say(
+				'Narasumber Contoh Tujuh',
+				'Matikan fitur paylater yang tidak benar-benar dibutuhkan, dan siapkan dana darurat kecil, misalnya setara satu bulan pengeluaran. Sebelum meminjam lagi, tanyakan dua hal: apakah ini kebutuhan, dan dari pos mana cicilannya akan dibayar.',
+			),
+			h2('Baca juga'),
+			ul(
+				link(
+					'/artikel/memeriksa-pinjaman-daring-legal',
+					'Pinjaman daring legal atau ilegal: cara memeriksa sebelum meminjam',
+				),
+				link(
+					'/artikel/berapa-besar-dana-darurat',
+					'Dana darurat: berapa besar dan di mana menyimpannya?',
+				),
+				link('/kategori/pinjaman', 'Semua artikel di topik Pinjaman'),
 			),
 		],
 	},

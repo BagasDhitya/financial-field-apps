@@ -7,7 +7,7 @@ import type { ArticleSummary, MediaAsset } from '@/types';
 import { CmsImage } from '../CmsImage/CmsImage';
 import { DateTime } from '../DateTime/DateTime';
 import { Icon } from '../Icon/Icon';
-import { Kicker } from '../Kicker/Kicker';
+import { Kicker, needsInterviewHint } from '../Kicker/Kicker';
 
 import styles from './ArticleCard.module.css';
 
@@ -68,6 +68,7 @@ export function ArticleCard({
 	}
 	const Heading = headingLevel === 2 ? 'h2' : 'h3';
 	const isPr = article.articleType === 'pr_article';
+	const isInterview = article.articleType === 'interview';
 	const image =
 		media === 'video' && article.video ? videoStill(article.video.id) : article.featuredImage;
 	const showImage = variant !== 'text' && image;
@@ -91,6 +92,13 @@ export function ArticleCard({
 									<span className="type-label">Video</span>
 								)}
 							</span>
+						) : isInterview ? (
+							<span className={styles.interview} aria-hidden="true">
+								<Icon name="chat" size={16} />
+								{variant === 'compact' ? null : (
+									<span className="type-label">Wawancara</span>
+								)}
+							</span>
 						) : null}
 					</div>
 				</div>
@@ -100,6 +108,7 @@ export function ArticleCard({
 					category={article.primaryCategory}
 					isPr={isPr}
 					isVideo={article.video !== null && !showImage}
+					isInterview={isInterview && !showImage}
 				/>
 				<Heading className={styles.title}>
 					<Link
@@ -115,6 +124,9 @@ export function ArticleCard({
 					>
 						{article.title}
 						{article.video ? <span className="visually-hidden"> (video)</span> : null}
+						{isInterview && needsInterviewHint(article.title) ? (
+							<span className="visually-hidden"> (wawancara)</span>
+						) : null}
 					</Link>
 				</Heading>
 				{variant === 'lead' || variant === 'standard' ? (

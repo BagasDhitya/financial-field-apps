@@ -8,6 +8,7 @@ const PATHS = {
 	link: 'M10 14a4 4 0 0 0 5.7 0l3-3a4 4 0 0 0-5.7-5.7l-1 1M14 10a4 4 0 0 0-5.7 0l-3 3a4 4 0 0 0 5.7 5.7l1-1',
 	check: 'M5 12.5l4.5 4.5L19 7',
 	play: 'M8 5.5v13l10.5-6.5L8 5.5Z',
+	chat: 'M4 5h16v11h-9l-5 4v-4H4V5Z',
 } as const;
 
 export type IconName = keyof typeof PATHS;
