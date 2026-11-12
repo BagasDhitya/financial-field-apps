@@ -5,6 +5,8 @@ financial-field-cms/.cache/
 financial-field-cms/dist/
 financial-field-cms/.env
 financial-field-cms/public/uploads/
+financial-field-cms/src/extensions/documentation
+
 # CMS env variants (only the example is committed)
 financial-field-cms/.env*
 !financial-field-cms/.env.example
