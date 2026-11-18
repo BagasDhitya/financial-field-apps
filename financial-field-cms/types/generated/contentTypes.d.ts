@@ -509,6 +509,10 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     featured_image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    interview_dialogues: Schema.Attribute.Component<
+      'article.chat-bubble',
+      true
+    >;
     lead_text: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<

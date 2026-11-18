@@ -78,6 +78,11 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "inversedBy": "articles"
+    },
+    "interview_dialogues": {
+      "type": "component",
+      "component": "article.chat-bubble",
+      "repeatable": true
     }
   }
 }
