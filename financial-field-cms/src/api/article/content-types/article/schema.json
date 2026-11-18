@@ -12,11 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "lead_text": {
       "type": "text"
@@ -27,11 +29,21 @@
     "featured_image": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": ["images", "files", "videos", "audios"]
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
     },
     "article_type": {
       "type": "enumeration",
-      "enum": ["standard", "pr_article", "interview", "column"]
+      "enum": [
+        "standard",
+        "pr_article",
+        "interview",
+        "column"
+      ]
     },
     "categories": {
       "type": "relation",
@@ -69,13 +81,15 @@
       "target": "api::tag.tag",
       "inversedBy": "articles"
     },
-    "video_url": {
-      "type": "text"
-    },
     "interview_dialogues": {
       "type": "component",
       "component": "article.chat-bubble",
       "repeatable": true
+    },
+    "video": {
+      "type": "component",
+      "component": "article.video",
+      "repeatable": false
     }
   }
 }
