@@ -25,9 +25,9 @@ export interface ArticleVideo extends Struct.ComponentSchema {
     caption: Schema.Attribute.Text;
     channel: Schema.Attribute.Text;
     duration: Schema.Attribute.String;
-    embedUrl: Schema.Attribute.Text;
+    embed_url: Schema.Attribute.Text;
     title: Schema.Attribute.String;
-    uploadedAt: Schema.Attribute.DateTime;
+    uploaded_at: Schema.Attribute.DateTime;
   };
 }
 

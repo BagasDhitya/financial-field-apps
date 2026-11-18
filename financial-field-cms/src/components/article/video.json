@@ -11,7 +11,7 @@
     "channel": {
       "type": "text"
     },
-    "uploadedAt": {
+    "uploaded_at": {
       "type": "datetime"
     },
     "duration": {
@@ -20,7 +20,7 @@
     "caption": {
       "type": "text"
     },
-    "embedUrl": {
+    "embed_url": {
       "type": "text"
     }
   },
