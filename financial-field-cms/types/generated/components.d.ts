@@ -16,6 +16,21 @@ export interface ArticleChatBubble extends Struct.ComponentSchema {
   };
 }
 
+export interface ArticleVideo extends Struct.ComponentSchema {
+  collectionName: 'components_article_videos';
+  info: {
+    displayName: 'Video';
+  };
+  attributes: {
+    caption: Schema.Attribute.Text;
+    channel: Schema.Attribute.Text;
+    duration: Schema.Attribute.String;
+    embed_url: Schema.Attribute.Text;
+    title: Schema.Attribute.String;
+    uploaded_at: Schema.Attribute.DateTime;
+  };
+}
+
 export interface NavigationMenuItem extends Struct.ComponentSchema {
   collectionName: 'components_navigation_menu_items';
   info: {
@@ -35,6 +50,7 @@ declare module '@strapi/strapi' {
   export namespace Public {
     export interface ComponentSchemas {
       'article.chat-bubble': ArticleChatBubble;
+      'article.video': ArticleVideo;
       'navigation.menu-item': NavigationMenuItem;
     }
   }
