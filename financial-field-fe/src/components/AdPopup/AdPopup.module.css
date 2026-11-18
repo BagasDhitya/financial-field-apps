@@ -1,0 +1,61 @@
+/* Below 1024 px: a bar on the bottom edge, above the home indicator. */
+.root {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: var(--z-ad);
+	display: grid;
+	gap: 0.25rem;
+	padding: 0.25rem var(--page-px) calc(0.5rem + env(safe-area-inset-bottom, 0px));
+	border-top: var(--stroke-frame) solid var(--color-ink);
+	background: var(--color-paper);
+}
+
+.bar {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.close {
+	display: inline-flex;
+	width: 2.75rem;
+	height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	border: var(--stroke-rule) solid var(--color-ink);
+	background: var(--color-paper);
+	color: var(--color-ink);
+	cursor: pointer;
+}
+
+.wide {
+	display: none;
+}
+
+/* From 1024 px: a 300×250 box bottom right, never covering the reading column. */
+@media (min-width: 1024px) {
+	.root {
+		right: var(--space-3);
+		bottom: var(--space-3);
+		left: auto;
+		width: calc(300px + 2 * var(--space-2) + 2 * var(--stroke-card));
+		padding: var(--space-1) var(--space-2) var(--space-2);
+		border: var(--stroke-card) solid var(--color-ink);
+		box-shadow: 6px 6px 0 0 rgb(3 3 3 / 0.12);
+	}
+
+	.wide {
+		display: block;
+	}
+
+	.narrow {
+		display: none;
+	}
+}
+
+/* The harness shows it in the page flow. */
+.preview {
+	position: static;
+}

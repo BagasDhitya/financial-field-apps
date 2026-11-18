@@ -227,6 +227,7 @@ export const menuFixture: MainMenuEntry[] = [
 			},
 		],
 		footer: { label: 'Semua perbandingan', href: '/bandingkan' },
+		highlighted: true,
 	},
 	{ kind: 'link', label: 'Kamus Keuangan', href: '/kamus-keuangan' },
 	{

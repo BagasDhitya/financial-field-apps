@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { guardOutboundUrl, withUtm } from './outbound';
+import { addUtm, guardOutboundUrl, withUtm } from './outbound';
 
 const ORIGIN = 'https://ffid.example';
 
@@ -39,5 +39,14 @@ describe('withUtm (REQ-INT-003)', () => {
 	it('leaves a URL with its own utm_* alone', () => {
 		const url = 'https://example.com/p?utm_source=mitra';
 		expect(withUtm(url, 'jaminan-bpkb', 'produk-a')).toBe(url);
+	});
+});
+
+describe('addUtm (ADR-0024, the partner-media links)', () => {
+	it('takes the campaign and content it is given', () => {
+		const url = new URL(addUtm('https://mitra.example.com/a', 'mitra-media', 'artikel-x'));
+		expect(url.searchParams.get('utm_campaign')).toBe('mitra-media');
+		expect(url.searchParams.get('utm_content')).toBe('artikel-x');
+		expect(url.searchParams.get('utm_source')).toBe('financialfieldindonesia');
 	});
 });

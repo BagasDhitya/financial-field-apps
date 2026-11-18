@@ -1,12 +1,15 @@
+import Link from 'next/link';
 import type { ReactNode } from 'react';
 
+import { AdSlot } from '@/components/AdSlot/AdSlot';
 import { ArticleCard } from '@/components/ArticleCard/ArticleCard';
 import { Container } from '@/components/Container/Container';
 import { EmptyState } from '@/components/EmptyState/EmptyState';
+import { PrLabel } from '@/components/Kicker/Kicker';
 import { RiverItem } from '@/components/RiverItem/RiverItem';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { routes } from '@/lib/routes';
-import type { ArticleSummary, CategoryNode } from '@/types';
+import type { ArticleSummary, CategoryNode, ProductSection } from '@/types';
 
 import styles from './HomeView.module.css';
 import type { HomeStories } from './select';
@@ -30,9 +33,18 @@ export type HomeViewProps = {
 	interviews: ArticleSummary[];
 	categoryBlocks: CategoryBlock[];
 	now: Date;
+	/** FEATURE_ADS: the banner under the river (ADR-0024, like financial-field.com's 【PR】 banner). */
+	banner?: boolean;
+	/** PR articles for "Rekomendasi" (ADR-0024); empty hides the section. */
+	prArticles?: ArticleSummary[];
+	/** Comparison sections for the "Bandingkan produk" tiles (FEATURE_COMPARISON); empty hides them. */
+	comparisonSections?: ProductSection[];
 };
 
-/** Media-first home: lead story, the widget rail, Terbaru river, Video, Wawancara, topic blocks. */
+/**
+ * Media-first home: lead story, the widget rail, Terbaru river, the banner,
+ * Video, Wawancara, "Rekomendasi" (PR), the comparison tiles, topic blocks.
+ */
 export function HomeView({
 	heading,
 	stories,
@@ -41,6 +53,9 @@ export function HomeView({
 	interviews,
 	categoryBlocks,
 	now,
+	banner = false,
+	prArticles = [],
+	comparisonSections = [],
 }: HomeViewProps) {
 	const { lead, river } = stories;
 	const hasRail = rail.length > 0;
@@ -85,6 +100,17 @@ export function HomeView({
 				/>
 			)}
 
+			{banner ? (
+				<div className={styles.banner}>
+					<AdSlot
+						size="320x100"
+						wideSize="728x90"
+						wideFrom={768}
+						placement="home-banner"
+					/>
+				</div>
+			) : null}
+
 			{videos.length > 0 ? (
 				<section className={styles.block} aria-labelledby="video">
 					<SectionHeader
@@ -115,6 +141,58 @@ export function HomeView({
 						{interviews.map((article) => (
 							<li key={article.id}>
 								<ArticleCard article={article} trackAs="home_interview" />
+							</li>
+						))}
+					</ul>
+				</section>
+			) : null}
+
+			{prArticles.length > 0 ? (
+				<section
+					className={styles.block}
+					aria-labelledby="rekomendasi-pr"
+					data-ad-placement="home-pr-articles"
+				>
+					<SectionHeader id="rekomendasi-pr" title="Rekomendasi" />
+					<p className={`type-meta ${styles.prNote}`}>
+						<PrLabel />
+						Konten bersponsor dari mitra
+					</p>
+					<ul className={styles.grid}>
+						{prArticles.map((article) => (
+							<li key={article.id}>
+								<ArticleCard article={article} trackAs="home_pr" />
+							</li>
+						))}
+					</ul>
+				</section>
+			) : null}
+
+			{comparisonSections.length > 0 ? (
+				<section className={styles.block} aria-labelledby="bandingkan-produk">
+					<SectionHeader
+						id="bandingkan-produk"
+						title="Bandingkan produk"
+						href={routes.comparisonIndex()}
+						linkLabel="Semua perbandingan"
+					/>
+					<ul className={styles.tiles}>
+						{comparisonSections.map((section) => (
+							<li key={section.id}>
+								<Link
+									href={routes.comparisonSection(section.slug)}
+									className={styles.tile}
+								>
+									<span className={styles.tileTitle}>
+										Bandingkan {section.name}
+									</span>
+									{section.description ? (
+										<span className={styles.tileText}>
+											{section.description}
+										</span>
+									) : null}
+									<span className="type-meta">{section.productCount} produk</span>
+								</Link>
 							</li>
 						))}
 					</ul>

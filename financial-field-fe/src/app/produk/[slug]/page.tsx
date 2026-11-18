@@ -2,12 +2,15 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
+import { AdSlot } from '@/components/AdSlot/AdSlot';
 import { ArticleBody } from '@/components/ArticleBody/ArticleBody';
 import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
 import { ComparisonDisclosure } from '@/components/ComparisonDisclosure/ComparisonDisclosure';
 import { Container } from '@/components/Container/Container';
 import { DateTime } from '@/components/DateTime/DateTime';
 import { JsonLd } from '@/components/JsonLd/JsonLd';
+import { PrLabel } from '@/components/Kicker/Kicker';
+import { LeadRelayForm } from '@/components/LeadRelayForm/LeadRelayForm';
 import { OutboundLink } from '@/components/OutboundLink/OutboundLink';
 import { ProviderLogo } from '@/components/ProviderLogo/ProviderLogo';
 import { HOME_CRUMB } from '@/lib/breadcrumbs';
@@ -25,7 +28,9 @@ import {
 	isComparisonEnabled,
 } from '@/lib/content/comparison';
 import { env } from '@/lib/env';
+import { features } from '@/lib/features';
 import { formatRupiah } from '@/lib/format';
+import { leadProductOf } from '@/lib/lead';
 import { routes } from '@/lib/routes';
 import { isValidSlug } from '@/lib/security';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -105,6 +110,8 @@ export default async function ProductPage({ params }: Props) {
 						<Link href={routes.provider(product.provider.slug)}>
 							{product.provider.name}
 						</Link>
+						{/* CMS-25 `is_partner`: a commercial tie is always shown (ADR-0024). */}
+						{product.isPartner ? <PrLabel /> : null}
 					</p>
 					<h1 className={styles.title}>{product.title}</h1>
 					{product.summary ? <p className={styles.dek}>{product.summary}</p> : null}
@@ -188,16 +195,18 @@ export default async function ProductPage({ params }: Props) {
 							</div>
 						) : null}
 					</dl>
-					{product.officialUrl && sectionSlug ? (
-						<p>
+					<div className={styles.ctaRow}>
+						{product.officialUrl && sectionSlug ? (
 							<OutboundLink
 								href={product.officialUrl}
 								section={sectionSlug}
 								productSlug={product.slug}
 								providerName={product.provider.name}
 							/>
-						</p>
-					) : null}
+						) : null}
+						{/* ADR-0025: the relay form, next to the outbound button. */}
+						<LeadRelayForm product={leadProductOf(product)} />
+					</div>
 				</div>
 				<aside className={styles.box} aria-labelledby="langkah">
 					<h2 id="langkah">Langkah berikutnya</h2>
@@ -218,6 +227,7 @@ export default async function ProductPage({ params }: Props) {
 							</Link>
 						</li>
 					</ul>
+					{features.ads ? <AdSlot placement="product-rail" /> : null}
 				</aside>
 			</div>
 			{product.features.length > 0 ? (
@@ -227,6 +237,18 @@ export default async function ProductPage({ params }: Props) {
 					</h2>
 					<ArticleBody body={product.features} siteOrigin={env.siteUrl} />
 				</section>
+			) : null}
+			{features.ads && product.officialUrl && sectionSlug ? (
+				// The outbound button again after the main sections, like
+				// financial-field.com's product pages (ADR-0024).
+				<p className={styles.repeatCta}>
+					<OutboundLink
+						href={product.officialUrl}
+						section={sectionSlug}
+						productSlug={product.slug}
+						providerName={product.provider.name}
+					/>
+				</p>
 			) : null}
 			{others.length > 0 && section ? (
 				<section aria-labelledby="produk-lain">

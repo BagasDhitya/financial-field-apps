@@ -113,6 +113,22 @@ details[open] > .topicSummary::after {
 	content: '–';
 }
 
+/* The highlighted entry (Bandingkan): the same filled FF-blue row as the desktop button. */
+.highlight {
+	padding-inline: var(--space-2);
+	background: var(--color-ff-blue);
+	color: var(--color-paper);
+}
+
+.highlight:hover,
+details[open] > .highlight {
+	background-image: linear-gradient(rgb(3 3 3 / 0.2), rgb(3 3 3 / 0.2));
+}
+
+details > .highlight::after {
+	color: var(--color-paper);
+}
+
 .body {
 	display: grid;
 	gap: var(--space-2);

@@ -21,8 +21,11 @@ export type MenuGroup = { heading: MenuLink | null; links: MenuLink[] };
 /**
  * One entry of the header menu (ADR-0022): the topic panel (Berita), a
  * dropdown, or a plain link. Built from Site Navigation by lib/content/menu.ts.
+ * `highlighted` draws the entry as a filled button (the client's request for
+ * Bandingkan, SPC-ui-design-system MainNav).
  */
-export type MainMenuEntry =
+export type MainMenuEntry = { highlighted?: boolean } & (
 	| { kind: 'topics'; label: string; topics: CategoryNode[]; views: MenuLink[] }
 	| { kind: 'menu'; label: string; groups: MenuGroup[]; footer: MenuLink | null }
-	| { kind: 'link'; label: string; href: string };
+	| { kind: 'link'; label: string; href: string }
+);

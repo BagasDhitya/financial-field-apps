@@ -80,6 +80,7 @@
 	--ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
 
 	--z-header: 40;
+	--z-ad: 45;
 	--z-panel: 50;
 	--z-sheet: 60;
 	--z-consent: 70;

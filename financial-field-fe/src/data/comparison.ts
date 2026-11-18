@@ -118,6 +118,8 @@ export const FINANCIAL_PRODUCTS: FinancialProductEntry[] = [
 			),
 		],
 		apply_url: url('contoh-multifinance', 'dana-tunai-bpkb-mobil'),
+		// CMS-25: a fictional commercial tie, so staging shows the PR units (ADR-0024).
+		is_partner: true,
 		data_checked_at: CHECKED,
 		source_url: url('contoh-multifinance', 'dana-tunai-bpkb-mobil', '/syarat'),
 		loan_specs: {
@@ -234,6 +236,8 @@ export const FINANCIAL_PRODUCTS: FinancialProductEntry[] = [
 			),
 		],
 		apply_url: url('contoh-mitra-pembiayaan', 'dana-bpkb'),
+		// CMS-25: a fictional commercial tie, so staging shows the PR units (ADR-0024).
+		is_partner: true,
 		data_checked_at: CHECKED,
 		source_url: url('contoh-mitra-pembiayaan', 'dana-bpkb', '/syarat'),
 		loan_specs: {
@@ -263,6 +267,8 @@ export const FINANCIAL_PRODUCTS: FinancialProductEntry[] = [
 			),
 		],
 		apply_url: url('contoh-bank-digital', 'pinjaman-bpkb'),
+		// CMS-25: a fictional commercial tie, so staging shows the PR units (ADR-0024).
+		is_partner: true,
 		data_checked_at: CHECKED,
 		source_url: url('contoh-bank-digital', 'pinjaman-bpkb', '/syarat'),
 		loan_specs: {
@@ -294,6 +300,8 @@ export const FINANCIAL_PRODUCTS: FinancialProductEntry[] = [
 			),
 		],
 		apply_url: url('contoh-auto-finance', 'kredit-mobil-baru'),
+		// CMS-25: a fictional commercial tie, so staging shows the PR units (ADR-0024).
+		is_partner: true,
 		data_checked_at: CHECKED,
 		source_url: url('contoh-auto-finance', 'kredit-mobil-baru', '/syarat'),
 		loan_specs: {
@@ -352,6 +360,8 @@ export const FINANCIAL_PRODUCTS: FinancialProductEntry[] = [
 			),
 		],
 		apply_url: url('contoh-bank-utama', 'kredit-kendaraan'),
+		// CMS-25: a fictional commercial tie, so staging shows the PR units (ADR-0024).
+		is_partner: true,
 		data_checked_at: CHECKED,
 		source_url: url('contoh-bank-utama', 'kredit-kendaraan', '/syarat'),
 		loan_specs: {
@@ -410,6 +420,8 @@ export const FINANCIAL_PRODUCTS: FinancialProductEntry[] = [
 			),
 		],
 		apply_url: url('contoh-bank-digital', 'kredit-mobil'),
+		// CMS-25: a fictional commercial tie, so staging shows the PR units (ADR-0024).
+		is_partner: true,
 		data_checked_at: CHECKED,
 		source_url: url('contoh-bank-digital', 'kredit-mobil', '/syarat'),
 		loan_specs: {

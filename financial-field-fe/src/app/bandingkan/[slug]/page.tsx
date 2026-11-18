@@ -8,6 +8,7 @@ import { ComparisonTool } from '@/components/ComparisonTool/ComparisonTool';
 import { Container } from '@/components/Container/Container';
 import { DateTime } from '@/components/DateTime/DateTime';
 import { JsonLd } from '@/components/JsonLd/JsonLd';
+import { PrRecommendations, PrTopCard } from '@/components/PrProducts/PrProducts';
 import { HOME_CRUMB } from '@/lib/breadcrumbs';
 import { surveyKindOf } from '@/lib/comparison/surveys';
 import {
@@ -16,6 +17,7 @@ import {
 	getProductsInSection,
 	isComparisonEnabled,
 } from '@/lib/content/comparison';
+import { features } from '@/lib/features';
 import { routes } from '@/lib/routes';
 import { isValidSlug } from '@/lib/security';
 import { buildMetadata } from '@/lib/seo/metadata';
@@ -127,6 +129,10 @@ export default async function ComparisonSectionPage({ params }: Props) {
 	const products = await getProductsInSection(section.slug);
 	const checked = newestCheck(products);
 	const demo = products.some((product) => product.provider.slug.startsWith('contoh-'));
+	// The paid units (ADR-0024): partner products (CMS-25 `is_partner`) in the
+	// section's own order. The ranked list below stays unpaid (REQ-CMP-010).
+	const partners = features.ads ? products.filter((product) => product.isPartner) : [];
+	const topPartner = partners[0] ?? null;
 
 	return (
 		<Container className={styles.root}>
@@ -153,12 +159,14 @@ export default async function ComparisonSectionPage({ params }: Props) {
 				</p>
 			</header>
 			<ComparisonDisclosure demo={demo} />
+			{topPartner ? <PrTopCard product={topPartner} sectionSlug={section.slug} /> : null}
 			<ComparisonTool
 				sectionSlug={section.slug}
 				sectionName={section.name}
 				kind={surveyKindOf(section.slug)}
 				products={products}
 			/>
+			<PrRecommendations products={partners} sectionSlug={section.slug} />
 			<aside className={styles.box} aria-labelledby="pelajari">
 				<h2 id="pelajari">Sebelum memutuskan</h2>
 				<ul className={styles.links}>

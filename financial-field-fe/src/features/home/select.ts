@@ -63,3 +63,22 @@ export function selectHomeInterviews(
 		.filter((article) => !shown.has(article.id))
 		.slice(0, INTERVIEW_COUNT);
 }
+
+const PR_ARTICLE_COUNT = 5;
+
+/**
+ * "Rekomendasi" with the PR label (ADR-0024, like financial-field.com's
+ * おすすめ記事【PR】): up to 5 PR articles, newest first, without the one in
+ * the rail's PR spot or any shown above (REQ-HOME-002).
+ */
+export function selectHomePrArticles(
+	pr: ArticleSummary[],
+	stories: HomeStories,
+	shownElsewhere: ArticleSummary[],
+): ArticleSummary[] {
+	const shown = shownIds(stories, shownElsewhere);
+	return pr
+		.filter((article) => article.articleType === 'pr_article' && article.slug && article.title)
+		.filter((article) => !shown.has(article.id))
+		.slice(0, PR_ARTICLE_COUNT);
+}

@@ -81,4 +81,10 @@ export const analytics = {
 	navOpen: (surface: 'desktop_panel' | 'mobile_sheet') => track('nav_open', { surface }),
 	videoStart: (videoUrl: string, itemId: string) =>
 		track('video_start', { video_provider: 'youtube', video_url: videoUrl, item_id: itemId }),
+	/**
+	 * The lead relay form sent (ADR-0025). Never personal data: only the
+	 * product slug and whether the optional marketing consent was given.
+	 */
+	generateLead: (productSlug: string, consentMarketing: boolean) =>
+		track('generate_lead', { product_id: productSlug, consent_marketing: consentMarketing }),
 };

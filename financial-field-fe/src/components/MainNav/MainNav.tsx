@@ -82,7 +82,11 @@ export function MainNav({ entries }: MainNavProps) {
 						<li key={entry.label} className={styles.item}>
 							<Link
 								href={entry.href}
-								className={styles.link}
+								className={
+									entry.highlighted
+										? `${styles.link} ${styles.highlight}`
+										: styles.link
+								}
 								aria-current={pathname === entry.href ? 'page' : undefined}
 							>
 								{entry.label}
@@ -103,7 +107,11 @@ export function MainNav({ entries }: MainNavProps) {
 								buttonRefs.current[index] = node;
 							}}
 							type="button"
-							className={styles.trigger}
+							className={
+								entry.highlighted
+									? `${styles.trigger} ${styles.highlight}`
+									: styles.trigger
+							}
 							aria-expanded={isOpen}
 							aria-controls={panelId}
 							onClick={() => toggle(index)}

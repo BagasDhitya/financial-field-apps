@@ -9,7 +9,6 @@ import { routes } from '@/lib/routes';
 import type { MainMenuEntry } from '@/types';
 
 import { Icon } from '../Icon/Icon';
-import { SearchField } from '../SearchField/SearchField';
 
 import styles from './MobileNav.module.css';
 
@@ -21,6 +20,7 @@ export type MobileNavProps = {
  * Below 1024 px (REQ-NAV-004, ADR-0022): a native modal <dialog> gives focus
  * trapping, Esc to close and an inert background. The same entries as the
  * desktop row, as an exclusive accordion; Berita's topics nest inside it.
+ * No search field: removed at the client's request (2026-11-19); /cari stays.
  */
 export function MobileNav({ entries }: MobileNavProps) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
@@ -53,18 +53,30 @@ export function MobileNav({ entries }: MobileNavProps) {
 					</button>
 				</div>
 				<div className={styles.content}>
-					<SearchField variant="full" id="cari-mobile" />
 					<nav aria-label="Menu utama">
 						<ul className={styles.entries}>
 							{entries.map((entry) => (
 								<li key={entry.label}>
 									{entry.kind === 'link' ? (
-										<Link href={entry.href} className={styles.summary}>
+										<Link
+											href={entry.href}
+											className={
+												entry.highlighted
+													? `${styles.summary} ${styles.highlight}`
+													: styles.summary
+											}
+										>
 											{entry.label}
 										</Link>
 									) : (
 										<details name="ffid-menu" className={styles.entry}>
-											<summary className={styles.summary}>
+											<summary
+												className={
+													entry.highlighted
+														? `${styles.summary} ${styles.highlight}`
+														: styles.summary
+												}
+											>
 												{entry.label}
 											</summary>
 											{entry.kind === 'topics' ? (

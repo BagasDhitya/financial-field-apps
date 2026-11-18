@@ -19,6 +19,14 @@ export function PrLabel({ size = 'small' }: PrLabelProps) {
 }
 
 /**
+ * "Iklan" in an ink outline (ADR-0024): a paid unit that is not a PR article,
+ * such as the partner-media links or the pop-up.
+ */
+export function AdLabel() {
+	return <span className={`type-label ${styles.adLabel}`}>Iklan</span>;
+}
+
+/**
  * "Video" in an ink outline, where no still shows that an article has a video
  * (text-only cards, the river). Hidden from screen readers: the title link
  * says "(video)" itself.

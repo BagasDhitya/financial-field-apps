@@ -9,6 +9,7 @@ import {
 	getRecentArticleSlugs,
 	getRelatedArticles,
 } from '@/lib/content/articles';
+import { getPartnerLinks } from '@/lib/content/partner-media';
 import { getSiteSettings } from '@/lib/content/site';
 import { env } from '@/lib/env';
 import { features } from '@/lib/features';
@@ -110,6 +111,8 @@ export default async function ArticlePage({ params }: Props) {
 					has_reviewer: article.reviewer !== null && article.lastReviewedAt !== null,
 					word_bucket: wordBucket(words),
 				}}
+				ads={features.ads}
+				partnerLinks={features.ads ? getPartnerLinks() : []}
 			/>
 		</>
 	);

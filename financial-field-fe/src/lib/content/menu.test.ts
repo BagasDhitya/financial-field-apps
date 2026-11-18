@@ -102,6 +102,10 @@ describe('buildMainMenu (ADR-0022)', () => {
 			'menu:Tentang Kami',
 		]);
 		const bandingkan = menu[2];
+		// Only the comparison entry is highlighted (client request; CMS-32 pending).
+		expect(menu.filter((entry) => entry.highlighted).map((entry) => entry.label)).toEqual([
+			'Bandingkan',
+		]);
 		expect(bandingkan?.kind === 'menu' && bandingkan.groups).toEqual([
 			{
 				heading: { label: 'Pinjaman', href: '/bandingkan/pinjaman' },

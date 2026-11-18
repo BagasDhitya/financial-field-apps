@@ -1,10 +1,6 @@
-import Link from 'next/link';
-
-import { routes } from '@/lib/routes';
 import type { MainMenuEntry } from '@/types';
 
 import { Container } from '../Container/Container';
-import { Icon } from '../Icon/Icon';
 import { MainNav } from '../MainNav/MainNav';
 import { MobileNav } from '../MobileNav/MobileNav';
 import { Wordmark } from '../Wordmark/Wordmark';
@@ -18,9 +14,9 @@ export type SiteHeaderProps = {
 
 /**
  * The brand on the first row; the menu on its own row from 1024 px (B6,
- * REQ-NAV-001, ADR-0022). Below that, a search icon and the Menu sheet. The
- * search bar at the top right was removed at the client's request
- * (2026-11-18); search itself stays at /cari.
+ * REQ-NAV-001, ADR-0022). Below that, the Menu sheet. The header has no
+ * search at any width: the desktop bar (2026-11-18) and the mobile icon
+ * (2026-11-19) were removed at the client's request; /cari stays.
  */
 export function SiteHeader({ menu }: SiteHeaderProps) {
 	return (
@@ -28,9 +24,6 @@ export function SiteHeader({ menu }: SiteHeaderProps) {
 			<Container className={styles.bar}>
 				<Wordmark />
 				<div className={styles.mobile}>
-					<Link href={routes.search()} className={styles.searchIcon}>
-						<Icon name="search" title="Cari" />
-					</Link>
 					<MobileNav entries={menu} />
 				</div>
 			</Container>

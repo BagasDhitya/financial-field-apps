@@ -11,7 +11,7 @@ import {
 	getVideoArticles,
 } from '@/lib/content/articles';
 import { getCategoryTree } from '@/lib/content/categories';
-import { getComparisonSection } from '@/lib/content/comparison';
+import { getComparisonSection, getComparisonSections } from '@/lib/content/comparison';
 import { getSiteNavigation } from '@/lib/content/navigation';
 import { getSiteSettings } from '@/lib/content/site';
 import { features } from '@/lib/features';
@@ -19,7 +19,12 @@ import { routes } from '@/lib/routes';
 import { BRAND, buildMetadata, composeDescription } from '@/lib/seo/metadata';
 
 import { HomeView } from '@/features/home/HomeView';
-import { selectHomeInterviews, selectHomeStories, selectHomeVideos } from '@/features/home/select';
+import {
+	selectHomeInterviews,
+	selectHomePrArticles,
+	selectHomeStories,
+	selectHomeVideos,
+} from '@/features/home/select';
 
 /** Safety-net window. Keep in sync with REVALIDATE.home (revalidate.test.ts). */
 export const revalidate = 60;
@@ -48,7 +53,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-	const [navigation, latest, videos, interviews, categories, settings, finder, pr] =
+	const [navigation, latest, videos, interviews, categories, settings, finder, pr, sections] =
 		await Promise.all([
 			getSiteNavigation(),
 			getLatestArticles(1, 20),
@@ -57,7 +62,10 @@ export default async function Home() {
 			getCategoryTree(),
 			getSiteSettings(),
 			getComparisonSection(FINDER_SECTION),
-			features.ads ? getPrArticles(1) : Promise.resolve(null),
+			// The PR spot takes the newest; "Rekomendasi" up to 5 of the rest (ADR-0024).
+			features.ads ? getPrArticles(6) : Promise.resolve(null),
+			// Empty while comparison is off.
+			getComparisonSections(),
 		]);
 
 	const blocks = await Promise.all(
@@ -72,6 +80,7 @@ export default async function Home() {
 	);
 
 	const stories = selectHomeStories(navigation.featuredArticles, latest.items);
+	const prSpot = pr?.items[0] ?? null;
 
 	// Each widget shows only when its flag (and, for the finder, its section) is on.
 	const rail = [
@@ -82,10 +91,11 @@ export default async function Home() {
 				href={routes.comparisonSection(finder.slug)}
 			/>
 		) : null,
-		features.ads ? <PrSpot key="pr" article={pr?.items[0] ?? null} /> : null,
+		features.ads ? <PrSpot key="pr" article={prSpot} /> : null,
 		features.newsletter ? <NewsletterSignup key="newsletter" /> : null,
 	].filter(Boolean);
 	const homeVideos = selectHomeVideos(videos.items, stories);
+	const homeInterviews = selectHomeInterviews(interviews.items, stories, homeVideos);
 
 	return (
 		<HomeView
@@ -93,9 +103,16 @@ export default async function Home() {
 			stories={stories}
 			rail={rail}
 			videos={homeVideos}
-			interviews={selectHomeInterviews(interviews.items, stories, homeVideos)}
+			interviews={homeInterviews}
 			categoryBlocks={blocks.filter((block) => block.articles.length > 0)}
 			now={new Date()}
+			banner={features.ads}
+			prArticles={selectHomePrArticles(pr?.items ?? [], stories, [
+				...homeVideos,
+				...homeInterviews,
+				...(prSpot ? [prSpot] : []),
+			])}
+			comparisonSections={sections.filter((section) => section.children.length === 0)}
 		/>
 	);
 }

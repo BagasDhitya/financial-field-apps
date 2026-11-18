@@ -37,7 +37,7 @@ export function PrSpot({ article }: PrSpotProps) {
 					{article.leadText ? <p className={styles.lead}>{article.leadText}</p> : null}
 				</div>
 			) : null}
-			<AdSlot />
+			<AdSlot placement="home-rail" />
 		</section>
 	);
 }

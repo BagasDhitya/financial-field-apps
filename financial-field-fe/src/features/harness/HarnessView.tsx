@@ -11,6 +11,7 @@ import {
 	videoFixture,
 	writer,
 } from '@/components/__fixtures__/domain';
+import { AdPopup } from '@/components/AdPopup/AdPopup';
 import { AdSlot } from '@/components/AdSlot/AdSlot';
 import { ArticleBody } from '@/components/ArticleBody/ArticleBody';
 import { ArticleCard } from '@/components/ArticleCard/ArticleCard';
@@ -26,14 +27,17 @@ import { FaqList } from '@/components/FaqList/FaqList';
 import { InstallmentCalculator } from '@/components/InstallmentCalculator/InstallmentCalculator';
 import { InterviewDialogue } from '@/components/InterviewDialogue/InterviewDialogue';
 import { KeyTakeaways } from '@/components/KeyTakeaways/KeyTakeaways';
-import { Kicker, PrLabel } from '@/components/Kicker/Kicker';
+import { AdLabel, Kicker, PrLabel } from '@/components/Kicker/Kicker';
+import { LeadRelayForm } from '@/components/LeadRelayForm/LeadRelayForm';
 import { LoanFinder } from '@/components/LoanFinder/LoanFinder';
 import { MainNav } from '@/components/MainNav/MainNav';
 import { NewsletterSignup } from '@/components/NewsletterSignup/NewsletterSignup';
 import { OutboundLink } from '@/components/OutboundLink/OutboundLink';
 import { Pagination } from '@/components/Pagination/Pagination';
+import { PartnerLinks } from '@/components/PartnerLinks/PartnerLinks';
 import { PersonMark } from '@/components/PersonMark/PersonMark';
 import { ProviderLogo } from '@/components/ProviderLogo/ProviderLogo';
+import { PrRecommendations, PrTopCard } from '@/components/PrProducts/PrProducts';
 import { PrSpot } from '@/components/PrSpot/PrSpot';
 import { ReviewerList } from '@/components/ReviewerList/ReviewerList';
 import { RiverItem } from '@/components/RiverItem/RiverItem';
@@ -58,6 +62,14 @@ function Specimen({ title, children }: { title: string; children: ReactNode }) {
 }
 
 /** Component harness (conventions W9): every variant and state in one place. */
+const leadProduct = {
+	productId: 'product-1',
+	productSlug: 'contoh-penyedia-kredit-mobil',
+	productTitle: 'Kredit Mobil Contoh',
+	providerId: 'provider-1',
+	providerName: 'Penyedia Contoh',
+};
+
 export function HarnessView() {
 	const pr = summary({
 		id: 'pr',
@@ -217,7 +229,7 @@ export function HarnessView() {
 				/>
 				<Pagination page={4} pageCount={9} hrefFor={(page) => `/terbaru/halaman/${page}`} />
 			</Specimen>
-			<Specimen title="MainNav — the desktop menu row (ADR-0022)">
+			<Specimen title="MainNav — the desktop menu row, Bandingkan highlighted (ADR-0022)">
 				<nav aria-label="Contoh menu">
 					<MainNav entries={menuFixture} />
 				</nav>
@@ -233,8 +245,66 @@ export function HarnessView() {
 			<Specimen title="Home rail — LoanFinder / PrSpot / AdSlot / NewsletterSignup">
 				<LoanFinder sectionSlug="kredit-mobil" href="/bandingkan/kredit-mobil" />
 				<PrSpot article={summary({ id: 'pr', slug: 'pr', articleType: 'pr_article' })} />
-				<AdSlot />
+				<AdSlot placement="home-rail" />
 				<NewsletterSignup />
+			</Specimen>
+			<Specimen title="Ads (ADR-0024) — AdSlot sizes / AdLabel / PrLabel">
+				<AdLabel />
+				<PrLabel />
+				<AdSlot size="300x250" placement="article-body" />
+				<AdSlot size="300x250" wideSize="300x600" placement="article-rail" />
+				<AdSlot size="728x90" placement="article-body" />
+				<AdSlot size="320x100" placement="article-popup" />
+			</Specimen>
+			<Specimen title="Ads — ArticleBody with the in-body slot (after paragraph 3, then every 6)">
+				<ArticleBody
+					body={Array.from({ length: 10 }, (_, index) => ({
+						type: 'paragraph',
+						children: [
+							{ type: 'text', text: `Paragraf ${index + 1} contoh isi artikel.` },
+						],
+					}))}
+					siteOrigin="http://localhost:3000"
+					inBodyAd={<AdSlot placement="article-body" />}
+				/>
+			</Specimen>
+			<Specimen title="Ads — PartnerLinks (Dari mitra media)">
+				<PartnerLinks
+					articleSlug="contoh-artikel"
+					links={[
+						{
+							outlet: 'Kabar Ekonomi (contoh)',
+							title: 'Suku bunga acuan dan dampaknya pada cicilan rumah',
+							url: 'https://kabar-ekonomi.example.com/a',
+						},
+						{
+							outlet: 'Warta Bisnis (contoh)',
+							title: 'Lima kebiasaan keuangan pekerja muda',
+							url: 'https://warta-bisnis.example.com/b',
+						},
+					]}
+				/>
+			</Specimen>
+			<Specimen title="Ads — AdPopup, open (box from 1024 px, bottom bar below)">
+				<AdPopup preview />
+			</Specimen>
+			<Specimen title="Ads — PrTopCard / PrRecommendations (comparison section)">
+				<PrTopCard
+					product={{ ...productFixture, isPartner: true }}
+					sectionSlug="kredit-mobil"
+				/>
+				<PrRecommendations
+					products={[
+						{ ...productFixture, isPartner: true },
+						{
+							...productFixture,
+							id: 'product-2',
+							slug: 'contoh-kedua',
+							isPartner: true,
+						},
+					]}
+					sectionSlug="kredit-mobil"
+				/>
 			</Specimen>
 			<Specimen title="Comparison — ProviderLogo / OutboundLink / ComparisonDisclosure / ComparisonTool">
 				<ProviderLogo provider={productFixture.provider} size="large" />
@@ -251,6 +321,22 @@ export function HarnessView() {
 					kind="car"
 					products={[productFixture]}
 				/>
+			</Specimen>
+			<Specimen title="LeadRelayForm (ADR-0025) — closed (button and text triggers)">
+				<LeadRelayForm product={leadProduct} />
+				<LeadRelayForm product={leadProduct} variant="text" />
+			</Specimen>
+			<Specimen title="LeadRelayForm — open (empty)">
+				<LeadRelayForm product={leadProduct} preview="open" />
+			</Specimen>
+			<Specimen title="LeadRelayForm — invalid (errors under each field, Kirim disabled)">
+				<LeadRelayForm product={leadProduct} preview="invalid" />
+			</Specimen>
+			<Specimen title="LeadRelayForm — ready (all valid, consent A ticked)">
+				<LeadRelayForm product={leadProduct} preview="ready" />
+			</Specimen>
+			<Specimen title="LeadRelayForm — success">
+				<LeadRelayForm product={leadProduct} preview="success" />
 			</Specimen>
 			<Specimen title="InstallmentCalculator">
 				<InstallmentCalculator />

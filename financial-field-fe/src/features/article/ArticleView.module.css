@@ -52,6 +52,33 @@
 	top: calc(var(--header-h) + var(--nav-h) + var(--space-3));
 }
 
+/*
+ * With ads on (ADR-0024) the related list scrolls with the page and the rail's
+ * ad sticks instead, below the header, for the rest of the article. Off, the
+ * related list sticks as before.
+ */
+.relatedStatic {
+	position: static;
+}
+
+.railAd {
+	display: none;
+}
+
+@media (min-width: 1024px) {
+	.railAd {
+		position: sticky;
+		top: calc(var(--header-h) + var(--nav-h) + var(--space-3));
+		display: block;
+		margin-top: var(--space-4);
+	}
+}
+
+/* POPUP_OPEN_ATTRIBUTE: the pop-up is showing, so the rail's ad steps aside (no layout shift). */
+:global(html[data-ffid-ad-popup]) .railAd {
+	visibility: hidden;
+}
+
 .relatedList {
 	display: grid;
 	gap: var(--space-2);

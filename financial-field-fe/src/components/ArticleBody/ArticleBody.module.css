@@ -96,3 +96,10 @@
 	font-size: var(--text-meta);
 	color: var(--ink-66);
 }
+
+/* The in-body ad (ADR-0024): sans, set apart from the reading text. */
+.ad {
+	padding-block: var(--space-2);
+	border-block: var(--stroke-rule) solid var(--ink-12);
+	font-family: var(--font-sans);
+}

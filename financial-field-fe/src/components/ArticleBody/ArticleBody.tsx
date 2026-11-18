@@ -1,7 +1,8 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import type { ReactNode } from 'react';
+import { Fragment, type ReactNode } from 'react';
 
+import { inBodyAdPositions } from '@/lib/ads';
 import {
 	safeHref,
 	shiftHeadingLevel,
@@ -21,6 +22,11 @@ export type ArticleBodyProps = {
 	siteOrigin: string;
 	/** PR articles: every outbound link is paid (REQ-SEO-024, REQ-ART-003). */
 	sponsored?: boolean;
+	/**
+	 * The in-body ad (ADR-0024), placed between top-level blocks by
+	 * inBodyAdPositions. Omitted: the body renders as before.
+	 */
+	inBodyAd?: ReactNode;
 };
 
 type LinkContext = { siteOrigin: string; sponsored: boolean };
@@ -148,11 +154,22 @@ function renderBlock(block: BlockNode, key: number, ctx: LinkContext): ReactNode
  * bodies and lets us shift headings, filter link protocols and mark
  * sponsored links (REQ-ART-011, REQ-SEC-004, REQ-SEO-021/024).
  */
-export function ArticleBody({ body, siteOrigin, sponsored = false }: ArticleBodyProps) {
+export function ArticleBody({ body, siteOrigin, sponsored = false, inBodyAd }: ArticleBodyProps) {
 	const ctx = { siteOrigin, sponsored };
+	const blocks = toBlocks(body);
+	const adAfter = new Set(inBodyAd ? inBodyAdPositions(blocks) : []);
 	return (
-		<div className={styles.body}>
-			{toBlocks(body).map((block, index) => renderBlock(block, index, ctx))}
+		<div className={styles.body} data-article-body="">
+			{blocks.map((block, index) =>
+				adAfter.has(index) ? (
+					<Fragment key={index}>
+						{renderBlock(block, index, ctx)}
+						<div className={styles.ad}>{inBodyAd}</div>
+					</Fragment>
+				) : (
+					renderBlock(block, index, ctx)
+				),
+			)}
 		</div>
 	);
 }

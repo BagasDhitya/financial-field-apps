@@ -37,8 +37,11 @@ export function guardOutboundUrl(url: string | null | undefined, ownOrigin: stri
 	return parsed.toString();
 }
 
-/** Appends the four UTM values unless the URL already has any `utm_*` parameter. */
-export function withUtm(url: string, section: string, productSlug: string): string {
+/**
+ * Appends the four UTM values unless the URL already has any `utm_*`
+ * parameter. Shared by the provider links and the partner-media links (ADR-0024).
+ */
+export function addUtm(url: string, campaign: string, content: string): string {
 	const parsed = new URL(url);
 	for (const key of parsed.searchParams.keys()) {
 		if (key.startsWith('utm_')) {
@@ -47,7 +50,12 @@ export function withUtm(url: string, section: string, productSlug: string): stri
 	}
 	parsed.searchParams.set('utm_source', 'financialfieldindonesia');
 	parsed.searchParams.set('utm_medium', 'referral');
-	parsed.searchParams.set('utm_campaign', `bandingkan-${section}`);
-	parsed.searchParams.set('utm_content', productSlug);
+	parsed.searchParams.set('utm_campaign', campaign);
+	parsed.searchParams.set('utm_content', content);
 	return parsed.toString();
+}
+
+/** A provider link from a comparison section: campaign `bandingkan-<section>`, content the product. */
+export function withUtm(url: string, section: string, productSlug: string): string {
+	return addUtm(url, `bandingkan-${section}`, productSlug);
 }

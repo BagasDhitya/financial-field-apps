@@ -28,9 +28,12 @@ import {
 } from '@/lib/comparison/options';
 import type { SurveyKind } from '@/lib/comparison/surveys';
 import { formatRupiah } from '@/lib/format';
+import { leadProductOf } from '@/lib/lead';
 import { routes } from '@/lib/routes';
 import type { FinancialProduct } from '@/types';
 
+import { PrLabel } from '../Kicker/Kicker';
+import { LeadRelayForm } from '../LeadRelayForm/LeadRelayForm';
 import { OutboundLink } from '../OutboundLink/OutboundLink';
 import { ProviderLogo } from '../ProviderLogo/ProviderLogo';
 
@@ -134,6 +137,7 @@ function Rows({
 									<span className={styles.productText}>
 										<span className={styles.provider}>
 											{product.provider.name}
+											{product.isPartner ? <PrLabel /> : null}
 										</span>
 										<Link
 											href={routes.product(product.slug)}
@@ -181,15 +185,21 @@ function Rows({
 									</td>
 								) : null}
 								<td>
-									{product.officialUrl ? (
-										<OutboundLink
-											href={product.officialUrl}
-											section={sectionSlug}
-											productSlug={product.slug}
-											providerName={product.provider.name}
+									<span className={styles.links}>
+										{product.officialUrl ? (
+											<OutboundLink
+												href={product.officialUrl}
+												section={sectionSlug}
+												productSlug={product.slug}
+												providerName={product.provider.name}
+												variant="text"
+											/>
+										) : null}
+										<LeadRelayForm
+											product={leadProductOf(product)}
 											variant="text"
 										/>
-									) : null}
+									</span>
 								</td>
 							</tr>
 						))}
@@ -202,7 +212,10 @@ function Rows({
 						<div className={styles.cardHead}>
 							<ProviderLogo provider={product.provider} />
 							<div className={styles.productText}>
-								<span className={styles.provider}>{product.provider.name}</span>
+								<span className={styles.provider}>
+									{product.provider.name}
+									{product.isPartner ? <PrLabel /> : null}
+								</span>
 								<Link
 									href={routes.product(product.slug)}
 									className={styles.productName}
@@ -260,6 +273,7 @@ function Rows({
 									providerName={product.provider.name}
 								/>
 							) : null}
+							<LeadRelayForm product={leadProductOf(product)} />
 						</div>
 					</li>
 				))}

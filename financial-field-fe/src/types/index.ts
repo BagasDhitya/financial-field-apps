@@ -11,6 +11,7 @@ export type {
 	Sponsor,
 	VideoRef,
 } from './article';
+export type { PartnerLink } from './ads';
 export type { Author, AuthorSummary } from './author';
 export type { Category, CategoryNode, CategorySummary } from './category';
 export type {

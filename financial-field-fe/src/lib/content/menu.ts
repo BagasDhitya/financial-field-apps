@@ -81,6 +81,10 @@ function entryFor(item: MenuItem, sources: MenuSources): MainMenuEntry | null {
 					label,
 					groups: comparisonGroups(sections),
 					footer: { label: 'Semua perbandingan', href: routes.comparisonIndex() },
+					// menu_item has no highlight field yet (asked as CMS-32
+					// `is_highlighted`); until then the comparison entry is the
+					// highlighted one, by its URL.
+					highlighted: true,
 				}
 			: null;
 	}

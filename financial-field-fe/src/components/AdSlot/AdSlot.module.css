@@ -12,9 +12,77 @@
 	text-align: center;
 }
 
+/* Each size reserves its box (REQ-PERF-006); narrow screens scale it down. */
+.s300x250 {
+	max-width: 300px;
+	aspect-ratio: 300 / 250;
+}
+
+.s300x600 {
+	max-width: 300px;
+	aspect-ratio: 300 / 600;
+}
+
+.s728x90 {
+	max-width: 728px;
+	aspect-ratio: 728 / 90;
+	gap: 0;
+}
+
+.s320x100 {
+	max-width: 320px;
+	aspect-ratio: 320 / 100;
+	gap: 0;
+}
+
 .size {
 	font-size: 1.375rem;
 	font-weight: 600;
 	font-variant-numeric: tabular-nums lining-nums;
 	color: var(--ink-82);
+}
+
+.s728x90 .size,
+.s320x100 .size {
+	font-size: 1rem;
+}
+
+.wideOnly {
+	display: none;
+}
+
+@media (min-width: 1280px) {
+	.wide300x600 {
+		max-width: 300px;
+		aspect-ratio: 300 / 600;
+	}
+
+	.wide300x250 {
+		max-width: 300px;
+		aspect-ratio: 300 / 250;
+	}
+
+	.narrowOnly {
+		display: none;
+	}
+
+	.wideOnly {
+		display: inline;
+	}
+}
+
+/* `wideFrom={768}`: the home banner, 320×100 on phones and 728×90 from 768 px. */
+@media (min-width: 768px) {
+	.from768.wide728x90 {
+		max-width: 728px;
+		aspect-ratio: 728 / 90;
+	}
+
+	.from768 .narrowOnly {
+		display: none;
+	}
+
+	.from768 .wideOnly {
+		display: inline;
+	}
 }

@@ -1,3 +1,5 @@
+import { AdPopup } from '@/components/AdPopup/AdPopup';
+import { AdSlot } from '@/components/AdSlot/AdSlot';
 import { ArticleAnalytics } from '@/components/ArticleAnalytics/ArticleAnalytics';
 import { ArticleBody } from '@/components/ArticleBody/ArticleBody';
 import { ArticleCard } from '@/components/ArticleCard/ArticleCard';
@@ -12,6 +14,7 @@ import { GoldenSplit } from '@/components/GoldenSplit/GoldenSplit';
 import { InterviewDialogue } from '@/components/InterviewDialogue/InterviewDialogue';
 import { KeyTakeaways } from '@/components/KeyTakeaways/KeyTakeaways';
 import { Kicker } from '@/components/Kicker/Kicker';
+import { PartnerLinks } from '@/components/PartnerLinks/PartnerLinks';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { ShareBar } from '@/components/ShareBar/ShareBar';
 import { SourcesList } from '@/components/SourcesList/SourcesList';
@@ -20,7 +23,7 @@ import { TagList } from '@/components/TagList/TagList';
 import { VerifiedNotice } from '@/components/VerifiedNotice/VerifiedNotice';
 import { VideoEmbed } from '@/components/VideoEmbed/VideoEmbed';
 import type { ArticleEventParams } from '@/lib/analytics/events';
-import type { Article, ArticleSummary } from '@/types';
+import type { Article, ArticleSummary, PartnerLink } from '@/types';
 
 import styles from './ArticleView.module.css';
 
@@ -33,6 +36,9 @@ export type ArticleViewProps = {
 	readingMinutes: number;
 	defaultPrDisclosure: string;
 	analyticsParams: ArticleEventParams | null;
+	/** FEATURE_ADS: the in-body, rail, partner-media and pop-up placements (ADR-0024). */
+	ads?: boolean;
+	partnerLinks?: readonly PartnerLink[];
 };
 
 /**
@@ -49,9 +55,13 @@ export function ArticleView({
 	readingMinutes,
 	defaultPrDisclosure,
 	analyticsParams,
+	ads = false,
+	partnerLinks = [],
 }: ArticleViewProps) {
 	const isPr = article.articleType === 'pr_article';
 	const isInterview = article.articleType === 'interview';
+	// A PR article is already paid for: no third-party ad inside it or over it (ADR-0024).
+	const readerAds = ads && !isPr;
 
 	return (
 		<>
@@ -111,6 +121,11 @@ export function ArticleView({
 										body={article.body}
 										siteOrigin={siteOrigin}
 										sponsored={isPr}
+										inBodyAd={
+											readerAds ? (
+												<AdSlot placement="article-body" />
+											) : undefined
+										}
 									/>
 									<InterviewDialogue turns={article.dialogue} />
 									{analyticsParams ? (
@@ -130,31 +145,49 @@ export function ArticleView({
 										<AuthorBox person={article.reviewer} role="Peninjau" />
 									) : null}
 								</div>
+								{ads ? (
+									<PartnerLinks links={partnerLinks} articleSlug={article.slug} />
+								) : null}
 							</div>
 						}
 						rail={
-							related.length > 0 ? (
-								<section
-									aria-labelledby="artikel-terkait"
-									className={styles.related}
-								>
-									<SectionHeader id="artikel-terkait" title="Artikel terkait" />
-									<ul className={styles.relatedList}>
-										{related.map((item) => (
-											<li key={item.id}>
-												<ArticleCard
-													article={item}
-													variant="compact"
-													trackAs="related_article"
-												/>
-											</li>
-										))}
-									</ul>
-								</section>
-							) : null
+							<>
+								{related.length > 0 ? (
+									<section
+										aria-labelledby="artikel-terkait"
+										className={ads ? styles.relatedStatic : styles.related}
+									>
+										<SectionHeader
+											id="artikel-terkait"
+											title="Artikel terkait"
+										/>
+										<ul className={styles.relatedList}>
+											{related.map((item) => (
+												<li key={item.id}>
+													<ArticleCard
+														article={item}
+														variant="compact"
+														trackAs="related_article"
+													/>
+												</li>
+											))}
+										</ul>
+									</section>
+								) : null}
+								{ads ? (
+									<div className={styles.railAd}>
+										<AdSlot
+											size="300x250"
+											wideSize="300x600"
+											placement="article-rail"
+										/>
+									</div>
+								) : null}
+							</>
 						}
 					/>
 				</article>
+				{readerAds ? <AdPopup key={article.id} /> : null}
 			</Container>
 		</>
 	);
