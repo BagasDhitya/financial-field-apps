@@ -90,10 +90,11 @@ test("the menu follows Site Navigation in the owner's order (ADR-0022)", async (
 	await expect(page.locator('h1')).toHaveText('Pinjaman Kredit');
 });
 
-test("the header has no site search (removed at the client's request)", async ({ page }) => {
+test('the header has no search bar; /cari still works (client request)', async ({ page }) => {
 	await page.goto('/');
-	await expect(page.getByRole('search')).toHaveCount(0);
-	await expect(page.locator('input[type="search"]')).toHaveCount(0);
+	await expect(page.getByRole('banner').getByRole('search')).toHaveCount(0);
+	const response = await page.goto('/cari?q=pajak');
+	expect(response?.status()).toBe(200);
 });
 
 test('skip link moves focus to the content (REQ-A11Y-002)', async ({ page }) => {

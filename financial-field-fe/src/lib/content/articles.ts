@@ -171,6 +171,24 @@ export async function getVideoArticles(
 	});
 }
 
+/** REQ-SRCH-001: title or lead, case-insensitive. Uncached. */
+export async function searchArticles(query: string, page = 1): Promise<Paginated<ArticleSummary>> {
+	const result = await cmsFetch<CmsCollection<StrapiArticle>>({
+		path: endpoints.articles,
+		query: {
+			...articleSummaryQuery(),
+			filters: {
+				$or: [{ title: { $containsi: query } }, { lead_text: { $containsi: query } }],
+			},
+			sort: articleSort(),
+			pagination: { page, pageSize: LISTING_PAGE_SIZE },
+		},
+		tags: [],
+		revalidate: 0,
+	});
+	return toPaginated(result, mapArticleSummary);
+}
+
 /** REQ-ART-006. Failure is non-fatal: the block is simply not rendered. */
 export async function getRelatedArticles(article: Article): Promise<ArticleSummary[]> {
 	const tagSlugs = article.tags.map((tag) => tag.slug);

@@ -37,6 +37,7 @@ import { ProviderLogo } from '@/components/ProviderLogo/ProviderLogo';
 import { PrSpot } from '@/components/PrSpot/PrSpot';
 import { ReviewerList } from '@/components/ReviewerList/ReviewerList';
 import { RiverItem } from '@/components/RiverItem/RiverItem';
+import { SearchField } from '@/components/SearchField/SearchField';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { SourcesList } from '@/components/SourcesList/SourcesList';
 import { SponsorDisclosure } from '@/components/SponsorDisclosure/SponsorDisclosure';
@@ -254,7 +255,8 @@ export function HarnessView() {
 			<Specimen title="InstallmentCalculator">
 				<InstallmentCalculator />
 			</Specimen>
-			<Specimen title="EmptyState">
+			<Specimen title="SearchField / EmptyState">
+				<SearchField variant="full" id="harness-search" />
 				<EmptyState
 					title="Belum ada artikel di Pajak."
 					links={[{ label: 'Artikel terbaru', href: '/terbaru' }]}

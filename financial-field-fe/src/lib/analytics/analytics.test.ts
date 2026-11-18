@@ -1,9 +1,16 @@
 import { describe, expect, it } from 'vitest';
 
 import { CONSENT_BOOT_SCRIPT, parseConsent, serializeConsent } from './consent';
-import { track } from './events';
+import { sanitizeSearchTerm, track } from './events';
 
 describe('analytics helpers (REQ-ANL-003, REQ-PRIV-002)', () => {
+	it('sanitizes search terms and drops personal data', () => {
+		expect(sanitizeSearchTerm('  Pajak   PENGHASILAN ')).toBe('pajak penghasilan');
+		expect(sanitizeSearchTerm('budi@example.com')).toBeNull();
+		expect(sanitizeSearchTerm('0812 3456 7890')).toBeNull();
+		expect(sanitizeSearchTerm('x'.repeat(80))).toHaveLength(50);
+	});
+
 	it('is a no-op without gtag (REQ-ANL-006)', () => {
 		expect(() => track('page_view')).not.toThrow();
 	});

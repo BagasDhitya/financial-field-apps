@@ -9,6 +9,7 @@ import { routes } from '@/lib/routes';
 import type { MainMenuEntry } from '@/types';
 
 import { Icon } from '../Icon/Icon';
+import { SearchField } from '../SearchField/SearchField';
 
 import styles from './MobileNav.module.css';
 
@@ -52,6 +53,7 @@ export function MobileNav({ entries }: MobileNavProps) {
 					</button>
 				</div>
 				<div className={styles.content}>
+					<SearchField variant="full" id="cari-mobile" />
 					<nav aria-label="Menu utama">
 						<ul className={styles.entries}>
 							{entries.map((entry) => (

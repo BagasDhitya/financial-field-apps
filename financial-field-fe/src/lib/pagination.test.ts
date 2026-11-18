@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { parsePageSegments } from './pagination';
+import { parsePageParam, parsePageSegments } from './pagination';
 
 describe('parsePageSegments (REQ-SEO-006)', () => {
 	it('treats no segments as page 1', () => {
@@ -28,5 +28,12 @@ describe('parsePageSegments (REQ-SEO-006)', () => {
 		[['halaman', '2', 'x']],
 	])('rejects %j', (segments) => {
 		expect(parsePageSegments(segments)).toEqual({ kind: 'invalid' });
+	});
+
+	it('parses ?halaman= defensively', () => {
+		expect(parsePageParam('4')).toBe(4);
+		expect(parsePageParam(['2', '9'])).toBe(2);
+		expect(parsePageParam('-1')).toBe(1);
+		expect(parsePageParam(undefined)).toBe(1);
 	});
 });

@@ -31,6 +31,7 @@ const ROUTES: [string, RegExp][] = [
 	['/video', /^Video$/],
 	['/tentang-kami', /Tentang Financial Field Indonesia/],
 	['/tentang-kami/redaksi', /Redaksi/],
+	['/cari?q=pajak', /Cari artikel/],
 	['/hubungi-kami', /Hubungi Kami/],
 ];
 
@@ -59,9 +60,6 @@ test('reserved, legacy and retired paths are 404 (ADR-0004, ADR-0022)', async ({
 		// Pages with their own URL are never served twice.
 		'/tentang-kami/kamus-keuangan',
 		'/tentang-kami/hubungi-kami',
-		// Site search was removed at the client's request.
-		'/cari',
-		'/cari?q=pajak',
 		'/articles/cara-membaca-slip-gaji-pph-21',
 		'/category/pajak',
 		'/authors/penulis-contoh-satu',
@@ -73,14 +71,11 @@ test('reserved, legacy and retired paths are 404 (ADR-0004, ADR-0022)', async ({
 	}
 });
 
-test('custom 404 offers the latest articles and topics, no search (REQ-PAGE-002)', async ({
-	page,
-}) => {
+test('custom 404 offers search and topics (REQ-PAGE-002)', async ({ page }) => {
 	const response = await page.goto('/artikel/tidak-ada');
 	expect(response?.status()).toBe(404);
 	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Halaman tidak ditemukan');
-	await expect(page.getByRole('link', { name: 'Artikel terbaru' })).toBeVisible();
-	await expect(page.getByRole('search')).toHaveCount(0);
+	await expect(page.locator('#cari-404')).toBeVisible();
 });
 
 test('harness is never served in production (T19)', async ({ request }) => {

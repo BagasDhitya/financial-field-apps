@@ -19,6 +19,11 @@ export const routes = {
 	about: (slug?: string) => (slug ? `/tentang-kami/${slug}` : '/tentang-kami'),
 	contact: () => '/hubungi-kami',
 	glossary: () => '/kamus-keuangan',
+	search: (query?: string) => (query ? `/cari?q=${encodeURIComponent(query)}` : '/cari'),
+	searchPage: (query: string, page: number) =>
+		page <= 1
+			? `/cari?q=${encodeURIComponent(query)}`
+			: `/cari?q=${encodeURIComponent(query)}&halaman=${page}`,
 	ticker: (symbol: string) => `/saham/${symbol.toLowerCase()}`,
 	/** Comparison (ADR-0012): sections are Product Categories, survey answers never enter a URL. */
 	comparisonIndex: () => '/bandingkan',

@@ -26,6 +26,15 @@
 	margin-left: auto;
 }
 
+.searchIcon {
+	display: inline-flex;
+	width: 2.75rem;
+	height: 2.75rem;
+	align-items: center;
+	justify-content: center;
+	border: var(--stroke-rule) solid var(--color-ink);
+}
+
 .navRow {
 	display: none;
 	border-top: var(--stroke-rule) solid var(--ink-12);
