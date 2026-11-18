@@ -509,6 +509,10 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
     featured_image: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios'
     >;
+    interview_dialogues: Schema.Attribute.Component<
+      'article.chat-bubble',
+      true
+    >;
     lead_text: Schema.Attribute.Text;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
@@ -525,16 +529,17 @@ export interface ApiArticleArticle extends Struct.CollectionTypeSchema {
       'manyToOne',
       'api::writer-profile.writer-profile'
     >;
-    slug: Schema.Attribute.UID<'title'>;
+    slug: Schema.Attribute.UID<'title'> & Schema.Attribute.Required;
     stocks_mentioned: Schema.Attribute.Relation<
       'manyToMany',
       'api::stock-ticker.stock-ticker'
     >;
     tags: Schema.Attribute.Relation<'manyToMany', 'api::tag.tag'>;
-    title: Schema.Attribute.String;
+    title: Schema.Attribute.String & Schema.Attribute.Required;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
+    video: Schema.Attribute.Component<'article.video', false>;
   };
 }
 

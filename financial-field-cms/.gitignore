@@ -131,3 +131,8 @@ build
 .strapi-cloud.json
 .vercel
 .env*
+
+############################
+# Ignore Generate Docs
+############################
+src/extensions/documentation

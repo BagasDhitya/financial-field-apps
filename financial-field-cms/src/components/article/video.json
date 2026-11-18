@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_article_videos",
+  "info": {
+    "displayName": "Video"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "channel": {
+      "type": "text"
+    },
+    "uploaded_at": {
+      "type": "datetime"
+    },
+    "duration": {
+      "type": "string"
+    },
+    "caption": {
+      "type": "text"
+    },
+    "embed_url": {
+      "type": "text"
+    }
+  },
+  "config": {}
+}

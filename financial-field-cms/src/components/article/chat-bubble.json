@@ -1,0 +1,36 @@
+{
+  "collectionName": "components_article_chat_bubbles",
+  "info": {
+    "displayName": "Chat Bubble"
+  },
+  "options": {},
+  "attributes": {
+    "speaker_name": {
+      "type": "string"
+    },
+    "speaker_role": {
+      "type": "string"
+    },
+    "speaker_avatar": {
+      "type": "media",
+      "multiple": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "message": {
+      "type": "text"
+    },
+    "position": {
+      "type": "enumeration",
+      "enum": [
+        "left",
+        "right"
+      ]
+    }
+  },
+  "config": {}
+}

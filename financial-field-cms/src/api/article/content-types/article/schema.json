@@ -12,11 +12,13 @@
   "pluginOptions": {},
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "slug": {
       "type": "uid",
-      "targetField": "title"
+      "targetField": "title",
+      "required": true
     },
     "lead_text": {
       "type": "text"
@@ -78,6 +80,16 @@
       "relation": "manyToMany",
       "target": "api::tag.tag",
       "inversedBy": "articles"
+    },
+    "interview_dialogues": {
+      "type": "component",
+      "component": "article.chat-bubble",
+      "repeatable": true
+    },
+    "video": {
+      "type": "component",
+      "component": "article.video",
+      "repeatable": false
     }
   }
 }
