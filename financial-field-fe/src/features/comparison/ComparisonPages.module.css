@@ -1,0 +1,173 @@
+/* Shared by the comparison pages: index, section, product, providers, calculator. */
+.root {
+	display: grid;
+	gap: var(--space-4);
+	padding-top: var(--space-3);
+	padding-bottom: var(--space-5);
+}
+
+.header {
+	display: grid;
+	gap: var(--space-1);
+	max-width: 50rem;
+}
+
+.header p {
+	margin: 0;
+}
+
+.kicker {
+	color: var(--color-ff-blue);
+}
+
+.title {
+	margin: 0;
+	font-size: var(--text-h1);
+}
+
+.dek {
+	font-size: calc(var(--text-body) * 1.05);
+	line-height: 1.55;
+	color: var(--ink-82);
+}
+
+.meta {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-1) var(--space-3);
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	gap: var(--space-2);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+@media (min-width: 640px) {
+	.grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: var(--space-3);
+	}
+}
+
+@media (min-width: 1024px) {
+	.grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+}
+
+.tile {
+	display: grid;
+	height: 100%;
+	align-content: start;
+	gap: var(--space-1);
+	padding: var(--space-3);
+	border: var(--stroke-card) solid var(--color-ink);
+	text-decoration: none;
+	transition: box-shadow var(--dur-slow) var(--ease-standard);
+}
+
+@media (hover: hover) {
+	.tile:hover {
+		box-shadow: var(--shadow-hard);
+	}
+}
+
+.tile p {
+	margin: 0;
+}
+
+.tileTitle {
+	margin: 0;
+	font-size: 1.25rem;
+	color: var(--color-ff-blue);
+}
+
+.tileHead {
+	display: flex;
+	align-items: center;
+	gap: var(--space-2);
+}
+
+.groupTitle {
+	margin: 0 0 var(--space-2);
+	padding-top: var(--space-1);
+	border-top: var(--stroke-frame) solid var(--color-ink);
+	font-size: var(--text-h2);
+}
+
+.split {
+	display: grid;
+	gap: var(--space-4);
+}
+
+@media (min-width: 1024px) {
+	.split {
+		grid-template-columns: var(--split-golden);
+		align-items: start;
+		gap: var(--space-5);
+	}
+}
+
+.box {
+	display: grid;
+	gap: var(--space-2);
+	padding: var(--space-3);
+	border: var(--stroke-card) solid var(--color-ink);
+}
+
+.box h2 {
+	margin: 0;
+	font-size: 1.25rem;
+}
+
+.box p {
+	margin: 0;
+}
+
+.facts {
+	display: grid;
+	margin: 0;
+	font-variant-numeric: tabular-nums lining-nums;
+}
+
+.facts > div {
+	display: grid;
+	grid-template-columns: minmax(8rem, 40%) minmax(0, 1fr);
+	gap: var(--space-2);
+	padding: var(--space-1) 0;
+	border-bottom: var(--stroke-rule) solid var(--ink-12);
+}
+
+.facts dt {
+	color: var(--ink-66);
+}
+
+.facts dd {
+	margin: 0;
+	font-weight: 600;
+}
+
+.links {
+	display: flex;
+	flex-wrap: wrap;
+	gap: var(--space-1) var(--space-3);
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.links a {
+	color: var(--color-ff-blue);
+	font-weight: 600;
+}
+
+.providerHead {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: var(--space-3);
+}

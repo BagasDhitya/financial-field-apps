@@ -36,6 +36,7 @@ const article: Article = {
 		mime: 'image/jpeg',
 	},
 	video: null,
+	dialogue: [],
 	primaryCategory: {
 		id: 'c',
 		slug: 'pajak',
@@ -51,6 +52,7 @@ const article: Article = {
 		credentials: null,
 		avatar: null,
 	},
+	verified: true,
 	publishedAt: '2026-10-01T03:00:00Z',
 	body: [],
 	reviewer: {
@@ -109,7 +111,7 @@ describe('structured data (SPC-seo §6)', () => {
 		expect(types).toEqual(['WebPage', 'Article', 'FAQPage', 'BreadcrumbList']);
 	});
 
-	it('uses +07:00 dates, Person authors and citations (REQ-SEO-030/031)', () => {
+	it('uses +07:00 dates, the writing team as author and citations (REQ-SEO-030/031)', () => {
 		const articleNode = nodes(
 			buildPageGraph({
 				kind: 'article',
@@ -124,9 +126,10 @@ describe('structured data (SPC-seo §6)', () => {
 			datePublished: '2026-10-01T10:00:00+07:00',
 			dateModified: '2026-10-05T10:00:00+07:00',
 			author: {
-				'@type': 'Person',
+				'@type': 'Organization',
 				name: 'Penulis Satu',
-				url: `${ORIGIN}/penulis/penulis`,
+				url: `${ORIGIN}/tentang-kami/redaksi`,
+				parentOrganization: { '@id': `${ORIGIN}/#organization` },
 			},
 			publisher: { '@id': `${ORIGIN}/#organization` },
 			inLanguage: 'id-ID',
@@ -134,7 +137,7 @@ describe('structured data (SPC-seo §6)', () => {
 		expect(articleNode?.citation).toHaveLength(1);
 	});
 
-	it('adds reviewedBy only with a recorded fact-check (REQ-SEO-035)', () => {
+	it('adds reviewedBy with a reviewer, and lastReviewed only with its date (REQ-SEO-035)', () => {
 		const withReview = nodes(
 			buildPageGraph({
 				kind: 'article',
@@ -146,16 +149,28 @@ describe('structured data (SPC-seo §6)', () => {
 			}),
 		)[0];
 		expect(withReview).toMatchObject({
-			reviewedBy: { name: 'Peninjau Dua' },
+			reviewedBy: { name: 'Peninjau Dua', url: `${ORIGIN}/peninjau/peninjau` },
 			lastReviewed: '2026-10-02',
 		});
-		const without = nodes(
+		const undated = nodes(
 			buildPageGraph({
 				kind: 'article',
 				origin: ORIGIN,
 				url: URL,
 				crumbs,
 				article: { ...article, lastReviewedAt: null },
+				faqSchema: false,
+			}),
+		)[0];
+		expect(undated).toHaveProperty('reviewedBy');
+		expect(undated).not.toHaveProperty('lastReviewed');
+		const without = nodes(
+			buildPageGraph({
+				kind: 'article',
+				origin: ORIGIN,
+				url: URL,
+				crumbs,
+				article: { ...article, reviewer: null, verified: false },
 				faqSchema: false,
 			}),
 		)[0];

@@ -88,130 +88,80 @@ export function blocksToPlainText(body: ArticleBody): string {
 		.join('\n');
 }
 
-// ---- Interview dialogue (ADR-0020) -------------------------------------------
+/** One glossary entry: the term, its definition as plain text, and its anchor id. */
+export type GlossaryTerm = { term: string; definition: string; anchor: string };
 
-/** Who speaks in a turn: the interviewer (the article's author) or a guest. */
-export type DialogueRole = 'interviewer' | 'guest';
+/** The terms under one letter heading. */
+export type GlossaryGroup = { letter: string; anchor: string; terms: GlossaryTerm[] };
 
-/** One speaker's turn: the name from the bold label and its paragraphs, label removed. */
-export type DialogueTurn = {
-	type: 'turn';
-	speaker: string;
-	role: DialogueRole;
-	paragraphs: InlineNode[][];
-};
-
-/** A dialogue in body order: turns, and every other block as it was. */
-export type DialogueSegment = DialogueTurn | { type: 'block'; block: BlockNode };
-
-export type Dialogue = {
-	segments: DialogueSegment[];
-	/** False when no speaker matched the author, so the first speaker was taken as interviewer. */
-	interviewerIsAuthor: boolean;
-};
-
-/** A speaker label is a name, not a sentence. */
-const MAX_SPEAKER_LENGTH = 60;
-
-function normalizeName(name: string): string {
-	return name.trim().replace(/\s+/g, ' ').toLowerCase();
+/** "Bunga flat" → "bunga-flat": an id for a term or letter. */
+export function anchorOf(text: string): string {
+	return text
+		.toLowerCase()
+		.normalize('NFKD')
+		.replace(/[^a-z0-9]+/g, '-')
+		.replace(/^-+|-+$/g, '');
 }
 
 /**
- * A turn's label: the paragraph's first text node is bold and reads "Name:"
- * (the colon may also start the next, plain node). Returns the name and the
- * paragraph without the label, or null when the paragraph has no label.
+ * A glossary written as an ordinary Static Page body (ADR-0022): a level-1
+ * heading per letter, a level-2 heading per term, then the paragraphs that
+ * define it. Blocks before the first letter are the intro, kept as Blocks.
+ * Terms without a definition are dropped (W2).
  */
-function splitSpeaker(children: InlineNode[]): { speaker: string; rest: InlineNode[] } | null {
-	const [first, ...others] = children;
-	if (!first || first.type !== 'text' || !first.bold) {
-		return null;
-	}
-	let label = first.text.trim();
-	let rest = others;
-	if (label.endsWith(':')) {
-		label = label.slice(0, -1).trim();
-	} else {
-		const next = others[0];
-		if (!next || next.type !== 'text' || !next.text.trimStart().startsWith(':')) {
-			return null;
+export function toGlossary(body: ArticleBody): { intro: ArticleBody; groups: GlossaryGroup[] } {
+	const blocks = toBlocks(body);
+	const firstLetter = blocks.findIndex((block) => block.type === 'heading' && block.level === 1);
+	const intro = firstLetter === -1 ? blocks : blocks.slice(0, firstLetter);
+	const groups: GlossaryGroup[] = [];
+	let term: GlossaryTerm | null = null;
+	const close = () => {
+		if (term && term.definition) {
+			groups.at(-1)?.terms.push(term);
 		}
-		rest = [{ ...next, text: next.text.trimStart().slice(1) }, ...others.slice(1)];
+		term = null;
+	};
+	for (const block of firstLetter === -1 ? [] : blocks.slice(firstLetter)) {
+		if (block.type === 'heading' && block.level === 1) {
+			close();
+			const letter = inlineText(block.children).trim();
+			groups.push({ letter, anchor: `huruf-${anchorOf(letter)}`, terms: [] });
+		} else if (block.type === 'heading' && block.level === 2) {
+			close();
+			const name = inlineText(block.children).trim();
+			term = { term: name, definition: '', anchor: anchorOf(name) };
+		} else if (term && block.type === 'paragraph') {
+			const text = inlineText(block.children).trim();
+			term.definition = term.definition ? `${term.definition} ${text}` : text;
+		}
 	}
-	if (!label || label.length > MAX_SPEAKER_LENGTH) {
-		return null;
-	}
-	// The space after the colon is the label's, not the text's.
-	while (rest[0]?.type === 'text' && !rest[0].text.trim()) {
-		rest = rest.slice(1);
-	}
-	const [lead, ...tail] = rest;
-	if (lead && lead.type === 'text') {
-		rest = [{ ...lead, text: lead.text.trimStart() }, ...tail];
-	}
-	return { speaker: label, rest };
-}
-
-function isEmptyParagraph(children: InlineNode[]): boolean {
-	return children.every((child) => child.type === 'text' && !child.text.trim());
+	close();
+	return { intro, groups: groups.filter((group) => group.terms.length > 0) };
 }
 
 /**
- * Reads an interview body as a dialogue (ADR-0020). A paragraph starting with
- * a bold "Name:" opens a turn; plain paragraphs after it continue that turn;
- * any other block ends it and stays as it is. The speaker named like the
- * author is the interviewer, else the first speaker; everyone else is a guest.
- * Returns null unless there is at least one interviewer and one guest turn,
- * so the caller renders the body as ordinary text.
+ * The text of the first list items in the body, up to `max`: a product's
+ * feature highlights on cards and in the comparison table (PRP-0002.p3 T08).
  */
-export function toDialogue(body: ArticleBody, authorName: string | null): Dialogue | null {
-	const segments: DialogueSegment[] = [];
-	let current: DialogueTurn | null = null;
+export function firstListItems(body: ArticleBody, max: number): string[] {
+	const items: string[] = [];
 	for (const block of toBlocks(body)) {
-		if (block.type !== 'paragraph') {
-			current = null;
-			segments.push({ type: 'block', block });
+		if (block.type !== 'list') {
 			continue;
 		}
-		const labelled = splitSpeaker(block.children);
-		if (labelled) {
-			current = {
-				type: 'turn',
-				speaker: labelled.speaker,
-				role: 'guest',
-				paragraphs: isEmptyParagraph(labelled.rest) ? [] : [labelled.rest],
-			};
-			segments.push(current);
-			continue;
-		}
-		if (isEmptyParagraph(block.children)) {
-			continue;
-		}
-		if (current) {
-			current.paragraphs.push(block.children);
-		} else {
-			segments.push({ type: 'block', block });
+		for (const item of block.children) {
+			if (items.length >= max) {
+				return items;
+			}
+			if (item.type === 'list-item') {
+				const text = inlineText(item.children).trim();
+				if (text) {
+					items.push(text);
+				}
+			}
 		}
 	}
-
-	const turns = segments.filter((segment): segment is DialogueTurn => segment.type === 'turn');
-	const firstTurn = turns[0];
-	if (!firstTurn) {
-		return null;
-	}
-	const author = authorName ? normalizeName(authorName) : '';
-	const authorTurn = author
-		? turns.find((turn) => normalizeName(turn.speaker) === author)
-		: undefined;
-	const interviewer = normalizeName((authorTurn ?? firstTurn).speaker);
-	for (const turn of turns) {
-		turn.role = normalizeName(turn.speaker) === interviewer ? 'interviewer' : 'guest';
-	}
-	const hasGuest = turns.some((turn) => turn.role === 'guest');
-	if (!hasGuest) {
-		return null;
-	}
-	return { segments, interviewerIsAuthor: authorTurn !== undefined };
+	return items;
 }
 
 /** Body heading levels shift down by one so the page keeps a single H1 (REQ-SEO-021). */

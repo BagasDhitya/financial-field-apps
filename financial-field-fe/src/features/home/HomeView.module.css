@@ -4,22 +4,65 @@
 	padding-top: var(--space-4);
 }
 
-.rail {
+.top,
+.topNoRail {
 	display: grid;
+	grid-template-columns: minmax(0, 1fr);
 	gap: var(--space-4);
 }
 
-.stack,
+/*
+ * From 1024 px: the lead and the river on the left, the widget rail on the
+ * right across both rows (ADR-0022). Below that the source order applies:
+ * lead, the widgets (the loan finder first), then the river.
+ */
+@media (min-width: 1024px) {
+	.top {
+		grid-template-columns: var(--split-golden);
+		grid-template-rows: auto 1fr;
+		grid-template-areas:
+			'lead rail'
+			'river rail';
+		align-items: start;
+		column-gap: var(--space-5);
+	}
+
+	.top .lead {
+		grid-area: lead;
+	}
+
+	.top .rail {
+		grid-area: rail;
+	}
+
+	.top .riverBlock {
+		grid-area: river;
+	}
+
+	/* Without widgets the river takes the rail's place, as before. */
+	.topNoRail {
+		grid-template-columns: var(--split-golden);
+		align-items: start;
+		column-gap: var(--space-5);
+	}
+}
+
+.lead,
+.riverBlock {
+	min-width: 0;
+}
+
+.rail {
+	display: grid;
+	gap: var(--space-3);
+	min-width: 0;
+}
+
 .river,
 .grid {
 	margin: 0;
 	padding: 0;
 	list-style: none;
-}
-
-.stack {
-	display: grid;
-	gap: var(--space-2);
 }
 
 .river {

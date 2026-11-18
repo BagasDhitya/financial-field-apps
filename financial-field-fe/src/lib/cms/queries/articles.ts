@@ -7,11 +7,15 @@ const CATEGORY_WITH_PARENT = {
 	populate: { parent_category: { fields: ['slug', 'name'] } },
 } as const;
 
-/** Relations and media a card needs, on every CMS. Kept minimal: listings fetch many. */
+/**
+ * Relations and media a card needs, on every CMS. Kept minimal: listings fetch
+ * many. The reviewer's slug is enough to mark a card "Terverifikasi" (ADR-0022).
+ */
 const ARTICLE_SUMMARY_POPULATE = {
 	featured_image: true,
 	primary_category: CATEGORY_WITH_PARENT,
 	author: { populate: { avatar: true } },
+	reviewer: { fields: ['slug'] },
 } as const;
 
 const SUMMARY_BASE_FIELDS = ['title', 'slug', 'lead_text', 'article_type', 'publishedAt'] as const;
@@ -31,13 +35,13 @@ export function articleSort(caps: CapabilitySet = cmsCapabilities): string[] {
 }
 
 /**
- * Card relations and media, plus the video's link once the CMS has videos
- * (CMS-30): a card needs to know only that there is one, and which.
+ * Card relations and media, plus the video's embed link once the CMS has
+ * videos (CMS-30): a card needs to know only that there is one, and which.
  */
 export function articleSummaryPopulate(caps: CapabilitySet = cmsCapabilities) {
 	return {
 		...ARTICLE_SUMMARY_POPULATE,
-		...(caps.has('video') ? { featured_video: { fields: ['url'] } } : {}),
+		...(caps.has('video') ? { video: { fields: ['embedUrl'] } } : {}),
 	};
 }
 
@@ -51,9 +55,9 @@ export function articleSummaryQuery(caps: CapabilitySet = cmsCapabilities) {
 
 /**
  * Only articles with a video (CMS-30). The component is filtered on its
- * required `url`, as Strapi filters a component's fields.
+ * `embedUrl`, as Strapi filters a component's fields.
  */
-export const WITH_VIDEO_FILTER = { featured_video: { url: { $notNull: true } } } as const;
+export const WITH_VIDEO_FILTER = { video: { embedUrl: { $notNull: true } } } as const;
 
 /**
  * Everything the article detail route renders. No `fields` list, so scalar
@@ -72,7 +76,10 @@ export function articleDetailPopulate(caps: CapabilitySet = cmsCapabilities) {
 		...(caps.has('sources') ? { sources: true } : {}),
 		...(caps.has('takeaways') ? { key_takeaways: true } : {}),
 		...(caps.has('corrections') ? { corrections: true } : {}),
-		...(caps.has('video') ? { featured_video: true } : {}),
+		...(caps.has('video') ? { video: true } : {}),
+		...(caps.has('interview')
+			? { interview_dialogues: { populate: { speaker_avatar: true } } }
+			: {}),
 	};
 }
 

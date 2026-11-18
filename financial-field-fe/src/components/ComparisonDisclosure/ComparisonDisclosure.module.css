@@ -1,0 +1,23 @@
+.root {
+	display: grid;
+	gap: var(--space-1);
+	padding: var(--space-2);
+	border-left: var(--stroke-frame) solid var(--color-ink);
+	background: var(--ink-04);
+	font-size: var(--text-meta);
+	line-height: 1.55;
+}
+
+.root p {
+	margin: 0;
+}
+
+.demo {
+	padding-bottom: var(--space-1);
+	border-bottom: var(--stroke-rule) solid var(--ink-12);
+}
+
+.text a {
+	color: var(--color-ff-blue);
+	font-weight: 600;
+}

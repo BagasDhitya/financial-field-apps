@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { routes, TRUST_PAGES } from '@/lib/routes';
-import type { CategoryNode, SiteSettings } from '@/types';
+import type { CategoryNode, MenuLink, SiteSettings } from '@/types';
 
 import { ConsentSettingsButton } from '../ConsentBanner/ConsentBanner';
 import { Container } from '../Container/Container';
@@ -11,13 +11,21 @@ import styles from './SiteFooter.module.css';
 
 export type SiteFooterProps = {
 	categories: CategoryNode[];
+	/** Comparison sections, Penyedia and the calculator (REQ-CMP-014); empty while comparison is off. */
+	comparisonLinks: MenuLink[];
 	settings: SiteSettings;
 	showConsentSettings: boolean;
 	year: number;
 };
 
-/** FF navy footer: topics, trust pages, contact (REQ-NAV-005, REQ-SEO-025). */
-export function SiteFooter({ categories, settings, showConsentSettings, year }: SiteFooterProps) {
+/** FF navy footer: topics, tools, trust pages, contact (REQ-NAV-005, REQ-SEO-025, REQ-CMP-014). */
+export function SiteFooter({
+	categories,
+	comparisonLinks,
+	settings,
+	showConsentSettings,
+	year,
+}: SiteFooterProps) {
 	return (
 		<footer className={styles.root}>
 			<Container className={styles.grid}>
@@ -41,6 +49,19 @@ export function SiteFooter({ categories, settings, showConsentSettings, year }: 
 						</li>
 						<li>
 							<Link href={routes.videos()}>Video</Link>
+						</li>
+					</ul>
+				</nav>
+				<nav aria-label="Alat dan referensi" className={styles.column}>
+					<p className={`type-label ${styles.heading}`}>Alat</p>
+					<ul className={styles.list}>
+						{comparisonLinks.map((link) => (
+							<li key={link.href}>
+								<Link href={link.href}>{link.label}</Link>
+							</li>
+						))}
+						<li>
+							<Link href={routes.glossary()}>Kamus Keuangan</Link>
 						</li>
 					</ul>
 				</nav>

@@ -1,15 +1,25 @@
-import type { Article, ArticleSummary, ArticleVideo, AuthorSummary, CategoryNode } from '@/types';
+import type {
+	Article,
+	ArticleSummary,
+	ArticleVideo,
+	AuthorSummary,
+	CategoryNode,
+	DialogueTurn,
+	FinancialProduct,
+	MainMenuEntry,
+} from '@/types';
 
 /** Synthetic data only: no real people, no personal data (REQ-TEST-003). */
 const HOUR = 60 * 60 * 1000;
 
 export const harnessNow = new Date('2026-11-03T08:00:00Z');
 
+/** The writing team: articles carry it as their author, with no profile page (ADR-0022). */
 export const writer: AuthorSummary = {
 	id: 'author-1',
-	slug: 'contoh-penulis',
-	fullName: 'Contoh Penulis',
-	roleTitle: 'Penulis keuangan',
+	slug: 'tim-redaksi-contoh',
+	fullName: 'Tim Redaksi Contoh',
+	roleTitle: 'Redaksi',
 	credentials: null,
 	avatar: null,
 };
@@ -43,34 +53,32 @@ export const videoFixture: ArticleVideo = {
 		'Keterangan video dari redaksi: apa yang ditampilkan video dan mengapa ada di artikel ini.',
 };
 
-/**
- * An interview body written as a dialogue (ADR-0020): bold "Name:" paragraphs,
- * a plain paragraph continuing a turn, and a heading that ends the dialogue.
- */
-export const dialogueFixture: Article['body'] = [
+/** Interview turns (CMS-31): left and right, a role, a two-paragraph message, no avatars. */
+export const dialogueFixture: DialogueTurn[] = [
 	{
-		type: 'paragraph',
-		children: [{ type: 'text', text: 'Pengantar redaksi sebelum percakapan.' }],
+		speakerName: 'Contoh Penulis',
+		speakerRole: 'Penulis keuangan',
+		avatar: null,
+		paragraphs: ['Pertanyaan pertama dari pewawancara?'],
+		position: 'left',
 	},
 	{
-		type: 'paragraph',
-		children: [
-			{ type: 'text', text: 'Contoh Penulis:', bold: true },
-			{ type: 'text', text: ' Pertanyaan pertama dari pewawancara?' },
+		speakerName: 'Narasumber Contoh',
+		speakerRole: 'Perencana keuangan',
+		avatar: null,
+		paragraphs: [
+			'Jawaban narasumber, paragraf pertama.',
+			'Paragraf kedua dari jawaban yang sama.',
 		],
+		position: 'right',
 	},
 	{
-		type: 'paragraph',
-		children: [
-			{ type: 'text', text: 'Narasumber Contoh:', bold: true },
-			{ type: 'text', text: ' Jawaban narasumber, paragraf pertama.' },
-		],
+		speakerName: 'Narasumber Tanpa Peran',
+		speakerRole: null,
+		avatar: null,
+		paragraphs: ['Giliran tanpa peran: hanya nama yang tampil.'],
+		position: 'right',
 	},
-	{
-		type: 'paragraph',
-		children: [{ type: 'text', text: 'Paragraf kedua dari jawaban yang sama.' }],
-	},
-	{ type: 'heading', level: 1, children: [{ type: 'text', text: 'Baca juga' }] },
 ];
 
 export function summary(overrides: Partial<ArticleSummary> = {}): ArticleSummary {
@@ -85,6 +93,7 @@ export function summary(overrides: Partial<ArticleSummary> = {}): ArticleSummary
 		video: null,
 		primaryCategory: category,
 		author: writer,
+		verified: true,
 		publishedAt: new Date(harnessNow.getTime() - 3 * HOUR).toISOString(),
 		...overrides,
 	};
@@ -93,6 +102,7 @@ export function summary(overrides: Partial<ArticleSummary> = {}): ArticleSummary
 export const articleFixture: Article = {
 	...summary(),
 	video: null,
+	dialogue: [],
 	body: [
 		{
 			type: 'paragraph',
@@ -194,3 +204,73 @@ export const categoriesFixture: CategoryNode[] = [
 		children: [],
 	},
 ];
+
+/** The header menu as the owner ordered it (ADR-0022), trimmed for tests and the harness. */
+export const menuFixture: MainMenuEntry[] = [
+	{
+		kind: 'topics',
+		label: 'Berita',
+		topics: categoriesFixture,
+		views: [
+			{ label: 'Terbaru', href: '/terbaru' },
+			{ label: 'Wawancara', href: '/wawancara' },
+			{ label: 'Video', href: '/video' },
+		],
+	},
+	{
+		kind: 'menu',
+		label: 'Bandingkan',
+		groups: [
+			{
+				heading: { label: 'Pinjaman', href: '/bandingkan/pinjaman' },
+				links: [{ label: 'Jaminan BPKB', href: '/bandingkan/jaminan-bpkb' }],
+			},
+		],
+		footer: { label: 'Semua perbandingan', href: '/bandingkan' },
+	},
+	{ kind: 'link', label: 'Kamus Keuangan', href: '/kamus-keuangan' },
+	{
+		kind: 'menu',
+		label: 'Tentang Kami',
+		groups: [{ heading: null, links: [{ label: 'Redaksi', href: '/tentang-kami/redaksi' }] }],
+		footer: null,
+	},
+];
+
+/** A fictional loan product for the comparison specimens (ADR-0022). */
+export const productFixture: FinancialProduct = {
+	id: 'product-1',
+	slug: 'contoh-penyedia-kredit-mobil',
+	title: 'Kredit Mobil Contoh',
+	summary: 'Bunga flat mulai 5% per tahun, uang muka mulai 20%.',
+	section: {
+		id: 'section-1',
+		slug: 'kredit-mobil',
+		name: 'Kredit Mobil',
+		parentSlug: 'pinjaman',
+		parentName: 'Pinjaman',
+	},
+	provider: { id: 'provider-1', slug: 'contoh-penyedia', name: 'Penyedia Contoh', logo: null },
+	minIncome: 5_000_000,
+	annualFeeText: null,
+	features: [],
+	featureHighlights: ['Uang muka mulai 20%.', 'Tenor sampai 60 bulan.'],
+	officialUrl: 'https://example.com/contoh-penyedia/kredit-mobil',
+	image: null,
+	dataCheckedAt: '2026-11-15',
+	sourceUrl: null,
+	isPartner: false,
+	loan: {
+		rateType: 'flat',
+		rateMin: 5,
+		rateMax: 7.5,
+		amountMin: 50_000_000,
+		amountMax: 1_000_000_000,
+		tenorMin: 12,
+		tenorMax: 60,
+		downPaymentMin: 20,
+		maxFinancing: null,
+		fees: 'Administrasi Rp 2.000.000',
+	},
+	seo: null,
+};

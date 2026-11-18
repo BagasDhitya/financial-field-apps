@@ -9,6 +9,7 @@ import { Container } from '@/components/Container/Container';
 import { CorrectionNotice } from '@/components/CorrectionNotice/CorrectionNotice';
 import { FaqList } from '@/components/FaqList/FaqList';
 import { GoldenSplit } from '@/components/GoldenSplit/GoldenSplit';
+import { InterviewDialogue } from '@/components/InterviewDialogue/InterviewDialogue';
 import { KeyTakeaways } from '@/components/KeyTakeaways/KeyTakeaways';
 import { Kicker } from '@/components/Kicker/Kicker';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
@@ -16,6 +17,7 @@ import { ShareBar } from '@/components/ShareBar/ShareBar';
 import { SourcesList } from '@/components/SourcesList/SourcesList';
 import { SponsorDisclosure } from '@/components/SponsorDisclosure/SponsorDisclosure';
 import { TagList } from '@/components/TagList/TagList';
+import { VerifiedNotice } from '@/components/VerifiedNotice/VerifiedNotice';
 import { VideoEmbed } from '@/components/VideoEmbed/VideoEmbed';
 import type { ArticleEventParams } from '@/lib/analytics/events';
 import type { Article, ArticleSummary } from '@/types';
@@ -35,8 +37,8 @@ export type ArticleViewProps = {
 
 /**
  * Article template (REQ-ART-001…013). Order follows SPC-functional §6; a video
- * takes the featured image's place at the top, and an interview's body shows
- * as a dialogue.
+ * takes the featured image's place at the top, and an interview's turns
+ * (CMS-31) follow the body as speech bubbles.
  */
 export function ArticleView({
 	article,
@@ -50,7 +52,6 @@ export function ArticleView({
 }: ArticleViewProps) {
 	const isPr = article.articleType === 'pr_article';
 	const isInterview = article.articleType === 'interview';
-	const reviewed = article.reviewer !== null && article.lastReviewedAt !== null;
 
 	return (
 		<>
@@ -65,6 +66,12 @@ export function ArticleView({
 						/>
 						<h1 className={styles.title}>{article.title}</h1>
 						{article.leadText ? <p className={styles.dek}>{article.leadText}</p> : null}
+						{article.reviewer ? (
+							<VerifiedNotice
+								reviewer={article.reviewer}
+								reviewedAt={article.lastReviewedAt}
+							/>
+						) : null}
 						<Byline
 							author={article.author}
 							reviewer={article.reviewer}
@@ -104,17 +111,8 @@ export function ArticleView({
 										body={article.body}
 										siteOrigin={siteOrigin}
 										sponsored={isPr}
-										dialogue={
-											isInterview
-												? {
-														authorName:
-															article.author?.fullName ?? null,
-														authorAvatar:
-															article.author?.avatar ?? null,
-													}
-												: undefined
-										}
 									/>
+									<InterviewDialogue turns={article.dialogue} />
 									{analyticsParams ? (
 										<ArticleAnalytics params={analyticsParams} />
 									) : null}
@@ -128,7 +126,7 @@ export function ArticleView({
 									{article.author ? (
 										<AuthorBox person={article.author} role="Penulis" />
 									) : null}
-									{reviewed && article.reviewer ? (
+									{article.reviewer ? (
 										<AuthorBox person={article.reviewer} role="Peninjau" />
 									) : null}
 								</div>

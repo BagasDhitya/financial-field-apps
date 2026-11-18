@@ -1,7 +1,8 @@
+import type { ReactNode } from 'react';
+
 import { ArticleCard } from '@/components/ArticleCard/ArticleCard';
 import { Container } from '@/components/Container/Container';
 import { EmptyState } from '@/components/EmptyState/EmptyState';
-import { GoldenSplit } from '@/components/GoldenSplit/GoldenSplit';
 import { RiverItem } from '@/components/RiverItem/RiverItem';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { routes } from '@/lib/routes';
@@ -18,6 +19,11 @@ export type CategoryBlock = {
 export type HomeViewProps = {
 	heading: string;
 	stories: HomeStories;
+	/**
+	 * The rail beside the lead (ADR-0022): the loan finder, the PR spot and the
+	 * newsletter box, each already gated by its flag. Empty puts the river there.
+	 */
+	rail: ReactNode[];
 	/** Articles with a video, not already above (REQ-HOME-005); empty hides the section. */
 	videos: ArticleSummary[];
 	/** Interviews, not already above (REQ-HOME-006); empty hides the section. */
@@ -26,66 +32,47 @@ export type HomeViewProps = {
 	now: Date;
 };
 
-/** Media-first home: lead story, editor picks, Terbaru river, Video, Wawancara, topic blocks. */
+/** Media-first home: lead story, the widget rail, Terbaru river, Video, Wawancara, topic blocks. */
 export function HomeView({
 	heading,
 	stories,
+	rail,
 	videos,
 	interviews,
 	categoryBlocks,
 	now,
 }: HomeViewProps) {
-	const { lead, secondary, river } = stories;
+	const { lead, river } = stories;
+	const hasRail = rail.length > 0;
 
 	return (
 		<Container className={styles.root}>
 			<h1 className="visually-hidden">{heading}</h1>
 
 			{lead ? (
-				<GoldenSplit
-					railLabel="Pilihan editor dan artikel terbaru"
-					main={
+				<div className={hasRail ? styles.top : styles.topNoRail}>
+					<div className={styles.lead}>
 						<ArticleCard article={lead} variant="lead" headingLevel={2} preloadImage />
-					}
-					rail={
-						<div className={styles.rail}>
-							{secondary.length > 0 ? (
-								<section aria-labelledby="pilihan-editor">
-									<SectionHeader id="pilihan-editor" title="Pilihan editor" />
-									<ul className={styles.stack}>
-										{secondary.map((article) => (
-											<li key={article.id}>
-												<ArticleCard
-													article={article}
-													variant="compact"
-													trackAs="home_featured"
-												/>
-											</li>
-										))}
-									</ul>
-								</section>
-							) : null}
-							{river.length > 0 ? (
-								<section aria-labelledby="terbaru">
-									<SectionHeader
-										id="terbaru"
-										title="Terbaru"
-										href={routes.latest()}
-									/>
-									<ul className={styles.river}>
-										{river.map((article) => (
-											<RiverItem
-												key={article.id}
-												article={article}
-												now={now}
-											/>
-										))}
-									</ul>
-								</section>
-							) : null}
-						</div>
-					}
-				/>
+					</div>
+					{hasRail ? (
+						<aside
+							className={styles.rail}
+							aria-label="Bandingkan, sponsor, dan newsletter"
+						>
+							{rail}
+						</aside>
+					) : null}
+					{river.length > 0 ? (
+						<section className={styles.riverBlock} aria-labelledby="terbaru">
+							<SectionHeader id="terbaru" title="Terbaru" href={routes.latest()} />
+							<ul className={styles.river}>
+								{river.map((article) => (
+									<RiverItem key={article.id} article={article} now={now} />
+								))}
+							</ul>
+						</section>
+					) : null}
+				</div>
 			) : (
 				<EmptyState
 					title="Belum ada artikel yang terbit."

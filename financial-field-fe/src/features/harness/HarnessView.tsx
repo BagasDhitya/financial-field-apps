@@ -5,27 +5,44 @@ import {
 	checker,
 	dialogueFixture,
 	harnessNow,
+	menuFixture,
+	productFixture,
 	summary,
 	videoFixture,
 	writer,
 } from '@/components/__fixtures__/domain';
+import { AdSlot } from '@/components/AdSlot/AdSlot';
 import { ArticleBody } from '@/components/ArticleBody/ArticleBody';
 import { ArticleCard } from '@/components/ArticleCard/ArticleCard';
+import { AuthorBox } from '@/components/AuthorBox/AuthorBox';
 import { Breadcrumbs } from '@/components/Breadcrumbs/Breadcrumbs';
 import { Byline } from '@/components/Byline/Byline';
+import { ComparisonDisclosure } from '@/components/ComparisonDisclosure/ComparisonDisclosure';
+import { ComparisonTool } from '@/components/ComparisonTool/ComparisonTool';
 import { Container } from '@/components/Container/Container';
 import { CorrectionNotice } from '@/components/CorrectionNotice/CorrectionNotice';
 import { EmptyState } from '@/components/EmptyState/EmptyState';
 import { FaqList } from '@/components/FaqList/FaqList';
+import { InstallmentCalculator } from '@/components/InstallmentCalculator/InstallmentCalculator';
+import { InterviewDialogue } from '@/components/InterviewDialogue/InterviewDialogue';
 import { KeyTakeaways } from '@/components/KeyTakeaways/KeyTakeaways';
 import { Kicker, PrLabel } from '@/components/Kicker/Kicker';
+import { LoanFinder } from '@/components/LoanFinder/LoanFinder';
+import { MainNav } from '@/components/MainNav/MainNav';
+import { NewsletterSignup } from '@/components/NewsletterSignup/NewsletterSignup';
+import { OutboundLink } from '@/components/OutboundLink/OutboundLink';
 import { Pagination } from '@/components/Pagination/Pagination';
+import { PersonMark } from '@/components/PersonMark/PersonMark';
+import { ProviderLogo } from '@/components/ProviderLogo/ProviderLogo';
+import { PrSpot } from '@/components/PrSpot/PrSpot';
+import { ReviewerList } from '@/components/ReviewerList/ReviewerList';
 import { RiverItem } from '@/components/RiverItem/RiverItem';
-import { SearchField } from '@/components/SearchField/SearchField';
 import { SectionHeader } from '@/components/SectionHeader/SectionHeader';
 import { SourcesList } from '@/components/SourcesList/SourcesList';
 import { SponsorDisclosure } from '@/components/SponsorDisclosure/SponsorDisclosure';
 import { TagList } from '@/components/TagList/TagList';
+import { VerifiedMark } from '@/components/VerifiedMark/VerifiedMark';
+import { VerifiedNotice } from '@/components/VerifiedNotice/VerifiedNotice';
 import { VideoEmbed } from '@/components/VideoEmbed/VideoEmbed';
 
 import styles from './HarnessView.module.css';
@@ -121,19 +138,8 @@ export function HarnessView() {
 					/>
 				</div>
 			</Specimen>
-			<Specimen title="ArticleBody — interview dialogue (interviewer left, guest right)">
-				<ArticleBody
-					body={dialogueFixture}
-					siteOrigin="http://localhost:3000"
-					dialogue={{ authorName: writer.fullName, authorAvatar: null }}
-				/>
-			</Specimen>
-			<Specimen title="ArticleBody — interview without named turns (falls back to text)">
-				<ArticleBody
-					body={articleFixture.body}
-					siteOrigin="http://localhost:3000"
-					dialogue={{ authorName: writer.fullName, authorAvatar: null }}
-				/>
+			<Specimen title="InterviewDialogue — left and right, with and without a role (CMS-31)">
+				<InterviewDialogue turns={dialogueFixture} />
 			</Specimen>
 			<Specimen title="VideoEmbed — still and play button; the player loads on click">
 				<VideoEmbed video={videoFixture} articleId="harness" />
@@ -210,8 +216,45 @@ export function HarnessView() {
 				/>
 				<Pagination page={4} pageCount={9} hrefFor={(page) => `/terbaru/halaman/${page}`} />
 			</Specimen>
-			<Specimen title="SearchField / EmptyState">
-				<SearchField variant="full" id="harness-search" />
+			<Specimen title="MainNav — the desktop menu row (ADR-0022)">
+				<nav aria-label="Contoh menu">
+					<MainNav entries={menuFixture} />
+				</nav>
+			</Specimen>
+			<Specimen title="VerifiedNotice / VerifiedMark / AuthorBox / PersonMark / ReviewerList">
+				<VerifiedNotice reviewer={checker} reviewedAt={articleFixture.lastReviewedAt} />
+				<VerifiedMark />
+				<AuthorBox person={writer} role="Penulis" />
+				<AuthorBox person={checker} role="Peninjau" />
+				<PersonMark person={checker} size={72} />
+				<ReviewerList reviewers={[checker]} />
+			</Specimen>
+			<Specimen title="Home rail — LoanFinder / PrSpot / AdSlot / NewsletterSignup">
+				<LoanFinder sectionSlug="kredit-mobil" href="/bandingkan/kredit-mobil" />
+				<PrSpot article={summary({ id: 'pr', slug: 'pr', articleType: 'pr_article' })} />
+				<AdSlot />
+				<NewsletterSignup />
+			</Specimen>
+			<Specimen title="Comparison — ProviderLogo / OutboundLink / ComparisonDisclosure / ComparisonTool">
+				<ProviderLogo provider={productFixture.provider} size="large" />
+				<OutboundLink
+					href={productFixture.officialUrl ?? 'https://example.com'}
+					section="kredit-mobil"
+					productSlug={productFixture.slug}
+					providerName={productFixture.provider.name}
+				/>
+				<ComparisonDisclosure demo />
+				<ComparisonTool
+					sectionSlug="harness-kredit-mobil"
+					sectionName="Kredit Mobil"
+					kind="car"
+					products={[productFixture]}
+				/>
+			</Specimen>
+			<Specimen title="InstallmentCalculator">
+				<InstallmentCalculator />
+			</Specimen>
+			<Specimen title="EmptyState">
 				<EmptyState
 					title="Belum ada artikel di Pajak."
 					links={[{ label: 'Artikel terbaru', href: '/terbaru' }]}

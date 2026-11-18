@@ -30,7 +30,7 @@ test.describe('local API (Strapi REST shape)', () => {
 		const limited = await (
 			await request.get('/api/tags?pagination[limit]=1&fields[0]=slug')
 		).json();
-		expect(limited.meta.pagination).toEqual({ start: 0, limit: 1, total: 20 });
+		expect(limited.meta.pagination).toEqual({ start: 0, limit: 1, total: 23 });
 
 		const navigation = await (
 			await request.get('/api/site-navigation?populate[featured_articles][fields][0]=slug')
@@ -45,15 +45,31 @@ test.describe('local API (Strapi REST shape)', () => {
 
 	test('filters and populates a component (the article video, CMS-30)', async ({ request }) => {
 		const response = await request.get(
-			'/api/articles?filters[featured_video][url][$notNull]=true&fields[0]=slug&populate[featured_video][fields][0]=url&pagination[pageSize]=1',
+			'/api/articles?filters[video][embedUrl][$notNull]=true&fields[0]=slug&populate[video][fields][0]=embedUrl&pagination[pageSize]=1',
 		);
 		const body = await response.json();
 		expect(body.meta.pagination.total).toBe(25);
-		expect(Object.keys(body.data[0].featured_video)).toEqual(['id', 'url']);
-		expect(body.data[0].featured_video.url).toMatch(
-			/^https:\/\/www\.youtube\.com\/watch\?v=[\w-]{11}$/,
+		expect(Object.keys(body.data[0].video)).toEqual(['id', 'embedUrl']);
+		expect(body.data[0].video.embedUrl).toMatch(
+			/^https:\/\/www\.youtube\.com\/embed\/[\w-]{11}$/,
 		);
-		const invalid = await request.get('/api/articles?filters[featured_video][bogus]=1');
+		// The CMS developer's component, field for field and in his order.
+		const full = await (
+			await request.get(
+				'/api/articles?filters[video][embedUrl][$notNull]=true&populate[video]=true',
+			)
+		).json();
+		expect(Object.keys(full.data[0].video)).toEqual([
+			'id',
+			'title',
+			'channel',
+			'uploadedAt',
+			'duration',
+			'caption',
+			'embedUrl',
+		]);
+		expect(full.data[0].video.duration).toMatch(/^PT(\d+H)?(\d+M)?(\d+S)?$/);
+		const invalid = await request.get('/api/articles?filters[video][bogus]=1');
 		expect(invalid.status()).toBe(400);
 	});
 

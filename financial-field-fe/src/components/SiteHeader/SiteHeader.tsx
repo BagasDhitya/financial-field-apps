@@ -1,45 +1,38 @@
-import Link from 'next/link';
-
-import { routes } from '@/lib/routes';
-import type { CategoryNode } from '@/types';
+import type { MainMenuEntry } from '@/types';
 
 import { Container } from '../Container/Container';
-import { Icon } from '../Icon/Icon';
+import { MainNav } from '../MainNav/MainNav';
 import { MobileNav } from '../MobileNav/MobileNav';
-import { SearchField } from '../SearchField/SearchField';
-import { TopicPanel } from '../TopicPanel/TopicPanel';
 import { Wordmark } from '../Wordmark/Wordmark';
 
 import styles from './SiteHeader.module.css';
 
 export type SiteHeaderProps = {
-	categories: CategoryNode[];
-	/** The single top-level article entry; label pending OQ-07. */
-	articleLabel?: string;
+	/** The menu from Site Navigation (ADR-0022): Berita, Edukasi, … Tentang Kami. */
+	menu: MainMenuEntry[];
 };
 
-/** Brand, one "Artikel" panel, Tentang Kami, search (B6, REQ-NAV-001). */
-export function SiteHeader({ categories, articleLabel = 'Artikel' }: SiteHeaderProps) {
+/**
+ * The brand on the first row; the menu on its own row from 1024 px (B6,
+ * REQ-NAV-001, ADR-0022). Below that, the Menu sheet. No site search: the
+ * client asked for it to be removed (2026-11-18).
+ */
+export function SiteHeader({ menu }: SiteHeaderProps) {
 	return (
 		<header className={styles.root}>
 			<Container className={styles.bar}>
 				<Wordmark />
-				<nav aria-label="Utama" className={styles.nav}>
-					<TopicPanel label={articleLabel} categories={categories} />
-					<Link href={routes.about()} className={styles.link}>
-						Tentang Kami
-					</Link>
-				</nav>
-				<div className={styles.search}>
-					<SearchField />
-				</div>
 				<div className={styles.mobile}>
-					<Link href={routes.search()} className={styles.searchIcon}>
-						<Icon name="search" title="Cari" />
-					</Link>
-					<MobileNav label={articleLabel} categories={categories} />
+					<MobileNav entries={menu} />
 				</div>
 			</Container>
+			<div className={styles.navRow}>
+				<Container>
+					<nav aria-label="Utama">
+						<MainNav entries={menu} />
+					</nav>
+				</Container>
+			</div>
 		</header>
 	);
 }

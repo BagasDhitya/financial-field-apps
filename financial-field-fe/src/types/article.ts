@@ -29,6 +29,16 @@ export type ArticleVideo = VideoRef & {
 	caption: string | null;
 };
 
+/** One interview turn (CMS-31), shown as a speech bubble on its side. */
+export type DialogueTurn = {
+	speakerName: string;
+	speakerRole: string | null;
+	avatar: MediaAsset | null;
+	/** The message split at blank lines; never empty. */
+	paragraphs: string[];
+	position: 'left' | 'right';
+};
+
 /** Card-sized article. What listings, rails, and related blocks consume. */
 export type ArticleSummary = {
 	id: string;
@@ -41,6 +51,8 @@ export type ArticleSummary = {
 	video: VideoRef | null;
 	primaryCategory: CategorySummary | null;
 	author: AuthorSummary | null;
+	/** A reviewer (peninjau) checked it: the "Terverifikasi" mark (ADR-0022). */
+	verified: boolean;
 	/** First publication (CMS-09 `first_published_at`, else Strapi `publishedAt`). */
 	publishedAt: string | null;
 };
@@ -67,13 +79,15 @@ export type Article = Omit<ArticleSummary, 'video'> & {
 	/** Shown in place of the featured image (CMS-30); null = none or not a YouTube link. */
 	video: ArticleVideo | null;
 	body: ArticleBody;
+	/** Interview turns after the body (CMS-31); empty for other articles. */
+	dialogue: DialogueTurn[];
 	reviewer: AuthorSummary | null;
 	categories: CategorySummary[];
 	tags: TagSummary[];
 	stocksMentioned: StockMention[];
 	/** Last substantive update (CMS-09 `content_updated_at`); null when never updated. */
 	contentUpdatedAt: string | null;
-	/** When the CFP fact-check was recorded (CMS-05/09); null = not fact-checked. */
+	/** When the reviewer's check was recorded (CMS-09); null when the CMS has no date. */
 	lastReviewedAt: string | null;
 	seo: SeoFields | null;
 	sponsor: Sponsor | null;

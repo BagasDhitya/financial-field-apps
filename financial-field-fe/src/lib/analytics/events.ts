@@ -19,21 +19,6 @@ declare global {
 /** Fired on window once gtag is defined (after consent). */
 export const ANALYTICS_READY_EVENT = 'ffid:analytics-ready';
 
-const EMAIL_PATTERN = /[^\s@]+@[^\s@]+\.[^\s@]+/;
-const PHONE_PATTERN = /(?:\+?\d[\s.-]?){8,}/;
-
-/**
- * REQ-ANL-003 / REQ-SRCH-002: lower-case, collapse spaces, max 50 chars, and
- * drop anything that looks like an email address or phone number.
- */
-export function sanitizeSearchTerm(term: string): string | null {
-	const clean = term.toLowerCase().replace(/\s+/g, ' ').trim().slice(0, 50);
-	if (!clean || EMAIL_PATTERN.test(clean) || PHONE_PATTERN.test(clean)) {
-		return null;
-	}
-	return clean;
-}
-
 export type EventParams = Record<string, string | number | boolean>;
 
 /**
@@ -70,12 +55,6 @@ export const analytics = {
 	articleRead: (params: ArticleEventParams) => track('article_read', params),
 	selectContent: (contentType: string, itemId: string) =>
 		track('select_content', { content_type: contentType, item_id: itemId }),
-	search: (term: string) => {
-		const searchTerm = sanitizeSearchTerm(term);
-		if (searchTerm) {
-			track('search', { search_term: searchTerm });
-		}
-	},
 	share: (method: string, itemId: string) =>
 		track('share', { method, content_type: 'article', item_id: itemId }),
 	navOpen: (surface: 'desktop_panel' | 'mobile_sheet') => track('nav_open', { surface }),

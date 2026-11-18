@@ -25,12 +25,3 @@ export function parsePageSegments(segments: readonly string[] = []): PageSegment
 	const page = Number(raw);
 	return page === 1 ? { kind: 'redirect-first' } : { kind: 'page', page };
 }
-
-/** Parses `?halaman=` for search, which is dynamic and noindex. */
-export function parsePageParam(value: string | string[] | undefined): number {
-	const raw = Array.isArray(value) ? value[0] : value;
-	if (!raw || !/^[1-9]\d{0,4}$/.test(raw)) {
-		return 1;
-	}
-	return Number(raw);
-}

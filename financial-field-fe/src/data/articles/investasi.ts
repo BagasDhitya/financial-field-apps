@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, say, ul } from '../blocks';
+import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Investasi and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -10,17 +10,17 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 			'Investasi rutin bulanan membantu pemula membangun kebiasaan dan mengurangi tekanan untuk menebak waktu terbaik membeli. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-investasi',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=FIAXLR8eiEo',
+		video: {
 			title: 'Tips Memulai Investasi Reksa Dana Bagi Pemula',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2023-10-28T04:00:09.000Z',
-			duration_seconds: 626,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2023-10-28T04:00:09.000Z',
+			duration: 'PT10M26S',
 			caption:
 				'Liputan CNBC Indonesia tentang cara kerja reksa dana, yang dikelola oleh manajer investasi, dan tips memulai investasi reksa dana bagi pemula.',
+			embedUrl: 'https://www.youtube.com/embed/FIAXLR8eiEo',
 		},
 		primary_category: 'investasi-reksa-dana',
-		author: 'penulis-contoh-dua',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['reksa-dana', 'investasi-pemula'],
 		first_published_at: '2026-09-23T06:00:00.000Z',
@@ -148,11 +148,9 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-investasi',
 		primary_category: 'investasi-properti',
-		author: 'penulis-contoh-tiga',
-		reviewer: 'peninjau-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['investasi-pemula'],
 		first_published_at: '2026-09-21T20:00:00.000Z',
-		last_reviewed_at: '2026-09-22T20:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Imbal hasil properti sewa dihitung dari pendapatan sewa bersih dibandingkan harga dan biaya kepemilikan properti.',
@@ -258,11 +256,9 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 		article_type: 'interview',
 		featured_image: 'kategori-investasi',
 		primary_category: 'investasi-saham-valas',
-		author: 'penulis-contoh-dua',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['saham', 'investasi-pemula'],
 		first_published_at: '2026-09-20T10:00:00.000Z',
-		last_reviewed_at: '2026-09-21T10:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Mulailah dengan dana yang tidak dibutuhkan dalam lima tahun ke depan, setelah dana darurat terkumpul.',
@@ -278,71 +274,99 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 			p(
 				'Sepuluh tahun lalu, Narasumber Contoh Dua membeli saham pertamanya dengan sisa bonus tahunan. Sejak itu ia mengalami pasar yang naik tajam, turun dalam, dan bergerak datar berbulan-bulan. Kami bertanya apa yang ia pelajari dari semua itu. Nama narasumber dan angka dalam wawancara ini fiktif; jawaban telah disunting agar ringkas.',
 			),
-			say('Penulis Contoh Dua', 'Apa yang Anda siapkan sebelum membeli saham pertama?'),
-			say(
-				'Narasumber Contoh Dua',
-				'Jujur, hampir tidak ada. Saya membuka rekening efek di perusahaan sekuritas yang berizin OJK, lalu membeli saham yang sedang ramai dibicarakan. Dalam tiga bulan nilainya turun sekitar 30 persen. Angkanya fiktif, tetapi rasanya nyata.',
-			),
-			p(
-				'Dari situ saya belajar urutannya: dana darurat dulu, lalu investasi dengan uang yang tidak akan saya butuhkan dalam lima tahun. Dengan begitu, saya tidak terpaksa menjual saat harga sedang jatuh.',
-			),
-			say('Penulis Contoh Dua', 'Bagaimana cara Anda memilih saham sekarang?'),
-			say(
-				'Narasumber Contoh Dua',
-				'Saya mulai dari bisnisnya. Apa yang dijual perusahaan, siapa pembelinya, apakah labanya stabil, dan apakah utangnya masuk akal. Laporan keuangan tahunan perusahaan tercatat bisa dibaca siapa saja di situs bursa.',
-			),
-			p(
-				'Kalau saya tidak bisa menjelaskan cara perusahaan itu mendapat uang dalam dua kalimat, saya tidak membelinya.',
-			),
-			say('Penulis Contoh Dua', 'Pernahkah Anda panik saat pasar turun?'),
-			say(
-				'Narasumber Contoh Dua',
-				'Pernah, terutama di tahun-tahun awal. Sekarang saya punya aturan tertulis: tidak mengambil keputusan jual-beli pada hari yang sama dengan berita besar. Saya menunggu, membaca ulang alasan saya membeli, lalu bertanya apakah alasan itu masih berlaku.',
-			),
-			p(
-				'Sering kali alasannya masih sama, dan yang berubah hanya harga. Kalau alasannya sudah hilang, barulah saya menjual, meski rugi.',
-			),
-			say(
-				'Penulis Contoh Dua',
-				'Berapa banyak saham yang sebaiknya dimiliki investor pemula?',
-			),
-			say(
-				'Narasumber Contoh Dua',
-				'Tidak ada angka ajaib. Saya sendiri memegang delapan sampai dua belas saham dari beberapa sektor, ditambah reksa dana indeks. Intinya, jangan sampai satu saham yang salah pilih menghapus hasil bertahun-tahun.',
-			),
-			say(
-				'Penulis Contoh Dua',
-				'Bagaimana Anda membagi uang antara saham dan instrumen lain?',
-			),
-			say(
-				'Narasumber Contoh Dua',
-				'Saya menyesuaikannya dengan tujuan. Dana untuk kebutuhan dua sampai tiga tahun lagi, seperti biaya sekolah anak, saya taruh di instrumen yang lebih stabil, misalnya deposito atau obligasi ritel. Saham hanya untuk tujuan yang jauh, seperti pensiun.',
-			),
-			p(
-				'Setiap tahun saya meninjau porsinya. Kalau saham sudah naik terlalu banyak sehingga porsinya melewati batas yang saya tetapkan, sebagian saya pindahkan. Kalau turun, saya tambah dari setoran rutin.',
-			),
-			say('Penulis Contoh Dua', 'Bagaimana dengan rekomendasi saham dari media sosial?'),
-			say(
-				'Narasumber Contoh Dua',
-				'Saya anggap sebagai bahan bacaan, bukan perintah beli. Banyak yang membagikan rekomendasi tanpa menyebut risiko atau kepentingannya sendiri. Kalau sebuah ajakan menjanjikan untung pasti dalam waktu singkat, itu justru tanda untuk menjauh.',
-			),
-			say('Penulis Contoh Dua', 'Apa pesan Anda untuk yang baru mau mulai?'),
-			say(
-				'Narasumber Contoh Dua',
-				'Mulailah kecil dan rutin, misalnya menyisihkan jumlah tetap setiap bulan, lalu catat setiap transaksi beserta alasannya. Setelah satu tahun, baca kembali catatan itu. Anda akan belajar lebih banyak dari catatan sendiri daripada dari grup percakapan mana pun.',
-			),
-			h2('Baca juga'),
-			ul(
-				link(
-					'/artikel/investasi-rutin-reksa-dana-pemula',
-					'Investasi rutin bulanan di reksa dana untuk pemula',
-				),
-				link(
-					'/artikel/emas-deposito-atau-obligasi-ritel',
-					'Emas, deposito, atau obligasi ritel: membandingkan risiko secara umum',
-				),
-				link('/kategori/investasi', 'Semua artikel di topik Investasi'),
-			),
+		],
+		interview_dialogues: [
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa yang Anda siapkan sebelum membeli saham pertama?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Dua',
+				speaker_role: 'Investor ritel',
+				message:
+					'Jujur, hampir tidak ada. Saya membuka rekening efek di perusahaan sekuritas yang berizin OJK, lalu membeli saham yang sedang ramai dibicarakan. Dalam tiga bulan nilainya turun sekitar 30 persen. Angkanya fiktif, tetapi rasanya nyata.\n\nDari situ saya belajar urutannya: dana darurat dulu, lalu investasi dengan uang yang tidak akan saya butuhkan dalam lima tahun. Dengan begitu, saya tidak terpaksa menjual saat harga sedang jatuh.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana cara Anda memilih saham sekarang?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Dua',
+				speaker_role: 'Investor ritel',
+				message:
+					'Saya mulai dari bisnisnya. Apa yang dijual perusahaan, siapa pembelinya, apakah labanya stabil, dan apakah utangnya masuk akal. Laporan keuangan tahunan perusahaan tercatat bisa dibaca siapa saja di situs bursa.\n\nKalau saya tidak bisa menjelaskan cara perusahaan itu mendapat uang dalam dua kalimat, saya tidak membelinya.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Pernahkah Anda panik saat pasar turun?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Dua',
+				speaker_role: 'Investor ritel',
+				message:
+					'Pernah, terutama di tahun-tahun awal. Sekarang saya punya aturan tertulis: tidak mengambil keputusan jual-beli pada hari yang sama dengan berita besar. Saya menunggu, membaca ulang alasan saya membeli, lalu bertanya apakah alasan itu masih berlaku.\n\nSering kali alasannya masih sama, dan yang berubah hanya harga. Kalau alasannya sudah hilang, barulah saya menjual, meski rugi.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Berapa banyak saham yang sebaiknya dimiliki investor pemula?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Dua',
+				speaker_role: 'Investor ritel',
+				message:
+					'Tidak ada angka ajaib. Saya sendiri memegang delapan sampai dua belas saham dari beberapa sektor, ditambah reksa dana indeks. Intinya, jangan sampai satu saham yang salah pilih menghapus hasil bertahun-tahun.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana Anda membagi uang antara saham dan instrumen lain?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Dua',
+				speaker_role: 'Investor ritel',
+				message:
+					'Saya menyesuaikannya dengan tujuan. Dana untuk kebutuhan dua sampai tiga tahun lagi, seperti biaya sekolah anak, saya taruh di instrumen yang lebih stabil, misalnya deposito atau obligasi ritel. Saham hanya untuk tujuan yang jauh, seperti pensiun.\n\nSetiap tahun saya meninjau porsinya. Kalau saham sudah naik terlalu banyak sehingga porsinya melewati batas yang saya tetapkan, sebagian saya pindahkan. Kalau turun, saya tambah dari setoran rutin.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana dengan rekomendasi saham dari media sosial?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Dua',
+				speaker_role: 'Investor ritel',
+				message:
+					'Saya anggap sebagai bahan bacaan, bukan perintah beli. Banyak yang membagikan rekomendasi tanpa menyebut risiko atau kepentingannya sendiri. Kalau sebuah ajakan menjanjikan untung pasti dalam waktu singkat, itu justru tanda untuk menjauh.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa pesan Anda untuk yang baru mau mulai?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Dua',
+				speaker_role: 'Investor ritel',
+				message:
+					'Mulailah kecil dan rutin, misalnya menyisihkan jumlah tetap setiap bulan, lalu catat setiap transaksi beserta alasannya. Setelah satu tahun, baca kembali catatan itu. Anda akan belajar lebih banyak dari catatan sendiri daripada dari grup percakapan mana pun.',
+				position: 'right',
+			},
 		],
 	},
 	{
@@ -352,17 +376,17 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 			'Emas, deposito, dan obligasi ritel memiliki profil risiko dan likuiditas berbeda sehingga cocok untuk tujuan yang berbeda.',
 		article_type: 'standard',
 		featured_image: 'kategori-investasi',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=4gIY5d5nE8E',
+		video: {
 			title: 'Mana lebih Profit, Investasi di Obligasi, Deposito Vs Emas?',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2025-04-15T11:45:01.000Z',
-			duration_seconds: 646,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2025-04-15T11:45:01.000Z',
+			duration: 'PT10M46S',
 			caption:
 				'Equity Analyst CNBC Indonesia membandingkan investasi emas dengan obligasi dan deposito, di tengah kenaikan harga emas yang tajam pada awal 2025.',
+			embedUrl: 'https://www.youtube.com/embed/4gIY5d5nE8E',
 		},
 		primary_category: 'investasi-lainnya',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['investasi-pemula', 'reksa-dana'],
 		first_published_at: '2026-09-19T00:00:00.000Z',
@@ -488,7 +512,7 @@ export const INVESTASI_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-investasi',
 		primary_category: 'investasi-properti-lahan',
-		author: 'penulis-contoh-tiga',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['warisan-keluarga'],
 		first_published_at: '2026-09-17T14:00:00.000Z',

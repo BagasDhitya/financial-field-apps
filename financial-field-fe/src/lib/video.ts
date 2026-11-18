@@ -1,8 +1,8 @@
 /**
- * YouTube URLs for article videos (planned CMS-30). Client-safe: the player
- * imports it too. The CMS stores a watch or share link; only the 11-character
- * video id leaves this module, so no stored URL is ever used as an iframe or
- * image source (REQ-SEC-010).
+ * YouTube URLs for article videos (CMS-30). Client-safe: the player imports it
+ * too. The CMS stores an `/embed/` link (`video.embedUrl`); watch and share
+ * links are read as well. Only the 11-character video id leaves this module,
+ * so no stored URL is ever used as an iframe or image source (REQ-SEC-010).
  */
 
 const YOUTUBE_HOSTS = new Set([
@@ -91,6 +91,30 @@ export function formatDuration(seconds: number | null | undefined): string | nul
 	return hours > 0
 		? `${hours}:${String(minutes).padStart(2, '0')}:${rest}`
 		: `${minutes}:${rest}`;
+}
+
+const ISO_DURATION = /^PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?$/;
+
+/**
+ * "PT5M18S" → 318: the CMS stores the length as an ISO 8601 duration (the
+ * hours, minutes and seconds form YouTube uses). Anything else is null.
+ */
+export function parseIsoDuration(value: string | null | undefined): number | null {
+	const match = value?.trim().match(ISO_DURATION);
+	if (!match || (!match[1] && !match[2] && !match[3])) {
+		return null;
+	}
+	const seconds =
+		Number(match[1] ?? 0) * 3600 + Number(match[2] ?? 0) * 60 + Number(match[3] ?? 0);
+	return seconds > 0 ? seconds : null;
+}
+
+/** True for `https://www.youtube.com/embed/<id>`, the form the CMS stores. */
+export function isYouTubeEmbedUrl(url: string | null | undefined): boolean {
+	if (!url || parseYouTubeId(url) === null) {
+		return false;
+	}
+	return new URL(url.trim()).pathname.startsWith('/embed/');
 }
 
 /** 318 → "PT5M18S", the ISO 8601 duration VideoObject takes. */

@@ -3,14 +3,38 @@ import { expect, test } from '@playwright/test';
 import { jsonLdTypes } from './helpers';
 
 test.describe('article page', () => {
-	test('byline shows author and CFP reviewer with dates (AC5)', async ({ page }) => {
+	test('byline shows the team without a link and the reviewer with one (AC5, ADR-0022)', async ({
+		page,
+	}) => {
 		await page.goto('/artikel/langkah-mengisi-spt-tahunan-pertama');
 		await expect(page.getByText('Ditulis oleh')).toBeVisible();
+		await expect(page.getByText('Tim Redaksi Financial Field').first()).toBeVisible();
+		await expect(page.getByRole('link', { name: 'Tim Redaksi Financial Field' })).toHaveCount(
+			0,
+		);
 		await expect(page.getByText('Ditinjau oleh')).toBeVisible();
 		await expect(
 			page.getByRole('link', { name: 'Peninjau Contoh Dua' }).first(),
-		).toHaveAttribute('href', '/penulis/peninjau-contoh-dua');
+		).toHaveAttribute('href', '/peninjau/peninjau-contoh-dua');
 		await expect(page.getByText(/Diperbarui/)).toBeVisible();
+	});
+
+	test('a verified article says so at the top; an unverified one does not (REQ-ART-014)', async ({
+		page,
+	}) => {
+		await page.goto('/artikel/langkah-mengisi-spt-tahunan-pertama');
+		const notice = page.getByRole('complementary', { name: 'Artikel terverifikasi' });
+		await expect(notice).toBeVisible();
+		await expect(notice.getByRole('link', { name: 'Peninjau Contoh Dua' })).toHaveAttribute(
+			'href',
+			'/peninjau/peninjau-contoh-dua',
+		);
+
+		await page.goto('/artikel/tantangan-menabung-52-minggu');
+		await expect(
+			page.getByRole('complementary', { name: 'Artikel terverifikasi' }),
+		).toHaveCount(0);
+		await expect(page.getByText('Ditinjau oleh')).toHaveCount(0);
 	});
 
 	test('structured data matches the template (AC8, REQ-SEO-030)', async ({ page }) => {

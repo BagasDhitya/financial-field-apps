@@ -9,7 +9,7 @@ test('robots.txt follows ADR-0005 in production (AC10)', async ({ request }) => 
 
 test('sitemap index and files list only indexable URLs (AC9)', async ({ request }) => {
 	const index = await (await request.get('/sitemap.xml')).text();
-	for (const name of ['articles-1', 'categories', 'tags', 'authors', 'pages']) {
+	for (const name of ['articles-1', 'categories', 'tags', 'reviewers', 'pages', 'comparison']) {
 		expect(index).toContain(`/sitemaps/${name}.xml`);
 	}
 	const tags = await (await request.get('/sitemaps/tags.xml')).text();
@@ -17,10 +17,10 @@ test('sitemap index and files list only indexable URLs (AC9)', async ({ request 
 	expect(tags).not.toContain('/tag/kartu-kredit');
 	const categories = await (await request.get('/sitemaps/categories.xml')).text();
 	expect(categories).toContain('/kategori/pajak/pajak-pph21');
-	expect(categories.match(/<loc>/g)).toHaveLength(59);
+	expect(categories.match(/<loc>/g)).toHaveLength(63);
 	const articles = await (await request.get('/sitemaps/articles-1.xml')).text();
 	expect(articles).toContain('<lastmod>');
-	expect(articles.match(/<loc>/g)).toHaveLength(65);
+	expect(articles.match(/<loc>/g)).toHaveLength(73);
 });
 
 test('security headers are present (AC19, REQ-SEC-001)', async ({ request }) => {

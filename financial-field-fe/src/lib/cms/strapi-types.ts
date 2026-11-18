@@ -41,6 +41,8 @@ export type StrapiAuthor = {
 	bio?: string | null;
 	same_as?: StrapiLink[] | null;
 	expertise?: unknown;
+	background?: string | null;
+	financial_view?: string | null;
 	seo?: StrapiSeo | null;
 };
 
@@ -75,12 +77,24 @@ export type StrapiTakeaway = { text?: string | null };
 export type StrapiCorrection = { date?: string | null; note?: string | null };
 
 export type StrapiVideo = {
-	url?: string | null;
 	title?: string | null;
-	channel_name?: string | null;
-	uploaded_at?: string | null;
-	duration_seconds?: number | null;
+	channel?: string | null;
+	/** Datetime, stored in UTC. */
+	uploadedAt?: string | null;
+	/** ISO 8601 duration, e.g. `PT1M30S`. */
+	duration?: string | null;
 	caption?: string | null;
+	/** `https://www.youtube.com/embed/<id>`. */
+	embedUrl?: string | null;
+};
+
+/** `article.chat-bubble` (CMS-31). */
+export type StrapiChatBubble = {
+	speaker_name?: string | null;
+	speaker_role?: string | null;
+	speaker_avatar?: StrapiMedia | null;
+	message?: string | null;
+	position?: string | null;
 };
 
 export type StrapiArticle = {
@@ -111,7 +125,8 @@ export type StrapiArticle = {
 	sources?: StrapiSource[] | null;
 	key_takeaways?: StrapiTakeaway[] | null;
 	corrections?: StrapiCorrection[] | null;
-	featured_video?: StrapiVideo | null;
+	interview_dialogues?: StrapiChatBubble[] | null;
+	video?: StrapiVideo | null;
 };
 
 export type StrapiMenuItem = {
@@ -144,4 +159,67 @@ export type StrapiSiteSettings = {
 	social_links?: { platform?: string | null; url?: string | null }[] | null;
 	contact_email?: string | null;
 	default_pr_disclosure?: string | null;
+};
+
+/** `product-specs.loan` (planned CMS-26). */
+export type StrapiLoanSpecs = {
+	rate_type?: string | null;
+	rate_min?: number | null;
+	rate_max?: number | null;
+	amount_min?: number | null;
+	amount_max?: number | null;
+	tenor_min?: number | null;
+	tenor_max?: number | null;
+	down_payment_min?: number | null;
+	max_financing?: number | null;
+	fees?: string | null;
+};
+
+/** api::provider.provider (ADR-0011), plus the planned CMS-24 fields. */
+export type StrapiProvider = {
+	documentId: string;
+	name?: string | null;
+	slug?: string | null;
+	logo?: StrapiMedia | null;
+	legal_name?: string | null;
+	regulator?: string | null;
+	license_number?: string | null;
+	website_url?: string | null;
+	description?: string | null;
+	financial_products?: StrapiFinancialProduct[] | null;
+};
+
+/** api::product-category.product-category, plus the planned CMS-23 and CMS-28 fields. */
+export type StrapiProductCategory = {
+	documentId: string;
+	name?: string | null;
+	slug?: string | null;
+	description?: string | null;
+	nav_order?: number | null;
+	show_in_nav?: boolean | null;
+	seo?: StrapiSeo | null;
+	parent?: StrapiProductCategory | null;
+	children?: StrapiProductCategory[] | null;
+	financial_products?: StrapiFinancialProduct[] | null;
+};
+
+/** api::financial-product.financial-product, plus the planned CMS-23, 25 and 26 fields. */
+export type StrapiFinancialProduct = {
+	documentId: string;
+	title?: string | null;
+	slug?: string | null;
+	min_income?: number | null;
+	annual_fee?: string | null;
+	features?: Record<string, unknown>[] | null;
+	apply_url?: string | null;
+	image?: StrapiMedia | null;
+	product_category?: StrapiProductCategory | null;
+	provider?: StrapiProvider | null;
+	summary?: string | null;
+	seo?: StrapiSeo | null;
+	data_checked_at?: string | null;
+	source_url?: string | null;
+	is_partner?: boolean | null;
+	loan_specs?: StrapiLoanSpecs | null;
+	updatedAt?: string | null;
 };

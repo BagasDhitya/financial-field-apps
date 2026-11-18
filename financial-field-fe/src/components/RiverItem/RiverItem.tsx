@@ -5,6 +5,7 @@ import type { ArticleSummary } from '@/types';
 
 import { DateTime } from '../DateTime/DateTime';
 import { InterviewLabel, needsInterviewHint, PrLabel, VideoLabel } from '../Kicker/Kicker';
+import { VerifiedMark } from '../VerifiedMark/VerifiedMark';
 
 import styles from './RiverItem.module.css';
 
@@ -44,6 +45,7 @@ export function RiverItem({ article, now = new Date() }: RiverItemProps) {
 						{article.primaryCategory.name}
 					</span>
 				) : null}
+				{article.verified ? <VerifiedMark /> : null}
 			</p>
 			<h3 className={styles.title}>
 				<Link

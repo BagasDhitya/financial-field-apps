@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { routes } from '@/lib/routes';
 import type { AuthorSummary } from '@/types';
 
-import { CmsImage } from '../CmsImage/CmsImage';
+import { PersonMark } from '../PersonMark/PersonMark';
 
 import styles from './AuthorBox.module.css';
 
@@ -12,22 +12,27 @@ export type AuthorBoxProps = {
 	role: 'Penulis' | 'Peninjau';
 };
 
-/** End-of-article box linking to the author page (REQ-GEO-003). */
+/**
+ * End-of-article box (REQ-GEO-003, ADR-0022). The reviewer's box links to
+ * their profile; the writer is the team, so its box has no link.
+ */
 export function AuthorBox({ person, role }: AuthorBoxProps) {
+	const href = role === 'Peninjau' ? routes.reviewer(person.slug) : null;
 	return (
 		<div className={styles.root}>
-			{person.avatar ? (
-				<span className={styles.avatar}>
-					<CmsImage image={person.avatar} sizes="72px" ratio="1/1" decorative />
-				</span>
-			) : null}
+			<PersonMark person={person} size={72} />
 			<div className={styles.text}>
 				<p className={`type-label ${styles.role}`}>{role}</p>
 				<p className={styles.name}>
-					<Link href={routes.author(person.slug)}>{person.fullName}</Link>
+					{href ? <Link href={href}>{person.fullName}</Link> : person.fullName}
 					{person.credentials ? <span>, {person.credentials}</span> : null}
 				</p>
 				{person.roleTitle ? <p className="type-meta">{person.roleTitle}</p> : null}
+				{href ? (
+					<p className={styles.more}>
+						<Link href={href}>Lihat profil peninjau</Link>
+					</p>
+				) : null}
 			</div>
 		</div>
 	);

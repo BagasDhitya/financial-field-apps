@@ -1,12 +1,12 @@
 import type { ArticleBody } from './article';
 import type { SeoFields } from './seo';
 
-/** Trust and legal pages (CMS-13). */
+/** Trust, legal and reference pages (CMS-13); `referensi` is the glossary (ADR-0022). */
 export type StaticPage = {
 	id: string;
 	slug: string;
 	title: string;
-	group: 'tentang-kami' | 'legal' | null;
+	group: 'tentang-kami' | 'legal' | 'referensi' | null;
 	body: ArticleBody;
 	seo: SeoFields | null;
 	updatedAt: string | null;

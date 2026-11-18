@@ -8,6 +8,7 @@ import { CmsImage } from '../CmsImage/CmsImage';
 import { DateTime } from '../DateTime/DateTime';
 import { Icon } from '../Icon/Icon';
 import { Kicker, needsInterviewHint } from '../Kicker/Kicker';
+import { VerifiedMark } from '../VerifiedMark/VerifiedMark';
 
 import styles from './ArticleCard.module.css';
 
@@ -135,6 +136,7 @@ export function ArticleCard({
 					) : null
 				) : null}
 				<p className={`type-meta ${styles.meta}`}>
+					{article.verified ? <VerifiedMark /> : null}
 					{variant === 'lead' && article.author ? (
 						<span>{article.author.fullName}</span>
 					) : null}

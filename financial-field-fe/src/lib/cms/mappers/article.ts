@@ -4,6 +4,7 @@ import type { StrapiArticle } from '../strapi-types';
 
 import { mapAuthorSummary } from './author';
 import { mapCategorySummary } from './category';
+import { mapDialogue } from './dialogue';
 import { mapMedia, resolveBodyMedia } from './media';
 import { mapSeo } from './seo';
 import { mapTagSummary } from './tag';
@@ -33,11 +34,12 @@ export function mapArticleSummary(entry: StrapiArticle): ArticleSummary {
 		leadText: nonEmpty(entry.lead_text),
 		articleType: toArticleType(entry.article_type),
 		featuredImage: mapMedia(entry.featured_image),
-		video: mapVideoRef(entry.featured_video),
+		video: mapVideoRef(entry.video),
 		primaryCategory: entry.primary_category?.slug
 			? mapCategorySummary(entry.primary_category)
 			: null,
 		author: entry.author?.slug ? mapAuthorSummary(entry.author) : null,
+		verified: Boolean(entry.reviewer?.slug),
 		publishedAt: entry.first_published_at ?? entry.publishedAt ?? null,
 	};
 }
@@ -54,11 +56,12 @@ export function mapArticle(entry: StrapiArticle): Article {
 
 	return {
 		...summary,
-		video: mapVideo(entry.featured_video),
+		video: mapVideo(entry.video, summary.title),
 		body: resolveBodyMedia(entry.content ?? []),
+		dialogue: mapDialogue(entry.interview_dialogues),
 		reviewer,
-		// A reviewer without a recorded fact-check date is not shown publicly
-		// (REQ-ART-002, REQ-SEO-035), so the date gates the reviewer.
+		// The reviewer is the verification (ADR-0022): the CMS has `reviewer`
+		// today; the check's date (CMS-09) is shown once the CMS records it.
 		lastReviewedAt: reviewer ? (entry.last_reviewed_at ?? null) : null,
 		categories: (entry.categories ?? [])
 			.filter((category) => category.slug)

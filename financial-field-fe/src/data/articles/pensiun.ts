@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, say, ul } from '../blocks';
+import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Pensiun and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -10,17 +10,17 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 			'Program pensiun pemerintah memberi dasar perlindungan di hari tua, tetapi biasanya perlu dilengkapi tabungan pribadi. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pensiun',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=MuYDRq4tw5I',
+		video: {
 			title: 'Jaminan Pensiun Cair di Usia 59 Tahun, Pekerja Rugi atau Untung? | Liputan 6',
-			channel_name: 'Liputan6',
-			uploaded_at: '2025-01-09T06:54:41.000Z',
-			duration_seconds: 170,
+			channel: 'Liputan6',
+			uploadedAt: '2025-01-09T06:54:41.000Z',
+			duration: 'PT2M50S',
 			caption:
 				'Liputan 6 SCTV: sejak Januari 2025 usia pensiun pekerja menjadi 59 tahun, yang memengaruhi kapan peserta BPJS Ketenagakerjaan dapat mencairkan Jaminan Pensiun.',
+			embedUrl: 'https://www.youtube.com/embed/MuYDRq4tw5I',
 		},
 		primary_category: 'pensiun-pemerintah',
-		author: 'penulis-contoh-dua',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['pensiun'],
 		first_published_at: '2026-10-11T16:00:00.000Z',
@@ -145,7 +145,7 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-pensiun',
 		primary_category: 'pensiun-pemberi-kerja',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['pensiun', 'karier-awal'],
 		first_published_at: '2026-10-10T06:00:00.000Z',
@@ -254,17 +254,17 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 			'DPLK memungkinkan pekerja mandiri menyisihkan dana pensiun secara rutin dengan aturan penarikan tertentu. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pensiun',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=IMOkRUu_Iag',
+		video: {
 			title: 'Jurus DPLK Tambah Perserta Dana Pensiunan & Tingkatkan Aset',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2023-10-17T07:22:21.000Z',
-			duration_seconds: 383,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2023-10-17T07:22:21.000Z',
+			duration: 'PT6M23S',
 			caption:
 				'Ketua Umum Perkumpulan DPLK menjelaskan di CNBC Indonesia bahwa peserta DPLK memilih sendiri instrumen investasinya dari pilihan yang disediakan, serta upaya industri menambah jumlah peserta.',
+			embedUrl: 'https://www.youtube.com/embed/IMOkRUu_Iag',
 		},
 		primary_category: 'pensiun-dplk',
-		author: 'penulis-contoh-tiga',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['pensiun'],
 		first_published_at: '2026-10-08T20:00:00.000Z',
@@ -378,17 +378,17 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 			'Kebutuhan dana pensiun dapat diperkirakan dari pengeluaran bulanan saat ini, perkiraan inflasi, dan lama masa pensiun. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pensiun',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=fXuVH71b0-4',
+		video: {
 			title: 'Cara Mempersiapkan Dana Pensiun, Simak Perhitungannya!',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2024-09-16T09:00:40.000Z',
-			duration_seconds: 878,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2024-09-16T09:00:40.000Z',
+			duration: 'PT14M38S',
 			caption:
 				'Financial Expert CNBC Indonesia membahas cara mempersiapkan dana pensiun dan menghitung kebutuhannya dalam program Investime.',
+			embedUrl: 'https://www.youtube.com/embed/fXuVH71b0-4',
 		},
 		primary_category: 'pensiun-lainnya',
-		author: 'penulis-contoh-dua',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['pensiun', 'investasi-pemula'],
 		first_published_at: '2026-10-07T10:00:00.000Z',
@@ -513,11 +513,9 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 		article_type: 'interview',
 		featured_image: 'kategori-pensiun',
 		primary_category: 'pensiun-lainnya',
-		author: 'penulis-contoh-satu',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['pensiun', 'lansia'],
 		first_published_at: '2026-10-02T13:00:00.000Z',
-		last_reviewed_at: '2026-10-03T13:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Petakan semua sumber dana pensiun, dari program pemerintah, kantor, hingga tabungan pribadi, beserta kapan masing-masing cair.',
@@ -531,65 +529,100 @@ export const PENSIUN_ARTICLES: ArticleEntry[] = [
 			p(
 				'Lima tahun terasa lama, tetapi bagi Narasumber Contoh Enam, waktu itu justru terasa sempit setelah ia mulai menghitung. Kami berbincang tentang daftar yang ia susun untuk masa menjelang pensiun. Nama narasumber dan angka dalam wawancara ini fiktif; jawaban telah disunting agar ringkas.',
 			),
-			say('Penulis Contoh Satu', 'Kapan Anda mulai serius memikirkan pensiun?'),
-			say(
-				'Narasumber Contoh Enam',
-				'Saat ulang tahun kelima puluh. Bagian SDM di kantor mengirimkan perkiraan saldo program pensiun saya, dan saya sadar belum pernah benar-benar membacanya. Hari itu juga saya membuat daftar semua sumber dana yang akan saya andalkan.',
-			),
-			say('Penulis Contoh Satu', 'Apa saja isi daftar itu?'),
-			say(
-				'Narasumber Contoh Enam',
-				'Ada program dari pemerintah melalui BPJS Ketenagakerjaan, yaitu Jaminan Hari Tua dan Jaminan Pensiun. Ada dana pensiun dari kantor. Lalu tabungan dan investasi pribadi. Untuk setiap sumber, saya catat perkiraan nilainya, kapan bisa dicairkan, dan apakah dibayar sekaligus atau bulanan.',
-			),
-			p(
-				'Ternyata waktunya tidak sama. Ada yang cair sekaligus, ada yang dibayar bulanan, dan ada yang baru bisa diterima pada usia tertentu. Mengetahui urutannya membantu saya menyusun arus kas setelah gaji berhenti.',
-			),
-			say('Penulis Contoh Satu', 'Bagaimana dengan utang?'),
-			say(
-				'Narasumber Contoh Enam',
-				'Itu prioritas saya. Masih ada sisa cicilan kendaraan dan kartu kredit. Saya menyusun jadwal agar keduanya lunas paling lambat dua tahun sebelum pensiun. Membayar cicilan dari dana pensiun terasa seperti mengurangi umur tabungan.',
-			),
-			p(
-				'Untuk rumah, saya dan istri memutuskan tidak mengambil pinjaman baru apa pun, termasuk untuk renovasi besar.',
-			),
-			say('Penulis Contoh Satu', 'Apakah gaya hidup Anda ikut berubah?'),
-			say(
-				'Narasumber Contoh Enam',
-				'Pelan-pelan, ya. Tahun lalu kami mencoba hidup dengan anggaran masa pensiun selama enam bulan, misalnya Rp7 juta sebulan, angka fiktif. Selisih dari gaji kami tabung. Uji coba itu menunjukkan pos mana yang realistis dan mana yang terlalu optimistis, terutama biaya kesehatan dan bantuan untuk keluarga.',
-			),
-			say('Penulis Contoh Satu', 'Apakah Anda berencana tetap bekerja setelah pensiun?'),
-			say(
-				'Narasumber Contoh Enam',
-				'Sedikit, mungkin dua atau tiga hari seminggu sebagai pengajar di kursus dekat rumah. Bukan semata soal uang, tetapi juga supaya tetap punya rutinitas dan teman bicara.',
-			),
-			p(
-				'Namun saya tidak memasukkan penghasilan itu ke perhitungan utama. Kalau ternyata tidak berjalan, rencana pensiun saya tetap harus cukup tanpanya.',
-			),
-			say('Penulis Contoh Satu', 'Bagaimana dengan biaya kesehatan?'),
-			say(
-				'Narasumber Contoh Enam',
-				'Saya memastikan kepesertaan BPJS Kesehatan tetap aktif setelah tidak lagi bekerja di kantor, karena status kepesertaannya ikut berubah. Selain itu, saya menyisihkan pos khusus kesehatan di tabungan, terpisah dari dana harian. Biaya kesehatan biasanya justru naik ketika penghasilan turun.',
-			),
-			say(
-				'Penulis Contoh Satu',
-				'Apa yang ingin Anda sampaikan kepada pembaca yang masih jauh dari pensiun?',
-			),
-			say(
-				'Narasumber Contoh Enam',
-				'Bacalah laporan saldo pensiun Anda sejak sekarang, meski angkanya masih kecil. Dan bicarakan rencana pensiun dengan pasangan dan anak sejak awal. Pensiun bukan hanya urusan angka, tetapi juga soal siapa yang bergantung pada siapa.',
-			),
-			h2('Baca juga'),
-			ul(
-				link(
-					'/artikel/menghitung-kebutuhan-dana-pensiun',
-					'Berapa dana pensiun yang cukup? Cara menghitung kebutuhan kasar',
-				),
-				link(
-					'/artikel/manfaat-program-pensiun-pemerintah',
-					'Mengenal manfaat program pensiun pemerintah bagi pekerja',
-				),
-				link('/kategori/pensiun', 'Semua artikel di topik Pensiun'),
-			),
+		],
+		interview_dialogues: [
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Kapan Anda mulai serius memikirkan pensiun?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Enam',
+				speaker_role: 'Pegawai swasta',
+				message:
+					'Saat ulang tahun kelima puluh. Bagian SDM di kantor mengirimkan perkiraan saldo program pensiun saya, dan saya sadar belum pernah benar-benar membacanya. Hari itu juga saya membuat daftar semua sumber dana yang akan saya andalkan.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa saja isi daftar itu?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Enam',
+				speaker_role: 'Pegawai swasta',
+				message:
+					'Ada program dari pemerintah melalui BPJS Ketenagakerjaan, yaitu Jaminan Hari Tua dan Jaminan Pensiun. Ada dana pensiun dari kantor. Lalu tabungan dan investasi pribadi. Untuk setiap sumber, saya catat perkiraan nilainya, kapan bisa dicairkan, dan apakah dibayar sekaligus atau bulanan.\n\nTernyata waktunya tidak sama. Ada yang cair sekaligus, ada yang dibayar bulanan, dan ada yang baru bisa diterima pada usia tertentu. Mengetahui urutannya membantu saya menyusun arus kas setelah gaji berhenti.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana dengan utang?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Enam',
+				speaker_role: 'Pegawai swasta',
+				message:
+					'Itu prioritas saya. Masih ada sisa cicilan kendaraan dan kartu kredit. Saya menyusun jadwal agar keduanya lunas paling lambat dua tahun sebelum pensiun. Membayar cicilan dari dana pensiun terasa seperti mengurangi umur tabungan.\n\nUntuk rumah, saya dan istri memutuskan tidak mengambil pinjaman baru apa pun, termasuk untuk renovasi besar.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apakah gaya hidup Anda ikut berubah?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Enam',
+				speaker_role: 'Pegawai swasta',
+				message:
+					'Pelan-pelan, ya. Tahun lalu kami mencoba hidup dengan anggaran masa pensiun selama enam bulan, misalnya Rp7 juta sebulan, angka fiktif. Selisih dari gaji kami tabung. Uji coba itu menunjukkan pos mana yang realistis dan mana yang terlalu optimistis, terutama biaya kesehatan dan bantuan untuk keluarga.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apakah Anda berencana tetap bekerja setelah pensiun?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Enam',
+				speaker_role: 'Pegawai swasta',
+				message:
+					'Sedikit, mungkin dua atau tiga hari seminggu sebagai pengajar di kursus dekat rumah. Bukan semata soal uang, tetapi juga supaya tetap punya rutinitas dan teman bicara.\n\nNamun saya tidak memasukkan penghasilan itu ke perhitungan utama. Kalau ternyata tidak berjalan, rencana pensiun saya tetap harus cukup tanpanya.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana dengan biaya kesehatan?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Enam',
+				speaker_role: 'Pegawai swasta',
+				message:
+					'Saya memastikan kepesertaan BPJS Kesehatan tetap aktif setelah tidak lagi bekerja di kantor, karena status kepesertaannya ikut berubah. Selain itu, saya menyisihkan pos khusus kesehatan di tabungan, terpisah dari dana harian. Biaya kesehatan biasanya justru naik ketika penghasilan turun.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message:
+					'Apa yang ingin Anda sampaikan kepada pembaca yang masih jauh dari pensiun?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Enam',
+				speaker_role: 'Pegawai swasta',
+				message:
+					'Bacalah laporan saldo pensiun Anda sejak sekarang, meski angkanya masih kecil. Dan bicarakan rencana pensiun dengan pasangan dan anak sejak awal. Pensiun bukan hanya urusan angka, tetapi juga soal siapa yang bergantung pada siapa.',
+				position: 'right',
+			},
 		],
 	},
 ];

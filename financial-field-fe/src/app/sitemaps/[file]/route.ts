@@ -6,7 +6,7 @@ import { buildUrlset } from '@/lib/sitemap';
 export const revalidate = 3600;
 
 export function generateStaticParams() {
-	return ['articles-1', 'categories', 'tags', 'authors', 'pages'].map((name) => ({
+	return ['articles-1', 'categories', 'tags', 'reviewers', 'pages', 'comparison'].map((name) => ({
 		file: `${name}.xml`,
 	}));
 }

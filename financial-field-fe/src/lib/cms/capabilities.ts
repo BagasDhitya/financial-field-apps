@@ -22,7 +22,14 @@ export const CMS_CAPABILITIES = [
 	'site-settings', // CMS-14
 	'redirects', // CMS-15
 	'tag-description', // CMS-19
-	'video', // CMS-30
+	'video', // CMS-30 (article.video, built by the CMS developer)
+	'interview', // CMS-31 (article.chat-bubble, built by the CMS developer)
+	'comparison', // CMS-20: the catalogue types (built) readable by the Public role
+	'comparison-seo', // CMS-23
+	'provider-profile', // CMS-24
+	'product-trust', // CMS-25
+	'product-specs', // CMS-26
+	'product-category-tree', // CMS-28
 ] as const;
 
 export type CmsCapability = (typeof CMS_CAPABILITIES)[number];

@@ -1,14 +1,20 @@
 import type { Metadata } from 'next';
 
+import { LoanFinder } from '@/components/LoanFinder/LoanFinder';
+import { NewsletterSignup } from '@/components/NewsletterSignup/NewsletterSignup';
+import { PrSpot } from '@/components/PrSpot/PrSpot';
 import {
 	getArticlesInCategories,
 	getInterviewArticles,
 	getLatestArticles,
+	getPrArticles,
 	getVideoArticles,
 } from '@/lib/content/articles';
 import { getCategoryTree } from '@/lib/content/categories';
+import { getComparisonSection } from '@/lib/content/comparison';
 import { getSiteNavigation } from '@/lib/content/navigation';
 import { getSiteSettings } from '@/lib/content/site';
+import { features } from '@/lib/features';
 import { routes } from '@/lib/routes';
 import { BRAND, buildMetadata, composeDescription } from '@/lib/seo/metadata';
 
@@ -19,6 +25,9 @@ import { selectHomeInterviews, selectHomeStories, selectHomeVideos } from '@/fea
 export const revalidate = 60;
 
 const BLOCK_SIZE = 3;
+
+/** The comparison section the home finder opens (the owner's widget, ADR-0022). */
+const FINDER_SECTION = 'kredit-mobil';
 
 /** Enough for the 6 videos after the up to 12 stories above them are taken out. */
 const VIDEO_CANDIDATES = 18;
@@ -39,14 +48,17 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-	const [navigation, latest, videos, interviews, categories, settings] = await Promise.all([
-		getSiteNavigation(),
-		getLatestArticles(1, 20),
-		getVideoArticles(1, VIDEO_CANDIDATES),
-		getInterviewArticles(1, INTERVIEW_CANDIDATES),
-		getCategoryTree(),
-		getSiteSettings(),
-	]);
+	const [navigation, latest, videos, interviews, categories, settings, finder, pr] =
+		await Promise.all([
+			getSiteNavigation(),
+			getLatestArticles(1, 20),
+			getVideoArticles(1, VIDEO_CANDIDATES),
+			getInterviewArticles(1, INTERVIEW_CANDIDATES),
+			getCategoryTree(),
+			getSiteSettings(),
+			getComparisonSection(FINDER_SECTION),
+			features.ads ? getPrArticles(1) : Promise.resolve(null),
+		]);
 
 	const blocks = await Promise.all(
 		categories.map(async (category) => {
@@ -60,12 +72,26 @@ export default async function Home() {
 	);
 
 	const stories = selectHomeStories(navigation.featuredArticles, latest.items);
+
+	// Each widget shows only when its flag (and, for the finder, its section) is on.
+	const rail = [
+		finder ? (
+			<LoanFinder
+				key="finder"
+				sectionSlug={finder.slug}
+				href={routes.comparisonSection(finder.slug)}
+			/>
+		) : null,
+		features.ads ? <PrSpot key="pr" article={pr?.items[0] ?? null} /> : null,
+		features.newsletter ? <NewsletterSignup key="newsletter" /> : null,
+	].filter(Boolean);
 	const homeVideos = selectHomeVideos(videos.items, stories);
 
 	return (
 		<HomeView
 			heading={`${BRAND}: ${settings.tagline}`}
 			stories={stories}
+			rail={rail}
 			videos={homeVideos}
 			interviews={selectHomeInterviews(interviews.items, stories, homeVideos)}
 			categoryBlocks={blocks.filter((block) => block.articles.length > 0)}

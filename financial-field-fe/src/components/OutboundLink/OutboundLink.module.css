@@ -1,0 +1,12 @@
+.button {
+	white-space: nowrap;
+}
+
+.text {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.25rem;
+	color: var(--color-ff-blue);
+	font-weight: 700;
+	white-space: nowrap;
+}

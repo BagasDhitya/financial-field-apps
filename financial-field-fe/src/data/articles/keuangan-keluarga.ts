@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, say, ul } from '../blocks';
+import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Keuangan Keluarga and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -10,17 +10,17 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 			'Metode 50/30/20 bisa dipakai sebagai titik awal, tetapi proporsinya sering perlu disesuaikan untuk penghasilan terbatas.',
 		article_type: 'standard',
 		featured_image: 'kategori-keuangan-keluarga',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=484cz-fWPWc',
+		video: {
 			title: 'Cara Cerdas Atur Keuangan Dengan Gaji UMR',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2022-12-27T02:46:14.000Z',
-			duration_seconds: 354,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2022-12-27T02:46:14.000Z',
+			duration: 'PT5M54S',
 			caption:
 				'Financial Expert CNBC Indonesia berbagi cara mengatur anggaran dengan gaji UMR agar kebutuhan terpenuhi dan masih ada yang disisihkan untuk tabungan dan investasi.',
+			embedUrl: 'https://www.youtube.com/embed/484cz-fWPWc',
 		},
 		primary_category: 'keluarga-anggaran',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['anggaran-bulanan', 'gaji'],
 		first_published_at: '2026-09-03T10:00:00.000Z',
@@ -144,17 +144,17 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 			'Dana darurat umumnya disiapkan beberapa kali pengeluaran bulanan dan disimpan di tempat yang mudah dicairkan. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-keuangan-keluarga',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=Ybx3FNSIlBY',
+		video: {
 			title: 'Berapa Idealnya Dana Darurat? Cek Jawabannya Disini',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2022-11-28T12:52:33.000Z',
-			duration_seconds: 277,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2022-11-28T12:52:33.000Z',
+			duration: 'PT4M37S',
 			caption:
 				'Program Investime CNBC Indonesia membahas berapa idealnya dana darurat sebagai bagian dari perencanaan keuangan, bersama asuransi, investasi, dan rencana pensiun.',
+			embedUrl: 'https://www.youtube.com/embed/Ybx3FNSIlBY',
 		},
 		primary_category: 'keluarga-menabung',
-		author: 'penulis-contoh-dua',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['dana-darurat'],
 		first_published_at: '2026-09-02T00:00:00.000Z',
@@ -286,7 +286,7 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 		article_type: 'column',
 		featured_image: 'kategori-keuangan-keluarga',
 		primary_category: 'keluarga-rencana-hidup',
-		author: 'redaksi-contoh',
+		author: 'tim-redaksi',
 		tags: ['keluarga-muda'],
 		first_published_at: '2026-08-31T14:00:00.000Z',
 		content: [
@@ -329,11 +329,9 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-keuangan-keluarga',
 		primary_category: 'keluarga-cara-bekerja',
-		author: 'penulis-contoh-tiga',
-		reviewer: 'peninjau-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['gaji', 'umkm'],
 		first_published_at: '2026-08-30T04:00:00.000Z',
-		last_reviewed_at: '2026-08-31T04:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Penghasilan kerja sampingan sebaiknya dicatat terpisah agar mudah dipantau dan dilaporkan.',
@@ -444,7 +442,7 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-keuangan-keluarga',
 		primary_category: 'keluarga-lainnya',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['anggaran-bulanan'],
 		first_published_at: '2026-08-28T18:00:00.000Z',
 		key_takeaways: [
@@ -546,11 +544,9 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-keuangan-keluarga',
 		primary_category: 'keluarga-tagihan-ponsel',
-		author: 'penulis-contoh-dua',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['anggaran-bulanan'],
 		first_published_at: '2026-08-27T08:00:00.000Z',
-		last_reviewed_at: '2026-08-28T08:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Tagihan ponsel dan internet dapat ditekan dengan meninjau pemakaian nyata dan memilih paket yang sesuai.',
@@ -674,12 +670,10 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-keuangan-keluarga',
 		primary_category: 'keluarga-menabung',
-		author: 'penulis-contoh-tiga',
-		reviewer: 'peninjau-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['dana-darurat'],
 		first_published_at: '2026-08-25T22:00:00.000Z',
 		content_updated_at: '2026-08-28T22:00:00.000Z',
-		last_reviewed_at: '2026-08-26T22:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Rekening terpisah membantu memisahkan tujuan tabungan sehingga dana tidak mudah terpakai untuk keperluan lain.',
@@ -784,11 +778,9 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 			'Tantangan menabung 52 minggu menaikkan jumlah tabungan sedikit demi sedikit setiap minggu selama setahun. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		primary_category: 'keluarga-menabung',
-		author: 'penulis-contoh-satu',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['dana-darurat'],
 		first_published_at: '2026-08-24T12:00:00.000Z',
-		last_reviewed_at: '2026-08-25T12:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Tantangan menabung 52 minggu menaikkan jumlah tabungan sedikit demi sedikit setiap minggu selama setahun.',
@@ -886,11 +878,9 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 		article_type: 'interview',
 		featured_image: 'kategori-keuangan-keluarga',
 		primary_category: 'keluarga-anggaran',
-		author: 'penulis-contoh-dua',
-		reviewer: 'peninjau-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['keluarga-muda', 'anggaran-bulanan'],
 		first_published_at: '2026-09-12T17:00:00.000Z',
-		last_reviewed_at: '2026-09-13T17:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Mulailah dengan saling membuka angka: gaji, utang, dan kiriman rutin untuk keluarga besar.',
@@ -906,68 +896,99 @@ export const KEUANGAN_KELUARGA_ARTICLES: ArticleEntry[] = [
 			p(
 				'Uang termasuk topik yang paling sering memicu salah paham pada pasangan baru. Narasumber Contoh Delapan dan pasangannya menikah dua tahun lalu dengan dua gaji, dua kebiasaan belanja, dan satu cicilan pinjaman. Kami bertanya bagaimana mereka menyatukan semuanya. Nama narasumber dan angka dalam wawancara ini fiktif.',
 			),
-			say('Penulis Contoh Dua', 'Apa percakapan keuangan pertama Anda berdua?'),
-			say(
-				'Narasumber Contoh Delapan',
-				'Saling membuka angka, beberapa minggu sebelum menikah. Berapa gaji masing-masing, berapa utang, dan berapa yang rutin kami kirim untuk orang tua. Rasanya canggung, tetapi justru itu yang membuat kami tidak kaget belakangan.',
-			),
-			p(
-				'Ternyata pasangan saya masih punya sisa cicilan pinjaman pendidikan. Karena sudah tahu sejak awal, kami bisa memasukkannya ke rencana bersama, bukan menjadi rahasia.',
-			),
-			say('Penulis Contoh Dua', 'Bagaimana Anda membagi rekening?'),
-			say(
-				'Narasumber Contoh Delapan',
-				'Kami memakai pola tiga rekening. Satu rekening bersama untuk sewa rumah, belanja dapur, listrik, internet, dan tabungan keluarga. Masing-masing juga tetap punya rekening pribadi.',
-			),
-			p(
-				'Setiap tanggal gajian, kami memindahkan bagian yang disepakati ke rekening bersama, sebanding dengan gaji masing-masing. Dengan angka fiktif, bila gaji kami Rp8 juta dan Rp6 juta, kontribusinya sekitar 57 dan 43 persen dari kebutuhan bersama.',
-			),
-			say('Penulis Contoh Dua', 'Apakah tidak lebih mudah menyatukan semua uang?'),
-			say(
-				'Narasumber Contoh Delapan',
-				'Bisa saja, dan ada pasangan yang nyaman dengan cara itu. Bagi kami, rekening pribadi memberi ruang untuk hobi dan hadiah tanpa harus minta izin setiap kali. Yang penting kebutuhan bersama selalu terpenuhi lebih dulu.',
-			),
-			say(
-				'Penulis Contoh Dua',
-				'Bagaimana kalian menyelesaikan perbedaan pendapat soal uang?',
-			),
-			say(
-				'Narasumber Contoh Delapan',
-				'Kami mengadakan rapat keuangan singkat setiap awal bulan, kurang dari tiga puluh menit. Kami melihat pengeluaran bulan lalu, rencana bulan ini, dan satu tujuan jangka panjang, misalnya dana darurat atau uang muka rumah.',
-			),
-			p(
-				'Untuk belanja besar di atas batas tertentu, misalnya Rp1 juta, kami sepakat membicarakannya dulu. Aturan sederhana ini mencegah banyak pertengkaran.',
-			),
-			say('Penulis Contoh Dua', 'Bagaimana dengan kiriman untuk orang tua?'),
-			say(
-				'Narasumber Contoh Delapan',
-				'Kami memasukkannya ke anggaran bersama sebagai pos tetap, dengan jumlah yang disepakati untuk kedua keluarga. Dengan begitu tidak ada yang merasa keluarganya dinomorduakan.',
-			),
-			p(
-				'Kalau ada kebutuhan mendadak, misalnya biaya berobat, kami ambil dari dana darurat lalu mengisinya kembali bertahap. Itu juga alasan kami mendahulukan dana darurat sebelum tujuan lain.',
-			),
-			say('Penulis Contoh Dua', 'Apakah kalian memakai aplikasi untuk mencatat?'),
-			say(
-				'Narasumber Contoh Delapan',
-				'Kami mencoba beberapa aplikasi, lalu kembali ke lembar kerja bersama yang bisa dibuka berdua di ponsel. Yang penting bukan alatnya, tetapi siapa yang mencatat. Kami bergantian setiap bulan, supaya keduanya tetap tahu kondisi keuangan rumah tangga.',
-			),
-			say('Penulis Contoh Dua', 'Apa saran Anda untuk pasangan yang baru menikah?'),
-			say(
-				'Narasumber Contoh Delapan',
-				'Mulailah dari kejujuran, bukan dari aplikasi atau metode tertentu. Metode bisa diganti kapan saja, tetapi kebiasaan saling terbuka itulah yang membuat rencana keuangan bertahan.',
-			),
-			h2('Baca juga'),
-			ul(
-				link(
-					'/artikel/metode-50-30-20-untuk-gaji-umr',
-					'Metode 50/30/20: apakah cocok untuk gaji UMR?',
-				),
-				link(
-					'/artikel/menabung-dengan-rekening-terpisah',
-					'Menabung dengan rekening terpisah: cara membagi pos tabungan',
-				),
-				link('/kategori/keuangan-keluarga', 'Semua artikel di topik Keuangan Keluarga'),
-			),
+		],
+		interview_dialogues: [
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa percakapan keuangan pertama Anda berdua?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Delapan',
+				speaker_role: 'Karyawan swasta',
+				message:
+					'Saling membuka angka, beberapa minggu sebelum menikah. Berapa gaji masing-masing, berapa utang, dan berapa yang rutin kami kirim untuk orang tua. Rasanya canggung, tetapi justru itu yang membuat kami tidak kaget belakangan.\n\nTernyata pasangan saya masih punya sisa cicilan pinjaman pendidikan. Karena sudah tahu sejak awal, kami bisa memasukkannya ke rencana bersama, bukan menjadi rahasia.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana Anda membagi rekening?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Delapan',
+				speaker_role: 'Karyawan swasta',
+				message:
+					'Kami memakai pola tiga rekening. Satu rekening bersama untuk sewa rumah, belanja dapur, listrik, internet, dan tabungan keluarga. Masing-masing juga tetap punya rekening pribadi.\n\nSetiap tanggal gajian, kami memindahkan bagian yang disepakati ke rekening bersama, sebanding dengan gaji masing-masing. Dengan angka fiktif, bila gaji kami Rp8 juta dan Rp6 juta, kontribusinya sekitar 57 dan 43 persen dari kebutuhan bersama.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apakah tidak lebih mudah menyatukan semua uang?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Delapan',
+				speaker_role: 'Karyawan swasta',
+				message:
+					'Bisa saja, dan ada pasangan yang nyaman dengan cara itu. Bagi kami, rekening pribadi memberi ruang untuk hobi dan hadiah tanpa harus minta izin setiap kali. Yang penting kebutuhan bersama selalu terpenuhi lebih dulu.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana kalian menyelesaikan perbedaan pendapat soal uang?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Delapan',
+				speaker_role: 'Karyawan swasta',
+				message:
+					'Kami mengadakan rapat keuangan singkat setiap awal bulan, kurang dari tiga puluh menit. Kami melihat pengeluaran bulan lalu, rencana bulan ini, dan satu tujuan jangka panjang, misalnya dana darurat atau uang muka rumah.\n\nUntuk belanja besar di atas batas tertentu, misalnya Rp1 juta, kami sepakat membicarakannya dulu. Aturan sederhana ini mencegah banyak pertengkaran.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana dengan kiriman untuk orang tua?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Delapan',
+				speaker_role: 'Karyawan swasta',
+				message:
+					'Kami memasukkannya ke anggaran bersama sebagai pos tetap, dengan jumlah yang disepakati untuk kedua keluarga. Dengan begitu tidak ada yang merasa keluarganya dinomorduakan.\n\nKalau ada kebutuhan mendadak, misalnya biaya berobat, kami ambil dari dana darurat lalu mengisinya kembali bertahap. Itu juga alasan kami mendahulukan dana darurat sebelum tujuan lain.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apakah kalian memakai aplikasi untuk mencatat?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Delapan',
+				speaker_role: 'Karyawan swasta',
+				message:
+					'Kami mencoba beberapa aplikasi, lalu kembali ke lembar kerja bersama yang bisa dibuka berdua di ponsel. Yang penting bukan alatnya, tetapi siapa yang mencatat. Kami bergantian setiap bulan, supaya keduanya tetap tahu kondisi keuangan rumah tangga.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa saran Anda untuk pasangan yang baru menikah?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Delapan',
+				speaker_role: 'Karyawan swasta',
+				message:
+					'Mulailah dari kejujuran, bukan dari aplikasi atau metode tertentu. Metode bisa diganti kapan saja, tetapi kebiasaan saling terbuka itulah yang membuat rencana keuangan bertahan.',
+				position: 'right',
+			},
 		],
 	},
 ];

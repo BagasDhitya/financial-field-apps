@@ -12,7 +12,6 @@ describe('selectHomeStories (REQ-HOME-001/002)', () => {
 	it('falls back to the latest when nothing is featured', () => {
 		const stories = selectHomeStories([], latest);
 		expect(stories.lead?.id).toBe('l0');
-		expect(stories.secondary).toEqual([]);
 		expect(stories.river.map((a) => a.id)).toEqual([
 			'l1',
 			'l2',
@@ -25,23 +24,12 @@ describe('selectHomeStories (REQ-HOME-001/002)', () => {
 		]);
 	});
 
-	it('uses featured 1 as lead and 2–4 as the secondary stack, never repeating', () => {
-		const featured = [
-			latest[3]!,
-			latest[0]!,
-			summary({ id: 'f2', slug: 'f2' }),
-			summary({ id: 'f3', slug: 'f3' }),
-			summary({ id: 'f4', slug: 'f4' }),
-		];
+	it('uses featured 1 as the lead and never repeats it in the river', () => {
+		const featured = [latest[3]!, latest[0]!, summary({ id: 'f2', slug: 'f2' })];
 		const stories = selectHomeStories(featured, latest);
 		expect(stories.lead?.id).toBe('l3');
-		expect(stories.secondary.map((a) => a.id)).toEqual(['l0', 'f2', 'f3']);
-		const ids = [
-			stories.lead!.id,
-			...stories.secondary.map((a) => a.id),
-			...stories.river.map((a) => a.id),
-		];
-		expect(new Set(ids).size).toBe(ids.length);
+		expect(stories.river.map((a) => a.id)).not.toContain('l3');
+		expect(stories.river).toHaveLength(8);
 	});
 
 	it('skips articles without a slug or title', () => {

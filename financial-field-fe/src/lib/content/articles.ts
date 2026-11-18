@@ -126,6 +126,17 @@ export async function getArticlesByAuthor(
 	});
 }
 
+/** The newest PR articles (`pr_article`): the home PR spot (ADR-0022). */
+export async function getPrArticles(pageSize = 1): Promise<Paginated<ArticleSummary>> {
+	return fetchArticleListing({
+		filters: { article_type: { $eq: 'pr_article' } },
+		page: 1,
+		pageSize,
+		tags: [],
+		revalidate: REVALIDATE.home,
+	});
+}
+
 /** Articles of type `interview`, newest first: /wawancara and the home Wawancara section. */
 export async function getInterviewArticles(
 	page = 1,
@@ -158,24 +169,6 @@ export async function getVideoArticles(
 		tags: [],
 		revalidate: REVALIDATE.archive,
 	});
-}
-
-/** REQ-SRCH-001: title or lead, case-insensitive. Uncached. */
-export async function searchArticles(query: string, page = 1): Promise<Paginated<ArticleSummary>> {
-	const result = await cmsFetch<CmsCollection<StrapiArticle>>({
-		path: endpoints.articles,
-		query: {
-			...articleSummaryQuery(),
-			filters: {
-				$or: [{ title: { $containsi: query } }, { lead_text: { $containsi: query } }],
-			},
-			sort: articleSort(),
-			pagination: { page, pageSize: LISTING_PAGE_SIZE },
-		},
-		tags: [],
-		revalidate: 0,
-	});
-	return toPaginated(result, mapArticleSummary);
 }
 
 /** REQ-ART-006. Failure is non-fatal: the block is simply not rendered. */
@@ -232,7 +225,8 @@ export type ArticleIndexEntry = {
 	hasVideo: boolean;
 	tagSlugs: string[];
 	primaryCategorySlug: string | null;
-	authorSlugs: string[];
+	/** The reviewer, whose profile page the sitemap lists; writers have no page (ADR-0022). */
+	reviewerSlugs: string[];
 };
 
 /**
@@ -254,7 +248,7 @@ export async function getArticleIndex(): Promise<ArticleIndexEntry[]> {
 					author: { fields: ['slug'] },
 					reviewer: { fields: ['slug'] },
 					...(hasCapability('seo') ? { seo: { fields: ['no_index'] } } : {}),
-					...(hasCapability('video') ? { featured_video: { fields: ['url'] } } : {}),
+					...(hasCapability('video') ? { video: { fields: ['embedUrl'] } } : {}),
 				},
 				sort: articleSort(),
 				pagination: { page, pageSize: 100 },
@@ -274,12 +268,10 @@ export async function getArticleIndex(): Promise<ArticleIndexEntry[]> {
 				publishedAt,
 				modifiedAt: entry.content_updated_at ?? publishedAt,
 				noIndex: entry.seo?.no_index === true,
-				hasVideo: mapVideoRef(entry.featured_video) !== null,
+				hasVideo: mapVideoRef(entry.video) !== null,
 				tagSlugs: mapTagSlugs(entry.tags),
 				primaryCategorySlug: entry.primary_category?.slug ?? null,
-				authorSlugs: [entry.author?.slug, entry.reviewer?.slug].filter(
-					(slug): slug is string => Boolean(slug),
-				),
+				reviewerSlugs: entry.reviewer?.slug ? [entry.reviewer.slug] : [],
 			});
 		}
 

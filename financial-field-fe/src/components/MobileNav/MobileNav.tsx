@@ -5,24 +5,23 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useRef } from 'react';
 
 import { analytics } from '@/lib/analytics/events';
-import { routes, TRUST_PAGES } from '@/lib/routes';
-import type { CategoryNode } from '@/types';
+import { routes } from '@/lib/routes';
+import type { MainMenuEntry } from '@/types';
 
 import { Icon } from '../Icon/Icon';
-import { SearchField } from '../SearchField/SearchField';
 
 import styles from './MobileNav.module.css';
 
 export type MobileNavProps = {
-	label: string;
-	categories: CategoryNode[];
+	entries: MainMenuEntry[];
 };
 
 /**
- * Below 1024 px (REQ-NAV-004): a native modal <dialog> gives focus trapping,
- * Esc to close and an inert background. Topics are an exclusive accordion.
+ * Below 1024 px (REQ-NAV-004, ADR-0022): a native modal <dialog> gives focus
+ * trapping, Esc to close and an inert background. The same entries as the
+ * desktop row, as an exclusive accordion; Berita's topics nest inside it.
  */
-export function MobileNav({ label, categories }: MobileNavProps) {
+export function MobileNav({ entries }: MobileNavProps) {
 	const dialogRef = useRef<HTMLDialogElement>(null);
 	const pathname = usePathname();
 
@@ -53,72 +52,134 @@ export function MobileNav({ label, categories }: MobileNavProps) {
 					</button>
 				</div>
 				<div className={styles.content}>
-					<SearchField variant="full" id="cari-mobile" />
-					<nav aria-label="Topik">
-						<p className={`type-label ${styles.section}`}>{label}</p>
-						<ul className={styles.topics}>
-							{categories.map((category) => (
-								<li key={category.id}>
-									{category.children.length > 0 ? (
-										<details name="ffid-topik" className={styles.topic}>
-											<summary className={styles.summary}>
-												{category.name}
-											</summary>
-											<ul className={styles.children}>
-												<li>
-													<Link href={routes.category(category)}>
-														Semua {category.name}
-													</Link>
-												</li>
-												{category.children.map((child) => (
-													<li key={child.id}>
-														<Link href={routes.category(child)}>
-															{child.name}
-														</Link>
-													</li>
-												))}
-											</ul>
-										</details>
-									) : (
-										<Link
-											href={routes.category(category)}
-											className={styles.summary}
-										>
-											{category.name}
+					<nav aria-label="Menu utama">
+						<ul className={styles.entries}>
+							{entries.map((entry) => (
+								<li key={entry.label}>
+									{entry.kind === 'link' ? (
+										<Link href={entry.href} className={styles.summary}>
+											{entry.label}
 										</Link>
+									) : (
+										<details name="ffid-menu" className={styles.entry}>
+											<summary className={styles.summary}>
+												{entry.label}
+											</summary>
+											{entry.kind === 'topics' ? (
+												<div className={styles.body}>
+													<ul className={styles.topics}>
+														{entry.topics.map((topic) => (
+															<li key={topic.id}>
+																{topic.children.length > 0 ? (
+																	<details
+																		name="ffid-topik"
+																		className={styles.topic}
+																	>
+																		<summary
+																			className={
+																				styles.topicSummary
+																			}
+																		>
+																			{topic.name}
+																		</summary>
+																		<ul
+																			className={
+																				styles.children
+																			}
+																		>
+																			<li>
+																				<Link
+																					href={routes.category(
+																						topic,
+																					)}
+																				>
+																					Semua{' '}
+																					{topic.name}
+																				</Link>
+																			</li>
+																			{topic.children.map(
+																				(child) => (
+																					<li
+																						key={
+																							child.id
+																						}
+																					>
+																						<Link
+																							href={routes.category(
+																								child,
+																							)}
+																						>
+																							{
+																								child.name
+																							}
+																						</Link>
+																					</li>
+																				),
+																			)}
+																		</ul>
+																	</details>
+																) : (
+																	<Link
+																		href={routes.category(
+																			topic,
+																		)}
+																		className={
+																			styles.topicSummary
+																		}
+																	>
+																		{topic.name}
+																	</Link>
+																)}
+															</li>
+														))}
+													</ul>
+													<ul className={styles.views}>
+														{entry.views.map((view) => (
+															<li key={view.href}>
+																<Link href={view.href}>
+																	{view.label}
+																</Link>
+															</li>
+														))}
+													</ul>
+												</div>
+											) : (
+												<div className={styles.body}>
+													{entry.groups.map((group, index) => (
+														<div key={group.heading?.href ?? index}>
+															{group.heading ? (
+																<Link
+																	href={group.heading.href}
+																	className={styles.groupHeading}
+																>
+																	{group.heading.label}
+																</Link>
+															) : null}
+															<ul className={styles.children}>
+																{group.links.map((link) => (
+																	<li key={link.href}>
+																		<Link href={link.href}>
+																			{link.label}
+																		</Link>
+																	</li>
+																))}
+															</ul>
+														</div>
+													))}
+													{entry.footer ? (
+														<Link
+															href={entry.footer.href}
+															className={styles.footer}
+														>
+															{entry.footer.label}
+														</Link>
+													) : null}
+												</div>
+											)}
+										</details>
 									)}
 								</li>
 							))}
-							<li>
-								<Link href={routes.latest()} className={styles.summary}>
-									Terbaru
-								</Link>
-							</li>
-							<li>
-								<Link href={routes.interviews()} className={styles.summary}>
-									Wawancara
-								</Link>
-							</li>
-							<li>
-								<Link href={routes.videos()} className={styles.summary}>
-									Video
-								</Link>
-							</li>
-						</ul>
-					</nav>
-					<nav aria-label="Tentang kami">
-						<ul className={styles.trust}>
-							<li>
-								<Link href={routes.about()}>Tentang Kami</Link>
-							</li>
-							{TRUST_PAGES.map((page) => (
-								<li key={page.slug}>
-									<Link href={routes.about(page.slug)}>{page.label}</Link>
-								</li>
-							))}
-							<li>
-								<Link href={routes.contact()}>Hubungi Kami</Link>
-							</li>
 						</ul>
 					</nav>
 				</div>

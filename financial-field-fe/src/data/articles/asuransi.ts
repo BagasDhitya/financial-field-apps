@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, say, ul } from '../blocks';
+import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Asuransi and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -10,17 +10,17 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 			'Asuransi jiwa berjangka cocok untuk perlindungan murni dalam periode tertentu, sedangkan seumur hidup memberi perlindungan lebih panjang dengan premi lebih tinggi.',
 		article_type: 'standard',
 		featured_image: 'kategori-asuransi',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=4ZI5DnJY4P0',
+		video: {
 			title: 'Kenali Manfaat dan Jenis Asuransi Jiwa',
-			channel_name: 'Otoritas Jasa Keuangan',
-			uploaded_at: '2022-03-23T01:00:01.000Z',
-			duration_seconds: 2115,
+			channel: 'Otoritas Jasa Keuangan',
+			uploadedAt: '2022-03-23T01:00:01.000Z',
+			duration: 'PT35M15S',
 			caption:
 				'Edukasi Finansial OJK bersama Asosiasi Asuransi Jiwa Indonesia (AAJI) tentang manfaat dan jenis-jenis asuransi jiwa, serta hal penting yang perlu dipahami sebelum memilihnya.',
+			embedUrl: 'https://www.youtube.com/embed/4ZI5DnJY4P0',
 		},
 		primary_category: 'asuransi-jiwa',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['asuransi-jiwa'],
 		first_published_at: '2026-10-06T00:00:00.000Z',
@@ -146,7 +146,7 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-asuransi',
 		primary_category: 'asuransi-umum',
-		author: 'penulis-contoh-tiga',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['keluarga-muda'],
 		first_published_at: '2026-10-04T14:00:00.000Z',
@@ -256,11 +256,9 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-asuransi',
 		primary_category: 'asuransi-kendaraan',
-		author: 'penulis-contoh-dua',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['anggaran-bulanan'],
 		first_published_at: '2026-10-03T04:00:00.000Z',
-		last_reviewed_at: '2026-10-04T04:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'All risk menanggung kerusakan kecil hingga besar, sedangkan TLO hanya menanggung kerugian total dengan premi yang lebih rendah.',
@@ -381,7 +379,7 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-asuransi',
 		primary_category: 'asuransi-pendidikan',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['keluarga-muda', 'pinjaman-pendidikan'],
 		first_published_at: '2026-10-01T18:00:00.000Z',
@@ -491,7 +489,7 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 		article_type: 'pr_article',
 		featured_image: 'kategori-asuransi',
 		primary_category: 'asuransi-kesehatan',
-		author: 'redaksi-contoh',
+		author: 'tim-redaksi',
 		tags: ['asuransi-kesehatan'],
 		first_published_at: '2026-09-30T08:00:00.000Z',
 		sponsor_name: 'Sponsor Contoh',
@@ -554,17 +552,17 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 			'Bagian polis yang paling penting dibaca adalah manfaat, pengecualian, masa tunggu, dan cara pengajuan klaim. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-asuransi',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=mJBZO1qpWkk',
+		video: {
 			title: 'Biar Gak Merasa "Tertipu”, Ini Cara Tepat Pilih Asuransi',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2023-01-10T04:20:18.000Z',
-			duration_seconds: 334,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2023-01-10T04:20:18.000Z',
+			duration: 'PT5M34S',
 			caption:
 				'Financial Expert CNBC Indonesia membahas cara memilih asuransi agar manfaatnya sesuai kebutuhan dan pemegang polis tidak kecewa saat mengajukan klaim.',
+			embedUrl: 'https://www.youtube.com/embed/mJBZO1qpWkk',
 		},
 		primary_category: 'asuransi-lainnya',
-		author: 'penulis-contoh-tiga',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['asuransi-jiwa', 'asuransi-kesehatan'],
 		first_published_at: '2026-09-28T22:00:00.000Z',
@@ -688,11 +686,9 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 		article_type: 'interview',
 		featured_image: 'kategori-asuransi',
 		primary_category: 'asuransi-kesehatan',
-		author: 'penulis-contoh-tiga',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['asuransi-kesehatan', 'keluarga-muda'],
 		first_published_at: '2026-10-12T11:00:00.000Z',
-		last_reviewed_at: '2026-10-13T11:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Pastikan kepesertaan BPJS Kesehatan aktif dulu, karena itu fondasi perlindungan kesehatan keluarga.',
@@ -706,71 +702,99 @@ export const ASURANSI_ARTICLES: ArticleEntry[] = [
 			p(
 				'Pertanyaan ini sering datang dari pembaca yang baru menikah atau baru punya anak: apakah BPJS Kesehatan sudah cukup? Kami berbincang dengan Narasumber Contoh Lima, perencana keuangan, tentang cara menimbangnya. Nama narasumber dan angka dalam wawancara ini fiktif, dan isi wawancara bukan rekomendasi produk tertentu.',
 			),
-			say('Penulis Contoh Tiga', 'Apakah BPJS Kesehatan saja sudah cukup?'),
-			say(
-				'Narasumber Contoh Lima',
-				'Untuk banyak keluarga, BPJS Kesehatan adalah fondasi yang perlu dijaga lebih dulu. Pastikan iurannya lancar dan data keluarga benar. Tanpa fondasi ini, membeli asuransi swasta sering kali hanya memindahkan masalah.',
-			),
-			p(
-				'Pertanyaan berikutnya adalah kebutuhan apa yang belum terpenuhi. Ada yang ingin bebas memilih rumah sakit atau kamar perawatan, ada yang khawatir soal penghasilan saat dirawat. Jawabannya menentukan jenis perlindungan tambahan yang dicari.',
-			),
-			say('Penulis Contoh Tiga', 'Jadi kapan asuransi tambahan masuk akal?'),
-			say(
-				'Narasumber Contoh Lima',
-				'Ketika ada risiko yang tidak ingin atau tidak mampu Anda tanggung sendiri, dan premi tidak mengganggu pos penting lain. Patokan sederhana yang sering saya pakai: total premi semua asuransi jangan sampai menggeser dana darurat dan tabungan rutin.',
-			),
-			p(
-				'Misalnya, dengan angka fiktif, keluarga berpenghasilan Rp10 juta sebulan yang membayar premi Rp2,5 juta perlu bertanya apakah perlindungannya memang sebanding.',
-			),
-			say('Penulis Contoh Tiga', 'Bagian polis apa yang paling sering terlewat?'),
-			say(
-				'Narasumber Contoh Lima',
-				'Masa tunggu, pengecualian, dan batas manfaat. Masa tunggu adalah periode awal ketika klaim untuk penyakit tertentu belum bisa diajukan. Pengecualian adalah daftar kondisi yang tidak ditanggung. Batas manfaat menentukan berapa maksimal yang dibayar dalam setahun atau per perawatan.',
-			),
-			p(
-				'Tanyakan juga apakah produk itu bisa dikoordinasikan dengan BPJS Kesehatan. Dengan koordinasi manfaat, sebagian biaya ditanggung BPJS dan selisihnya oleh asuransi swasta, sesuai ketentuan polis.',
-			),
-			say(
-				'Penulis Contoh Tiga',
-				'Bagaimana dengan produk yang menggabungkan asuransi dan investasi?',
-			),
-			say(
-				'Narasumber Contoh Lima',
-				'Pahami dulu porsi biaya dan porsi investasinya. Bagi banyak orang, memisahkan perlindungan dan investasi membuat keduanya lebih mudah dipantau. Apa pun pilihannya, pastikan perusahaan asuransinya berizin dan diawasi OJK.',
-			),
-			say(
-				'Penulis Contoh Tiga',
-				'Apa yang sebaiknya ditanyakan kepada agen sebelum membeli?',
-			),
-			say(
-				'Narasumber Contoh Lima',
-				'Minta ringkasan informasi produk dan baca bersama di rumah, jangan langsung tanda tangan pada pertemuan pertama. Tanyakan contoh kasus: kalau saya dirawat tiga hari karena demam berdarah, berapa yang dibayar dan dokumen apa yang dibutuhkan untuk klaim?',
-			),
-			p(
-				'Agen yang baik akan menjawab dengan rinci, termasuk hal yang tidak ditanggung. Kalau jawabannya selalu semua ditanggung, itu tanda untuk bertanya lebih jauh.',
-			),
-			say('Penulis Contoh Tiga', 'Bagaimana jika premi terasa berat di tengah jalan?'),
-			say(
-				'Narasumber Contoh Lima',
-				'Hubungi perusahaan asuransi sebelum premi tertunggak, karena polis bisa berhenti berlaku bila premi tidak dibayar sampai masa tenggang habis. Tanyakan pilihan yang ada, misalnya menurunkan manfaat atau mengganti plan. Keputusan yang dibuat dengan tenang biasanya lebih baik daripada membiarkan polis berhenti begitu saja.',
-			),
-			say('Penulis Contoh Tiga', 'Apa saran Anda untuk keluarga muda yang baru mulai?'),
-			say(
-				'Narasumber Contoh Lima',
-				'Urutkan langkahnya: BPJS Kesehatan aktif, dana darurat terkumpul, baru kemudian asuransi tambahan bila memang perlu. Simpan polis dan kartu peserta di tempat yang diketahui pasangan Anda, karena saat sakit, yang mengurus klaim sering kali bukan pemegang polisnya.',
-			),
-			h2('Baca juga'),
-			ul(
-				link(
-					'/artikel/bagian-polis-yang-wajib-dipahami',
-					'Membaca polis asuransi: bagian yang wajib dipahami sebelum tanda tangan',
-				),
-				link(
-					'/artikel/berapa-besar-dana-darurat',
-					'Dana darurat: berapa besar dan di mana menyimpannya?',
-				),
-				link('/kategori/asuransi', 'Semua artikel di topik Asuransi'),
-			),
+		],
+		interview_dialogues: [
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apakah BPJS Kesehatan saja sudah cukup?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Lima',
+				speaker_role: 'Perencana keuangan',
+				message:
+					'Untuk banyak keluarga, BPJS Kesehatan adalah fondasi yang perlu dijaga lebih dulu. Pastikan iurannya lancar dan data keluarga benar. Tanpa fondasi ini, membeli asuransi swasta sering kali hanya memindahkan masalah.\n\nPertanyaan berikutnya adalah kebutuhan apa yang belum terpenuhi. Ada yang ingin bebas memilih rumah sakit atau kamar perawatan, ada yang khawatir soal penghasilan saat dirawat. Jawabannya menentukan jenis perlindungan tambahan yang dicari.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Jadi kapan asuransi tambahan masuk akal?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Lima',
+				speaker_role: 'Perencana keuangan',
+				message:
+					'Ketika ada risiko yang tidak ingin atau tidak mampu Anda tanggung sendiri, dan premi tidak mengganggu pos penting lain. Patokan sederhana yang sering saya pakai: total premi semua asuransi jangan sampai menggeser dana darurat dan tabungan rutin.\n\nMisalnya, dengan angka fiktif, keluarga berpenghasilan Rp10 juta sebulan yang membayar premi Rp2,5 juta perlu bertanya apakah perlindungannya memang sebanding.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagian polis apa yang paling sering terlewat?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Lima',
+				speaker_role: 'Perencana keuangan',
+				message:
+					'Masa tunggu, pengecualian, dan batas manfaat. Masa tunggu adalah periode awal ketika klaim untuk penyakit tertentu belum bisa diajukan. Pengecualian adalah daftar kondisi yang tidak ditanggung. Batas manfaat menentukan berapa maksimal yang dibayar dalam setahun atau per perawatan.\n\nTanyakan juga apakah produk itu bisa dikoordinasikan dengan BPJS Kesehatan. Dengan koordinasi manfaat, sebagian biaya ditanggung BPJS dan selisihnya oleh asuransi swasta, sesuai ketentuan polis.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana dengan produk yang menggabungkan asuransi dan investasi?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Lima',
+				speaker_role: 'Perencana keuangan',
+				message:
+					'Pahami dulu porsi biaya dan porsi investasinya. Bagi banyak orang, memisahkan perlindungan dan investasi membuat keduanya lebih mudah dipantau. Apa pun pilihannya, pastikan perusahaan asuransinya berizin dan diawasi OJK.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa yang sebaiknya ditanyakan kepada agen sebelum membeli?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Lima',
+				speaker_role: 'Perencana keuangan',
+				message:
+					'Minta ringkasan informasi produk dan baca bersama di rumah, jangan langsung tanda tangan pada pertemuan pertama. Tanyakan contoh kasus: kalau saya dirawat tiga hari karena demam berdarah, berapa yang dibayar dan dokumen apa yang dibutuhkan untuk klaim?\n\nAgen yang baik akan menjawab dengan rinci, termasuk hal yang tidak ditanggung. Kalau jawabannya selalu semua ditanggung, itu tanda untuk bertanya lebih jauh.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana jika premi terasa berat di tengah jalan?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Lima',
+				speaker_role: 'Perencana keuangan',
+				message:
+					'Hubungi perusahaan asuransi sebelum premi tertunggak, karena polis bisa berhenti berlaku bila premi tidak dibayar sampai masa tenggang habis. Tanyakan pilihan yang ada, misalnya menurunkan manfaat atau mengganti plan. Keputusan yang dibuat dengan tenang biasanya lebih baik daripada membiarkan polis berhenti begitu saja.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa saran Anda untuk keluarga muda yang baru mulai?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Lima',
+				speaker_role: 'Perencana keuangan',
+				message:
+					'Urutkan langkahnya: BPJS Kesehatan aktif, dana darurat terkumpul, baru kemudian asuransi tambahan bila memang perlu. Simpan polis dan kartu peserta di tempat yang diketahui pasangan Anda, karena saat sakit, yang mengurus klaim sering kali bukan pemegang polisnya.',
+				position: 'right',
+			},
 		],
 	},
 ];

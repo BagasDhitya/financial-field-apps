@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, say, ul } from '../blocks';
+import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Pajak and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -10,17 +10,17 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			'Pengurang penghasilan kena pajak adalah pos yang mengurangi dasar pengenaan pajak sebelum tarif dihitung. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=lwNXYFoSjxU',
+		video: {
 			title: 'Keringanan PPh 21 Diperluas & PTKP Dikaji Naik',
-			channel_name: 'CNN Indonesia',
-			uploaded_at: '2026-10-07T06:45:32.000Z',
-			duration_seconds: 391,
+			channel: 'CNN Indonesia',
+			uploadedAt: '2026-10-07T06:45:32.000Z',
+			duration: 'PT6M31S',
 			caption:
 				'Berita CNN Indonesia: pemerintah berencana melanjutkan keringanan PPh 21 bagi pekerja bergaji di bawah Rp10 juta per bulan pada 2027, sambil mengkaji penyesuaian batas Penghasilan Tidak Kena Pajak (PTKP), salah satu pengurang utama dalam pajak karyawan.',
+			embedUrl: 'https://www.youtube.com/embed/lwNXYFoSjxU',
 		},
 		primary_category: 'pajak-pengurang',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['pajak-karyawan', 'gaji'],
 		first_published_at: '2026-11-09T00:00:00.000Z',
@@ -144,17 +144,17 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			'Angka PPh 21 di slip gaji berasal dari penghasilan bruto yang dikurangi pengurang tertentu, lalu dikenai tarif. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=gqHcGFd0FNg',
+		video: {
 			title: 'Heboh Hitungan Pajak Baru TER PPh 21 bikin Gaji Turun, Benarkah?',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2024-01-29T06:07:49.000Z',
-			duration_seconds: 318,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2024-01-29T06:07:49.000Z',
+			duration: 'PT5M18S',
 			caption:
 				'Liputan CNBC Indonesia tentang skema tarif efektif rata-rata (TER) PPh 21 yang mulai berlaku Januari 2024, saat sebagian pegawai mendapati gaji bersihnya turun. Konteks yang berguna sebelum membaca angka PPh 21 di slip gaji Anda.',
+			embedUrl: 'https://www.youtube.com/embed/gqHcGFd0FNg',
 		},
 		primary_category: 'pajak-pph21',
-		author: 'penulis-contoh-dua',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['pajak-karyawan', 'gaji'],
 		first_published_at: '2026-11-07T14:00:00.000Z',
@@ -278,17 +278,17 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			'Mengisi SPT Tahunan pertama kali dimulai dari menyiapkan bukti potong dan daftar harta, lalu mengisi formulir secara berurutan.',
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=vfXixW3BNqM',
+		video: {
 			title: 'Tutorial Coretax Resmi : Panduan SPT Tahunan Wajib Pajak Orang Pribadi - Karyawan',
-			channel_name: 'Direktorat Jenderal Pajak',
-			uploaded_at: '2025-09-29T07:52:49.000Z',
-			duration_seconds: 1006,
+			channel: 'Direktorat Jenderal Pajak',
+			uploadedAt: '2025-09-29T07:52:49.000Z',
+			duration: 'PT16M46S',
 			caption:
 				'Tutorial resmi Direktorat Jenderal Pajak untuk melaporkan SPT Tahunan karyawan dengan satu pemberi kerja melalui Coretax: dari menyiapkan dokumen dan membuat konsep SPT hingga mengisi dan menyampaikannya.',
+			embedUrl: 'https://www.youtube.com/embed/vfXixW3BNqM',
 		},
 		primary_category: 'pajak-spt-tahunan',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['spt'],
 		first_published_at: '2026-11-06T04:00:00.000Z',
@@ -419,17 +419,17 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			'Zakat dan sumbangan tertentu dapat diperhitungkan sebagai pengurang jika dibayarkan melalui lembaga yang memenuhi syarat.',
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=BEwz-GpVvWA',
+		video: {
 			title: 'Ngobrolin Zakat Pengurang Pajak?',
-			channel_name: 'KPP Pratama Yogyakarta',
-			uploaded_at: '2025-08-20T06:23:52.000Z',
-			duration_seconds: 1216,
+			channel: 'KPP Pratama Yogyakarta',
+			uploadedAt: '2025-08-20T06:23:52.000Z',
+			duration: 'PT20M16S',
 			caption:
 				'Siniar KPP Pratama Yogyakarta, kantor Direktorat Jenderal Pajak, tentang zakat yang dibayarkan melalui BAZNAS sebagai pengurang dalam penghitungan Pajak Penghasilan dan cara memanfaatkannya.',
+			embedUrl: 'https://www.youtube.com/embed/BEwz-GpVvWA',
 		},
 		primary_category: 'pajak-zakat-donasi',
-		author: 'penulis-contoh-tiga',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['spt'],
 		first_published_at: '2026-11-04T18:00:00.000Z',
@@ -554,17 +554,17 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			'Tanggal jatuh tempo pajak kendaraan tercantum di dokumen kendaraan dan sebaiknya dicatat di kalender keluarga. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=IgavgIkqpqw',
+		video: {
 			title: '2 Pajak Baru Kendaraan Bermotor Berlaku Mulai 5 Januari 2025',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2025-01-06T03:12:51.000Z',
-			duration_seconds: 88,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2025-01-06T03:12:51.000Z',
+			duration: 'PT1M28S',
 			caption:
 				'Berita CNBC Indonesia saat dua pajak baru kendaraan bermotor mulai berlaku pada 5 Januari 2025. Rinciannya tercantum pada tagihan pajak kendaraan Anda.',
+			embedUrl: 'https://www.youtube.com/embed/IgavgIkqpqw',
 		},
 		primary_category: 'pajak-lainnya',
-		author: 'penulis-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['anggaran-bulanan'],
 		first_published_at: '2026-11-03T08:00:00.000Z',
 		key_takeaways: [
@@ -671,17 +671,17 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			'Ketika gaji naik, potongan pajak biasanya ikut naik, tetapi kenaikannya tidak selalu sebanding dengan kenaikan gaji. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=DFWIrR_te-M',
+		video: {
 			title: 'DJP Jamin Tak Ada Tambahan Pajak Baru di TER PPh 21 Hanya Permudah Perhitungan',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2024-01-29T07:49:29.000Z',
-			duration_seconds: 636,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2024-01-29T07:49:29.000Z',
+			duration: 'PT10M36S',
 			caption:
 				'Direktur Penyuluhan, Pelayanan, dan Hubungan Masyarakat DJP menjelaskan di CNBC Indonesia bahwa TER PPh 21 hanya mempermudah penghitungan bulanan oleh pemberi kerja dan tidak menambah total pajak yang dibayar.',
+			embedUrl: 'https://www.youtube.com/embed/DFWIrR_te-M',
 		},
 		primary_category: 'pajak-pph21',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['pajak-karyawan', 'gaji'],
 		first_published_at: '2026-11-01T22:00:00.000Z',
@@ -791,17 +791,17 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			'Kesalahan lapor SPT yang paling sering adalah data harta yang tidak lengkap dan bukti potong yang terlewat. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=2UZan2cIl8M',
+		video: {
 			title: 'DJP Hapus Denda Telat Lapor SPT Orang Pribadi Hingga 30 April 2026',
-			channel_name: 'CNN Indonesia',
-			uploaded_at: '2026-03-30T08:30:01.000Z',
-			duration_seconds: 116,
+			channel: 'CNN Indonesia',
+			uploadedAt: '2026-03-30T08:30:01.000Z',
+			duration: 'PT1M56S',
 			caption:
 				'Berita CNN Indonesia: DJP memperpanjang batas pelaporan SPT Tahunan orang pribadi tahun pajak 2025 hingga 30 April 2026 tanpa denda keterlambatan. Terlambat melapor termasuk kesalahan yang paling sering terjadi.',
+			embedUrl: 'https://www.youtube.com/embed/2UZan2cIl8M',
 		},
 		primary_category: 'pajak-spt-tahunan',
-		author: 'penulis-contoh-tiga',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['spt'],
 		first_published_at: '2026-10-31T12:00:00.000Z',
@@ -926,11 +926,9 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
 		primary_category: 'pajak-pengurang',
-		author: 'penulis-contoh-dua',
-		reviewer: 'peninjau-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['pajak-karyawan'],
 		first_published_at: '2026-10-30T02:00:00.000Z',
-		last_reviewed_at: '2026-10-31T02:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Bukti potong, bukti pembayaran, dan dokumen harta sebaiknya disimpan rapi selama beberapa tahun.',
@@ -1036,7 +1034,7 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
 		primary_category: 'pajak-lainnya',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['gaji'],
 		first_published_at: '2026-10-28T16:00:00.000Z',
@@ -1151,11 +1149,9 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
 		primary_category: 'pajak',
-		author: 'redaksi-contoh',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['spt', 'anggaran-bulanan'],
 		first_published_at: '2026-10-27T06:00:00.000Z',
-		last_reviewed_at: '2026-10-28T06:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Kalender pajak pribadi membantu mengingat tanggal lapor dan bayar sehingga tidak ada denda yang tidak perlu.',
@@ -1252,17 +1248,17 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			'Pekerja lepas biasanya lebih banyak mengurus pencatatan pajaknya sendiri dibandingkan karyawan tetap. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=XAfcjOiVcX0',
+		video: {
 			title: 'Panduan Pemberitahuan Penggunaan Norma Penghitungan Penghasilan Neto (NPPN)',
-			channel_name: 'Direktorat Jenderal Pajak',
-			uploaded_at: '2026-02-04T08:25:47.000Z',
-			duration_seconds: 565,
+			channel: 'Direktorat Jenderal Pajak',
+			uploadedAt: '2026-02-04T08:25:47.000Z',
+			duration: 'PT9M25S',
 			caption:
 				'Panduan resmi Direktorat Jenderal Pajak tentang Norma Penghitungan Penghasilan Neto (NPPN): syarat penggunaannya bagi pekerja bebas yang tidak menyelenggarakan pembukuan, dan cara menyampaikan pemberitahuannya melalui Coretax.',
+			embedUrl: 'https://www.youtube.com/embed/XAfcjOiVcX0',
 		},
 		primary_category: 'pajak-pph21',
-		author: 'penulis-contoh-tiga',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['gaji'],
 		first_published_at: '2026-10-25T20:00:00.000Z',
@@ -1387,7 +1383,7 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
 		primary_category: 'pajak-spt-tahunan',
-		author: 'penulis-contoh-dua',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['spt'],
 		first_published_at: '2026-10-24T10:00:00.000Z',
@@ -1513,7 +1509,7 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
 		primary_category: 'pajak-zakat-donasi',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['spt'],
 		first_published_at: '2026-10-23T00:00:00.000Z',
@@ -1626,7 +1622,7 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-pajak',
 		primary_category: 'pajak',
-		author: 'redaksi-contoh',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['pajak-karyawan'],
 		first_published_at: '2026-10-21T14:00:00.000Z',
@@ -1727,11 +1723,9 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 		article_type: 'interview',
 		featured_image: 'kategori-pajak',
 		primary_category: 'pajak-spt-tahunan',
-		author: 'penulis-contoh-satu',
-		reviewer: 'peninjau-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['spt', 'pajak-karyawan'],
 		first_published_at: '2026-10-22T09:00:00.000Z',
-		last_reviewed_at: '2026-10-23T09:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Minta bukti potong tahunan dari setiap pemberi kerja sebelum mulai mengisi SPT.',
@@ -1747,74 +1741,113 @@ export const PAJAK_ARTICLES: ArticleEntry[] = [
 			p(
 				'Setiap awal tahun, banyak karyawan baru pertama kali harus melaporkan SPT Tahunan pribadi. Kami bertanya kepada Narasumber Contoh Empat, konsultan pajak yang setiap musim lapor menerima pertanyaan dari karyawan muda, tentang cara menyiapkannya dengan tenang. Nama narasumber dan angka dalam wawancara ini fiktif. Untuk aturan yang berlaku bagi Anda, rujuk situs resmi Direktorat Jenderal Pajak.',
 			),
-			say(
-				'Penulis Contoh Satu',
-				'Apa yang paling membuat karyawan bingung saat lapor SPT pertama kali?',
-			),
-			say(
-				'Narasumber Contoh Empat',
-				'Mereka mengira harus menghitung pajak sendiri dari nol. Padahal bagi karyawan, pajak penghasilan biasanya sudah dipotong oleh kantor setiap bulan. Tugas di SPT adalah melaporkan ulang: berapa penghasilan setahun, berapa pajak yang sudah dipotong, dan apa saja harta serta utang yang dimiliki.',
-			),
-			p('Begitu pemahaman itu ada, prosesnya terasa jauh lebih ringan.'),
-			say('Penulis Contoh Satu', 'Dokumen apa saja yang perlu disiapkan?'),
-			say(
-				'Narasumber Contoh Empat',
-				'Pertama, bukti potong tahunan dari pemberi kerja. Kalau dalam setahun Anda pindah kantor, mintalah bukti potong dari setiap kantor. Kedua, data keluarga untuk status tanggungan. Ketiga, daftar harta dan utang per akhir tahun: tabungan, kendaraan, cicilan, dan sebagainya.',
-			),
-			p(
-				'Simpan semuanya dalam satu folder, kertas maupun berkas digital. Folder itu akan Anda pakai lagi tahun depan.',
-			),
-			say('Penulis Contoh Satu', 'Kesalahan apa yang paling sering Anda temui?'),
-			say(
-				'Narasumber Contoh Empat',
-				'Yang paling sering adalah lupa menggabungkan penghasilan dari dua kantor dalam tahun yang sama. Masing-masing kantor memotong pajak seolah-olah itu satu-satunya penghasilan Anda, sehingga saat digabung bisa muncul kurang bayar.',
-			),
-			p(
-				'Kesalahan kedua adalah mengosongkan daftar harta. Banyak yang menganggap tabungan kecil tidak perlu dilaporkan, padahal SPT meminta gambaran harta secara lengkap.',
-			),
-			say('Penulis Contoh Satu', 'Bagaimana jika hasil akhirnya kurang bayar?'),
-			say(
-				'Narasumber Contoh Empat',
-				'Jangan panik. Kurang bayar berarti masih ada pajak yang perlu disetor sebelum SPT dikirim. Hitung ulang dengan teliti, cocokkan dengan bukti potong, dan kalau ragu, tanyakan ke kantor pajak atau saluran resmi DJP. Lebih baik bertanya sekarang daripada membetulkan SPT belakangan.',
-			),
-			say('Penulis Contoh Satu', 'Kapan waktu terbaik untuk melapor?'),
-			say(
-				'Narasumber Contoh Empat',
-				'Secepatnya setelah bukti potong diterima, biasanya pada awal tahun. Batas waktu untuk wajib pajak orang pribadi adalah akhir Maret, dan mendekati tanggal itu layanan bantuan biasanya ramai. Melapor lebih awal memberi Anda waktu bila ada data yang perlu diperbaiki.',
-			),
-			say(
-				'Penulis Contoh Satu',
-				'Apakah karyawan yang hanya punya satu kantor juga perlu memeriksa datanya?',
-			),
-			say(
-				'Narasumber Contoh Empat',
-				'Tetap perlu. Cocokkan nama, nomor identitas pajak, dan angka di bukti potong dengan slip gaji Anda. Kesalahan ketik jarang terjadi, tetapi lebih mudah diperbaiki bila ditemukan sebelum melapor.',
-			),
-			p(
-				'Periksa juga status tanggungan. Kalau Anda menikah atau punya anak pada tahun itu, pastikan datanya sudah diperbarui di kantor.',
-			),
-			say('Penulis Contoh Satu', 'Bagaimana dengan penghasilan dari kerja sampingan?'),
-			say(
-				'Narasumber Contoh Empat',
-				'Penghasilan itu juga perlu dilaporkan, walaupun tidak selalu ada bukti potongnya. Catat setiap pembayaran yang Anda terima sepanjang tahun, lengkap dengan tanggal dan pemberi kerjanya. Tanpa catatan, angka di SPT hanya tebakan.',
-			),
-			say('Penulis Contoh Satu', 'Saran terakhir untuk pembaca?'),
-			say(
-				'Narasumber Contoh Empat',
-				'Simpan bukti penerimaan laporan Anda dan catat apa yang Anda pelajari tahun ini. Tahun depan, prosesnya biasanya hanya butuh separuh waktu.',
-			),
-			h2('Baca juga'),
-			ul(
-				link(
-					'/artikel/langkah-mengisi-spt-tahunan-pertama',
-					'Langkah mengisi SPT Tahunan pribadi untuk pertama kali',
-				),
-				link(
-					'/artikel/arti-spt-nihil-kurang-lebih-bayar',
-					'SPT nihil, kurang bayar, lebih bayar: apa artinya?',
-				),
-				link('/kategori/pajak', 'Semua artikel di topik Pajak'),
-			),
+		],
+		interview_dialogues: [
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa yang paling membuat karyawan bingung saat lapor SPT pertama kali?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Empat',
+				speaker_role: 'Konsultan pajak',
+				message:
+					'Mereka mengira harus menghitung pajak sendiri dari nol. Padahal bagi karyawan, pajak penghasilan biasanya sudah dipotong oleh kantor setiap bulan. Tugas di SPT adalah melaporkan ulang: berapa penghasilan setahun, berapa pajak yang sudah dipotong, dan apa saja harta serta utang yang dimiliki.\n\nBegitu pemahaman itu ada, prosesnya terasa jauh lebih ringan.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Dokumen apa saja yang perlu disiapkan?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Empat',
+				speaker_role: 'Konsultan pajak',
+				message:
+					'Pertama, bukti potong tahunan dari pemberi kerja. Kalau dalam setahun Anda pindah kantor, mintalah bukti potong dari setiap kantor. Kedua, data keluarga untuk status tanggungan. Ketiga, daftar harta dan utang per akhir tahun: tabungan, kendaraan, cicilan, dan sebagainya.\n\nSimpan semuanya dalam satu folder, kertas maupun berkas digital. Folder itu akan Anda pakai lagi tahun depan.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Kesalahan apa yang paling sering Anda temui?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Empat',
+				speaker_role: 'Konsultan pajak',
+				message:
+					'Yang paling sering adalah lupa menggabungkan penghasilan dari dua kantor dalam tahun yang sama. Masing-masing kantor memotong pajak seolah-olah itu satu-satunya penghasilan Anda, sehingga saat digabung bisa muncul kurang bayar.\n\nKesalahan kedua adalah mengosongkan daftar harta. Banyak yang menganggap tabungan kecil tidak perlu dilaporkan, padahal SPT meminta gambaran harta secara lengkap.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana jika hasil akhirnya kurang bayar?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Empat',
+				speaker_role: 'Konsultan pajak',
+				message:
+					'Jangan panik. Kurang bayar berarti masih ada pajak yang perlu disetor sebelum SPT dikirim. Hitung ulang dengan teliti, cocokkan dengan bukti potong, dan kalau ragu, tanyakan ke kantor pajak atau saluran resmi DJP. Lebih baik bertanya sekarang daripada membetulkan SPT belakangan.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Kapan waktu terbaik untuk melapor?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Empat',
+				speaker_role: 'Konsultan pajak',
+				message:
+					'Secepatnya setelah bukti potong diterima, biasanya pada awal tahun. Batas waktu untuk wajib pajak orang pribadi adalah akhir Maret, dan mendekati tanggal itu layanan bantuan biasanya ramai. Melapor lebih awal memberi Anda waktu bila ada data yang perlu diperbaiki.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message:
+					'Apakah karyawan yang hanya punya satu kantor juga perlu memeriksa datanya?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Empat',
+				speaker_role: 'Konsultan pajak',
+				message:
+					'Tetap perlu. Cocokkan nama, nomor identitas pajak, dan angka di bukti potong dengan slip gaji Anda. Kesalahan ketik jarang terjadi, tetapi lebih mudah diperbaiki bila ditemukan sebelum melapor.\n\nPeriksa juga status tanggungan. Kalau Anda menikah atau punya anak pada tahun itu, pastikan datanya sudah diperbarui di kantor.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana dengan penghasilan dari kerja sampingan?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Empat',
+				speaker_role: 'Konsultan pajak',
+				message:
+					'Penghasilan itu juga perlu dilaporkan, walaupun tidak selalu ada bukti potongnya. Catat setiap pembayaran yang Anda terima sepanjang tahun, lengkap dengan tanggal dan pemberi kerjanya. Tanpa catatan, angka di SPT hanya tebakan.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Saran terakhir untuk pembaca?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Empat',
+				speaker_role: 'Konsultan pajak',
+				message:
+					'Simpan bukti penerimaan laporan Anda dan catat apa yang Anda pelajari tahun ini. Tahun depan, prosesnya biasanya hanya butuh separuh waktu.',
+				position: 'right',
+			},
 		],
 	},
 ];

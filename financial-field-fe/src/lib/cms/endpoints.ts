@@ -8,4 +8,7 @@ export const endpoints = {
 	navigation: '/site-navigation',
 	staticPages: '/static-pages',
 	siteSettings: '/site-setting',
+	products: '/financial-products',
+	productCategories: '/product-categories',
+	providers: '/providers',
 } as const;

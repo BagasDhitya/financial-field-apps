@@ -1,3 +1,4 @@
+import { paragraphsOf } from '@/lib/text';
 import type { Author, AuthorSummary } from '@/types';
 
 import type { StrapiAuthor } from '../strapi-types';
@@ -47,6 +48,8 @@ export function mapAuthor(entry: StrapiAuthor): Author {
 			.map((link) => link.url?.trim() ?? '')
 			.filter((url) => url.startsWith('https://') || url.startsWith('http://')),
 		expertise: toStringList(entry.expertise),
+		background: paragraphsOf(entry.background),
+		financialView: paragraphsOf(entry.financial_view),
 		seo: mapSeo(entry.seo),
 	};
 }

@@ -33,22 +33,39 @@ export type SeoEntry = {
 };
 
 /**
- * `article.video` component (planned CMS-30): a YouTube video shown at the top
- * of the article. Everything but `url` is copied from the video's YouTube page,
- * so the credit and the structured data match what readers see there.
+ * `article.video` component (CMS-30, built by the CMS developer as Article
+ * `video`): a YouTube video shown at the top of the article. Everything but
+ * `embedUrl` is copied from the video's YouTube page, so the credit and the
+ * structured data match what readers see there.
  */
 export type VideoEntry = {
-	/** The watch link, `https://www.youtube.com/watch?v=<id>`. */
-	url: string;
-	/** The title as published on YouTube. */
+	/** The title as published on YouTube; the article title is the fallback. */
 	title: string;
 	/** The channel that published it: the credit line. */
-	channel_name: string;
-	/** ISO 8601, YouTube's publish time. */
-	uploaded_at: string;
-	duration_seconds: number;
+	channel: string;
+	/** ISO 8601 in UTC, YouTube's publish time; shown in WIB. */
+	uploadedAt: string;
+	/** ISO 8601 duration, e.g. `PT10M26S`. */
+	duration: string;
 	/** One or two sentences from the editor: what the video shows and why it is here. */
 	caption: string;
+	/** The embed link, `https://www.youtube.com/embed/<id>`. */
+	embedUrl: string;
+};
+
+/**
+ * `article.chat-bubble` component (CMS-31, in the CMS as `interview_dialogues`):
+ * one turn of an interview. `position` puts the bubble on the left (the
+ * interviewer, by convention) or the right (the guest).
+ */
+export type ChatBubbleEntry = {
+	speaker_name: string;
+	/** A job or role shown next to the name, e.g. "Perencana keuangan". */
+	speaker_role?: string;
+	speaker_avatar?: MediaKey;
+	/** Plain text; a blank line starts a new paragraph. */
+	message: string;
+	position: 'left' | 'right';
 };
 
 /** An Article (api::article.article). */
@@ -59,8 +76,10 @@ export type ArticleEntry = {
 	lead_text: string;
 	article_type: 'standard' | 'pr_article' | 'interview' | 'column';
 	featured_image?: MediaKey;
-	/** Planned CMS-30. Shown in place of the featured image at the top of the article. */
-	featured_video?: VideoEntry;
+	/** CMS-30 (`video`). Shown in place of the featured image at the top of the article. */
+	video?: VideoEntry;
+	/** CMS-31. An interview's turns, shown as speech bubbles after the body. */
+	interview_dialogues?: ChatBubbleEntry[];
 	/** Category slug, top-level or sub-category. */
 	primary_category: string;
 	/** Category slugs; left out means `[primary_category]`. */
@@ -131,6 +150,10 @@ export type WriterProfileEntry = {
 	same_as: { url: string; label: string }[];
 	/** Planned CMS-11. */
 	expertise: string[];
+	/** Planned CMS-11 (ADR-0022): education and career, for the reviewer page. Blank lines split paragraphs. */
+	background?: string;
+	/** Planned CMS-11 (ADR-0022): how the reviewer thinks about money. Blank lines split paragraphs. */
+	financial_view?: string;
 	seo?: SeoEntry;
 };
 
@@ -144,7 +167,7 @@ export type StockTickerEntry = {
 export type StaticPageEntry = {
 	slug: string;
 	title: string;
-	group: 'tentang-kami' | 'legal';
+	group: 'tentang-kami' | 'legal' | 'referensi';
 	body: BlocksEntry;
 	/** ISO 8601; the entry's `updatedAt`. */
 	updatedAt: string;
@@ -168,4 +191,76 @@ export type SiteNavigationEntry = {
 	menu_item: { label: string; url?: string; category_ref?: string[] }[];
 	/** Article slugs, lead first. */
 	featured_articles: string[];
+};
+
+/** `product-specs.loan` (planned CMS-26, shape pending OQ-35): a loan's published terms. */
+export type LoanSpecsEntry = {
+	rate_type: 'flat' | 'efektif';
+	/** Percent per year, as advertised; the lowest and highest. */
+	rate_min: number;
+	rate_max: number;
+	/** Rupiah. */
+	amount_min: number;
+	amount_max: number;
+	/** Months. */
+	tenor_min: number;
+	tenor_max: number;
+	/** Car loans: the lowest down payment, in percent of the price. */
+	down_payment_min?: number;
+	/** Collateral loans: the highest loan, in percent of the vehicle's appraised value. */
+	max_financing?: number;
+	/** Other costs as the provider words them, e.g. "Provisi 1%, administrasi Rp 500.000". */
+	fees?: string;
+};
+
+/** A Provider (api::provider.provider). */
+export type ProviderEntry = {
+	slug: string;
+	name: string;
+	logo?: MediaKey;
+	/** Planned CMS-24. */
+	legal_name: string;
+	regulator: 'ojk' | 'bi' | 'lainnya';
+	license_number: string;
+	website_url: string;
+	description: string;
+};
+
+/** A Product Category (api::product-category.product-category): one comparison section. */
+export type ProductCategoryEntry = {
+	slug: string;
+	name: string;
+	/** Planned CMS-23. */
+	description: string;
+	/** Planned CMS-28: the group it sits under, e.g. "pinjaman". */
+	parent?: string;
+	show_in_nav?: boolean;
+	seo?: SeoEntry;
+};
+
+/** A Financial Product (api::financial-product.financial-product). */
+export type FinancialProductEntry = {
+	slug: string;
+	title: string;
+	/** Product category slug. */
+	product_category: string;
+	/** Provider slug. */
+	provider: string;
+	/** Monthly net income in Rupiah (OQ-36 asks the CMS developer to confirm the unit). */
+	min_income?: number;
+	/** Shown as written; loans usually have none. */
+	annual_fee?: string;
+	features: BlocksEntry;
+	/** The product's own page at the provider (shown as "Kunjungi situs resmi"). */
+	apply_url: string;
+	image?: MediaKey;
+	/** Planned CMS-23. */
+	summary: string;
+	/** Planned CMS-25: when the numbers were last checked against `source_url`. */
+	data_checked_at: string;
+	source_url: string;
+	is_partner?: boolean;
+	/** Planned CMS-26. */
+	loan_specs?: LoanSpecsEntry;
+	seo?: SeoEntry;
 };

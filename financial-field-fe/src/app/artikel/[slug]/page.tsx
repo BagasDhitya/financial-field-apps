@@ -56,7 +56,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 			modifiedTime: toIsoWib(article.contentUpdatedAt ?? article.publishedAt),
 			section: article.primaryCategory?.name ?? null,
 			tags: article.tags.map((tag) => tag.name),
-			authors: article.author ? [absoluteUrl(routes.author(article.author.slug))] : [],
+			// The team writes every article and has no page; the Redaksi page describes it (ADR-0022).
+			authors: article.author ? [absoluteUrl(routes.about('redaksi'))] : [],
 		},
 	});
 }
@@ -70,7 +71,12 @@ export default async function ArticlePage({ params }: Props) {
 	const [related, settings] = await Promise.all([getRelatedArticles(article), getSiteSettings()]);
 
 	const url = absoluteUrl(routes.article(article.slug));
-	const words = countWords(blocksToPlainText(article.body));
+	const words = countWords(
+		[
+			blocksToPlainText(article.body),
+			...article.dialogue.flatMap((turn) => turn.paragraphs),
+		].join('\n'),
+	);
 	const trail = [
 		...categoryTrail(article.primaryCategory),
 		{ label: article.title, href: routes.article(article.slug) },

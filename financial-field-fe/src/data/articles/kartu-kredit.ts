@@ -11,7 +11,7 @@ export const KARTU_KREDIT_ARTICLES: ArticleEntry[] = [
 		article_type: 'pr_article',
 		featured_image: 'kategori-kartu-kredit',
 		primary_category: 'kartu-kredit',
-		author: 'redaksi-contoh',
+		author: 'tim-redaksi',
 		tags: ['kartu-kredit'],
 		first_published_at: '2026-08-21T16:00:00.000Z',
 		sponsor_name: 'Sponsor Contoh',

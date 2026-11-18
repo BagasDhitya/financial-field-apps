@@ -29,11 +29,3 @@ test('thin tags are noindex, rich tags are indexable (REQ-SEO-008)', async ({ pa
 	await page.goto('/tag/pajak-karyawan');
 	await expect(page.locator('meta[name="robots"]')).toHaveCount(0);
 });
-
-test('search: short query shows the form only; results are noindex (AC20)', async ({ page }) => {
-	await page.goto('/cari?q=a');
-	await expect(page.getByText('Masukkan minimal 2 karakter.')).toBeVisible();
-	await page.goto('/cari?q=pajak');
-	await expect(page.getByText(/hasil untuk “pajak”/)).toBeVisible();
-	await expect(page.locator('meta[name="robots"]')).toHaveAttribute('content', /noindex/);
-});

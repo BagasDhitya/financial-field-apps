@@ -45,19 +45,15 @@ export async function getCategoryTree(): Promise<CategoryNode[]> {
 
 	const navigation = await getSiteNavigation();
 	return navigation.menuItems.flatMap((item, index) =>
-		item.category
-			? [
-					{
-						...item.category,
-						name: item.label || item.category.name,
-						parentSlug: null,
-						parentName: null,
-						description: null,
-						navOrder: index,
-						children: [],
-					},
-				]
-			: [],
+		item.categories.map((category) => ({
+			...category,
+			name: item.categories.length === 1 ? item.label || category.name : category.name,
+			parentSlug: null,
+			parentName: null,
+			description: null,
+			navOrder: index,
+			children: [],
+		})),
 	);
 }
 

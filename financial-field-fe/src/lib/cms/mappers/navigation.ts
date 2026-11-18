@@ -12,14 +12,13 @@ export function mapNavigation(
 	featuredArticles: ArticleSummary[],
 ): SiteNavigation {
 	return {
-		menuItems: (entry.menu_item ?? []).map((item) => {
-			const category = item.category_ref?.[0];
-			return {
-				label: item.label ?? '',
-				url: item.url ?? null,
-				category: category?.slug ? mapCategorySummary(category) : null,
-			};
-		}),
+		menuItems: (entry.menu_item ?? []).map((item) => ({
+			label: item.label ?? '',
+			url: item.url ?? null,
+			categories: (item.category_ref ?? [])
+				.filter((category) => category.slug)
+				.map(mapCategorySummary),
+		})),
 		featuredArticles,
 	};
 }

@@ -7,6 +7,10 @@ export const e2eEnv = {
 	NEXT_PUBLIC_SITE_URL: `http://localhost:${E2E_PORT}`,
 	SITE_ENV: 'production',
 	NEXT_PUBLIC_GA_MEASUREMENT_ID: 'G-E2ETEST000',
+	// As staging runs (ADR-0022): the comparison pages, the PR spot and the newsletter box.
+	FEATURE_COMPARISON: '1',
+	FEATURE_ADS: '1',
+	FEATURE_NEWSLETTER: '1',
 };
 
 /** Second server on the same build, run as staging with basic auth (REQ-INFRA-006). */

@@ -5,7 +5,7 @@
  *
  * Palette lock (I7): paper, ink, FF blue, FF navy, FF cyan, FF red — values
  * from the Financial Field JP stylesheet (DSC-0006). Opacity is the only extra
- * lever, except the interview dialogue tints below (ADR-0020). Cyan is never
+ * lever, except the interview dialogue tints below (ADR-0021). Cyan is never
  * text on paper; red is never text.
  *
  * Sharp edges (I1): the radius scale is removed, so `rounded-*` utilities do
@@ -22,16 +22,23 @@
 	--color-ff-red: #fe1f20;
 
 	/*
-	 * The one exception to the palette lock (ADR-0020): interview dialogue
+	 * The one exception to the palette lock (ADR-0021): interview dialogue
 	 * bubbles. Backgrounds and borders only, never text.
 	 */
-	--color-dialogue-host: #fde8ef;
-	--color-dialogue-host-line: #f2a7c0;
-	--color-dialogue-guest: #ffeedd;
-	--color-dialogue-guest-line: #f6b47a;
+	--color-dialogue-left: #fde8ef;
+	--color-dialogue-left-line: #f2a7c0;
+	--color-dialogue-right: #ffeedd;
+	--color-dialogue-right-line: #f6b47a;
 
-	--font-display: var(--font-playfair), 'Playfair Display', Georgia, serif;
-	--font-sans: var(--font-montserrat), 'Montserrat', ui-sans-serif, system-ui, sans-serif;
+	/*
+	 * Two type levels (ADR-0023). Level 1, Inter Tight: everything that frames
+	 * the page (headlines, titles, intros, navigation, labels, meta). Level 2,
+	 * Source Serif 4: the text people read (article and page bodies, dialogue,
+	 * answers, profiles). `display` and `sans` are the same family on purpose.
+	 */
+	--font-display: var(--font-inter-tight), 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
+	--font-sans: var(--font-inter-tight), 'Inter Tight', ui-sans-serif, system-ui, sans-serif;
+	--font-text: var(--font-source-serif), 'Source Serif 4', Georgia, 'Times New Roman', serif;
 
 	--breakpoint-3xl: 120rem;
 
@@ -58,6 +65,8 @@
 	--page-px: clamp(1.3125rem, 4.5vw, 3.4375rem);
 	--content-max: 77rem;
 	--reading-max: 38.2rem;
+	/* Main / rail at 61.8 / 38.2 (I6, §2.3). */
+	--split-golden: minmax(0, 1.618fr) minmax(0, 1fr);
 
 	--stroke-frame: 3px;
 	--stroke-card: 2px;
@@ -77,6 +86,8 @@
 	--z-skip: 90;
 
 	--header-h: 4.5rem;
+	/* The menu row under the brand row, from 1024 px (ADR-0022). */
+	--nav-h: 2.875rem;
 
 	/* Type scale (§2.2). */
 	--text-display: clamp(2.125rem, 3.6vw, 3.4375rem);
@@ -112,6 +123,12 @@
 		scroll-padding-top: calc(var(--header-h) + var(--space-3));
 	}
 
+	@media (min-width: 1024px) {
+		html {
+			scroll-padding-top: calc(var(--header-h) + var(--nav-h) + var(--space-3));
+		}
+	}
+
 	body {
 		background: var(--color-paper);
 		color: var(--color-ink);
@@ -123,10 +140,12 @@
 	}
 
 	h1,
-	h2 {
+	h2,
+	h3 {
 		font-family: var(--font-display);
 		font-weight: 700;
 		line-height: 1.12;
+		letter-spacing: -0.01em;
 		text-wrap: balance;
 	}
 

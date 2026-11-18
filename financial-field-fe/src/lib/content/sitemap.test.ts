@@ -13,7 +13,7 @@ function entry(slug: string, overrides: Partial<ArticleIndexEntry> = {}): Articl
 		hasVideo: false,
 		tagSlugs: [],
 		primaryCategorySlug: 'pph',
-		authorSlugs: ['penulis'],
+		reviewerSlugs: ['peninjau'],
 		...overrides,
 	};
 }
@@ -44,7 +44,13 @@ describe('buildSitemapFiles (REQ-SEO-013)', () => {
 				{ slug: 'tentang-kami', updatedAt: null },
 				{ slug: 'redaksi', updatedAt: '2026-09-01T00:00:00Z' },
 				{ slug: 'hubungi-kami', updatedAt: null },
+				{ slug: 'kamus-keuangan', updatedAt: null },
 			],
+			comparison: {
+				sections: ['pinjaman', 'jaminan-bpkb'],
+				products: [{ slug: 'contoh-produk', checkedAt: '2026-11-15' }],
+				providers: ['contoh-penyedia'],
+			},
 		},
 		ORIGIN,
 	);
@@ -78,7 +84,25 @@ describe('buildSitemapFiles (REQ-SEO-013)', () => {
 			`${ORIGIN}/tentang-kami`,
 			`${ORIGIN}/tentang-kami/redaksi`,
 			`${ORIGIN}/hubungi-kami`,
+			`${ORIGIN}/kamus-keuangan`,
 		]);
+	});
+
+	it('lists the comparison pages in their own file, only when comparison is on (p3 T31)', () => {
+		expect(byName('comparison')).toEqual([
+			`${ORIGIN}/bandingkan`,
+			`${ORIGIN}/bandingkan/pinjaman`,
+			`${ORIGIN}/bandingkan/jaminan-bpkb`,
+			`${ORIGIN}/produk/contoh-produk`,
+			`${ORIGIN}/penyedia`,
+			`${ORIGIN}/penyedia/contoh-penyedia`,
+			`${ORIGIN}/kalkulator/cicilan-kredit`,
+		]);
+		const off = buildSitemapFiles(
+			{ articles: [], categories: [], pages: [], comparison: null },
+			ORIGIN,
+		);
+		expect(off.map((file) => file.name)).not.toContain('comparison');
 	});
 
 	it('uses content dates for lastmod, never the build time', () => {
@@ -87,7 +111,10 @@ describe('buildSitemapFiles (REQ-SEO-013)', () => {
 	});
 
 	it('still produces an (empty) article file when there are no articles', () => {
-		const empty = buildSitemapFiles({ articles: [], categories: [], pages: [] }, ORIGIN);
+		const empty = buildSitemapFiles(
+			{ articles: [], categories: [], pages: [], comparison: null },
+			ORIGIN,
+		);
 		expect(empty.find((file) => file.name === 'articles-1')?.urls).toEqual([]);
 	});
 });

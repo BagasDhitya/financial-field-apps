@@ -11,15 +11,27 @@ const ROUTES: [string, RegExp][] = [
 	['/kategori/pajak', /^Pajak$/],
 	['/kategori/pajak/pajak-pph21', /^PPh 21 & Bukti Potong$/],
 	['/tag/pajak-karyawan', /Pajak karyawan/],
-	['/penulis/peninjau-contoh-dua', /Peninjau Contoh Dua/],
-	['/penulis/penulis-contoh-tiga', /Penulis Contoh Tiga/],
+	['/peninjau/peninjau-contoh-dua', /Peninjau Contoh Dua/],
+	['/peninjau/peninjau-contoh-tiga', /Peninjau Contoh Tiga/],
+	['/kategori/edukasi/edukasi-pinjaman-kredit', /^Pinjaman Kredit$/],
+	['/kategori/panduan/panduan-pinjaman-kredit', /^Pinjaman Kredit$/],
+	['/artikel/bunga-flat-dan-bunga-efektif', /Bunga flat dan bunga efektif/],
+	['/bandingkan', /^Bandingkan$/],
+	['/bandingkan/pinjaman', /^Pinjaman$/],
+	['/bandingkan/jaminan-bpkb', /^Jaminan BPKB$/],
+	['/bandingkan/kredit-mobil', /^Kredit Mobil$/],
+	['/produk/contoh-auto-finance-kredit-mobil-baru', /^Kredit Mobil Baru$/],
+	['/penyedia', /^Penyedia$/],
+	['/penyedia/contoh-bank-utama', /^Bank Contoh Utama$/],
+	['/kalkulator/cicilan-kredit', /^Cicilan Kredit$/],
+	['/kamus-keuangan', /^Kamus Keuangan$/],
+	['/tentang-kami/metodologi-perbandingan', /Metodologi Perbandingan/],
 	['/terbaru', /Artikel Terbaru/],
 	['/wawancara', /Wawancara/],
 	['/video', /^Video$/],
 	['/tentang-kami', /Tentang Financial Field Indonesia/],
 	['/tentang-kami/redaksi', /Redaksi/],
 	['/hubungi-kami', /Hubungi Kami/],
-	['/cari?q=pajak', /Cari artikel/],
 ];
 
 for (const [path, heading] of ROUTES) {
@@ -32,15 +44,24 @@ for (const [path, heading] of ROUTES) {
 	});
 }
 
-test('reserved and legacy segments are 404 (ADR-0004)', async ({ request }) => {
+test('reserved, legacy and retired paths are 404 (ADR-0004, ADR-0022)', async ({ request }) => {
 	for (const path of [
-		'/bandingkan',
+		'/bandingkan/tidak-ada',
 		'/penyedia/x',
 		'/produk',
+		'/produk/tidak-ada',
 		'/kalkulator',
-		'/kamus-keuangan',
 		'/edukasi',
 		'/panduan',
+		// Writers are a team without pages; only reviewers have one.
+		'/penulis/peninjau-contoh-satu',
+		'/peninjau/tim-redaksi',
+		// Pages with their own URL are never served twice.
+		'/tentang-kami/kamus-keuangan',
+		'/tentang-kami/hubungi-kami',
+		// Site search was removed at the client's request.
+		'/cari',
+		'/cari?q=pajak',
 		'/articles/cara-membaca-slip-gaji-pph-21',
 		'/category/pajak',
 		'/authors/penulis-contoh-satu',
@@ -52,11 +73,14 @@ test('reserved and legacy segments are 404 (ADR-0004)', async ({ request }) => {
 	}
 });
 
-test('custom 404 offers search and topics (REQ-PAGE-002)', async ({ page }) => {
+test('custom 404 offers the latest articles and topics, no search (REQ-PAGE-002)', async ({
+	page,
+}) => {
 	const response = await page.goto('/artikel/tidak-ada');
 	expect(response?.status()).toBe(404);
 	await expect(page.getByRole('heading', { level: 1 })).toHaveText('Halaman tidak ditemukan');
-	await expect(page.locator('#cari-404')).toBeVisible();
+	await expect(page.getByRole('link', { name: 'Artikel terbaru' })).toBeVisible();
+	await expect(page.getByRole('search')).toHaveCount(0);
 });
 
 test('harness is never served in production (T19)', async ({ request }) => {

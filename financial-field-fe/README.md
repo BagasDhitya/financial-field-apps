@@ -1,8 +1,9 @@
 # financial-field-fe
 
 Public website of **Financial Field Indonesia**: a Next.js 16 news and article
-portal. For now the content is **hardcoded in `src/data/`**: 60 demo articles,
-the topic tree, tags, authors and trust pages, written with the CMS's own
+portal. For now the content is **hardcoded in `src/data/`**: 73 demo articles,
+the topic tree, tags, the writing team and reviewers, trust pages, the
+glossary and a fictional comparison catalogue, written with the CMS's own
 field names. A **local API** serves it at `/api/<endpoint>` in the shape of
 the Strapi CMS (`../financial-field-cms`), and the site reads it through the
 same client it uses for Strapi. Setting `CMS_URL` switches to the real CMS
@@ -29,16 +30,23 @@ when it is set, the build fetches from that CMS.
 
 Component harness: http://localhost:3000/harness (local only).
 
+The comparison pages, the home loan finder, the PR spot and the newsletter box
+are behind `FEATURE_COMPARISON`, `FEATURE_ADS` and `FEATURE_NEWSLETTER` (set to
+`1` in `.env.local` to see them; staging sets all three). Static pages read
+them at build time.
+
 ## The local API
 
 The CMS's REST endpoints, answered from `src/data` (`src/lib/cms/local/`):
 
-| Endpoint                                               | In the CMS today     |
-| ------------------------------------------------------ | -------------------- |
-| `/api/articles`, `/api/categories`, `/api/tags`        | yes                  |
-| `/api/writer-profiles`, `/api/stock-tickers`           | yes                  |
-| `/api/site-navigation` (single type)                   | yes                  |
-| `/api/static-pages`, `/api/site-setting` (single type) | planned (CMS-13, 14) |
+| Endpoint                                               | In the CMS today          |
+| ------------------------------------------------------ | ------------------------- |
+| `/api/articles`, `/api/categories`, `/api/tags`        | yes                       |
+| `/api/writer-profiles`, `/api/stock-tickers`           | yes                       |
+| `/api/site-navigation` (single type)                   | yes                       |
+| `/api/static-pages`, `/api/site-setting` (single type) | planned (CMS-13, 14)      |
+| `/api/financial-products`, `/api/product-categories`   | yes (Public read: CMS-20) |
+| `/api/providers`                                       | yes (Public read: CMS-20) |
 
 It takes the same parameters as Strapi 5 (`filters`, `sort`, `pagination`,
 `fields`, `populate`, `status`, and `/<documentId>` reads) and refuses unknown
@@ -51,15 +59,17 @@ here; against a real CMS, `CMS_CAPABILITIES` lists the ones it has. Try:
 
 Everything a reader sees comes from `src/data/`:
 
-| File                                 | CMS type                     |
-| ------------------------------------ | ---------------------------- |
-| `articles/<category>.ts`             | Article, one file per topic  |
-| `categories.ts`                      | Category, in menu order      |
-| `tags.ts`, `writer-profiles.ts`      | Tag, Writer Profile          |
-| `stock-tickers.ts`                   | Stock Ticker                 |
-| `site-navigation.ts`                 | Site Navigation (featured)   |
-| `static-pages.ts`, `site-setting.ts` | Static Page, Site Setting    |
-| `media.ts`                           | upload files (public/images) |
+| File                                 | CMS type                                      |
+| ------------------------------------ | --------------------------------------------- |
+| `articles/<category>.ts`             | Article, one file per topic                   |
+| `categories.ts`                      | Category, in menu order                       |
+| `tags.ts`, `writer-profiles.ts`      | Tag, Writer Profile                           |
+| `stock-tickers.ts`                   | Stock Ticker                                  |
+| `site-navigation.ts`                 | Site Navigation (menu, lead)                  |
+| `comparison.ts`                      | Financial Product, Product Category, Provider |
+| `glossary.ts`                        | the Kamus Keuangan Static Page body           |
+| `static-pages.ts`, `site-setting.ts` | Static Page, Site Setting                     |
+| `media.ts`                           | upload files (public/images)                  |
 
 Field names are the CMS attribute names (`lead_text`, `primary_category`,
 `full_name`). Relations are slugs, images are `media.ts` keys. Article bodies
@@ -68,21 +78,33 @@ use the helpers in `src/data/blocks.ts`:
 `ul('satu', 'dua')`. The local API checks every relation and internal link at
 build: an unknown slug stops `pnpm build` and names the entry.
 
-An article can carry a YouTube video at the top: add `featured_video` with the
-watch link, and the title, channel, publish time and length as YouTube shows
-them, plus a one- or two-sentence `caption`. Pick a video that can be embedded
-and was uploaded before the article's date; the build checks the link, the date
-and that no other article uses the same video. The player loads only when the
-reader presses play.
+An article can carry a YouTube video at the top: add `video` (the CMS's
+`article.video`) with `embedUrl` (`https://www.youtube.com/embed/<id>`), and the
+`title`, `channel`, `uploadedAt` (UTC) and `duration` (ISO 8601, e.g.
+`PT5M18S`) as YouTube shows them, plus a one- or two-sentence `caption`. Pick a
+video that can be embedded and was uploaded before the article's date; the
+build checks the link form, the duration, the date and that no other article
+uses the same video. The player loads only when the reader presses play.
 
-An `interview` article shows as a dialogue of speech bubbles. Write each turn
-with `say('Nama', 'teks')`, which stores the name in bold followed by a colon,
-the same as typing **Nama:** in the CMS editor. The turns named like the
-article's author are the interviewer's (pink, left), every other name is a
-guest's (orange, right), and a plain `p()` right after a turn continues it. A
-heading ends the dialogue, so put "Baca juga" links under `h2('Baca juga')`.
-The build stops when an interview has no turn by its author or no guest turn.
-No new field is involved, so the CMS needs no change for this.
+Every article's `author` is the team profile `tim-redaksi`; its name shows
+without a link. Set `reviewer` (and `last_reviewed_at`) to a reviewer's slug
+to mark the article "Terverifikasi"; reviewers have a profile page at
+`/peninjau/<slug>`, with `background` and `financial_view` as plain text
+(a blank line starts a paragraph).
+
+The menu is `menu_item` in `site-navigation.ts`: an entry with several
+`category_ref` opens the topic panel, one opens that category's children, and
+a `url` of `/bandingkan`, `/penyedia`, `/kalkulator` or `/tentang-kami` opens
+those lists. Comparison links (`apply_url`, `website_url`, `source_url`) must
+stay on `https://example.com/` until real data replaces the demo set.
+
+An `interview` article shows its turns as speech bubbles after the body. Add
+`interview_dialogues`, one entry per turn, with the CMS's field names:
+`speaker_name`, `speaker_role`, `message` (plain text; a blank line, `\n\n`,
+starts a new paragraph), `position` (`left` for the interviewer, pink;
+`right` for the guest, orange) and optionally `speaker_avatar`. Keep `content`
+for the intro. The build stops when an interview has no turn on one side, or a
+turn without a name, message or position.
 
 ## Code style
 

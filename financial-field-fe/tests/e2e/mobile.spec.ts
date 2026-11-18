@@ -10,6 +10,11 @@ for (const width of [360, 390, 768]) {
 			'/artikel/cara-membaca-slip-gaji-pph-21',
 			'/kategori/pajak',
 			'/video',
+			'/bandingkan/kredit-mobil',
+			'/produk/contoh-auto-finance-kredit-mobil-baru',
+			'/kalkulator/cicilan-kredit',
+			'/kamus-keuangan',
+			'/peninjau/peninjau-contoh-satu',
 		]) {
 			await page.goto(path);
 			await expectNoHorizontalScroll(page);
@@ -30,6 +35,7 @@ test('mobile sheet opens as a dialog, topics expand, Escape closes (REQ-NAV-004)
 	await page.getByRole('button', { name: 'Menu' }).click();
 	const dialog = page.getByRole('dialog', { name: 'Menu' });
 	await expect(dialog).toBeVisible();
+	await dialog.getByText('Berita', { exact: true }).click();
 	await dialog.getByText('Pajak', { exact: true }).click();
 	await expect(
 		dialog.getByRole('link', { name: 'PPh 21 & Bukti Potong', exact: true }),

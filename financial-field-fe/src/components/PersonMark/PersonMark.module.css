@@ -1,0 +1,25 @@
+.root {
+	display: block;
+	flex: 0 0 auto;
+	border: var(--stroke-rule) solid var(--color-ink);
+}
+
+.initials {
+	display: grid;
+	aspect-ratio: 1 / 1;
+	place-items: center;
+	background: var(--color-ff-navy);
+	color: var(--color-paper);
+	font-family: var(--font-display);
+	font-size: 0.875rem;
+	font-weight: 700;
+	letter-spacing: 0.04em;
+}
+
+.initials[data-size='72'] {
+	font-size: 1.375rem;
+}
+
+.initials[data-size='144'] {
+	font-size: 2.75rem;
+}

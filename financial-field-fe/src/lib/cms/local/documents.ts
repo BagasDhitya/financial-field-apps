@@ -1,15 +1,15 @@
 import { ARTICLES } from '@/data/articles';
 import { CATEGORIES } from '@/data/categories';
+import { FINANCIAL_PRODUCTS, PRODUCT_CATEGORIES, PROVIDERS } from '@/data/comparison';
 import { MEDIA, type MediaKey } from '@/data/media';
 import { SITE_NAVIGATION } from '@/data/site-navigation';
 import { SITE_SETTING } from '@/data/site-setting';
 import { STATIC_PAGES } from '@/data/static-pages';
 import { STOCK_TICKERS } from '@/data/stock-tickers';
 import { TAGS } from '@/data/tags';
-import type { ArticleEntry, BlocksEntry, SeoEntry } from '@/data/types';
+import type { ArticleEntry, BlocksEntry, LoanSpecsEntry, SeoEntry } from '@/data/types';
 import { WRITER_PROFILES } from '@/data/writer-profiles';
-import { toDialogue } from '@/lib/blocks';
-import { parseYouTubeId } from '@/lib/video';
+import { isYouTubeEmbedUrl, parseIsoDuration, parseYouTubeId } from '@/lib/video';
 
 import type { ContentTypeName } from './schema';
 
@@ -19,8 +19,8 @@ import type { ContentTypeName } from './schema';
  * them: an article's `primary_category` also appears in that category's
  * `category` list. A duplicate slug, an unknown relation, a missing featured
  * article, an internal body link to a page that doesn't exist, a broken
- * featured video or an interview that isn't written as a dialogue throws, so
- * `next build` stops and names the entry.
+ * featured video or an interview without proper turns throws, so `next build`
+ * stops and names the entry.
  */
 
 /** A stored document: its system fields plus attribute values. */
@@ -140,40 +140,86 @@ function items<T>(list: readonly T[] | undefined): (T & { id: number })[] {
 const videoOwners = new Map<string, string>();
 
 /**
- * The `article.video` component, checked: a YouTube link, the credit and
- * caption filled in, a whole number of seconds, and not uploaded after the
- * article's last date (a video can't be in an article before it exists).
+ * The `article.video` component (CMS-30), checked: an `/embed/` YouTube link
+ * as the CMS developer specified, the credit and caption filled in, an ISO
+ * 8601 duration, and not uploaded after the article's last date (a video
+ * can't be in an article before it exists).
  */
 function videoOf(entry: ArticleEntry): Record<string, unknown> | null {
-	const video = entry.featured_video;
+	const video = entry.video;
 	if (!video) {
 		return null;
 	}
 	const owner = `article "${entry.slug}"`;
-	const id =
-		parseYouTubeId(video.url) ??
-		fail(`${owner} has a featured_video that isn't a YouTube link`);
+	if (!isYouTubeEmbedUrl(video.embedUrl)) {
+		fail(`${owner} has a video embedUrl that isn't a YouTube /embed/ link`);
+	}
+	const id = parseYouTubeId(video.embedUrl) ?? fail(`${owner} has an unreadable video embedUrl`);
 	const other = videoOwners.get(id);
 	if (other) {
-		fail(`${owner} has the same featured_video as article "${other}"`);
+		fail(`${owner} has the same video as article "${other}"`);
 	}
 	videoOwners.set(id, entry.slug);
-	for (const field of ['title', 'channel_name', 'caption'] as const) {
+	for (const field of ['title', 'channel', 'caption'] as const) {
 		if (!video[field].trim()) {
-			fail(`${owner} has an empty featured_video ${field}`);
+			fail(`${owner} has an empty video ${field}`);
 		}
 	}
-	const uploaded = Date.parse(video.uploaded_at);
-	if (Number.isNaN(uploaded)) {
-		fail(`${owner} has an invalid featured_video uploaded_at`);
+	const uploaded = Date.parse(video.uploadedAt);
+	if (Number.isNaN(uploaded) || !video.uploadedAt.endsWith('Z')) {
+		fail(`${owner} has a video uploadedAt that isn't an ISO 8601 UTC time`);
 	}
 	if (uploaded > Date.parse(entry.content_updated_at ?? entry.first_published_at)) {
-		fail(`${owner} has a featured_video uploaded after the article's last date`);
+		fail(`${owner} has a video uploaded after the article's last date`);
 	}
-	if (!Number.isInteger(video.duration_seconds) || video.duration_seconds <= 0) {
-		fail(`${owner} has an invalid featured_video duration_seconds`);
+	if (parseIsoDuration(video.duration) === null) {
+		fail(`${owner} has a video duration that isn't ISO 8601 (e.g. PT1M30S)`);
 	}
-	return { id: 1, ...video };
+	return {
+		id: 1,
+		title: video.title,
+		channel: video.channel,
+		uploadedAt: video.uploadedAt,
+		duration: video.duration,
+		caption: video.caption,
+		embedUrl: video.embedUrl,
+	};
+}
+
+/**
+ * The `article.chat-bubble` turns (CMS-31), checked: only on interviews, and
+ * every interview has at least one turn on each side, each with a speaker
+ * name, a message and a position.
+ */
+function dialoguesOf(entry: ArticleEntry): Record<string, unknown>[] {
+	const owner = `article "${entry.slug}"`;
+	const turns = entry.interview_dialogues ?? [];
+	if (entry.article_type !== 'interview') {
+		if (turns.length > 0) {
+			fail(`${owner} has interview_dialogues but is not an interview`);
+		}
+		return [];
+	}
+	for (const [index, turn] of turns.entries()) {
+		if (!turn.speaker_name.trim() || !turn.message.trim()) {
+			fail(`${owner} has an empty speaker_name or message in turn ${index + 1}`);
+		}
+		if (turn.position !== 'left' && turn.position !== 'right') {
+			fail(`${owner} has an invalid position in turn ${index + 1}`);
+		}
+	}
+	const sides = new Set(turns.map((turn) => turn.position));
+	if (!sides.has('left') || !sides.has('right')) {
+		fail(`${owner} is an interview without turns on both sides (interview_dialogues)`);
+	}
+	return turns.map((turn, index) => ({
+		id: index + 1,
+		speaker_name: turn.speaker_name,
+		speaker_role: turn.speaker_role ?? null,
+		speaker_avatar: mediaOf(turn.speaker_avatar),
+		message: turn.message,
+		position: turn.position,
+	}));
 }
 
 // ---- Collections -------------------------------------------------------------
@@ -218,6 +264,8 @@ const writerProfiles = collection('writer-profiles', WRITER_PROFILES, (entry) =>
 	bio: entry.bio,
 	credentials: entry.credentials ?? null,
 	expertise: entry.expertise,
+	background: entry.background ?? null,
+	financial_view: entry.financial_view ?? null,
 	avatar: mediaOf(entry.avatar),
 	same_as: items(entry.same_as),
 	seo: seoOf(entry.seo),
@@ -266,7 +314,8 @@ const articles = collection('articles', ARTICLES, (entry) => {
 		sources: items(entry.sources),
 		key_takeaways: items(entry.key_takeaways),
 		corrections: items(entry.corrections),
-		featured_video: videoOf(entry),
+		interview_dialogues: dialoguesOf(entry),
+		video: videoOf(entry),
 	};
 });
 for (const entry of ARTICLES) {
@@ -316,6 +365,131 @@ const staticPages = collection('static-pages', STATIC_PAGES, (entry) => ({
 	seo: seoOf(entry.seo),
 	...stamps(entry.updatedAt),
 }));
+
+// ---- Comparison catalogue (ADR-0011, ADR-0022) ---------------------------------------
+
+/** The loan terms (planned CMS-26), checked: each minimum at or below its maximum. */
+function loanSpecsOf(
+	owner: string,
+	specs: LoanSpecsEntry | undefined,
+): Record<string, unknown> | null {
+	if (!specs) {
+		return null;
+	}
+	if (specs.rate_type !== 'flat' && specs.rate_type !== 'efektif') {
+		fail(`${owner} has an invalid loan_specs rate_type`);
+	}
+	for (const [low, high] of [
+		['rate_min', 'rate_max'],
+		['amount_min', 'amount_max'],
+		['tenor_min', 'tenor_max'],
+	] as const) {
+		if (!(specs[low] > 0) || specs[low] > specs[high]) {
+			fail(`${owner} has loan_specs ${low} above ${high}, or not positive`);
+		}
+	}
+	return {
+		id: 1,
+		rate_type: specs.rate_type,
+		rate_min: specs.rate_min,
+		rate_max: specs.rate_max,
+		amount_min: specs.amount_min,
+		amount_max: specs.amount_max,
+		tenor_min: specs.tenor_min,
+		tenor_max: specs.tenor_max,
+		down_payment_min: specs.down_payment_min ?? null,
+		max_financing: specs.max_financing ?? null,
+		fees: specs.fees ?? null,
+	};
+}
+
+/** Demo links must stay on example.com (REQ-SEED-014): nothing can pass for a real offer. */
+function demoUrl(owner: string, field: string, url: string): string {
+	if (!url.startsWith('https://example.com/')) {
+		fail(`${owner} has a ${field} outside https://example.com/`);
+	}
+	return url;
+}
+
+const productCategories = collection('product-categories', PRODUCT_CATEGORIES, (entry) => ({
+	name: entry.name,
+	slug: entry.slug,
+	description: entry.description,
+	nav_order: PRODUCT_CATEGORIES.indexOf(entry) + 1,
+	show_in_nav: entry.show_in_nav ?? true,
+	seo: seoOf(entry.seo),
+	...stamps(CONTENT_DATE),
+	financial_products: [],
+	children: [],
+}));
+for (const entry of PRODUCT_CATEGORIES) {
+	const doc = need(productCategories, entry.slug, 'product category', 'product categories');
+	const parent = entry.parent
+		? need(
+				productCategories,
+				entry.parent,
+				'product category',
+				`product category "${entry.slug}"`,
+			)
+		: null;
+	if (parent?.values.parent) {
+		fail(`product category "${entry.slug}" is nested more than two levels (CMS-28)`);
+	}
+	doc.values.parent = parent;
+	if (parent) {
+		push(parent, 'children', doc);
+	}
+}
+
+const providers = collection('providers', PROVIDERS, (entry) => ({
+	name: entry.name,
+	slug: entry.slug,
+	logo: mediaOf(entry.logo),
+	legal_name: entry.legal_name,
+	regulator: entry.regulator,
+	license_number: entry.license_number,
+	website_url: demoUrl(`provider "${entry.slug}"`, 'website_url', entry.website_url),
+	description: entry.description,
+	seo: null,
+	...stamps(CONTENT_DATE),
+	financial_products: [],
+}));
+
+const financialProducts = collection('financial-products', FINANCIAL_PRODUCTS, (entry) => {
+	const owner = `financial product "${entry.slug}"`;
+	if (Number.isNaN(Date.parse(entry.data_checked_at))) {
+		fail(`${owner} has an invalid data_checked_at`);
+	}
+	return {
+		title: entry.title,
+		slug: entry.slug,
+		min_income: entry.min_income ?? null,
+		annual_fee: entry.annual_fee ?? null,
+		features: entry.features,
+		apply_url: demoUrl(owner, 'apply_url', entry.apply_url),
+		image: mediaOf(entry.image),
+		summary: entry.summary,
+		seo: seoOf(entry.seo),
+		data_checked_at: entry.data_checked_at,
+		source_url: demoUrl(owner, 'source_url', entry.source_url),
+		is_partner: entry.is_partner ?? false,
+		loan_specs: loanSpecsOf(owner, entry.loan_specs),
+		...stamps(CONTENT_DATE),
+	};
+});
+for (const entry of FINANCIAL_PRODUCTS) {
+	const owner = `financial product "${entry.slug}"`;
+	const doc = need(financialProducts, entry.slug, 'financial product', 'financial products');
+	const section = need(productCategories, entry.product_category, 'product category', owner);
+	if ((section.values.children as Doc[]).length > 0) {
+		fail(`${owner} sits in the group "${entry.product_category}"; use one of its sections`);
+	}
+	const owningProvider = need(providers, entry.provider, 'provider', owner);
+	doc.values.product_category = section;
+	doc.values.provider = owningProvider;
+	push(section, 'financial_products', doc);
+	push(owningProvider, 'financial_products', doc);
+}
 
 // ---- Single types --------------------------------------------------------------
 
@@ -398,29 +572,6 @@ for (const entry of STATIC_PAGES) {
 	checkLinks(`static page "${entry.slug}"`, entry.body);
 }
 
-/**
- * An interview must read as a dialogue led by its author (ADR-0020): at least
- * one turn named like the author and one guest turn. The renderer would fall
- * back to plain text; for the hardcoded content that is a mistake, so it stops.
- */
-function checkDialogue(entry: ArticleEntry): void {
-	const owner = `interview "${entry.slug}"`;
-	const author = WRITER_PROFILES.find((profile) => profile.slug === entry.author);
-	const dialogue = toDialogue(entry.content, author?.full_name ?? null);
-	if (!dialogue) {
-		fail(`${owner} has no interviewer and guest turns ("**Name:** text" paragraphs)`);
-	}
-	if (!dialogue.interviewerIsAuthor) {
-		fail(`${owner} has no turn named after its author "${author?.full_name ?? entry.author}"`);
-	}
-}
-
-for (const entry of ARTICLES) {
-	if (entry.article_type === 'interview') {
-		checkDialogue(entry);
-	}
-}
-
 // ---- Exports -------------------------------------------------------------------------
 
 /** Documents per collection type, in file order (Strapi's default order is by id). */
@@ -431,6 +582,9 @@ export const COLLECTIONS: Record<string, readonly Doc[]> = {
 	'writer-profiles': [...writerProfiles.values()],
 	'stock-tickers': [...stockTickers.values()],
 	'static-pages': [...staticPages.values()],
+	'financial-products': [...financialProducts.values()],
+	'product-categories': [...productCategories.values()],
+	providers: [...providers.values()],
 };
 
 /** The document of each single type. */

@@ -11,11 +11,9 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-gaya-hidup',
 		primary_category: 'gaya-hidup-anak',
-		author: 'penulis-contoh-satu',
-		reviewer: 'peninjau-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['keluarga-muda', 'anggaran-bulanan'],
 		first_published_at: '2026-09-16T04:00:00.000Z',
-		last_reviewed_at: '2026-09-17T04:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Biaya tahun pertama anak tidak hanya kebutuhan harian, tetapi juga kesehatan, perlengkapan, dan perubahan penghasilan keluarga.',
@@ -121,11 +119,9 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-gaya-hidup',
 		primary_category: 'gaya-hidup-rumah',
-		author: 'penulis-contoh-dua',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['anggaran-bulanan'],
 		first_published_at: '2026-09-14T18:00:00.000Z',
-		last_reviewed_at: '2026-09-15T18:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Perabot dapat dibeli tanpa utang dengan menabung bertahap sesuai prioritas ruangan dan kebutuhan.',
@@ -222,17 +218,17 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 			'Saldo dompet digital lebih aman jika kode rahasia dijaga, notifikasi diaktifkan, dan saldo besar tidak disimpan terlalu lama.',
 		article_type: 'standard',
 		featured_image: 'kategori-gaya-hidup',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=hMhYKTqkODM',
+		video: {
 			title: 'Penipuan Kuras Rekening Lewat Social Engineering',
-			channel_name: 'CNN Indonesia',
-			uploaded_at: '2023-01-31T06:00:12.000Z',
-			duration_seconds: 461,
+			channel: 'CNN Indonesia',
+			uploadedAt: '2023-01-31T06:00:12.000Z',
+			duration: 'PT7M41S',
 			caption:
 				'CNN Indonesia menjelaskan modus rekayasa sosial (social engineering): penipuan yang memanipulasi korban lewat pesan dan media sosial sampai rekening atau saldonya terkuras.',
+			embedUrl: 'https://www.youtube.com/embed/hMhYKTqkODM',
 		},
 		primary_category: 'gaya-hidup-nontunai',
-		author: 'penulis-contoh-tiga',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-dua',
 		tags: ['nontunai'],
 		first_published_at: '2026-09-13T08:00:00.000Z',
@@ -357,11 +353,9 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-gaya-hidup',
 		primary_category: 'gaya-hidup-hewan',
-		author: 'penulis-contoh-satu',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['anggaran-bulanan'],
 		first_published_at: '2026-09-11T22:00:00.000Z',
-		last_reviewed_at: '2026-09-12T22:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Anggaran hewan peliharaan mencakup makanan, perawatan rutin, kesehatan, dan dana cadangan untuk kebutuhan mendadak.',
@@ -457,17 +451,17 @@ export const GAYA_HIDUP_ARTICLES: ArticleEntry[] = [
 			'Liburan tanpa paylater dimulai dengan menentukan anggaran total dan menabung khusus beberapa bulan sebelumnya. Artikel ini merangkum dasar-dasarnya beserta langkah praktis yang bisa langsung dicoba.',
 		article_type: 'standard',
 		featured_image: 'kategori-gaya-hidup',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=OwPOEbwaaBI',
+		video: {
 			title: 'Liburan Asik, Anti Dompet Tercekik',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2024-08-24T00:01:20.000Z',
-			duration_seconds: 1016,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2024-08-24T00:01:20.000Z',
+			duration: 'PT16M56S',
 			caption:
 				'Program Investime CNBC Indonesia bersama CEO Antavaya membahas mengapa harga tiket pesawat naik saat permintaan tinggi dan cara berlibur tanpa membebani keuangan.',
+			embedUrl: 'https://www.youtube.com/embed/OwPOEbwaaBI',
 		},
 		primary_category: 'gaya-hidup-lainnya',
-		author: 'penulis-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['nontunai', 'dana-darurat'],
 		first_published_at: '2026-09-10T12:00:00.000Z',
 		key_takeaways: [

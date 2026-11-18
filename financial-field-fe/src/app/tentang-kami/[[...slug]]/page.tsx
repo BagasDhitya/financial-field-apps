@@ -2,8 +2,10 @@ import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 import { JsonLd } from '@/components/JsonLd/JsonLd';
+import { ReviewerList } from '@/components/ReviewerList/ReviewerList';
 import { blocksToPlainText } from '@/lib/blocks';
 import { HOME_CRUMB, toSchemaCrumbs } from '@/lib/breadcrumbs';
+import { getReviewers } from '@/lib/content/authors';
 import { getStaticPage } from '@/lib/content/pages';
 import { env } from '@/lib/env';
 import { routes } from '@/lib/routes';
@@ -35,7 +37,8 @@ async function load(segments: string[] = []) {
 		notFound();
 	}
 	const page = await getStaticPage(slug);
-	if (!page) {
+	// Contact and the glossary have their own URLs; never a second copy here.
+	if (!page || page.group === 'referensi' || slug === 'hubungi-kami') {
 		notFound();
 	}
 	const path = slug === ABOUT_SLUG ? routes.about() : routes.about(slug);
@@ -59,6 +62,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function AboutPage({ params }: Props) {
 	const { slug } = await params;
 	const { page, path, isIndex } = await load(slug);
+	// The Redaksi page lists the reviewers, each linking to their profile (ADR-0022).
+	const reviewers = page.slug === 'redaksi' ? await getReviewers() : [];
 	const trail = isIndex
 		? [HOME_CRUMB, { label: page.title, href: path }]
 		: [
@@ -80,7 +85,9 @@ export default async function AboutPage({ params }: Props) {
 					description: page.seo?.metaDescription,
 				})}
 			/>
-			<StaticPageView page={page} breadcrumbs={trail} siteOrigin={env.siteUrl} />
+			<StaticPageView page={page} breadcrumbs={trail} siteOrigin={env.siteUrl}>
+				{reviewers.length > 0 ? <ReviewerList reviewers={reviewers} /> : null}
+			</StaticPageView>
 		</>
 	);
 }

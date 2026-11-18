@@ -2,15 +2,16 @@ import { cacheTags } from '@/lib/cms/cache-tags';
 import { hasCapability } from '@/lib/cms/capabilities';
 import { cmsFetch, type CmsCollection } from '@/lib/cms/client';
 import { endpoints } from '@/lib/cms/endpoints';
-import { mapAuthor } from '@/lib/cms/mappers/author';
+import { mapAuthor, mapAuthorSummary } from '@/lib/cms/mappers/author';
 import { seoPopulate } from '@/lib/cms/queries/articles';
 import type { StrapiAuthor } from '@/lib/cms/strapi-types';
 import { REVALIDATE } from '@/lib/revalidate';
-import type { Author } from '@/types';
+import type { Author, AuthorSummary } from '@/types';
 
 /**
- * Author by slug, or null. `same_as` is requested only with the `author-
- * profile` capability.
+ * A writer profile by slug, or null: the reviewer pages use it (ADR-0022).
+ * `same_as` is requested only with the `author-profile` capability; the
+ * profile's text fields arrive with the scalars once the CMS has them.
  */
 export async function getAuthorBySlug(slug: string): Promise<Author | null> {
 	const result = await cmsFetch<CmsCollection<StrapiAuthor>>({
@@ -33,15 +34,22 @@ export async function getAuthorBySlug(slug: string): Promise<Author | null> {
 }
 
 /**
- * Every author slug for the sitemap (the first 100, enough for the current
- * team).
+ * Everyone who reviewed at least one article, A–Z: the reviewers listed on the
+ * Redaksi page (ADR-0022). `article` is the CMS's inverse of Article
+ * `reviewer`.
  */
-export async function getAllAuthorSlugs(): Promise<string[]> {
-	const result = await cmsFetch<CmsCollection<StrapiAuthor>>({
+export async function getReviewers(): Promise<AuthorSummary[]> {
+	const result = await cmsFetch<CmsCollection<StrapiAuthor & { article?: unknown[] | null }>>({
 		path: endpoints.authors,
-		query: { fields: ['slug'], pagination: { limit: 100 } },
+		query: {
+			populate: { avatar: true, article: { fields: ['slug'] } },
+			pagination: { limit: 100 },
+		},
 		tags: [cacheTags.authors()],
-		revalidate: REVALIDATE.sitemap,
+		revalidate: REVALIDATE.archive,
 	});
-	return result.data.flatMap((entry) => (entry.slug ? [entry.slug] : []));
+	return result.data
+		.filter((entry) => entry.slug && (entry.article ?? []).length > 0)
+		.map(mapAuthorSummary)
+		.sort((a, b) => a.fullName.localeCompare(b.fullName, 'id'));
 }

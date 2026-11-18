@@ -6,9 +6,24 @@ import { checker, writer } from '@/components/__fixtures__/domain';
 
 import { Byline } from './Byline';
 
-describe('Byline (REQ-ART-002)', () => {
-	it('shows the reviewer only with a recorded fact-check', () => {
-		const { rerender } = render(
+describe('Byline (REQ-ART-002, ADR-0022)', () => {
+	it('shows the writing team as plain text, with no link', () => {
+		render(
+			<Byline
+				author={writer}
+				reviewer={null}
+				lastReviewedAt={null}
+				publishedAt="2026-10-01T03:00:00Z"
+				contentUpdatedAt={null}
+				readingMinutes={4}
+			/>,
+		);
+		expect(screen.getByText('Tim Redaksi Contoh')).toBeInTheDocument();
+		expect(screen.queryByRole('link')).toBeNull();
+	});
+
+	it('links the reviewer to their profile, and dates the check only when recorded', () => {
+		const { container, rerender } = render(
 			<Byline
 				author={writer}
 				reviewer={checker}
@@ -21,8 +36,9 @@ describe('Byline (REQ-ART-002)', () => {
 		expect(screen.getByText('Ditinjau oleh')).toBeInTheDocument();
 		expect(screen.getByRole('link', { name: 'Contoh Peninjau' })).toHaveAttribute(
 			'href',
-			'/penulis/contoh-peninjau',
+			'/peninjau/contoh-peninjau',
 		);
+		expect(container.textContent).toMatch(/Ditinjau \d/);
 
 		rerender(
 			<Byline
@@ -34,7 +50,8 @@ describe('Byline (REQ-ART-002)', () => {
 				readingMinutes={4}
 			/>,
 		);
-		expect(screen.queryByText('Ditinjau oleh')).toBeNull();
+		expect(screen.getByText('Ditinjau oleh')).toBeInTheDocument();
+		expect(container.textContent).not.toMatch(/Ditinjau \d/);
 	});
 
 	it('shows Diperbarui only a day or more after publication', () => {

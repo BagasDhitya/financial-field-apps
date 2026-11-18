@@ -10,5 +10,5 @@ export const schemaIds = {
 	article: (url: string) => `${url}#article`,
 	breadcrumb: (url: string) => `${url}#breadcrumb`,
 	faq: (url: string) => `${url}#faq`,
-	person: (origin: string, slug: string) => `${trimSlash(origin)}/penulis/${slug}#person`,
+	person: (origin: string, slug: string) => `${trimSlash(origin)}/peninjau/${slug}#person`,
 } as const;

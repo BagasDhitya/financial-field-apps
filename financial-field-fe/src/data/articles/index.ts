@@ -2,6 +2,7 @@ import type { ArticleEntry } from '../types';
 
 import { ASURANSI_ARTICLES } from './asuransi';
 import { BISNIS_ARTICLES } from './bisnis';
+import { EDUKASI_PANDUAN_ARTICLES } from './edukasi-panduan';
 import { GAYA_HIDUP_ARTICLES } from './gaya-hidup';
 import { HARI_TUA_ARTICLES } from './hari-tua';
 import { INVESTASI_ARTICLES } from './investasi';
@@ -32,4 +33,5 @@ export const ARTICLES: ArticleEntry[] = [
 	...KARIER_ARTICLES,
 	...KARTU_KREDIT_ARTICLES,
 	...BISNIS_ARTICLES,
+	...EDUKASI_PANDUAN_ARTICLES,
 ];

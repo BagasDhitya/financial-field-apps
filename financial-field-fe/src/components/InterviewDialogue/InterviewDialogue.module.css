@@ -1,0 +1,139 @@
+/*
+ * Interview dialogue (REQ-ART-013): `left` turns in soft pink, `right` turns
+ * in soft orange. Square bubbles with a square-cut pointer toward the avatar
+ * (I1); 1px border in the stronger tint (I2). The tints are backgrounds only;
+ * text stays ink.
+ */
+.dialogue {
+	--avatar: 2.5rem;
+	--pointer: 0.625rem;
+
+	display: grid;
+	gap: var(--space-2);
+	max-width: var(--reading-max);
+	margin-top: var(--space-4);
+	font-size: var(--text-body);
+	line-height: 1.7;
+	color: var(--color-ink);
+}
+
+.turn {
+	display: flex;
+	gap: var(--space-2);
+	align-items: flex-start;
+}
+
+.left {
+	--fill: var(--color-dialogue-left);
+	--line: var(--color-dialogue-left-line);
+}
+
+.right {
+	--fill: var(--color-dialogue-right);
+	--line: var(--color-dialogue-right-line);
+
+	flex-direction: row-reverse;
+}
+
+.avatar {
+	flex: none;
+	display: block;
+	width: var(--avatar);
+	height: var(--avatar);
+	overflow: hidden;
+	border: var(--stroke-rule) solid var(--line);
+	background: var(--line);
+}
+
+.initials {
+	display: flex;
+	width: 100%;
+	height: 100%;
+	align-items: center;
+	justify-content: center;
+	color: var(--color-ink);
+	font-size: 0.875rem;
+	font-weight: 700;
+	letter-spacing: 0.05em;
+}
+
+.bubble {
+	/* The turn's words are reading text (ADR-0023); the speaker line keeps level 1. */
+	font-family: var(--font-text);
+	position: relative;
+	min-width: 0;
+	max-width: min(100%, 34rem);
+	padding: var(--space-2) var(--space-3);
+	border: var(--stroke-rule) solid var(--line);
+	background: var(--fill);
+}
+
+.bubble > p {
+	margin: 0;
+}
+
+.bubble > p + p {
+	margin-top: var(--space-1);
+}
+
+/* The pointer: two stacked triangles, the border colour under the fill. */
+.bubble::before,
+.bubble::after {
+	position: absolute;
+	top: calc(var(--avatar) / 2 - var(--pointer));
+	content: '';
+	border-block: var(--pointer) solid transparent;
+}
+
+.left .bubble::before {
+	left: calc(var(--pointer) * -1);
+	border-right: var(--pointer) solid var(--line);
+}
+
+.left .bubble::after {
+	left: calc(var(--pointer) * -1 + 1px);
+	border-right: var(--pointer) solid var(--fill);
+}
+
+.right .bubble::before {
+	right: calc(var(--pointer) * -1);
+	border-left: var(--pointer) solid var(--line);
+}
+
+.right .bubble::after {
+	right: calc(var(--pointer) * -1 + 1px);
+	border-left: var(--pointer) solid var(--fill);
+}
+
+.speaker {
+	font-family: var(--font-display);
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0 var(--space-1);
+	align-items: baseline;
+	margin-bottom: 0.25rem;
+	line-height: 1.4;
+}
+
+.speaker strong {
+	font-weight: 700;
+}
+
+.role {
+	color: var(--ink-66);
+}
+
+@media (max-width: 639px) {
+	.dialogue {
+		--avatar: 2rem;
+		--pointer: 0.5rem;
+	}
+
+	.turn {
+		gap: var(--space-1);
+	}
+
+	.bubble {
+		padding: var(--space-1) var(--space-2);
+	}
+}

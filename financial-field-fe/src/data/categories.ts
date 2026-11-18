@@ -1,10 +1,11 @@
 import type { CategoryEntry } from './types';
 
 /**
- * The topic tree (PRP-0002.p1 §S4.1): 13 top-level categories, each followed
- * by its sub-categories, 59 in all. The order here is the menu order: the
- * local API sets `nav_order` from it. Labels are working translations of the
- * FF JP topics until the client confirms them (OQ-06).
+ * The topic tree (PRP-0002.p1 §S4.1): 13 news topics under "Berita", then
+ * Edukasi and Panduan (ADR-0022), each followed by its sub-categories, 63 in
+ * all. The order here is the menu order: the local API sets `nav_order` from
+ * it. Labels are working translations of the FF JP topics until the client
+ * confirms them (OQ-06).
  */
 export const CATEGORIES: CategoryEntry[] = [
 	{
@@ -406,5 +407,32 @@ export const CATEGORIES: CategoryEntry[] = [
 		description:
 			'Kumpulan artikel tentang topik bisnis lainnya: penjelasan dasar, langkah praktis, contoh perhitungan sederhana, dan kesalahan yang sering terjadi.',
 		parent_category: 'bisnis',
+	},
+	// Edukasi and Panduan (ADR-0022): their own menu entries, not part of Berita.
+	{
+		slug: 'edukasi',
+		name: 'Edukasi',
+		description:
+			'Penjelasan dasar tentang produk dan istilah keuangan: cara kerjanya, biayanya, dan hal yang perlu dipahami sebelum memakainya.',
+	},
+	{
+		slug: 'edukasi-pinjaman-kredit',
+		name: 'Pinjaman Kredit',
+		description:
+			'Penjelasan dasar tentang pinjaman dan kredit: cara bunga dihitung, biaya di luar bunga, riwayat kredit, dan pinjaman beragunan.',
+		parent_category: 'edukasi',
+	},
+	{
+		slug: 'panduan',
+		name: 'Panduan',
+		description:
+			'Langkah demi langkah untuk keputusan keuangan sehari-hari, lengkap dengan contoh perhitungan dan daftar periksa.',
+	},
+	{
+		slug: 'panduan-pinjaman-kredit',
+		name: 'Pinjaman Kredit',
+		description:
+			'Panduan praktis seputar pinjaman dan kredit: menghitung cicilan yang aman, membandingkan penawaran, dan menyiapkan dokumen.',
+		parent_category: 'panduan',
 	},
 ];

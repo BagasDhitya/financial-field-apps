@@ -1,4 +1,4 @@
-import { h2, link, ol, p, quote, say, ul } from '../blocks';
+import { h2, link, ol, p, quote, ul } from '../blocks';
 import type { ArticleEntry } from '../types';
 
 /** Articles in Bisnis and its sub-categories (PRP-0002.p1 §S4.4). */
@@ -10,17 +10,17 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 			'Pilihan modal usaha kecil bergantung pada besar kebutuhan, kecepatan, dan seberapa besar kendali yang ingin dipertahankan.',
 		article_type: 'standard',
 		featured_image: 'kategori-bisnis',
-		featured_video: {
-			url: 'https://www.youtube.com/watch?v=PHAuC9Jq6AA',
+		video: {
 			title: 'Isu UMKM Sulit Dapat KUR, Menkeu Purbaya Bakal Investigasi',
-			channel_name: 'CNBC Indonesia',
-			uploaded_at: '2025-11-05T08:30:12.000Z',
-			duration_seconds: 168,
+			channel: 'CNBC Indonesia',
+			uploadedAt: '2025-11-05T08:30:12.000Z',
+			duration: 'PT2M48S',
 			caption:
 				'Berita CNBC Indonesia: Menteri Keuangan akan menyelidiki keluhan UMKM yang sulit mengakses Kredit Usaha Rakyat (KUR), salah satunya karena persyaratan agunan.',
+			embedUrl: 'https://www.youtube.com/embed/PHAuC9Jq6AA',
 		},
 		primary_category: 'bisnis-pembiayaan',
-		author: 'penulis-contoh-satu',
+		author: 'tim-redaksi',
 		reviewer: 'peninjau-contoh-satu',
 		tags: ['umkm'],
 		first_published_at: '2026-08-20T06:00:00.000Z',
@@ -146,11 +146,9 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 		article_type: 'standard',
 		featured_image: 'kategori-bisnis',
 		primary_category: 'bisnis-pemasaran',
-		author: 'penulis-contoh-tiga',
-		reviewer: 'peninjau-contoh-dua',
+		author: 'tim-redaksi',
 		tags: ['umkm'],
 		first_published_at: '2026-08-18T20:00:00.000Z',
-		last_reviewed_at: '2026-08-19T20:00:00.000Z',
 		key_takeaways: [
 			{
 				text: 'Usaha rumahan dapat dipasarkan dengan anggaran minim melalui pelanggan pertama, ulasan, dan konsistensi konten.',
@@ -261,11 +259,9 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 		article_type: 'interview',
 		featured_image: 'kategori-bisnis',
 		primary_category: 'bisnis-lainnya',
-		author: 'penulis-contoh-dua',
-		reviewer: 'peninjau-contoh-satu',
+		author: 'tim-redaksi',
 		tags: ['umkm'],
 		first_published_at: '2026-08-17T10:00:00.000Z',
-		last_reviewed_at: '2026-08-18T10:00:00.000Z',
 		key_takeaways: [
 			{ text: 'Buka rekening khusus usaha dan arahkan semua pembayaran pelanggan ke sana.' },
 			{
@@ -279,74 +275,99 @@ export const BISNIS_ARTICLES: ArticleEntry[] = [
 			p(
 				'Narasumber Contoh Tiga memulai usaha katering dari dapur rumahnya lima tahun lalu. Pada tahun kedua pesanan ramai, tetapi uangnya selalu terasa habis. Kami berbincang tentang langkah yang akhirnya membuat keuangan usahanya lebih jelas. Nama narasumber dan angka dalam wawancara ini fiktif; jawaban telah disunting agar ringkas.',
 			),
-			say(
-				'Penulis Contoh Dua',
-				'Apa tanda bahwa uang pribadi dan uang usaha Anda tercampur?',
-			),
-			say(
-				'Narasumber Contoh Tiga',
-				'Saya tidak bisa menjawab pertanyaan sederhana: bulan ini usaha saya untung atau rugi? Uang belanja bahan, uang sekolah anak, dan uang dari pelanggan masuk dan keluar dari rekening yang sama.',
-			),
-			p(
-				'Saya merasa usahanya ramai, tetapi tabungan keluarga tidak bertambah. Ternyata sebagian keuntungan habis untuk kebutuhan rumah tanpa pernah tercatat.',
-			),
-			say('Penulis Contoh Dua', 'Langkah pertama apa yang Anda ambil?'),
-			say(
-				'Narasumber Contoh Tiga',
-				'Membuka rekening kedua, khusus untuk usaha. Semua pembayaran pelanggan, termasuk lewat QRIS, saya arahkan ke rekening itu. Belanja bahan, gas, dan kemasan juga dibayar dari sana.',
-			),
-			p(
-				'Butuh disiplin di bulan-bulan awal, karena kebiasaan lama selalu menggoda. Setelah tiga bulan, saya bisa melihat dengan jelas berapa uang yang masuk dan ke mana perginya.',
-			),
-			say('Penulis Contoh Dua', 'Lalu bagaimana Anda mengambil uang untuk kebutuhan rumah?'),
-			say(
-				'Narasumber Contoh Tiga',
-				'Saya menggaji diri sendiri. Setiap tanggal satu, sejumlah tetap dipindahkan dari rekening usaha ke rekening pribadi, misalnya Rp4 juta, angka fiktif. Kalau laba bulan itu lebih besar, kelebihannya tetap di rekening usaha sebagai cadangan atau untuk membeli peralatan.',
-			),
-			p(
-				'Dengan cara ini, keluarga punya penghasilan yang bisa diperkirakan, dan usaha tidak kekurangan modal kerja saat pesanan sepi.',
-			),
-			say('Penulis Contoh Dua', 'Bagaimana Anda mencatat keuangan usaha?'),
-			say(
-				'Narasumber Contoh Tiga',
-				'Awalnya di buku tulis, sekarang di lembar kerja sederhana di ponsel. Setiap malam saya catat penerimaan dan pengeluaran hari itu, lengkap dengan foto nota bila ada. Waktunya kurang dari sepuluh menit.',
-			),
-			p(
-				'Catatan ini juga berguna ketika saya mengajukan pembiayaan usaha. Pemberi pinjaman ingin melihat arus kas, bukan sekadar cerita bahwa usaha sedang ramai.',
-			),
-			say('Penulis Contoh Dua', 'Bagaimana dengan pajak usaha Anda?'),
-			say(
-				'Narasumber Contoh Tiga',
-				'Sejak omzet mulai stabil, saya mendaftarkan usaha dan mencari tahu kewajiban pajak untuk usaha kecil. Karena uang usaha sudah terpisah, menghitung omzet bulanan menjadi mudah: cukup lihat mutasi rekening usaha dan catatan harian.',
-			),
-			p(
-				'Saran saya, tanyakan langsung ke kantor pajak terdekat atau saluran resmi DJP tentang aturan yang berlaku untuk usaha Anda, karena ketentuannya bisa berubah.',
-			),
-			say(
-				'Penulis Contoh Dua',
-				'Apa kesalahan yang pernah Anda buat setelah memisahkan rekening?',
-			),
-			say(
-				'Narasumber Contoh Tiga',
-				'Meminjam dari rekening usaha untuk keperluan rumah, lalu lupa mengembalikannya. Sekarang setiap pinjaman seperti itu saya catat sebagai utang pribadi kepada usaha, lengkap dengan tanggal pengembaliannya.',
-			),
-			say('Penulis Contoh Dua', 'Apa saran Anda untuk pemilik usaha kecil lain?'),
-			say(
-				'Narasumber Contoh Tiga',
-				'Jangan menunggu usaha besar untuk mulai rapi. Justru saat masih kecil, memisahkan uang paling mudah dilakukan. Mulailah dengan satu rekening, satu catatan harian, dan satu tanggal gajian untuk diri sendiri.',
-			),
-			h2('Baca juga'),
-			ul(
-				link(
-					'/artikel/modal-usaha-kecil',
-					'Modal usaha kecil: menabung, meminjam, atau mencari mitra?',
-				),
-				link(
-					'/artikel/mencatat-penghasilan-kerja-sampingan',
-					'Kerja sampingan: mencatat penghasilan tambahan dengan rapi',
-				),
-				link('/kategori/bisnis', 'Semua artikel di topik Bisnis'),
-			),
+		],
+		interview_dialogues: [
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa tanda bahwa uang pribadi dan uang usaha Anda tercampur?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Tiga',
+				speaker_role: 'Pemilik usaha katering',
+				message:
+					'Saya tidak bisa menjawab pertanyaan sederhana: bulan ini usaha saya untung atau rugi? Uang belanja bahan, uang sekolah anak, dan uang dari pelanggan masuk dan keluar dari rekening yang sama.\n\nSaya merasa usahanya ramai, tetapi tabungan keluarga tidak bertambah. Ternyata sebagian keuntungan habis untuk kebutuhan rumah tanpa pernah tercatat.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Langkah pertama apa yang Anda ambil?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Tiga',
+				speaker_role: 'Pemilik usaha katering',
+				message:
+					'Membuka rekening kedua, khusus untuk usaha. Semua pembayaran pelanggan, termasuk lewat QRIS, saya arahkan ke rekening itu. Belanja bahan, gas, dan kemasan juga dibayar dari sana.\n\nButuh disiplin di bulan-bulan awal, karena kebiasaan lama selalu menggoda. Setelah tiga bulan, saya bisa melihat dengan jelas berapa uang yang masuk dan ke mana perginya.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Lalu bagaimana Anda mengambil uang untuk kebutuhan rumah?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Tiga',
+				speaker_role: 'Pemilik usaha katering',
+				message:
+					'Saya menggaji diri sendiri. Setiap tanggal satu, sejumlah tetap dipindahkan dari rekening usaha ke rekening pribadi, misalnya Rp4 juta, angka fiktif. Kalau laba bulan itu lebih besar, kelebihannya tetap di rekening usaha sebagai cadangan atau untuk membeli peralatan.\n\nDengan cara ini, keluarga punya penghasilan yang bisa diperkirakan, dan usaha tidak kekurangan modal kerja saat pesanan sepi.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana Anda mencatat keuangan usaha?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Tiga',
+				speaker_role: 'Pemilik usaha katering',
+				message:
+					'Awalnya di buku tulis, sekarang di lembar kerja sederhana di ponsel. Setiap malam saya catat penerimaan dan pengeluaran hari itu, lengkap dengan foto nota bila ada. Waktunya kurang dari sepuluh menit.\n\nCatatan ini juga berguna ketika saya mengajukan pembiayaan usaha. Pemberi pinjaman ingin melihat arus kas, bukan sekadar cerita bahwa usaha sedang ramai.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Bagaimana dengan pajak usaha Anda?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Tiga',
+				speaker_role: 'Pemilik usaha katering',
+				message:
+					'Sejak omzet mulai stabil, saya mendaftarkan usaha dan mencari tahu kewajiban pajak untuk usaha kecil. Karena uang usaha sudah terpisah, menghitung omzet bulanan menjadi mudah: cukup lihat mutasi rekening usaha dan catatan harian.\n\nSaran saya, tanyakan langsung ke kantor pajak terdekat atau saluran resmi DJP tentang aturan yang berlaku untuk usaha Anda, karena ketentuannya bisa berubah.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa kesalahan yang pernah Anda buat setelah memisahkan rekening?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Tiga',
+				speaker_role: 'Pemilik usaha katering',
+				message:
+					'Meminjam dari rekening usaha untuk keperluan rumah, lalu lupa mengembalikannya. Sekarang setiap pinjaman seperti itu saya catat sebagai utang pribadi kepada usaha, lengkap dengan tanggal pengembaliannya.',
+				position: 'right',
+			},
+			{
+				speaker_name: 'Redaksi',
+				speaker_role: 'Financial Field Indonesia',
+				message: 'Apa saran Anda untuk pemilik usaha kecil lain?',
+				position: 'left',
+			},
+			{
+				speaker_name: 'Narasumber Contoh Tiga',
+				speaker_role: 'Pemilik usaha katering',
+				message:
+					'Jangan menunggu usaha besar untuk mulai rapi. Justru saat masih kecil, memisahkan uang paling mudah dilakukan. Mulailah dengan satu rekening, satu catatan harian, dan satu tanggal gajian untuk diri sendiri.',
+				position: 'right',
+			},
 		],
 	},
 ];

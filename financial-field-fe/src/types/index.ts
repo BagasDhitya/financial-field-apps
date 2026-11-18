@@ -5,6 +5,7 @@ export type {
 	ArticleType,
 	ArticleVideo,
 	Correction,
+	DialogueTurn,
 	FaqItem,
 	Source,
 	Sponsor,
@@ -12,8 +13,16 @@ export type {
 } from './article';
 export type { Author, AuthorSummary } from './author';
 export type { Category, CategoryNode, CategorySummary } from './category';
+export type {
+	FinancialProduct,
+	LoanSpecs,
+	ProductSection,
+	Provider,
+	ProviderSummary,
+	SectionSummary,
+} from './comparison';
 export type { MediaAsset } from './media';
-export type { MenuItem, SiteNavigation } from './navigation';
+export type { MainMenuEntry, MenuGroup, MenuItem, MenuLink, SiteNavigation } from './navigation';
 export type { StaticPage } from './page';
 export type { Paginated } from './pagination';
 export type { SeoFields } from './seo';

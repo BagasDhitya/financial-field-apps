@@ -14,7 +14,10 @@ export function mapStaticPage(entry: StrapiStaticPage): StaticPage {
 		id: entry.documentId,
 		slug: entry.slug ?? '',
 		title: entry.title ?? '',
-		group: entry.group === 'tentang-kami' || entry.group === 'legal' ? entry.group : null,
+		group:
+			entry.group === 'tentang-kami' || entry.group === 'legal' || entry.group === 'referensi'
+				? entry.group
+				: null,
 		body: resolveBodyMedia(entry.body ?? []),
 		seo: mapSeo(entry.seo),
 		updatedAt: entry.updatedAt ?? null,

@@ -1,0 +1,32 @@
+.root {
+	display: block;
+	flex: 0 0 auto;
+	border: var(--stroke-rule) solid var(--color-ink);
+	background: var(--color-paper);
+}
+
+.small {
+	width: 2.5rem;
+}
+
+.large {
+	width: 6rem;
+}
+
+.initials {
+	display: grid;
+	aspect-ratio: 1 / 1;
+	place-items: center;
+	background: var(--blue-06);
+	color: var(--color-ff-blue);
+	font-weight: 800;
+	letter-spacing: 0.04em;
+}
+
+.small .initials {
+	font-size: 0.875rem;
+}
+
+.large .initials {
+	font-size: 1.75rem;
+}

@@ -6,11 +6,6 @@
 	border: var(--stroke-card) solid var(--color-ink);
 }
 
-.avatar {
-	flex: 0 0 4.5rem;
-	border: var(--stroke-rule) solid var(--color-ink);
-}
-
 .text {
 	display: grid;
 	gap: 0.25rem;
@@ -34,4 +29,13 @@
 
 .name a:hover {
 	text-decoration: underline;
+}
+
+.more {
+	font-size: var(--text-meta);
+	font-weight: 600;
+}
+
+.more a {
+	color: var(--color-ff-blue);
 }

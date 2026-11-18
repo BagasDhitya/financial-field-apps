@@ -18,11 +18,6 @@
 	gap: var(--space-1);
 }
 
-.avatar {
-	flex: 0 0 2.5rem;
-	border: var(--stroke-rule) solid var(--color-ink);
-}
-
 .line {
 	margin: 0;
 	font-size: var(--text-ui);
@@ -30,6 +25,10 @@
 
 .role {
 	color: var(--ink-66);
+}
+
+.team {
+	font-weight: 600;
 }
 
 .name {

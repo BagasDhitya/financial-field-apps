@@ -1,0 +1,38 @@
+.root {
+	display: grid;
+	gap: 0.375rem;
+	padding: var(--space-2);
+	border: var(--stroke-rule) solid var(--color-ff-blue);
+	border-left-width: var(--stroke-frame);
+	background: rgb(0 58 160 / 0.06);
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	gap: 0.375rem;
+	margin: 0;
+	color: var(--color-ff-blue);
+	font-size: var(--text-kicker);
+	font-weight: 700;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.text {
+	margin: 0;
+	font-size: var(--text-ui);
+	line-height: 1.55;
+}
+
+.name {
+	font-weight: 600;
+	color: var(--color-ff-blue);
+}
+
+.text a {
+	color: var(--color-ff-blue);
+	font-weight: 600;
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+}

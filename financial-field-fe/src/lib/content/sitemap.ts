@@ -3,6 +3,12 @@ import { ARTICLES_PER_SITEMAP, latestDate, type SitemapUrl } from '@/lib/sitemap
 
 import { getArticleIndex, type ArticleIndexEntry } from './articles';
 import { getAllCategoryPaths } from './categories';
+import {
+	getComparisonSections,
+	getProviders,
+	getProductsInSection,
+	isComparisonEnabled,
+} from './comparison';
 import { getStaticPageEntries } from './pages';
 import { isIndexableTag } from './tags';
 
@@ -10,12 +16,19 @@ export type SitemapData = {
 	articles: ArticleIndexEntry[];
 	categories: { slug: string; parentSlug: string | null }[];
 	pages: { slug: string; updatedAt: string | null }[];
+	/** Null while comparison is off: no comparison file at all (PRP-0002.p3 T31). */
+	comparison: {
+		sections: string[];
+		products: { slug: string; checkedAt: string | null }[];
+		providers: string[];
+	} | null;
 };
 
 export type SitemapFile = { name: string; urls: SitemapUrl[] };
 
 const ABOUT_SLUG = 'tentang-kami';
 const CONTACT_SLUG = 'hubungi-kami';
+const GLOSSARY_SLUG = 'kamus-keuangan';
 
 function staticPagePath(slug: string): string {
 	if (slug === ABOUT_SLUG) {
@@ -23,6 +36,9 @@ function staticPagePath(slug: string): string {
 	}
 	if (slug === CONTACT_SLUG) {
 		return routes.contact();
+	}
+	if (slug === GLOSSARY_SLUG) {
+		return routes.glossary();
 	}
 	return routes.about(slug);
 }
@@ -92,14 +108,17 @@ export function buildSitemapFiles(data: SitemapData, origin: string): SitemapFil
 			lastmod: latestDate(articles.map((article) => article.modifiedAt)),
 		}));
 
-	const authorDates = new Map<string, string | null>();
+	const reviewerDates = new Map<string, string | null>();
 	for (const article of indexable) {
-		for (const slug of article.authorSlugs) {
-			authorDates.set(slug, latestDate([authorDates.get(slug) ?? null, article.modifiedAt]));
+		for (const slug of article.reviewerSlugs) {
+			reviewerDates.set(
+				slug,
+				latestDate([reviewerDates.get(slug) ?? null, article.modifiedAt]),
+			);
 		}
 	}
-	const authorUrls: SitemapUrl[] = [...authorDates.entries()].map(([slug, lastmod]) => ({
-		loc: abs(routes.author(slug)),
+	const reviewerUrls: SitemapUrl[] = [...reviewerDates.entries()].map(([slug, lastmod]) => ({
+		loc: abs(routes.reviewer(slug)),
 		lastmod,
 	}));
 
@@ -116,24 +135,66 @@ export function buildSitemapFiles(data: SitemapData, origin: string): SitemapFil
 		})),
 	];
 
+	const comparisonUrls: SitemapUrl[] = data.comparison
+		? [
+				{ loc: abs(routes.comparisonIndex()), lastmod: null },
+				...data.comparison.sections.map((slug) => ({
+					loc: abs(routes.comparisonSection(slug)),
+					lastmod: null,
+				})),
+				...data.comparison.products.map((product) => ({
+					loc: abs(routes.product(product.slug)),
+					lastmod: product.checkedAt,
+				})),
+				{ loc: abs(routes.providers()), lastmod: null },
+				...data.comparison.providers.map((slug) => ({
+					loc: abs(routes.provider(slug)),
+					lastmod: null,
+				})),
+				{ loc: abs(routes.calculator()), lastmod: null },
+			]
+		: [];
+
 	return [
 		...articleFiles,
 		{ name: 'categories', urls: categoryUrls },
 		{ name: 'tags', urls: tagUrls },
-		{ name: 'authors', urls: authorUrls },
+		{ name: 'reviewers', urls: reviewerUrls },
 		{ name: 'pages', urls: pageUrls },
+		...(comparisonUrls.length > 0 ? [{ name: 'comparison', urls: comparisonUrls }] : []),
 	];
+}
+
+/** Comparison paths for the sitemap: sections with products, their products, providers. */
+async function getComparisonPaths(): Promise<SitemapData['comparison']> {
+	if (!isComparisonEnabled()) {
+		return null;
+	}
+	const [sections, providers] = await Promise.all([getComparisonSections(), getProviders()]);
+	const leaves = sections.filter((section) => section.children.length === 0);
+	const products = (
+		await Promise.all(leaves.map((section) => getProductsInSection(section.slug)))
+	).flat();
+	return {
+		sections: sections.map((section) => section.slug),
+		products: products.map((product) => ({
+			slug: product.slug,
+			checkedAt: product.dataCheckedAt,
+		})),
+		providers: providers.map((provider) => provider.slug),
+	};
 }
 
 /**
  * Every sitemap file for the origin: article files of ARTICLES_PER_SITEMAP
- * each, then categories, tags, authors and pages.
+ * each, then categories, tags, reviewers, pages and, when on, comparison.
  */
 export async function getSitemapFiles(origin: string): Promise<SitemapFile[]> {
-	const [articles, categories, pages] = await Promise.all([
+	const [articles, categories, pages, comparison] = await Promise.all([
 		getArticleIndex(),
 		getAllCategoryPaths(),
 		getStaticPageEntries(),
+		getComparisonPaths(),
 	]);
-	return buildSitemapFiles({ articles, categories, pages }, origin);
+	return buildSitemapFiles({ articles, categories, pages, comparison }, origin);
 }

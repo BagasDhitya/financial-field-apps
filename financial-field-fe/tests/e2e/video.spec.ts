@@ -102,9 +102,7 @@ test('home: a Video section of articles not already shown above it', async ({ pa
 
 	const above = new Set(
 		await page
-			.locator(
-				'[aria-label="Pilihan editor dan artikel terbaru"] a[href^="/artikel/"], main h2 a',
-			)
+			.locator('section[aria-labelledby="terbaru"] a[href^="/artikel/"], main h2 a')
 			.evaluateAll((nodes) => nodes.map((node) => node.getAttribute('href'))),
 	);
 	for (const href of await links.evaluateAll((nodes) =>

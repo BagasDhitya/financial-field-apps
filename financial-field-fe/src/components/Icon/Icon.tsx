@@ -1,5 +1,4 @@
 const PATHS = {
-	search: 'M10.5 17a6.5 6.5 0 1 0 0-13 6.5 6.5 0 0 0 0 13ZM15.5 15.5 20 20',
 	menu: 'M4 7h16M4 12h16M4 17h16',
 	close: 'M6 6l12 12M18 6 6 18',
 	'chevron-down': 'M6 9l6 6 6-6',
@@ -9,6 +8,11 @@ const PATHS = {
 	check: 'M5 12.5l4.5 4.5L19 7',
 	play: 'M8 5.5v13l10.5-6.5L8 5.5Z',
 	chat: 'M4 5h16v11h-9l-5 4v-4H4V5Z',
+	verified:
+		'M12 3l7.5 3v5.5c0 4.4-3.1 8-7.5 9.5-4.4-1.5-7.5-5.1-7.5-9.5V6L12 3ZM8.5 12l2.5 2.5 4.5-5',
+	mail: 'M3.5 6h17v12h-17V6Zm0 0 8.5 7 8.5-7',
+	lock: 'M6 11h12v9H6v-9Zm2.5 0V8a3.5 3.5 0 0 1 7 0v3',
+	calculator: 'M6 3h12v18H6V3Zm2.5 3h7v3h-7V6Zm0 6.5h1m2.5 0h1m2.5 0h1m-7 3.5h1m2.5 0h1m2.5 0h1',
 } as const;
 
 export type IconName = keyof typeof PATHS;

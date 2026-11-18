@@ -17,4 +17,10 @@ export const cacheTags = {
 	pages: () => 'pages',
 	page: (slug: string) => `page:${slug}`,
 	siteSettings: () => 'site-settings',
+	products: () => 'products',
+	product: (slug: string) => `product:${slug}`,
+	productSections: () => 'product-sections',
+	productSection: (slug: string) => `product-section:${slug}`,
+	providers: () => 'providers',
+	provider: (slug: string) => `provider:${slug}`,
 } as const;

@@ -33,7 +33,7 @@ export function VideoLabel() {
 }
 
 /**
- * "Wawancara" with a speech-bubble icon, in a pink outline (ADR-0020): an
+ * "Wawancara" with a speech-bubble icon, in a pink outline (ADR-0021): an
  * interview article. Hidden from screen readers: the title says it (or the
  * title link adds "(wawancara)").
  */

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next';
-import { Montserrat, Playfair_Display } from 'next/font/google';
+import { Inter_Tight, Source_Serif_4 } from 'next/font/google';
 import type { ReactNode } from 'react';
 
 import { Analytics } from '@/components/Analytics/Analytics';
@@ -9,6 +9,8 @@ import { SiteFooter } from '@/components/SiteFooter/SiteFooter';
 import { SiteHeader } from '@/components/SiteHeader/SiteHeader';
 import { CONSENT_BOOT_SCRIPT } from '@/lib/analytics/consent';
 import { getCategoryTree } from '@/lib/content/categories';
+import { getComparisonSections } from '@/lib/content/comparison';
+import { comparisonFooterLinks, getMainMenu } from '@/lib/content/menu';
 import { trustPagesEnabled } from '@/lib/content/pages';
 import { getSiteSettings } from '@/lib/content/site';
 import { env } from '@/lib/env';
@@ -20,29 +22,24 @@ import { buildGraph } from '@/lib/structured-data/serialize';
 import './globals.css';
 
 /**
- * Headlines are the LCP element on home: same `optional` rule, and no preload,
- * because Chrome holds first text render for a preloaded optional font
- * (DSC-0011). First slow visits may show the metric-matched fallback; cached
- * and fast visits get Playfair. Never a late swap.
+ * Two type levels (ADR-0023): Inter Tight frames the page (headlines, titles,
+ * intros, navigation, labels) and Source Serif 4 sets the reading text. Both
+ * are LCP candidates (headlines on home, body on articles), so both use
+ * `optional` without preload: Chrome holds first text render for a preloaded
+ * optional font (DSC-0011). Slow first visits may show the metric-matched
+ * fallback; never a late swap. Variable files cover every weight used.
  */
-const playfair = Playfair_Display({
-	variable: '--font-playfair',
+const interTight = Inter_Tight({
+	variable: '--font-inter-tight',
 	subsets: ['latin'],
-	// Variable font: one file covers 600–700 (and dodges a Turbopack bug with
-	// explicit weight lists plus preload: false in Next 16.3.5).
 	display: 'optional',
 	preload: false,
 });
 
-/**
- * Body text is the LCP element on article and listing pages, so the body font
- * uses `optional`: a late swap would re-paint the LCP text (DSC-0011). The
- * size-adjusted fallback keeps CLS at zero.
- */
-const montserrat = Montserrat({
-	variable: '--font-montserrat',
+const sourceSerif = Source_Serif_4({
+	variable: '--font-source-serif',
 	subsets: ['latin'],
-	// Variable font: one file covers 400–700.
+	axes: ['opsz'],
 	display: 'optional',
 	preload: false,
 });
@@ -60,6 +57,7 @@ export const viewport: Viewport = {
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
 	const [categories, settings] = await Promise.all([getCategoryTree(), getSiteSettings()]);
+	const [menu, sections] = await Promise.all([getMainMenu(categories), getComparisonSections()]);
 
 	// GA4 only in production and only when configured (REQ-ANL-001).
 	const analyticsEnabled = env.siteEnv === 'production' && env.gaMeasurementId !== '';
@@ -76,7 +74,7 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 	return (
 		<html
 			lang="id"
-			className={`${playfair.variable} ${montserrat.variable}`}
+			className={`${interTight.variable} ${sourceSerif.variable}`}
 			// CONSENT_BOOT_SCRIPT may add data-ffid-consent before hydration.
 			suppressHydrationWarning
 		>
@@ -98,12 +96,13 @@ export default async function RootLayout({ children }: { children: ReactNode }) 
 						<Analytics measurementId={env.gaMeasurementId} />
 					</>
 				) : null}
-				<SiteHeader categories={categories} />
+				<SiteHeader menu={menu} />
 				<main id="konten" tabIndex={-1}>
 					{children}
 				</main>
 				<SiteFooter
 					categories={categories}
+					comparisonLinks={comparisonFooterLinks(sections)}
 					settings={settings}
 					showConsentSettings={analyticsEnabled}
 					year={new Date().getFullYear()}

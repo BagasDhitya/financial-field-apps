@@ -23,6 +23,7 @@ function article(id: string, category: string | null, publishedAt: string): Arti
 				}
 			: null,
 		author: null,
+		verified: false,
 		publishedAt,
 	};
 }

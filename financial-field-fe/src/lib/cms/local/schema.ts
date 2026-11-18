@@ -15,6 +15,8 @@ export type ComponentName =
 	| 'article.takeaway'
 	| 'article.correction'
 	| 'article.video'
+	| 'article.chat-bubble'
+	| 'product-specs.loan'
 	| 'shared.link'
 	| 'navigation.menu-item'
 	| 'site.social-link';
@@ -33,7 +35,10 @@ export type ContentTypeName =
 	| 'stock-tickers'
 	| 'site-navigation'
 	| 'static-pages'
-	| 'site-setting';
+	| 'site-setting'
+	| 'financial-products'
+	| 'product-categories'
+	| 'providers';
 
 export type ContentType = {
 	kind: 'collection' | 'single';
@@ -84,13 +89,35 @@ export const COMPONENTS: Record<ComponentName, Record<string, Attribute>> = {
 	},
 	'article.takeaway': { text: scalar() },
 	'article.correction': { date: scalar(), note: scalar() },
+	// financial-field-cms src/components/article/video.json (CMS-30).
 	'article.video': {
-		url: scalar(),
 		title: scalar(),
-		channel_name: scalar(),
-		uploaded_at: scalar(),
-		duration_seconds: scalar(),
+		channel: scalar(),
+		uploadedAt: scalar(),
+		duration: scalar(),
 		caption: scalar(),
+		embedUrl: scalar(),
+	},
+	// financial-field-cms src/components/article/chat-bubble.json (CMS-31).
+	'article.chat-bubble': {
+		speaker_name: scalar(),
+		speaker_role: scalar(),
+		speaker_avatar: media(),
+		message: scalar(),
+		position: scalar(),
+	},
+	// Planned CMS-26 (OQ-35 decides the final shape): loan terms as published by the provider.
+	'product-specs.loan': {
+		rate_type: scalar(),
+		rate_min: scalar(),
+		rate_max: scalar(),
+		amount_min: scalar(),
+		amount_max: scalar(),
+		tenor_min: scalar(),
+		tenor_max: scalar(),
+		down_payment_min: scalar(),
+		max_financing: scalar(),
+		fees: scalar(),
 	},
 	'shared.link': { url: scalar(), label: scalar() },
 	'navigation.menu-item': { label: scalar(), url: scalar(), category_ref: many('categories') },
@@ -125,7 +152,8 @@ export const CONTENT_TYPES: Record<ContentTypeName, ContentType> = {
 			sources: component('article.source', true, 'sources'),
 			key_takeaways: component('article.takeaway', true, 'takeaways'),
 			corrections: component('article.correction', true, 'corrections'),
-			featured_video: component('article.video', false, 'video'),
+			interview_dialogues: component('article.chat-bubble', true, 'interview'),
+			video: component('article.video', false, 'video'),
 		},
 	},
 	categories: {
@@ -163,6 +191,8 @@ export const CONTENT_TYPES: Record<ContentTypeName, ContentType> = {
 			bio: scalar(),
 			credentials: scalar('author-profile'),
 			expertise: scalar('author-profile'),
+			background: scalar('author-profile'),
+			financial_view: scalar('author-profile'),
 			avatar: media(),
 			articles: many('articles'),
 			article: many('articles'),
@@ -207,6 +237,61 @@ export const CONTENT_TYPES: Record<ContentTypeName, ContentType> = {
 			logo: media(),
 			default_og_image: media(),
 			social_links: component('site.social-link', true),
+		},
+	},
+	// The comparison catalogue: financial-field-cms src/api/{financial-product,
+	// product-category,provider} as merged (ADR-0011), plus the planned CMS-23…28.
+	// `comparison` (CMS-20) is the Public role's read access to all three.
+	'financial-products': {
+		kind: 'collection',
+		planned: 'comparison',
+		attributes: {
+			title: scalar(),
+			slug: scalar(),
+			product_category: one('product-categories'),
+			min_income: scalar(),
+			annual_fee: scalar(),
+			features: scalar(),
+			apply_url: scalar(),
+			image: media(),
+			provider: one('providers'),
+			summary: scalar('comparison-seo'),
+			seo: component('shared.seo', false, 'comparison-seo'),
+			data_checked_at: scalar('product-trust'),
+			source_url: scalar('product-trust'),
+			is_partner: scalar('product-trust'),
+			loan_specs: component('product-specs.loan', false, 'product-specs'),
+		},
+	},
+	'product-categories': {
+		kind: 'collection',
+		planned: 'comparison',
+		attributes: {
+			name: scalar(),
+			slug: scalar(),
+			financial_products: many('financial-products'),
+			description: scalar('comparison-seo'),
+			nav_order: scalar('comparison-seo'),
+			show_in_nav: scalar('comparison-seo'),
+			seo: component('shared.seo', false, 'comparison-seo'),
+			parent: one('product-categories', 'product-category-tree'),
+			children: many('product-categories', 'product-category-tree'),
+		},
+	},
+	providers: {
+		kind: 'collection',
+		planned: 'comparison',
+		attributes: {
+			name: scalar(),
+			slug: scalar(),
+			logo: media(),
+			financial_products: many('financial-products'),
+			legal_name: scalar('provider-profile'),
+			regulator: scalar('provider-profile'),
+			license_number: scalar('provider-profile'),
+			website_url: scalar('provider-profile'),
+			description: scalar('provider-profile'),
+			seo: component('shared.seo', false, 'provider-profile'),
 		},
 	},
 };

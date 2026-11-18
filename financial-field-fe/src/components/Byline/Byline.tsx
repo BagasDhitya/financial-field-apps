@@ -4,8 +4,8 @@ import { isLaterDayWib } from '@/lib/format';
 import { routes } from '@/lib/routes';
 import type { AuthorSummary } from '@/types';
 
-import { CmsImage } from '../CmsImage/CmsImage';
 import { DateTime } from '../DateTime/DateTime';
+import { PersonMark } from '../PersonMark/PersonMark';
 
 import styles from './Byline.module.css';
 
@@ -18,32 +18,11 @@ export type BylineProps = {
 	readingMinutes: number;
 };
 
-function Person({ person, role }: { person: AuthorSummary; role: string }) {
-	return (
-		<div className={styles.person}>
-			{person.avatar ? (
-				<span className={styles.avatar}>
-					<CmsImage image={person.avatar} sizes="40px" ratio="1/1" decorative />
-				</span>
-			) : null}
-			<p className={styles.line}>
-				<span className={styles.role}>{role} </span>
-				<Link href={routes.author(person.slug)} className={styles.name}>
-					{person.fullName}
-				</Link>
-				{person.credentials ? <span>, {person.credentials}</span> : null}
-				{person.roleTitle ? (
-					<span className={styles.title}> · {person.roleTitle}</span>
-				) : null}
-			</p>
-		</div>
-	);
-}
-
 /**
- * Author + CFP reviewer + dates (REQ-ART-002). The reviewer appears only when
- * a fact-check date is recorded; "Diperbarui" only when a day or more after
- * publication.
+ * Writer team + reviewer + dates (REQ-ART-002, ADR-0022). The writer is the
+ * team: its name is plain text, with no link and no photo. The reviewer links
+ * to their profile. "Diperbarui" appears only a day or more after publication;
+ * "Ditinjau" only when the CMS records the check's date.
  */
 export function Byline({
 	author,
@@ -57,9 +36,26 @@ export function Byline({
 	return (
 		<div className={styles.root}>
 			<div className={styles.people}>
-				{author ? <Person person={author} role="Ditulis oleh" /> : null}
-				{reviewer && lastReviewedAt ? (
-					<Person person={reviewer} role="Ditinjau oleh" />
+				{author ? (
+					<p className={styles.line}>
+						<span className={styles.role}>Ditulis oleh </span>
+						<span className={styles.team}>{author.fullName}</span>
+					</p>
+				) : null}
+				{reviewer ? (
+					<div className={styles.person}>
+						<PersonMark person={reviewer} size={40} />
+						<p className={styles.line}>
+							<span className={styles.role}>Ditinjau oleh </span>
+							<Link href={routes.reviewer(reviewer.slug)} className={styles.name}>
+								{reviewer.fullName}
+							</Link>
+							{reviewer.credentials ? <span>, {reviewer.credentials}</span> : null}
+							{reviewer.roleTitle ? (
+								<span className={styles.title}> · {reviewer.roleTitle}</span>
+							) : null}
+						</p>
+					</div>
 				) : null}
 			</div>
 			<p className={`type-meta ${styles.dates}`}>

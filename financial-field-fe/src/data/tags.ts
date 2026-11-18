@@ -105,4 +105,22 @@ export const TAGS: TagEntry[] = [
 		name: 'Karier awal',
 		description: 'Artikel tentang karier awal dari redaksi Financial Field Indonesia.',
 	},
+	{
+		slug: 'bunga-pinjaman',
+		name: 'Bunga pinjaman',
+		description:
+			'Artikel tentang cara bunga pinjaman dihitung dan dibandingkan, dari redaksi Financial Field Indonesia.',
+	},
+	{
+		slug: 'jaminan-bpkb',
+		name: 'Jaminan BPKB',
+		description:
+			'Artikel tentang pinjaman dengan jaminan BPKB kendaraan dari redaksi Financial Field Indonesia.',
+	},
+	{
+		slug: 'kredit-kendaraan',
+		name: 'Kredit kendaraan',
+		description:
+			'Artikel tentang kredit mobil dan kendaraan lain dari redaksi Financial Field Indonesia.',
+	},
 ];

@@ -42,8 +42,8 @@ function buildVideoObject(video: ArticleVideo): JsonLdNode | null {
 
 /**
  * Article + WebPage (SPC-seo §6), with the article's video when it has one.
- * `reviewedBy`/`lastReviewed` appear only when a fact-check is recorded
- * (REQ-SEO-035). Returns [] when the article
+ * `reviewedBy` appears when the article has a reviewer, `lastReviewed` when
+ * the CMS records the check's date (REQ-SEO-035, ADR-0022). Returns [] when the article
  * lacks the minimum (title, slug) instead of emitting partial data (W2).
  */
 export function buildArticleNodes({
@@ -56,9 +56,17 @@ export function buildArticleNodes({
 		return [];
 	}
 
-	const author = article.author ? buildPerson(origin, article.author) : null;
-	const reviewer =
-		article.reviewer && article.lastReviewedAt ? buildPerson(origin, article.reviewer) : null;
+	// The writer is the team (ADR-0022): an Organization, part of ours, at the
+	// Redaksi page. The reviewer is a Person with a profile page.
+	const author = article.author?.fullName
+		? {
+				'@type': 'Organization',
+				name: article.author.fullName,
+				url: `${origin.replace(/\/+$/, '')}/tentang-kami/redaksi`,
+				parentOrganization: { '@id': schemaIds.organization(origin) },
+			}
+		: null;
+	const reviewer = article.reviewer ? buildPerson(origin, article.reviewer) : null;
 	const published = toIsoWib(article.publishedAt);
 	const modified = toIsoWib(article.contentUpdatedAt ?? article.publishedAt);
 	const video = article.video ? buildVideoObject(article.video) : null;
@@ -74,7 +82,9 @@ export function buildArticleNodes({
 		...(reviewer
 			? {
 					reviewedBy: reviewer,
-					lastReviewed: toIsoWib(article.lastReviewedAt)?.slice(0, 10),
+					...(article.lastReviewedAt
+						? { lastReviewed: toIsoWib(article.lastReviewedAt)?.slice(0, 10) }
+						: {}),
 				}
 			: {}),
 	};
