@@ -27,21 +27,11 @@
     "featured_image": {
       "type": "media",
       "multiple": false,
-      "allowedTypes": [
-        "images",
-        "files",
-        "videos",
-        "audios"
-      ]
+      "allowedTypes": ["images", "files", "videos", "audios"]
     },
     "article_type": {
       "type": "enumeration",
-      "enum": [
-        "standard",
-        "pr_article",
-        "interview",
-        "column"
-      ]
+      "enum": ["standard", "pr_article", "interview", "column"]
     },
     "categories": {
       "type": "relation",
@@ -81,6 +71,11 @@
     },
     "video_url": {
       "type": "text"
+    },
+    "interview_dialogues": {
+      "type": "component",
+      "component": "article.chat-bubble",
+      "repeatable": true
     }
   }
 }
